@@ -1,49 +1,61 @@
 import numpy as np
-import pandas as pd
-import mne
 
-EPOCH_DURATION = 30.0
 
-def extract_eeg_epochs(eeg_raw, epochs_df):
+def extract_eeg_epochs(
+    eeg_raw,
+    epochs_df,
+):
     """
-    Extract EEG samples for every epoch in epochs_df.
+    Extract EEG samples corresponding to each epoch.
 
     Parameters
     ----------
     eeg_raw : mne.io.Raw
-        Preloaded raw EEG recording.
+        Filtered continuous EEG recording containing one EEG channel.
+
     epochs_df : pandas.DataFrame
-        DataFrame containing start_time and end_time for each epoch.
+        Epoch metadata containing start_time and end_time.
 
     Returns
     -------
-    X : numpy.ndarray
-        EEG epochs with shape:
+    numpy.ndarray
+        Array with shape:
+
         (number_of_epochs, samples_per_epoch)
     """
-    
-    sfreq = eeg_raw.info["sfreq"]
-    epoch_samples = int(EPOCH_DURATION * sfreq)
 
-    X = []
+    sfreq = eeg_raw.info["sfreq"]
+
+    epochs = []
 
     for _, row in epochs_df.iterrows():
-        start_sample = int(round(row["start_time"] * sfreq))
-        end_sample = start_sample + epoch_samples
+
+        start_sample = int(
+            round(
+                row["start_time"] * sfreq
+            )
+        )
+
+        end_sample = int(
+            round(
+                row["end_time"] * sfreq
+            )
+        )
 
         epoch = eeg_raw.get_data(
             start=start_sample,
-            stop=end_sample
+            stop=end_sample,
         )[0]
 
-        # Validate epoch length
-        if len(epoch) != epoch_samples:
-            raise ValueError(
-                f"Unexpected epoch length for epoch "
-                f"{row['epoch_index']}: "
-                f"expected {epoch_samples}, got {len(epoch)}"
-            )
+        epochs.append(epoch)
 
-        X.append(epoch)
+    if not epochs:
+        return np.empty(
+            (0, 0),
+            dtype=np.float64,
+        )
 
-    return np.asarray(X)
+    return np.asarray(
+        epochs,
+        dtype=np.float64,
+    )
