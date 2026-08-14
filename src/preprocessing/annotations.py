@@ -11,6 +11,11 @@ STAGE_MAPPING = {
     "Sleep stage R": "REM",
 }
 
+EXCLUDED_STAGES = {
+    "Movement time",
+    "?",
+}
+
 
 TARGET_STAGES = [
     "W",
@@ -26,7 +31,13 @@ def map_sleep_stage(raw_stage):
     Convert a Sleep-EDF annotation label into the target label.
 
     Sleep stage 3 and Sleep stage 4 are combined into N3.
+
+    Movement time and unknown annotations are excluded
+    from the classification dataset.
     """
+
+    if raw_stage in EXCLUDED_STAGES:
+        return None
 
     return STAGE_MAPPING.get(raw_stage)
 
