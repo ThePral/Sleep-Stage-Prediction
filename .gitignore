@@ -222,3 +222,6 @@ data/raw
 
 # data/processed
 data/processed
+
+# data/features
+data/features
