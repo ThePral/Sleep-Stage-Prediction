@@ -95,12 +95,8 @@ def process_one_recording(
     hypnogram_path,
 ):
     """
-    Process one Sleep-EDF recording.
-
-    Returns
-    -------
-    pandas.DataFrame
-        Feature DataFrame for the recording.
+    Process one Sleep-EDF recording and report
+    the number of valid epochs.
     """
 
     print()
