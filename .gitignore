@@ -225,3 +225,6 @@ data/processed
 
 # data/features
 data/features
+
+# .vscode
+.vscode
