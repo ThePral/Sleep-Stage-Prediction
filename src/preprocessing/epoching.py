@@ -4,123 +4,172 @@ import numpy as np
 DEFAULT_FLAT_STD_THRESHOLD = 1e-10
 
 
-def extract_eeg_epochs(
+def extract_all_eeg_epochs(
     eeg_raw,
-    epochs_df,
+    epoch_duration=30.0,
 ):
     """
-    Extract EEG samples corresponding to each epoch.
-
-    Parameters
-    ----------
-    eeg_raw : mne.io.Raw
-        Continuous EEG recording.
-
-    epochs_df : pandas.DataFrame
-        Epoch metadata containing start_time and end_time.
+    Extract all complete 30-second epochs from a continuous EEG
+    recording in one operation.
 
     Returns
     -------
     np.ndarray
-        EEG epochs with shape:
-        (n_epochs, n_samples)
+        Shape:
+        (n_epochs, samples_per_epoch)
     """
 
     sfreq = eeg_raw.info["sfreq"]
 
-    epochs = []
+    epoch_samples = int(
+        epoch_duration * sfreq
+    )
 
-    for _, row in epochs_df.iterrows():
+    total_samples = eeg_raw.n_times
 
-        start_sample = int(
-            round(
-                row["start_time"] * sfreq
-            )
-        )
+    n_complete_epochs = (
+        total_samples // epoch_samples
+    )
 
-        end_sample = int(
-            round(
-                row["end_time"] * sfreq
-            )
-        )
-
-        epoch = eeg_raw.get_data(
-            start=start_sample,
-            stop=end_sample,
-        )[0]
-
-        if len(epoch) == 0:
-            raise ValueError(
-                f"Empty EEG epoch at "
-                f"epoch_index={row['epoch_index']}"
-            )
-
-        epochs.append(epoch)
-
-    if not epochs:
+    if n_complete_epochs == 0:
         return np.empty(
-            (0, 0),
+            (0, epoch_samples),
             dtype=np.float64,
         )
 
-    return np.asarray(
-        epochs,
-        dtype=np.float64,
+    usable_samples = (
+        n_complete_epochs * epoch_samples
+    )
+
+    # Load the continuous signal only once.
+    signal = eeg_raw.get_data(
+        start=0,
+        stop=usable_samples,
+    )[0]
+
+    return signal.reshape(
+        n_complete_epochs,
+        epoch_samples,
     )
 
 
 def find_valid_epoch_indices(
     eeg_raw,
     epochs_df,
+    epoch_duration=30.0,
     flat_std_threshold=DEFAULT_FLAT_STD_THRESHOLD,
 ):
     """
-    Identify epochs whose raw EEG is not flat or near-flat.
+    Identify valid EEG epochs using a raw-signal
+    standard-deviation threshold.
+
+    The continuous EEG is loaded once and reshaped into
+    30-second epochs, making the quality check much faster
+    than repeatedly calling get_data() for each epoch.
 
     Returns
     -------
     np.ndarray
-        Row indices of valid epochs in epochs_df.
+        Original epoch indices from epochs_df that passed
+        the quality check.
     """
 
-    valid_indices = []
+    all_epochs = extract_all_eeg_epochs(
+        eeg_raw=eeg_raw,
+        epoch_duration=epoch_duration,
+    )
 
-    sfreq = eeg_raw.info["sfreq"]
-
-    for dataframe_index, (_, row) in enumerate(
-        epochs_df.iterrows()
-    ):
-
-        start_sample = int(
-            round(
-                row["start_time"] * sfreq
-            )
+    if len(all_epochs) == 0:
+        return np.empty(
+            (0,),
+            dtype=int,
         )
 
-        end_sample = int(
-            round(
-                row["end_time"] * sfreq
-            )
-        )
+    epoch_stds = np.std(
+        all_epochs,
+        axis=1,
+    )
 
-        epoch = eeg_raw.get_data(
-            start=start_sample,
-            stop=end_sample,
-        )[0]
+    # epochs_df["epoch_index"] refers to the original
+    # 30-second timeline, so use it directly.
+    epoch_indices = (
+        epochs_df["epoch_index"]
+        .to_numpy(dtype=int)
+    )
 
-        if len(epoch) == 0:
-            continue
+    # Keep only indices that are actually present
+    # in the loaded EEG recording.
+    valid_timeline_mask = (
+        epoch_indices < len(all_epochs)
+    )
 
-        epoch_std = np.std(epoch)
+    epoch_indices = (
+        epoch_indices[
+            valid_timeline_mask
+        ]
+    )
 
-        if epoch_std < flat_std_threshold:
-            continue
+    valid_mask = (
+        epoch_stds[epoch_indices]
+        >= flat_std_threshold
+    )
 
-        valid_indices.append(
-            dataframe_index
-        )
+    return epoch_indices[
+        valid_mask
+    ]
 
-    return np.asarray(
-        valid_indices,
+
+def extract_eeg_epochs_by_indices(
+    eeg_raw,
+    epoch_indices,
+    epoch_duration=30.0,
+):
+    """
+    Extract selected epochs from a continuous EEG recording.
+
+    The continuous signal is loaded only once.
+
+    Parameters
+    ----------
+    eeg_raw : mne.io.Raw
+        Continuous EEG recording.
+
+    epoch_indices : array-like
+        Original 30-second epoch indices.
+
+    epoch_duration : float
+        Epoch duration in seconds.
+
+    Returns
+    -------
+    np.ndarray
+        Selected EEG epochs.
+    """
+
+    all_epochs = extract_all_eeg_epochs(
+        eeg_raw=eeg_raw,
+        epoch_duration=epoch_duration,
+    )
+
+    epoch_indices = np.asarray(
+        epoch_indices,
         dtype=int,
     )
+
+    if len(epoch_indices) == 0:
+        return np.empty(
+            (0, 0),
+            dtype=np.float64,
+        )
+
+    if np.any(
+        epoch_indices >= len(all_epochs)
+    ):
+        raise IndexError(
+            "One or more requested epoch indices "
+            "are outside the available EEG data."
+        )
+
+    return all_epochs[
+        epoch_indices
+    ]

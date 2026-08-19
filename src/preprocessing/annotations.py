@@ -11,6 +11,7 @@ STAGE_MAPPING = {
     "Sleep stage R": "REM",
 }
 
+
 EXCLUDED_STAGES = {
     "Movement time",
     "?",
@@ -32,8 +33,7 @@ def map_sleep_stage(raw_stage):
 
     Sleep stage 3 and Sleep stage 4 are combined into N3.
 
-    Movement time and unknown annotations are excluded
-    from the classification dataset.
+    Movement time and unknown annotations are excluded.
     """
 
     if raw_stage in EXCLUDED_STAGES:
@@ -49,11 +49,15 @@ def build_epoch_metadata(
     epoch_duration=30.0,
 ):
     """
-    Build 30-second epoch metadata from Sleep-EDF annotations.
+    Convert Sleep-EDF annotations into complete 30-second
+    epoch metadata.
 
-    Only complete epochs inside the PSG recording are retained.
+    Epochs are generated from the actual hypnogram annotation
+    intervals. This preserves the annotation-based behavior
+    validated during dataset exploration.
 
-    Unknown/unusable annotations are ignored.
+    Unknown/unusable annotations such as Movement time and
+    Sleep stage ? are ignored.
 
     Parameters
     ----------
@@ -61,75 +65,75 @@ def build_epoch_metadata(
         Sleep-EDF hypnogram annotations.
 
     recording_id : str
-        Recording identifier, e.g. SC4001.
+        Recording identifier.
 
     recording_duration : float
         PSG duration in seconds.
 
     epoch_duration : float
-        Epoch duration in seconds. Default is 30 seconds.
+        Epoch duration in seconds.
 
     Returns
     -------
     pandas.DataFrame
-        One row per complete epoch.
+        One row per valid annotated epoch.
     """
 
-    n_epochs = int(
-        np.floor(
-            recording_duration / epoch_duration
-        )
-    )
+    records = []
 
-    rows = []
+    epoch_index = 0
 
-    for epoch_index in range(n_epochs):
-
-        start_time = (
-            epoch_index * epoch_duration
-        )
-
-        end_time = (
-            start_time + epoch_duration
-        )
-
-        raw_stage = None
-
-        # Find the annotation covering this epoch.
-        for onset, duration, description in zip(
-            annotations.onset,
-            annotations.duration,
-            annotations.description,
-        ):
-
-            annotation_start = onset
-            annotation_end = onset + duration
-
-            if (
-                start_time >= annotation_start
-                and end_time <= annotation_end
-            ):
-                raw_stage = description
-                break
+    for onset, duration, description in zip(
+        annotations.onset,
+        annotations.duration,
+        annotations.description,
+    ):
 
         target_stage = map_sleep_stage(
-            raw_stage
+            description
         )
 
-        # Ignore unknown stages such as "?"
-        # and annotations outside the useful PSG range.
+        # Ignore Movement time, ?, and any other
+        # annotation without a target stage.
         if target_stage is None:
             continue
 
-        rows.append(
-            {
-                "subject_id": recording_id,
-                "epoch_index": epoch_index,
-                "start_time": start_time,
-                "end_time": end_time,
-                "raw_stage": raw_stage,
-                "target_stage": target_stage,
-            }
+        # Number of complete 30-second epochs
+        # represented by this annotation.
+        n_epochs = int(
+            np.floor(
+                duration / epoch_duration
+            )
         )
 
-    return pd.DataFrame(rows)
+        for i in range(n_epochs):
+
+            start_time = (
+                onset
+                + i * epoch_duration
+            )
+
+            end_time = (
+                start_time
+                + epoch_duration
+            )
+
+            # Do not create an epoch extending
+            # beyond the actual PSG.
+            if end_time > recording_duration:
+                continue
+
+            records.append(
+                {
+                    "subject_id": recording_id,
+                    "epoch_index": epoch_index,
+                    "start_time": start_time,
+                    "end_time": end_time,
+                    "raw_stage": description,
+                    "target_stage": target_stage,
+                }
+            )
+
+            epoch_index += 1
+
+    return pd.DataFrame(records)

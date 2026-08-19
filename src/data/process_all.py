@@ -1,4 +1,5 @@
 from pathlib import Path
+import traceback
 
 import pandas as pd
 
@@ -6,63 +7,145 @@ from src.data.pairing import (
     build_recording_pairs,
     validate_recording_pairs,
 )
+
 from src.data.process_dataset import (
     process_one_recording,
 )
 
 
-def process_all_recordings(
-    data_directory: Path,
-    output_directory: Path,
-) -> pd.DataFrame:
-    """
-    Process every paired Sleep-EDF recording.
+# ============================================================
+# Project paths
+# ============================================================
 
-    Each recording is processed independently and saved
-    as an individual CSV file.
+PROJECT_ROOT = (
+    Path(__file__)
+    .resolve()
+    .parents[2]
+)
 
-    A final combined CSV containing all recordings is
-    also created.
+DATA_RAW_DIR = (
+    PROJECT_ROOT
+    / "data"
+    / "raw"
+)
 
-    Parameters
-    ----------
-    data_directory:
-        Root directory containing sleep-cassette and
-        sleep-telemetry.
+FEATURES_DIR = (
+    PROJECT_ROOT
+    / "data"
+    / "features"
+)
 
-    output_directory:
-        Directory where feature files will be saved.
+INDIVIDUAL_DIR = (
+    FEATURES_DIR
+    / "individual"
+)
 
-    Returns
-    -------
-    pd.DataFrame
-        Combined feature dataset.
-    """
 
-    output_directory.mkdir(
+# ============================================================
+# Configuration
+# ============================================================
+
+EEG_CHANNEL = "EEG Fpz-Cz"
+
+LOW_FREQ = 0.3
+HIGH_FREQ = 35.0
+EPOCH_DURATION = 30.0
+NPERSEG = 1024
+
+
+# ============================================================
+# Helpers
+# ============================================================
+
+def prepare_directories():
+    INDIVIDUAL_DIR.mkdir(
         parents=True,
         exist_ok=True,
     )
 
-    individual_directory = (
-        output_directory / "individual"
+
+def is_valid_feature_file(
+    path: Path,
+):
+    """
+    Check whether an existing CSV looks like a valid
+    completed feature file.
+
+    This prevents an interrupted/empty file from being
+    treated as successfully processed.
+    """
+
+    if not path.exists():
+        return False
+
+    if path.stat().st_size == 0:
+        return False
+
+    required_columns = {
+        "subject_id",
+        "epoch_index",
+        "target_stage",
+        "delta_absolute",
+        "theta_absolute",
+        "alpha_absolute",
+        "beta_absolute",
+        "delta_relative",
+        "theta_relative",
+        "alpha_relative",
+        "beta_relative",
+        "spectral_entropy",
+        "dominant_frequency",
+    }
+
+    try:
+        header = pd.read_csv(
+            path,
+            nrows=0,
+        )
+
+        return required_columns.issubset(
+            set(header.columns)
+        )
+
+    except Exception:
+        return False
+
+
+def save_recording_features(
+    dataframe,
+    recording_id,
+):
+    output_path = (
+        INDIVIDUAL_DIR
+        / f"{recording_id}_features.csv"
     )
 
-    individual_directory.mkdir(
-        parents=True,
-        exist_ok=True,
+    dataframe.to_csv(
+        output_path,
+        index=False,
     )
+
+    return output_path
+
+
+# ============================================================
+# Main
+# ============================================================
+
+def main():
+    prepare_directories()
 
     print("=" * 70)
-    print("Building Sleep-EDF recording pairs")
+    print("Sleep-EDF Expanded Feature Processing")
     print("=" * 70)
 
     pairings = build_recording_pairs(
-        data_directory
+        DATA_RAW_DIR
     )
 
     print(
-        f"Total recording pairs: {len(pairings)}"
+        f"Total recording pairs: "
+        f"{len(pairings)}"
     )
 
     validation = validate_recording_pairs(
@@ -71,119 +154,211 @@ def process_all_recordings(
 
     if not validation["is_valid"]:
         raise RuntimeError(
-            "Recording-pair validation failed."
+            "Recording pairing validation failed."
         )
 
-    print("Pairing validation: PASSED")
+    print(
+        "Pairing validation: PASSED"
+    )
 
-    all_data = []
+    all_dataframes = []
+
+    processed_count = 0
+    skipped_count = 0
+    failed_count = 0
+
+    failed_recordings = []
 
     total = len(pairings)
 
-    for index, row in pairings.iterrows():
+    for position, row in enumerate(
+        pairings.itertuples(index=False),
+        start=1,
+    ):
 
-        recording_id = row["recording_id"]
+        recording_id = row.recording_id
+
+        output_path = (
+            INDIVIDUAL_DIR
+            / f"{recording_id}_features.csv"
+        )
 
         print()
         print("=" * 70)
         print(
-            f"[{index + 1}/{total}] "
-            f"Processing {recording_id}"
+            f"[{position}/{total}] "
+            f"{recording_id}"
         )
         print("=" * 70)
 
+        # ----------------------------------------------------
+        # Resume support
+        # ----------------------------------------------------
+
+        if is_valid_feature_file(
+            output_path
+        ):
+
+            print(
+                "Already processed."
+                " Skipping."
+            )
+
+            skipped_count += 1
+
+            try:
+                existing = pd.read_csv(
+                    output_path
+                )
+
+                all_dataframes.append(
+                    existing
+                )
+
+            except Exception as exc:
+
+                print(
+                    "Existing file could not "
+                    "be read. Reprocessing."
+                )
+
+                print(
+                    repr(exc)
+                )
+
+                try:
+                    output_path.unlink()
+                except FileNotFoundError:
+                    pass
+
+            else:
+                continue
+
+        # ----------------------------------------------------
+        # Process recording
+        # ----------------------------------------------------
+
         try:
-            features = process_one_recording(
+
+            dataframe = process_one_recording(
                 recording_id=recording_id,
-                psg_path=row["psg"],
-                hypnogram_path=row[
-                    "hypnogram"
-                ],
+                psg_path=row.psg,
+                hypnogram_path=row.hypnogram,
             )
 
-            output_path = (
-                individual_directory
-                / f"{recording_id}_features.csv"
+            save_recording_features(
+                dataframe,
+                recording_id,
             )
 
-            features.to_csv(
-                output_path,
-                index=False,
+            all_dataframes.append(
+                dataframe
             )
 
-            all_data.append(
-                features
-            )
+            processed_count += 1
 
             print(
                 f"Valid epochs: "
-                f"{len(features)}"
+                f"{len(dataframe)}"
             )
 
             print(
-                "Class distribution:"
+                "Saved:"
             )
 
             print(
-                features[
-                    "target_stage"
-                ].value_counts()
-            )
-
-            print(
-                f"Saved: {output_path}"
+                output_path
             )
 
         except Exception as exc:
 
+            failed_count += 1
+
+            failed_recordings.append(
+                recording_id
+            )
+
+            print()
             print(
                 f"ERROR processing "
-                f"{recording_id}:"
+                f"{recording_id}"
             )
 
             print(
-                repr(exc)
+                f"{type(exc).__name__}: "
+                f"{exc}"
+            )
+
+            traceback.print_exc()
+
+            print(
+                "\nProcessing will stop."
             )
 
             raise
 
-    if not all_data:
+    # ========================================================
+    # Combine individual files
+    # ========================================================
+
+    if not all_dataframes:
         raise RuntimeError(
-            "No recordings were processed."
+            "No feature files were available "
+            "for combination."
         )
 
     combined = pd.concat(
-        all_data,
+        all_dataframes,
         ignore_index=True,
     )
 
-    combined_output = (
-        output_directory
+    combined_path = (
+        FEATURES_DIR
         / "sleep_edf_features.csv"
     )
 
     combined.to_csv(
-        combined_output,
+        combined_path,
         index=False,
     )
 
+    # ========================================================
+    # Summary
+    # ========================================================
+
     print()
     print("=" * 70)
-    print("FULL DATASET PROCESSING COMPLETE")
+    print("PROCESSING COMPLETE")
     print("=" * 70)
 
     print(
-        f"Number of recordings: "
-        f"{combined['subject_id'].nunique()}"
+        f"Total recordings: {total}"
     )
 
     print(
-        f"Total valid epochs: "
-        f"{len(combined)}"
+        f"Newly processed: {processed_count}"
     )
 
-    print()
-    print("Overall class distribution:")
+    print(
+        f"Skipped/resumed: {skipped_count}"
+    )
+
+    print(
+        f"Failed: {failed_count}"
+    )
+
+    print(
+        f"Combined rows: {len(combined)}"
+    )
+
+    print(
+        "Subjects:",
+        combined["subject_id"].nunique(),
+    )
+
+    print(
+        "\nCombined class distribution:"
+    )
 
     print(
         combined[
@@ -191,37 +366,14 @@ def process_all_recordings(
         ].value_counts()
     )
 
-    print()
     print(
-        f"Combined dataset saved to:"
+        "\nCombined dataset:"
     )
 
     print(
-        combined_output
+        combined_path
     )
-
-    return combined
 
 
 if __name__ == "__main__":
-
-    project_root = Path(
-        __file__
-    ).resolve().parents[2]
-
-    data_directory = (
-        project_root
-        / "data"
-        / "raw"
-    )
-
-    output_directory = (
-        project_root
-        / "data"
-        / "features"
-    )
-
-    process_all_recordings(
-        data_directory=data_directory,
-        output_directory=output_directory,
-    )
+    main()
