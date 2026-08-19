@@ -241,3 +241,58 @@ def build_sequences_from_dataframe(
         ),
     )
     
+CLASS_LABELS = [
+    "W",
+    "N1",
+    "N2",
+    "N3",
+    "REM",
+]
+
+CLASS_TO_INDEX = {
+    label: index
+    for index, label in enumerate(
+        CLASS_LABELS
+    )
+}
+
+
+def encode_sleep_stage_labels(
+    labels,
+):
+    """
+    Convert sleep-stage strings into integer class labels.
+
+    Mapping:
+
+        W   -> 0
+        N1  -> 1
+        N2  -> 2
+        N3  -> 3
+        REM -> 4
+    """
+
+    labels = np.asarray(
+        labels,
+        dtype=object,
+    )
+
+    unknown_labels = set(
+        labels
+    ) - set(
+        CLASS_TO_INDEX
+    )
+
+    if unknown_labels:
+        raise ValueError(
+            f"Unknown sleep-stage labels: "
+            f"{unknown_labels}"
+        )
+
+    return np.asarray(
+        [
+            CLASS_TO_INDEX[label]
+            for label in labels
+        ],
+        dtype=np.int64,
+    )
