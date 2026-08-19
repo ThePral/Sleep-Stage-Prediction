@@ -2,6 +2,28 @@ import numpy as np
 import pandas as pd
 
 
+# ============================================================
+# Class configuration
+# ============================================================
+
+CLASS_LABELS = [
+    "W",
+    "N1",
+    "N2",
+    "N3",
+    "REM",
+]
+
+CLASS_TO_INDEX = {
+    label: index
+    for index, label in enumerate(CLASS_LABELS)
+}
+
+
+# ============================================================
+# Temporal continuity
+# ============================================================
+
 def find_contiguous_runs(
     dataframe,
     time_tolerance=1e-6,
@@ -9,7 +31,7 @@ def find_contiguous_runs(
     """
     Split a subject's epochs into temporally contiguous runs.
 
-    Two consecutive rows belong to the same run only if:
+    Two consecutive rows belong to the same run only when:
 
         next.start_time ≈ current.end_time
 
@@ -17,17 +39,17 @@ def find_contiguous_runs(
     ----------
     dataframe : pandas.DataFrame
         Must contain:
-            subject_id
-            start_time
-            end_time
+        subject_id
+        start_time
+        end_time
 
     time_tolerance : float
-        Allowed floating-point tolerance in seconds.
+        Allowed floating-point difference in seconds.
 
     Returns
     -------
     list[pandas.DataFrame]
-        Contiguous temporal runs.
+        Temporally contiguous runs.
     """
 
     if dataframe.empty:
@@ -82,6 +104,10 @@ def find_contiguous_runs(
     return runs
 
 
+# ============================================================
+# Sequence construction
+# ============================================================
+
 def build_sequences_from_dataframe(
     dataframe,
     feature_values,
@@ -94,8 +120,8 @@ def build_sequences_from_dataframe(
     Each sequence contains `sequence_length`
     consecutive epochs from the same subject.
 
-    The target is the sleep-stage label of
-    the final epoch in the sequence.
+    The target is the sleep stage of the final
+    epoch in the sequence.
 
     Parameters
     ----------
@@ -104,23 +130,23 @@ def build_sequences_from_dataframe(
 
     feature_values : numpy.ndarray
         Normalized feature matrix aligned row-for-row
-        with `dataframe`.
+        with dataframe.
 
     sequence_length : int
         Number of time steps per sequence.
 
     time_tolerance : float
-        Allowed timing tolerance.
+        Allowed timing tolerance in seconds.
 
     Returns
     -------
     X : numpy.ndarray
         Shape:
-            (n_sequences, sequence_length, n_features)
+        (n_sequences, sequence_length, n_features)
 
     y : numpy.ndarray
         Shape:
-            (n_sequences,)
+        (n_sequences,)
     """
 
     if len(dataframe) != len(
@@ -137,7 +163,6 @@ def build_sequences_from_dataframe(
             "sequence_length must be >= 1."
         )
 
-    # Work with dataframe row positions.
     working_df = (
         dataframe
         .reset_index(drop=True)
@@ -152,18 +177,16 @@ def build_sequences_from_dataframe(
     sequences = []
     targets = []
 
-    # Process each subject independently.
+    # Process every subject separately.
     for subject_id, subject_df in (
         working_df
         .groupby("subject_id", sort=False)
     ):
 
-        subject_positions = (
-            subject_df.index.to_numpy()
-        )
-
-        # Split the subject into contiguous
-        # temporal runs.
+        # Important:
+        # subject_df.index corresponds to the rows
+        # in working_df, so these positions can be
+        # used directly with feature_values.
         runs = find_contiguous_runs(
             subject_df,
             time_tolerance=time_tolerance,
@@ -190,11 +213,9 @@ def build_sequences_from_dataframe(
                     ]
                 )
 
-                X_sequence = (
-                    feature_values[
-                        window_positions
-                    ]
-                )
+                sequence = feature_values[
+                    window_positions
+                ]
 
                 target_position = (
                     window_positions[-1]
@@ -208,7 +229,7 @@ def build_sequences_from_dataframe(
                 )
 
                 sequences.append(
-                    X_sequence
+                    sequence
                 )
 
                 targets.append(
@@ -216,12 +237,19 @@ def build_sequences_from_dataframe(
                 )
 
     if not sequences:
+
+        n_features = (
+            feature_values.shape[1]
+            if feature_values.ndim == 2
+            else 0
+        )
+
         return (
             np.empty(
                 (
                     0,
                     sequence_length,
-                    feature_values.shape[1],
+                    n_features,
                 ),
                 dtype=np.float32,
             ),
@@ -240,36 +268,25 @@ def build_sequences_from_dataframe(
             dtype=object,
         ),
     )
-    
-CLASS_LABELS = [
-    "W",
-    "N1",
-    "N2",
-    "N3",
-    "REM",
-]
 
-CLASS_TO_INDEX = {
-    label: index
-    for index, label in enumerate(
-        CLASS_LABELS
-    )
-}
 
+# ============================================================
+# Label encoding
+# ============================================================
 
 def encode_sleep_stage_labels(
     labels,
 ):
     """
-    Convert sleep-stage strings into integer class labels.
+    Convert sleep-stage strings to integer class labels.
 
-    Mapping:
-
-        W   -> 0
-        N1  -> 1
-        N2  -> 2
-        N3  -> 3
-        REM -> 4
+    Mapping
+    -------
+    W   -> 0
+    N1  -> 1
+    N2  -> 2
+    N3  -> 3
+    REM -> 4
     """
 
     labels = np.asarray(
@@ -277,15 +294,14 @@ def encode_sleep_stage_labels(
         dtype=object,
     )
 
-    unknown_labels = set(
-        labels
-    ) - set(
-        CLASS_TO_INDEX
+    unknown_labels = (
+        set(labels)
+        - set(CLASS_TO_INDEX)
     )
 
     if unknown_labels:
         raise ValueError(
-            f"Unknown sleep-stage labels: "
+            "Unknown sleep-stage labels: "
             f"{unknown_labels}"
         )
 
