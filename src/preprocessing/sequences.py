@@ -2,10 +2,6 @@ import numpy as np
 import pandas as pd
 
 
-# ============================================================
-# Class configuration
-# ============================================================
-
 CLASS_LABELS = [
     "W",
     "N1",
@@ -20,10 +16,6 @@ CLASS_TO_INDEX = {
 }
 
 
-# ============================================================
-# Temporal continuity
-# ============================================================
-
 def find_contiguous_runs(
     dataframe,
     time_tolerance=1e-6,
@@ -31,51 +23,36 @@ def find_contiguous_runs(
     """
     Split a subject's epochs into temporally contiguous runs.
 
-    Two consecutive rows belong to the same run only when:
-
-        next.start_time ≈ current.end_time
-
-    Parameters
-    ----------
-    dataframe : pandas.DataFrame
-        Must contain:
-        subject_id
-        start_time
-        end_time
-
-    time_tolerance : float
-        Allowed floating-point difference in seconds.
-
-    Returns
-    -------
-    list[pandas.DataFrame]
-        Temporally contiguous runs.
+    The original dataframe indices are preserved so that the
+    returned runs can safely be used to index an external
+    feature matrix aligned with the original dataframe.
     """
 
     if dataframe.empty:
         return []
 
-    dataframe = (
+    sorted_df = (
         dataframe
         .sort_values("start_time")
-        .reset_index(drop=True)
+        .copy()
     )
 
     runs = []
 
-    run_start = 0
+    run_start_position = 0
 
-    for i in range(1, len(dataframe)):
+    for position in range(
+        1,
+        len(sorted_df),
+    ):
 
-        previous_end = dataframe.loc[
-            i - 1,
-            "end_time",
-        ]
+        previous_end = sorted_df.iloc[
+            position - 1
+        ]["end_time"]
 
-        current_start = dataframe.loc[
-            i,
-            "start_time",
-        ]
+        current_start = sorted_df.iloc[
+            position
+        ]["start_time"]
 
         is_contiguous = (
             abs(
@@ -88,25 +65,21 @@ def find_contiguous_runs(
         if not is_contiguous:
 
             runs.append(
-                dataframe.iloc[
-                    run_start:i
+                sorted_df.iloc[
+                    run_start_position:position
                 ].copy()
             )
 
-            run_start = i
+            run_start_position = position
 
     runs.append(
-        dataframe.iloc[
-            run_start:
+        sorted_df.iloc[
+            run_start_position:
         ].copy()
     )
 
     return runs
 
-
-# ============================================================
-# Sequence construction
-# ============================================================
 
 def build_sequences_from_dataframe(
     dataframe,
@@ -117,45 +90,20 @@ def build_sequences_from_dataframe(
     """
     Build many-to-one temporal sequences.
 
-    Each sequence contains `sequence_length`
-    consecutive epochs from the same subject.
+    Each sequence contains `sequence_length` consecutive
+    epochs from the same subject and the same contiguous
+    time run.
 
-    The target is the sleep stage of the final
-    epoch in the sequence.
+    The target is the stage of the final epoch.
 
-    Parameters
-    ----------
-    dataframe : pandas.DataFrame
-        Epoch metadata and labels.
-
-    feature_values : numpy.ndarray
-        Normalized feature matrix aligned row-for-row
-        with dataframe.
-
-    sequence_length : int
-        Number of time steps per sequence.
-
-    time_tolerance : float
-        Allowed timing tolerance in seconds.
-
-    Returns
-    -------
-    X : numpy.ndarray
-        Shape:
-        (n_sequences, sequence_length, n_features)
-
-    y : numpy.ndarray
-        Shape:
-        (n_sequences,)
+    `feature_values` must be aligned row-for-row with
+    `dataframe`.
     """
 
-    if len(dataframe) != len(
-        feature_values
-    ):
+    if len(dataframe) != len(feature_values):
         raise ValueError(
-            "dataframe and feature_values "
-            "must contain the same number "
-            "of rows."
+            "dataframe and feature_values must "
+            "contain the same number of rows."
         )
 
     if sequence_length < 1:
@@ -163,11 +111,7 @@ def build_sequences_from_dataframe(
             "sequence_length must be >= 1."
         )
 
-    working_df = (
-        dataframe
-        .reset_index(drop=True)
-        .copy()
-    )
+    working_df = dataframe.copy()
 
     feature_values = np.asarray(
         feature_values,
@@ -177,16 +121,13 @@ def build_sequences_from_dataframe(
     sequences = []
     targets = []
 
-    # Process every subject separately.
     for subject_id, subject_df in (
-        working_df
-        .groupby("subject_id", sort=False)
+        working_df.groupby(
+            "subject_id",
+            sort=False,
+        )
     ):
 
-        # Important:
-        # subject_df.index corresponds to the rows
-        # in working_df, so these positions can be
-        # used directly with feature_values.
         runs = find_contiguous_runs(
             subject_df,
             time_tolerance=time_tolerance,
@@ -197,13 +138,17 @@ def build_sequences_from_dataframe(
             if len(run) < sequence_length:
                 continue
 
-            run_positions = (
-                run.index.to_numpy()
+            # IMPORTANT:
+            # These are the ORIGINAL dataframe indices.
+            run_positions = run.index.to_numpy(
+                dtype=int
             )
 
             for start in range(
                 0,
-                len(run) - sequence_length + 1,
+                len(run_positions)
+                - sequence_length
+                + 1,
             ):
 
                 window_positions = (
@@ -221,12 +166,10 @@ def build_sequences_from_dataframe(
                     window_positions[-1]
                 )
 
-                target_stage = (
-                    working_df.loc[
-                        target_position,
-                        "target_stage",
-                    ]
-                )
+                target_stage = working_df.loc[
+                    target_position,
+                    "target_stage",
+                ]
 
                 sequences.append(
                     sequence
@@ -270,18 +213,12 @@ def build_sequences_from_dataframe(
     )
 
 
-# ============================================================
-# Label encoding
-# ============================================================
-
 def encode_sleep_stage_labels(
     labels,
 ):
     """
-    Convert sleep-stage strings to integer class labels.
+    Convert sleep-stage strings into integer class labels.
 
-    Mapping
-    -------
     W   -> 0
     N1  -> 1
     N2  -> 2
@@ -301,7 +238,7 @@ def encode_sleep_stage_labels(
 
     if unknown_labels:
         raise ValueError(
-            "Unknown sleep-stage labels: "
+            f"Unknown sleep-stage labels: "
             f"{unknown_labels}"
         )
 
