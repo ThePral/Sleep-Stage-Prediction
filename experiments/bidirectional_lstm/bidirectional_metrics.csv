@@ -1,0 +1,2 @@
+model,accuracy,balanced_accuracy,macro_precision,macro_recall,macro_f1,weighted_f1
+Bidirectional LSTM(32+32) — 20 epochs,0.8650790098034827,0.7066972211160314,0.7128411516469783,0.7066972211160314,0.7069710370320264,0.8670875681355291
