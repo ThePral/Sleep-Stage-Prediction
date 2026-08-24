@@ -1,0 +1,39 @@
+{
+    "dataset": "Sleep-EDF Expanded",
+    "subjects": 197,
+    "eeg_channel": "EEG Fpz-Cz",
+    "sampling_frequency_hz": 100.0,
+    "features": [
+        "delta_absolute",
+        "theta_absolute",
+        "alpha_absolute",
+        "beta_absolute",
+        "delta_relative",
+        "theta_relative",
+        "alpha_relative",
+        "beta_relative",
+        "spectral_entropy",
+        "dominant_frequency"
+    ],
+    "sequence_length_epochs": 20,
+    "epoch_duration_seconds": 30,
+    "temporal_context_minutes": 10,
+    "model": "stacked_lstm",
+    "lstm_units": [
+        32,
+        32
+    ],
+    "dropout": 0.3,
+    "loss": "unweighted_sparse_categorical_crossentropy",
+    "optimizer": "Adam",
+    "initial_learning_rate": 0.001,
+    "batch_size": 256,
+    "classes": [
+        "W",
+        "N1",
+        "N2",
+        "N3",
+        "REM"
+    ],
+    "random_seed": 42
+}
