@@ -1,0 +1,7 @@
+Architecture,Context,Accuracy,Balanced Accuracy,Macro-F1
+LSTM(32),10 min,0.8662,0.7004,0.7081
+LSTM(64),10 min,0.8602,0.6985,0.7017
+LSTM(128),10 min,0.8332,0.6656,0.6546
+Stacked LSTM(32+32),10 min,0.874,0.7039,0.7146
+Bidirectional LSTM(32+32),10 min,0.8651,0.7067,0.707
+Attention LSTM,10 min,0.8452,0.6817,0.6733

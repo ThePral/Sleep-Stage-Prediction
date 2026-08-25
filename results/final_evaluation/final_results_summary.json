@@ -1,0 +1,19 @@
+{
+    "model": "Two-layer stacked LSTM",
+    "sequence_length_epochs": 20,
+    "temporal_context_minutes": 10,
+    "lstm_units": "32 + 32",
+    "dropout": 0.3,
+    "features": 10,
+    "loss": "Unweighted sparse categorical cross-entropy",
+    "subjects": 197,
+    "classes": 5,
+    "accuracy_mean": 0.8698837608368026,
+    "accuracy_std": 0.003906863606008945,
+    "balanced_accuracy_mean": 0.7043316986285536,
+    "balanced_accuracy_std": 0.0033132584413139952,
+    "macro_f1_mean": 0.7112603366017384,
+    "macro_f1_std": 0.003251574759468205,
+    "weighted_f1_mean": 0.8694304774953657,
+    "weighted_f1_std": 0.003080040560059282
+}
