@@ -7,3 +7,4 @@ seaborn
 scikit-learn
 jupyter
 tensorflow
+joblib
