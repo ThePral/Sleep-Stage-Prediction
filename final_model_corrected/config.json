@@ -1,0 +1,31 @@
+{
+    "sequence_length_epochs": 10,
+    "temporal_context_minutes": 5.0,
+    "loss_strategy": "unweighted",
+    "lstm_units": 32,
+    "architecture": "stacked",
+    "dropout": 0.3,
+    "n_features": 10,
+    "n_classes": 5,
+    "features": [
+        "delta_absolute",
+        "theta_absolute",
+        "alpha_absolute",
+        "beta_absolute",
+        "delta_relative",
+        "theta_relative",
+        "alpha_relative",
+        "beta_relative",
+        "spectral_entropy",
+        "dominant_frequency"
+    ],
+    "classes": [
+        "W",
+        "N1",
+        "N2",
+        "N3",
+        "REM"
+    ],
+    "random_seed": 42,
+    "batch_size": 256
+}
