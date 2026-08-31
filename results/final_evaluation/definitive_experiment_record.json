@@ -1,0 +1,88 @@
+{
+    "dataset": {
+        "name": "Sleep-EDF Expanded",
+        "recordings": 197,
+        "participants": 100,
+        "eeg_channel": "EEG Fpz-Cz",
+        "sampling_frequency_hz": 100.0
+    },
+    "split": {
+        "unit": "participant",
+        "train_participants": 70,
+        "validation_participants": 15,
+        "test_participants": 15,
+        "participant_leakage": 0
+    },
+    "features": [
+        "delta_absolute",
+        "theta_absolute",
+        "alpha_absolute",
+        "beta_absolute",
+        "delta_relative",
+        "theta_relative",
+        "alpha_relative",
+        "beta_relative",
+        "spectral_entropy",
+        "dominant_frequency"
+    ],
+    "epoch": {
+        "duration_seconds": 30
+    },
+    "temporal_context": {
+        "sequence_length_epochs": 10,
+        "duration_minutes": 5.0
+    },
+    "model": {
+        "architecture": "stacked_lstm",
+        "lstm_units": [
+            32,
+            32
+        ],
+        "dropout": 0.3
+    },
+    "training": {
+        "loss": "unweighted_sparse_categorical_crossentropy",
+        "optimizer": "Adam",
+        "learning_rate": 0.001,
+        "batch_size": 256,
+        "max_epochs": 30,
+        "random_seeds": [
+            42,
+            123,
+            456
+        ]
+    },
+    "selection": {
+        "criterion": "validation_macro_f1",
+        "temporal_context": "5 minutes",
+        "loss_strategy": "unweighted",
+        "lstm_units": 32,
+        "architecture": "stacked"
+    },
+    "test_results": {
+        "accuracy": {
+            "mean": 0.8240124246825523,
+            "std": 0.002284767658533936
+        },
+        "balanced_accuracy": {
+            "mean": 0.6539906380850479,
+            "std": 0.0024177280476368425
+        },
+        "macro_f1": {
+            "mean": 0.6525915671670388,
+            "std": 0.000720695451844938
+        },
+        "weighted_f1": {
+            "mean": 0.8233501444955215,
+            "std": 0.0012130940269076088
+        },
+        "cohen_kappa": {
+            "mean": 0.682310925078213,
+            "std": 0.0028798564592200627
+        },
+        "macro_roc_auc": {
+            "mean": 0.9449593196861946,
+            "std": 0.00014455543446777015
+        }
+    }
+}
