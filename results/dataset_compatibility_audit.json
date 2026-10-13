@@ -1,0 +1,437 @@
+{
+  "configured_paths": {
+    "sleep_edf": "data\\raw",
+    "isruc": "data\\external\\ISRUC-Sleep-I",
+    "features": "data\\features\\sleep_edf_features.csv",
+    "split": "data\\features\\participant_split.csv"
+  },
+  "sleep_edf_signal_files_discovered": 197,
+  "isruc_signal_files_discovered": 101,
+  "sleep_edf_signals": [
+    {
+      "file": "data\\raw\\sleep-cassette\\SC4001E0-PSG.edf",
+      "sfreq_hz": 100.0,
+      "n_channels": 7,
+      "duration_seconds": 79500.0,
+      "n_samples": 7950000,
+      "channels": [
+        "EEG Fpz-Cz",
+        "EEG Pz-Oz",
+        "EOG horizontal",
+        "Resp oro-nasal",
+        "EMG submental",
+        "Temp rectal",
+        "Event marker"
+      ],
+      "channel_types": [
+        "eeg",
+        "eeg",
+        "eeg",
+        "eeg",
+        "eeg",
+        "eeg",
+        "eeg"
+      ]
+    },
+    {
+      "file": "data\\raw\\sleep-cassette\\SC4002E0-PSG.edf",
+      "sfreq_hz": 100.0,
+      "n_channels": 7,
+      "duration_seconds": 84900.0,
+      "n_samples": 8490000,
+      "channels": [
+        "EEG Fpz-Cz",
+        "EEG Pz-Oz",
+        "EOG horizontal",
+        "Resp oro-nasal",
+        "EMG submental",
+        "Temp rectal",
+        "Event marker"
+      ],
+      "channel_types": [
+        "eeg",
+        "eeg",
+        "eeg",
+        "eeg",
+        "eeg",
+        "eeg",
+        "eeg"
+      ]
+    },
+    {
+      "file": "data\\raw\\sleep-cassette\\SC4011E0-PSG.edf",
+      "sfreq_hz": 100.0,
+      "n_channels": 7,
+      "duration_seconds": 84060.0,
+      "n_samples": 8406000,
+      "channels": [
+        "EEG Fpz-Cz",
+        "EEG Pz-Oz",
+        "EOG horizontal",
+        "Resp oro-nasal",
+        "EMG submental",
+        "Temp rectal",
+        "Event marker"
+      ],
+      "channel_types": [
+        "eeg",
+        "eeg",
+        "eeg",
+        "eeg",
+        "eeg",
+        "eeg",
+        "eeg"
+      ]
+    },
+    {
+      "file": "data\\raw\\sleep-cassette\\SC4012E0-PSG.edf",
+      "sfreq_hz": 100.0,
+      "n_channels": 7,
+      "duration_seconds": 85500.0,
+      "n_samples": 8550000,
+      "channels": [
+        "EEG Fpz-Cz",
+        "EEG Pz-Oz",
+        "EOG horizontal",
+        "Resp oro-nasal",
+        "EMG submental",
+        "Temp rectal",
+        "Event marker"
+      ],
+      "channel_types": [
+        "eeg",
+        "eeg",
+        "eeg",
+        "eeg",
+        "eeg",
+        "eeg",
+        "eeg"
+      ]
+    },
+    {
+      "file": "data\\raw\\sleep-cassette\\SC4021E0-PSG.edf",
+      "sfreq_hz": 100.0,
+      "n_channels": 7,
+      "duration_seconds": 84120.0,
+      "n_samples": 8412000,
+      "channels": [
+        "EEG Fpz-Cz",
+        "EEG Pz-Oz",
+        "EOG horizontal",
+        "Resp oro-nasal",
+        "EMG submental",
+        "Temp rectal",
+        "Event marker"
+      ],
+      "channel_types": [
+        "eeg",
+        "eeg",
+        "eeg",
+        "eeg",
+        "eeg",
+        "eeg",
+        "eeg"
+      ]
+    }
+  ],
+  "isruc_signals": [
+    {
+      "file": "data\\external\\ISRUC-Sleep-I\\1\\1.rec",
+      "error": "NotImplementedError: Only EDF files are supported, got rec."
+    },
+    {
+      "file": "data\\external\\ISRUC-Sleep-I\\10\\10.rec",
+      "error": "NotImplementedError: Only EDF files are supported, got rec."
+    },
+    {
+      "file": "data\\external\\ISRUC-Sleep-I\\100\\100.rec",
+      "error": "NotImplementedError: Only EDF files are supported, got rec."
+    },
+    {
+      "file": "data\\external\\ISRUC-Sleep-I\\11\\11.rec",
+      "error": "NotImplementedError: Only EDF files are supported, got rec."
+    },
+    {
+      "file": "data\\external\\ISRUC-Sleep-I\\12\\12.rec",
+      "error": "NotImplementedError: Only EDF files are supported, got rec."
+    }
+  ],
+  "sleep_edf_annotations": {
+    "candidate_count": 200,
+    "counts_by_extension": {
+      ".xls": 2,
+      ".txt": 1,
+      ".edf": 197
+    },
+    "examples": [
+      "data\\raw\\SC-subjects.xls",
+      "data\\raw\\SHA256SUMS.txt",
+      "data\\raw\\sleep-cassette\\SC4001EC-Hypnogram.edf",
+      "data\\raw\\sleep-cassette\\SC4002EC-Hypnogram.edf",
+      "data\\raw\\sleep-cassette\\SC4011EH-Hypnogram.edf"
+    ]
+  },
+  "isruc_annotations": {
+    "candidate_count": 402,
+    "counts_by_extension": {
+      ".txt": 200,
+      ".xlsx": 202
+    },
+    "examples": [
+      "data\\external\\ISRUC-Sleep-I\\1\\1_1.txt",
+      "data\\external\\ISRUC-Sleep-I\\1\\1_1.xlsx",
+      "data\\external\\ISRUC-Sleep-I\\1\\1_2.txt",
+      "data\\external\\ISRUC-Sleep-I\\1\\1_2.xlsx",
+      "data\\external\\ISRUC-Sleep-I\\10\\10_1.txt"
+    ],
+    "sample_table": {
+      "file": "data\\external\\ISRUC-Sleep-I\\1\\1_1.xlsx",
+      "columns": [
+        "Epoch",
+        "Stage",
+        "SpO2",
+        "HR",
+        "Events",
+        "BPOS",
+        "Txln",
+        "TxEx",
+        "Technote",
+        "Unnamed: 9",
+        "Total AR and Awke",
+        "Unnamed: 11",
+        "Unnamed: 12",
+        "Unnamed: 13",
+        "ID:",
+        "1_1"
+      ],
+      "first_rows": [
+        {
+          "Epoch": "1",
+          "Stage": "W",
+          "SpO2": "0",
+          "HR": "69",
+          "Events": "L Out,MChg",
+          "BPOS": "R",
+          "Txln": "0",
+          "TxEx": "0",
+          "Technote": NaN,
+          "Unnamed: 9": NaN,
+          "Total AR and Awke": "880.0",
+          "Unnamed: 11": NaN,
+          "Unnamed: 12": "total epochs",
+          "Unnamed: 13": NaN,
+          "ID:": "DATE:",
+          "1_1": "18/5/2009"
+        },
+        {
+          "Epoch": "2",
+          "Stage": "W",
+          "SpO2": "97",
+          "HR": "67",
+          "Events": NaN,
+          "BPOS": "R",
+          "Txln": "0",
+          "TxEx": "0",
+          "Technote": NaN,
+          "Unnamed: 9": NaN,
+          "Total AR and Awke": "264.0",
+          "Unnamed: 11": NaN,
+          "Unnamed: 12": "total awake",
+          "Unnamed: 13": NaN,
+          "ID:": "HEIGHT: ",
+          "1_1": "68 in"
+        },
+        {
+          "Epoch": "3",
+          "Stage": "W",
+          "SpO2": "97",
+          "HR": "60",
+          "Events": NaN,
+          "BPOS": "R",
+          "Txln": "0",
+          "TxEx": "0",
+          "Technote": NaN,
+          "Unnamed: 9": NaN,
+          "Total AR and Awke": "616.0",
+          "Unnamed: 11": NaN,
+          "Unnamed: 12": "total sleep epoch",
+          "Unnamed: 13": NaN,
+          "ID:": NaN,
+          "1_1": "172 cm"
+        },
+        {
+          "Epoch": "4",
+          "Stage": "W",
+          "SpO2": "97",
+          "HR": "60",
+          "Events": NaN,
+          "BPOS": "R",
+          "Txln": "0",
+          "TxEx": "0",
+          "Technote": NaN,
+          "Unnamed: 9": NaN,
+          "Total AR and Awke": "308.0",
+          "Unnamed: 11": NaN,
+          "Unnamed: 12": "total sleep minutes",
+          "Unnamed: 13": NaN,
+          "ID:": "WEIGHT:",
+          "1_1": "183 lbs"
+        },
+        {
+          "Epoch": "5",
+          "Stage": "W",
+          "SpO2": "97",
+          "HR": "64",
+          "Events": NaN,
+          "BPOS": "R",
+          "Txln": "0",
+          "TxEx": "0",
+          "Technote": NaN,
+          "Unnamed: 9": NaN,
+          "Total AR and Awke": "0.0",
+          "Unnamed: 11": NaN,
+          "Unnamed: 12": "total AR and awake",
+          "Unnamed: 13": NaN,
+          "ID:": NaN,
+          "1_1": "83 kg"
+        },
+        {
+          "Epoch": "6",
+          "Stage": "W",
+          "SpO2": "97",
+          "HR": "63",
+          "Events": NaN,
+          "BPOS": "R",
+          "Txln": "0",
+          "TxEx": "0",
+          "Technote": NaN,
+          "Unnamed: 9": NaN,
+          "Total AR and Awke": NaN,
+          "Unnamed: 11": NaN,
+          "Unnamed: 12": NaN,
+          "Unnamed: 13": NaN,
+          "ID:": "AGE:",
+          "1_1": "64"
+        },
+        {
+          "Epoch": "7",
+          "Stage": "W",
+          "SpO2": "97",
+          "HR": "59",
+          "Events": NaN,
+          "BPOS": "R",
+          "Txln": "0",
+          "TxEx": "0",
+          "Technote": NaN,
+          "Unnamed: 9": NaN,
+          "Total AR and Awke": NaN,
+          "Unnamed: 11": NaN,
+          "Unnamed: 12": NaN,
+          "Unnamed: 13": NaN,
+          "ID:": "SEX:",
+          "1_1": "Male"
+        },
+        {
+          "Epoch": "8",
+          "Stage": "W",
+          "SpO2": "95",
+          "HR": "58",
+          "Events": NaN,
+          "BPOS": "R",
+          "Txln": "0",
+          "TxEx": "0",
+          "Technote": NaN,
+          "Unnamed: 9": NaN,
+          "Total AR and Awke": NaN,
+          "Unnamed: 11": NaN,
+          "Unnamed: 12": NaN,
+          "Unnamed: 13": NaN,
+          "ID:": NaN,
+          "1_1": NaN
+        }
+      ]
+    }
+  },
+  "existing_project": {
+    "features": {
+      "path": "data\\features\\sleep_edf_features.csv",
+      "rows": 457577,
+      "recording_ids": 197,
+      "stages": {
+        "W": 289781,
+        "N2": 88983,
+        "REM": 34184,
+        "N3": 19454,
+        "N1": 25175
+      },
+      "columns": [
+        "subject_id",
+        "epoch_index",
+        "start_time",
+        "end_time",
+        "raw_stage",
+        "target_stage",
+        "delta_absolute",
+        "theta_absolute",
+        "alpha_absolute",
+        "beta_absolute",
+        "delta_relative",
+        "theta_relative",
+        "alpha_relative",
+        "beta_relative",
+        "spectral_entropy",
+        "dominant_frequency"
+      ],
+      "missing_values_by_column": {
+        "subject_id": 0,
+        "epoch_index": 0,
+        "start_time": 0,
+        "end_time": 0,
+        "raw_stage": 0,
+        "target_stage": 0,
+        "delta_absolute": 0,
+        "theta_absolute": 0,
+        "alpha_absolute": 0,
+        "beta_absolute": 0,
+        "delta_relative": 0,
+        "theta_relative": 0,
+        "alpha_relative": 0,
+        "beta_relative": 0,
+        "spectral_entropy": 0,
+        "dominant_frequency": 0
+      },
+      "missing_expected_columns": [],
+      "participant_id_rule_for_existing_project": "first 5 characters of subject_id (verify in preprocessing code)"
+    },
+    "split": {
+      "path": "data\\features\\participant_split.csv",
+      "rows": 100,
+      "unique_participants": 100,
+      "participant_counts_by_split": {
+        "test": 15,
+        "train": 70,
+        "val": 15
+      },
+      "duplicate_participant_rows": 0,
+      "pairwise_overlap_counts": {
+        "test ∩ train": 0,
+        "test ∩ val": 0,
+        "train ∩ val": 0
+      },
+      "dataset_type_by_split": {
+        "test": {
+          "SC": 12,
+          "ST": 3
+        },
+        "train": {
+          "SC": 55,
+          "ST": 15
+        },
+        "val": {
+          "SC": 11,
+          "ST": 4
+        }
+      }
+    }
+  }
+}
