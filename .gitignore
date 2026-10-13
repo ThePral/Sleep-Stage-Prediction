@@ -226,5 +226,8 @@ data/processed
 # data/features
 data/features
 
+# data/external
+data/external
+
 # .vscode
 .vscode
