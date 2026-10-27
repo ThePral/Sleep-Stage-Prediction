@@ -342,6 +342,12 @@ def main():
     # Combine successful recordings
     # --------------------------------------------------------
 
+    if failed:
+        raise RuntimeError(
+            f"Processing failed for {len(failed)} recording(s). "
+            "The combined dataset was not overwritten with a partial cohort."
+        )
+
     if not all_dataframes:
 
         print(

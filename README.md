@@ -1,5 +1,10 @@
 # Sleep Stage Prediction from EEG Using Spectral Features and LSTM
 
+The research extension adds aligned waveform/spectral data for multi-view models,
+source-only self-supervised pretraining, and external ISRUC evaluation. See
+[implementation status](IMPLEMENTATION_STATUS.md) and the
+[research roadmap](RESEARCH_ROADMAP_2026-10-26.md) for current progress.
+
 A sleep-stage classification system based on **single-channel EEG**, **frequency-domain features**, and **Long Short-Term Memory (LSTM)** neural networks.
 
 The project investigates whether a compact set of handcrafted spectral EEG features can capture enough information for reliable automatic sleep-stage prediction while modeling the temporal dependencies between consecutive sleep epochs.
@@ -134,3 +139,66 @@ Stacked LSTM
         │
         ▼
 Evaluation
+```
+
+**Research data workflow**
+
+Run commands from the repository root. The new workflow writes separate,
+versioned stores under `data/processed/research_v1`; it verifies completed stores
+before reusing them and refuses conflicting inputs or policies. Use a new output
+root when changing preprocessing, channels, scorers, or split assignments.
+
+```powershell
+# Regression checks (no extra test package required).
+.venv\Scripts\python.exe -X utf8 -m unittest discover -s tests -v
+
+# Preview inputs and destinations without processing signals.
+.venv\Scripts\python.exe -X utf8 -m src.data.prepare_research_data --dataset sleepedf --recordings SC4002 --dry-run
+
+# Prepare source data and compare every supervised feature with the old cache.
+.venv\Scripts\python.exe -u -X utf8 -m src.data.prepare_research_data --dataset sleepedf --all --compare-cached
+
+# Prepare external data using the fixed C3 contralateral derivation and scorer-1 workbook.
+.venv\Scripts\python.exe -u -X utf8 -m src.data.prepare_research_data --dataset isruc --all
+
+# Check all stores and reproduce the frozen source model from the new features.
+.venv\Scripts\python.exe -X utf8 -m src.evaluation.validate_research_data --require-complete --check-baseline --report reports/research_data_validation.json
+```
+
+Each recording contains `waveforms.npy`, `epochs.csv`, and a completion manifest
+with preprocessing parameters, source-file hashes, and output-file hashes. Signals
+remain in volts and powers in volts squared. No normalization is fitted during
+dataset preparation. Every complete physical epoch is retained, including
+unscored/quality-rejected epochs with explicit masks. The authoritative source
+split is `final_model_corrected/participant_split.csv`; ISRUC is marked `external`.
+
+Waveforms are memory-mapped and overlapping windows are gathered by index:
+
+```python
+from src.data.epoch_store import EpochStore
+
+with EpochStore("data/processed/research_v1/sleepedf/SC4002") as store:
+    positions = store.sequence_positions(sequence_length=10)
+    batch = store.gather(positions[:8])
+    # waveform: (batch, 10, 3000, 1); spectral: (batch, 10, 10)
+```
+
+For unlabeled epoch/window selection, `supervised=False` uses signal QC rather
+than stage availability. A pretraining caller must additionally restrict its
+inputs to Sleep-EDF training participants. Feature scaling remains a separate
+training-only operation. The store rejects skipped physical positions and
+ineligible contexts rather than silently joining gaps.
+
+The canonical feature-model loader avoids the historical 20-epoch bundle:
+
+```python
+from src.inference.predict import SleepStagePredictor
+
+predictor = SleepStagePredictor.from_directory()
+```
+
+Earlier notebooks contain historical experiments, including the old recording
+split, and can write incompatible artifacts into legacy result directories.
+Use the research commands and corrected bundle for the extension. The local
+dependency snapshot is `requirements-windows-py313.lock.txt`; it records the
+tested Windows/Python 3.13 environment and is not a cloud GPU environment lock.

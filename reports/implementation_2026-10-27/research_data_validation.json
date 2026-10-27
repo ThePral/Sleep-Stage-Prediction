@@ -1,0 +1,40 @@
+{
+  "datasets": {
+    "sleepedf": {
+      "recordings": 197,
+      "epochs": 461870,
+      "quality_epochs": 459633,
+      "supervised_epochs": 457577,
+      "participants": 100,
+      "participants_by_split": {
+        "train": 70,
+        "val": 15,
+        "test": 15
+      },
+      "windows_10_by_split": {
+        "train": 319226,
+        "val": 65133,
+        "test": 69539
+      }
+    },
+    "isruc": {
+      "recordings": 100,
+      "epochs": 90187,
+      "quality_epochs": 90187,
+      "supervised_epochs": 89995,
+      "participants": 100,
+      "participants_by_split": {
+        "external": 100
+      },
+      "windows_10_by_split": {
+        "external": 89032
+      }
+    }
+  },
+  "baseline": {
+    "test_windows": 69539,
+    "accuracy": 0.8266296610535095,
+    "macro_f1": 0.6533745630204372,
+    "confusion_matrix_matches": true
+  }
+}

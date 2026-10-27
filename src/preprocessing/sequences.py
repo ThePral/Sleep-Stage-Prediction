@@ -1,5 +1,5 @@
 import numpy as np
-import pandas as pd
+from numbers import Integral
 
 
 CLASS_LABELS = [
@@ -16,201 +16,60 @@ CLASS_TO_INDEX = {
 }
 
 
-def find_contiguous_runs(
-    dataframe,
-    time_tolerance=1e-6,
-):
-    """
-    Split a subject's epochs into temporally contiguous runs.
-
-    The original dataframe indices are preserved so that the
-    returned runs can safely be used to index an external
-    feature matrix aligned with the original dataframe.
-    """
-
+def find_contiguous_runs(dataframe, time_tolerance=1e-6):
+    """Split one recording at time gaps, preserving its input index labels."""
+    if not np.isfinite(time_tolerance) or time_tolerance < 0:
+        raise ValueError("time_tolerance must be nonnegative and finite.")
     if dataframe.empty:
         return []
-
-    sorted_df = (
-        dataframe
-        .sort_values("start_time")
-        .copy()
-    )
-
-    runs = []
-
-    run_start_position = 0
-
-    for position in range(
-        1,
-        len(sorted_df),
-    ):
-
-        previous_end = sorted_df.iloc[
-            position - 1
-        ]["end_time"]
-
-        current_start = sorted_df.iloc[
-            position
-        ]["start_time"]
-
-        is_contiguous = (
-            abs(
-                current_start
-                - previous_end
-            )
-            <= time_tolerance
-        )
-
-        if not is_contiguous:
-
-            runs.append(
-                sorted_df.iloc[
-                    run_start_position:position
-                ].copy()
-            )
-
-            run_start_position = position
-
-    runs.append(
-        sorted_df.iloc[
-            run_start_position:
-        ].copy()
-    )
-
-    return runs
+    ordered = dataframe.sort_values("start_time", kind="stable").copy()
+    times = ordered[["start_time", "end_time"]].to_numpy(dtype=float)
+    if not np.isfinite(times).all() or np.any(times[:, 1] <= times[:, 0]):
+        raise ValueError("Epoch times must be finite and have positive duration.")
+    gaps = times[1:, 0] - times[:-1, 1]
+    if np.any(gaps < -time_tolerance):
+        raise ValueError("Overlapping or duplicate epochs cannot form temporal windows.")
+    boundaries = np.r_[0, np.flatnonzero(np.abs(gaps) > time_tolerance) + 1, len(ordered)]
+    return [ordered.iloc[a:b].copy() for a, b in zip(boundaries[:-1], boundaries[1:])]
 
 
-def build_sequences_from_dataframe(
-    dataframe,
-    feature_values,
-    sequence_length=10,
-    time_tolerance=1e-6,
-):
+def build_sequence_positions(dataframe, sequence_length=10, time_tolerance=1e-6):
+    """Return input-row positions without materializing overlapping EEG windows.
+
+    Identifying columns isolate datasets, participants, recordings, and splits
+    when present. Input index labels may be arbitrary or duplicated.
     """
-    Build many-to-one temporal sequences.
+    if isinstance(sequence_length, bool) or not isinstance(sequence_length, Integral) or sequence_length < 1:
+        raise ValueError("sequence_length must be a positive integer.")
+    frame = dataframe.reset_index(drop=True)
+    recording = "recording_id" if "recording_id" in frame else "subject_id"
+    if recording not in frame:
+        raise ValueError("A recording_id or subject_id column is required.")
+    groups = [c for c in ["dataset", "participant_id", recording, "split"] if c in frame]
+    if frame[groups].isna().any().any():
+        raise ValueError("Recording/group identifiers cannot be missing.")
+    windows = []
+    for _, group in frame.groupby(groups, sort=False):
+        for run in find_contiguous_runs(group, time_tolerance):
+            if len(run) >= sequence_length:
+                windows.append(np.lib.stride_tricks.sliding_window_view(
+                    run.index.to_numpy(dtype=np.int64), sequence_length,
+                ).copy())
+    return np.concatenate(windows) if windows else np.empty((0, sequence_length), dtype=np.int64)
 
-    Each sequence contains `sequence_length` consecutive
-    epochs from the same subject and the same contiguous
-    time run.
 
-    The target is the stage of the final epoch.
+def build_sequences_from_dataframe(dataframe, feature_values, sequence_length=10, time_tolerance=1e-6):
+    """Build final-epoch targets from features aligned row-for-row with the frame.
 
-    `feature_values` must be aligned row-for-row with
-    `dataframe`.
+    Pandas index labels may be arbitrary or duplicated. All indexing into the
+    external feature matrix uses input row positions.
     """
-
-    if len(dataframe) != len(feature_values):
-        raise ValueError(
-            "dataframe and feature_values must "
-            "contain the same number of rows."
-        )
-
-    if sequence_length < 1:
-        raise ValueError(
-            "sequence_length must be >= 1."
-        )
-
-    working_df = dataframe.copy()
-
-    feature_values = np.asarray(
-        feature_values,
-        dtype=np.float32,
-    )
-
-    sequences = []
-    targets = []
-
-    for subject_id, subject_df in (
-        working_df.groupby(
-            "subject_id",
-            sort=False,
-        )
-    ):
-
-        runs = find_contiguous_runs(
-            subject_df,
-            time_tolerance=time_tolerance,
-        )
-
-        for run in runs:
-
-            if len(run) < sequence_length:
-                continue
-
-            # IMPORTANT:
-            # These are the ORIGINAL dataframe indices.
-            run_positions = run.index.to_numpy(
-                dtype=int
-            )
-
-            for start in range(
-                0,
-                len(run_positions)
-                - sequence_length
-                + 1,
-            ):
-
-                window_positions = (
-                    run_positions[
-                        start:
-                        start + sequence_length
-                    ]
-                )
-
-                sequence = feature_values[
-                    window_positions
-                ]
-
-                target_position = (
-                    window_positions[-1]
-                )
-
-                target_stage = working_df.loc[
-                    target_position,
-                    "target_stage",
-                ]
-
-                sequences.append(
-                    sequence
-                )
-
-                targets.append(
-                    target_stage
-                )
-
-    if not sequences:
-
-        n_features = (
-            feature_values.shape[1]
-            if feature_values.ndim == 2
-            else 0
-        )
-
-        return (
-            np.empty(
-                (
-                    0,
-                    sequence_length,
-                    n_features,
-                ),
-                dtype=np.float32,
-            ),
-            np.empty(
-                (0,),
-                dtype=object,
-            ),
-        )
-
-    return (
-        np.stack(sequences).astype(
-            np.float32
-        ),
-        np.asarray(
-            targets,
-            dtype=object,
-        ),
-    )
+    values = np.asarray(feature_values, dtype=np.float32)
+    if values.ndim != 2 or len(dataframe) != len(values):
+        raise ValueError("feature_values must be 2D and aligned row-for-row with dataframe.")
+    positions = build_sequence_positions(dataframe, sequence_length, time_tolerance)
+    targets = dataframe["target_stage"].to_numpy(dtype=object)[positions[:, -1]]
+    return values[positions], targets
 
 
 def encode_sleep_stage_labels(

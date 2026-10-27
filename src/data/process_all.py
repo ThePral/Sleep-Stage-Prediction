@@ -11,6 +11,7 @@ from src.data.pairing import (
 from src.data.process_dataset import (
     process_one_recording,
 )
+from src.data.research import validate_feature_dataframe
 
 
 # ============================================================
@@ -68,11 +69,11 @@ def is_valid_feature_file(
     path: Path,
 ):
     """
-    Check whether an existing CSV looks like a valid
-    completed feature file.
+    Check that an existing CSV has populated, finite, aligned feature rows.
 
-    This prevents an interrupted/empty file from being
-    treated as successfully processed.
+    This rejects empty/invalid files but cannot prove that the end of a legacy
+    CSV is complete. Research epoch stores additionally verify completion
+    manifests, row counts, source identities, and file hashes.
     """
 
     if not path.exists():
@@ -98,14 +99,11 @@ def is_valid_feature_file(
     }
 
     try:
-        header = pd.read_csv(
-            path,
-            nrows=0,
-        )
-
-        return required_columns.issubset(
-            set(header.columns)
-        )
+        frame = pd.read_csv(path)
+        if not required_columns.issubset(frame.columns):
+            return False
+        validate_feature_dataframe(frame)
+        return True
 
     except Exception:
         return False

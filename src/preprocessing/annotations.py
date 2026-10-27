@@ -15,6 +15,7 @@ STAGE_MAPPING = {
 EXCLUDED_STAGES = {
     "Movement time",
     "?",
+    "Sleep stage ?",
 }
 
 
@@ -47,6 +48,9 @@ def build_epoch_metadata(
     recording_id,
     recording_duration,
     epoch_duration=30.0,
+    *,
+    include_excluded=False,
+    time_tolerance=1e-6,
 ):
     """
     Convert Sleep-EDF annotations into complete 30-second
@@ -79,9 +83,13 @@ def build_epoch_metadata(
         One row per valid annotated epoch.
     """
 
+    if not np.isfinite(epoch_duration) or epoch_duration <= 0:
+        raise ValueError("epoch_duration must be positive and finite.")
+    if not np.isfinite(recording_duration) or recording_duration < 0:
+        raise ValueError("recording_duration must be nonnegative and finite.")
+    if not np.isfinite(time_tolerance) or time_tolerance < 0:
+        raise ValueError("time_tolerance must be nonnegative and finite.")
     records = []
-
-    epoch_index = 0
 
     for onset, duration, description in zip(
         annotations.onset,
@@ -95,14 +103,17 @@ def build_epoch_metadata(
 
         # Ignore Movement time, ?, and any other
         # annotation without a target stage.
-        if target_stage is None:
+        if target_stage is None and not include_excluded:
             continue
+
+        if not np.isfinite([onset, duration]).all() or duration < 0:
+            raise ValueError("Annotation onset/duration must be finite; duration cannot be negative.")
 
         # Number of complete 30-second epochs
         # represented by this annotation.
         n_epochs = int(
             np.floor(
-                duration / epoch_duration
+                (min(duration, recording_duration - onset) + time_tolerance) / epoch_duration
             )
         )
 
@@ -118,9 +129,23 @@ def build_epoch_metadata(
                 + epoch_duration
             )
 
+            if start_time < -time_tolerance:
+                continue
+            # The physical timeline, not the retained row number, determines
+            # which EEG samples belong to this label after excluded intervals.
+            epoch_index = int(round(start_time / epoch_duration))
+            grid_start = epoch_index * epoch_duration
+            if abs(start_time - grid_start) > time_tolerance:
+                raise ValueError(
+                    f"Annotation at {start_time}s in {recording_id} is not "
+                    f"aligned to the {epoch_duration}s EEG grid."
+                )
+            start_time = grid_start
+            end_time = grid_start + epoch_duration
+
             # Do not create an epoch extending
             # beyond the actual PSG.
-            if end_time > recording_duration:
+            if end_time > recording_duration + time_tolerance:
                 continue
 
             records.append(
@@ -134,6 +159,9 @@ def build_epoch_metadata(
                 }
             )
 
-            epoch_index += 1
-
-    return pd.DataFrame(records)
+    result = pd.DataFrame(records, columns=[
+        "subject_id", "epoch_index", "start_time", "end_time", "raw_stage", "target_stage",
+    ])
+    if result["epoch_index"].duplicated().any():
+        raise ValueError(f"Overlapping annotation epochs in {recording_id}.")
+    return result.sort_values("epoch_index", kind="stable").reset_index(drop=True)

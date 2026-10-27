@@ -1,0 +1,231 @@
+{
+  "audit_date_client_timezone": "2026-10-26 Asia/Tehran",
+  "scope": "Current local working tree. No training rerun. No existing project files changed.",
+  "python": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+  "packages": {
+    "numpy": "2.5.2",
+    "pandas": "3.0.5",
+    "scipy": "1.18.0",
+    "mne": "1.12.1",
+    "tensorflow": "2.21.0",
+    "keras": "3.15.1",
+    "scikit-learn": "1.9.0",
+    "joblib": "1.5.3"
+  },
+  "input_hashes": {
+    "src/preprocessing/annotations.py": {
+      "bytes": 2941,
+      "sha256": "a0fc7fb3ef13488cc18ce99e0e78e2b18c5d5f1096cbdcb36dd370d68c1315f4"
+    },
+    "src/preprocessing/epoching.py": {
+      "bytes": 3443,
+      "sha256": "e62f37fc88651e7b39836417f8c31e118ae99e668de058d407bf61e9a60ce05a"
+    },
+    "src/preprocessing/pipeline.py": {
+      "bytes": 5238,
+      "sha256": "f1a3e575bb16c9d6a7d2b56462e37bb46de92b63d65d838c3b5db11f89ab171a"
+    },
+    "src/preprocessing/sequences.py": {
+      "bytes": 4933,
+      "sha256": "e7ad7cf9a51140f029347defb3dbe7c58437780d5c7c871047099aaf2bdb3eda"
+    },
+    "src/data/process_all.py": {
+      "bytes": 7188,
+      "sha256": "8730f025cb63d5ac6cb8d0a01cc3db0daae93fc65947104e15e14dd2b12390b5"
+    },
+    "src/inference/predict.py": {
+      "bytes": 8491,
+      "sha256": "1dd80ade83a483ec1b5dfa8cc75674bc1e622183e3b6fbc09766a87e110ae442"
+    },
+    "notebooks/06_participant_split_model.ipynb": {
+      "bytes": 588159,
+      "sha256": "6c102cc9606a0d2592bdcfe080bf42dfafc38832004d9959ed426126a4a76fea"
+    },
+    "data/features/sleep_edf_features.csv": {
+      "bytes": 110857593,
+      "sha256": "33fbd5f1ac3455499215a8d971d841ef1dd11c63c0e893d748e9c624d52eaf19"
+    },
+    "data/features/subject_split.csv": {
+      "bytes": 2687,
+      "sha256": "3b4b7fbf363f92d87cb9a34d52b3abb4cdf611d1b13c8699182a84621e414493"
+    },
+    "data/features/participant_split.csv": {
+      "bytes": 1590,
+      "sha256": "cf1cd33a6a6b2376886119d0ca48d049b26f27f089fcc9e87ea54f5113a673c0"
+    },
+    "final_model/stacked_lstm_32_32_10_epochs.keras": {
+      "bytes": 205508,
+      "sha256": "ba9f9bcae47246d1202fff3f0a686f29a06f1e534b9d789268c49713beeabefb"
+    },
+    "final_model/scaler.pkl": {
+      "bytes": 1334,
+      "sha256": "d6331c15a782d31844d545c142815f23f02d9f4be61be4503f8575b4fad0606d"
+    },
+    "final_model/config.json": {
+      "bytes": 1146,
+      "sha256": "4e1444828693a6b27b3dc2413fbef25eea5a38dfadf6b010046a920656ec220d"
+    },
+    "final_model_corrected/stacked_lstm_final.keras": {
+      "bytes": 205509,
+      "sha256": "627bcea0773dae7a7884d494b9ba73a9e583b6551df3cc5ce97f12813f5975a6"
+    },
+    "results/final_evaluation/final_predictions.csv": {
+      "bytes": 4571223,
+      "sha256": "8b21f04f789dcc632228c89f5c59dbce577a4619f87b396613af42988b96959f"
+    },
+    "results/final_evaluation/final_confusion_matrix.csv": {
+      "bytes": 140,
+      "sha256": "19ad49a36befbbb95d2eca0850f6fb0be8e104fb0b309675d72b48ea1fe92be7"
+    },
+    "results/final_evaluation/definitive_experiment_record.json": {
+      "bytes": 2296,
+      "sha256": "567c7f36a23dec43490ca6bd23f3b0f41a8c0bdc1586849885a632af64f09db7"
+    }
+  },
+  "checks": {
+    "raw_pairings": 197,
+    "cached_epochs": 457577,
+    "cached_label_mismatches_against_annotations": 0,
+    "cached_epoch_start_index_mismatches": 0,
+    "current_metadata_index_start_mismatches_before_quality_filter": 92570,
+    "recordings_with_current_metadata_mismatch": 80,
+    "legacy_participants_in_multiple_splits": 43,
+    "corrected_participant_overlap": 0,
+    "corrected_participants": {
+      "train": 70,
+      "val": 15,
+      "test": 15
+    },
+    "test_windows": 69539,
+    "raw_feature_spot_checks": {
+      "recordings": {
+        "SC4001": [
+          0,
+          100,
+          1021,
+          1100,
+          1500,
+          2649
+        ],
+        "SC4002": [
+          0,
+          100,
+          1022,
+          1101,
+          1501,
+          2829
+        ],
+        "ST7012": [
+          0,
+          100,
+          1021,
+          1034
+        ]
+      },
+      "epochs": 16,
+      "features_per_epoch": 10,
+      "all_matched": true,
+      "rtol": 1e-06,
+      "atol": 1e-20
+    },
+    "training_scaler_refit_max_mean_difference": 0.0,
+    "training_scaler_refit_max_scale_difference": 0.0,
+    "inference_api_probability_max_absolute_difference": 2.444721758365631e-09,
+    "header_only_cache_accepted": true,
+    "sequence_index_probe": {
+      "index_labels": [
+        2,
+        0,
+        1
+      ],
+      "aligned_feature_values": [
+        10,
+        20,
+        30
+      ],
+      "expected_windows": [
+        [
+          10,
+          20
+        ],
+        [
+          20,
+          30
+        ]
+      ],
+      "actual_windows": [
+        [
+          30,
+          10
+        ],
+        [
+          10,
+          20
+        ]
+      ]
+    },
+    "annotation_gap_probe": {
+      "annotations": [
+        [
+          0,
+          30,
+          "W"
+        ],
+        [
+          30,
+          30,
+          "Movement"
+        ],
+        [
+          60,
+          30,
+          "N2"
+        ]
+      ],
+      "generated_retained_indices": [
+        0,
+        1
+      ],
+      "expected_retained_indices": [
+        0,
+        2
+      ]
+    },
+    "legacy_predictions": {
+      "rows": 67017,
+      "accuracy": 0.8739573541041825,
+      "macro_f1": 0.7145689293962676
+    },
+    "old_inference_bundle": {
+      "model_shape": [
+        null,
+        20,
+        10
+      ],
+      "config_sequence_length": 10,
+      "predict_10_epoch_result": "ValueError: expected shape=(None, 20, 10), found shape=(1, 10, 10)"
+    },
+    "existing_validator": {
+      "plain_command": "Failed printing Unicode intersection under Windows stdout encoding",
+      "utf8_command": ".venv\\Scripts\\python.exe -X utf8 -m src.evaluation.validate_final_model",
+      "utf8_result": "passed"
+    }
+  },
+  "bootstrap_method": {
+    "model": "fixed canonical corrected seed-42 model",
+    "unit": "participant, with all nights and overlapping windows retained as a cluster",
+    "aggregation": "sum sampled participant confusion matrices; calculate pooled accuracy and five-class macro-F1",
+    "interval": "2.5th and 97.5th percentiles",
+    "rng": "numpy default_rng(42)",
+    "draws": 5000,
+    "limitation": "Conditional on 15 test participants and one fitted model; does not incorporate retraining/model-selection uncertainty"
+  },
+  "not_verified": [
+    "full training rerun",
+    "independent seed-123/456 checkpoint evaluation",
+    "complete raw-to-feature regeneration",
+    "new complete ISRUC audit or external model evaluation",
+    "clean environment installation",
+    "exhaustive literature review"
+  ]
+}

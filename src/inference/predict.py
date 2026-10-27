@@ -37,7 +37,7 @@ class SleepStagePredictor:
     Load the trained sleep-stage model and perform inference.
 
     Expected input:
-        20 consecutive epochs × 10 features
+        The configured number of consecutive epochs, with ten raw features.
 
     Output:
         predicted sleep stage and class probabilities.
@@ -103,6 +103,28 @@ class SleepStagePredictor:
                 "does not match the expected "
                 "class ordering."
             )
+
+        if list(self.config["features"]) != FEATURE_COLUMNS:
+            raise ValueError("Feature ordering in config.json does not match the inference pipeline.")
+        if self.sequence_length < 1:
+            raise ValueError("Configured sequence length must be positive.")
+        expected_input = (self.sequence_length, self.n_features)
+        if tuple(self.model.input_shape[1:]) != expected_input:
+            raise ValueError(
+                f"Model/configuration mismatch: model expects {self.model.input_shape[1:]}, "
+                f"configuration specifies {expected_input}. Load a matching model bundle."
+            )
+        if self.model.output_shape[-1] != len(self.class_names):
+            raise ValueError("Model output size disagrees with the configured class ordering.")
+
+    @classmethod
+    def from_directory(cls, directory=None):
+        """Load the canonical corrected bundle, avoiding the historical 20-epoch model."""
+        directory = Path(directory) if directory is not None else Path(__file__).resolve().parents[2] / "final_model"
+        config_path = directory / "config.json"
+        config = json.loads(config_path.read_text(encoding="utf-8"))
+        model_file = config.get("model_file", "stacked_lstm_32_32_10_epochs.keras")
+        return cls(directory / model_file, directory / "scaler.pkl", config_path)
 
     def _validate_paths(self) -> None:
         paths = {
@@ -194,7 +216,7 @@ class SleepStagePredictor:
         sequence: pd.DataFrame | np.ndarray,
     ) -> dict:
         """
-        Predict one 20-epoch sequence.
+        Predict one sequence of the configured length.
         """
 
         features = self._prepare_features(
@@ -255,7 +277,7 @@ class SleepStagePredictor:
         np.ndarray,
     ]:
         """
-        Predict a batch of 20-epoch sequences.
+        Predict a batch of sequences of the configured length.
 
         Input
         -----
