@@ -17,7 +17,9 @@ This file tracks delivered code separately from research conclusions.
 | Waveform encoder, feature tokens, and fusion models | Implemented | Shared strided CNN, ten feature tokens, raw-only/concatenation/gated-attention controls, and a temporal GRU |
 | Source-only normalization and streaming batches | Implemented | Unique training-epoch statistics, frozen split checks, bounded memory maps, reproducible window ordering |
 | Supervised trainer and multiview inference | Implemented; source integration pilots passed | Validation macro-F1 checkpoints, hashed completed bundles, prediction exports, and checkpoint reload checks |
-| Contrastive pretraining and fine-tuning | Next milestone | Source-training-only pool, reproducible augmentations and checkpoint transfer |
+| Contrastive pretraining and fine-tuning | Implemented; CPU integration pilots passed | Quality-only source pool, stateless augmentations, masked NT-Xent, recoverable optimizer state, verified encoder transfer |
+| Frozen-encoder linear probe | Implemented | Single-epoch mean pooling and affine classifier; CNN weights checked unchanged |
+| Matched participant label budgets | Planned | Nested training-participant selections shared across model/initialization comparisons |
 | Full experiment runner and external predictive evaluation | Planned | Repeated comparisons, label budgets, participant uncertainty, and a frozen external scoring batch |
 
 **Validation and data notes**
@@ -45,7 +47,7 @@ source-only pretraining eligibility.
 
 **Supervised model milestone**
 
-The full current suite passes **56 tests**: the 36 data/bundle checks from the
+At the supervised milestone, the suite passed **56 tests**: the 36 data/bundle checks from the
 first milestone and 20 model/training checks. The recorded source pilots and
 replay checks are in `reports/supervised_2026-10-27/pilot_summary.json`.
 
@@ -69,8 +71,54 @@ independence, reproducible initialization, backbone transfer, serialization,
 tiny-problem overfitting, source-only fitting, capped validation sampling,
 metric agreement, and complete training-to-inference bundle execution.
 Reproduction commands are in the README. Full source training, GPU memory and
-throughput measurements, SSL, and the subsequent frozen external experiment
+throughput measurements, full-budget SSL, and the subsequent frozen external experiment
 remain distinct experimental/implementation steps.
+
+**Contrastive implementation — 31 October 2026**
+
+The source-only raw SSL path uses individual signal-valid epochs, including
+unscored epochs. Store integrity validation can inspect annotations, but the pool
+retains neither stage labels nor spectral features. Hiding every annotation in
+the test fixture preserves epoch eligibility, waveform statistics and seeded
+batch order. Held-out source participants and ISRUC cannot enter the pool.
+
+Two independently augmented views feed the shared CNN and a discarded projection
+head. NT-Xent retains the positive in the denominator, excludes self-similarity,
+and masks nearby same-recording negatives. Mild gain/noise and a short contiguous
+mask are explicit initial assumptions; their physiological suitability and
+same-stage false negatives remain research questions. The default pretraining
+model has 35,328 parameters, of which 27,008 belong to the transferable CNN.
+
+An atomic epoch-boundary state records encoder/projector/optimizer tensors and
+history. Sampler/view randomness is stateless and reproducible from the seed,
+epoch and batch. Resume requires unchanged source content, update settings,
+package versions and relevant code, and writes a new run directory. The test
+suite compares recovery after a simulated interruption with uninterrupted
+updates. Completed bundles verify file hashes and reloaded encoder outputs.
+
+Downstream transfer validates architecture, source identities and preprocessing.
+SSL and downstream currently require the same source recording selection. The
+SSL waveform scale is preserved, while the spectral scaler retains its separate
+supervised source fitting population. Scratch controls can reuse that exact
+waveform scale without loading pretrained weights. Linear probes freeze the CNN
+and fit only a 325-parameter affine head on a single epoch; frozen temporal/fusion
+head training is also supported and is explicitly distinguished from probing.
+
+The full current suite passes **68 tests**, including 12 contrastive/data/transfer
+checks. CPU pilots completed raw pretraining, epoch-boundary resume, gated
+fine-tuning, a matched scratch control and a frozen linear probe. The complete
+70-participant source-training pool contains 323,423 quality-valid epochs. Its
+waveform statistics were fitted on that full pool, and a deliberately capped
+two-batch optimization pass completed successfully. The smaller transfer pilot
+fitted waveform statistics on 5,480 source epochs and spectral statistics on
+5,479 supervised source epochs from SC4001/SC4002, validating on SC4011.
+
+Implementation pilots, test totals and limitations are recorded in
+`reports/contrastive_2026-10-31/pilot_summary.json`. These runs verify execution
+and source boundaries; they do not demonstrate convergence, label efficiency,
+physiological invariance, or external generalization. No new test/ISRUC predictive
+scores are used. Participant label budgets, the experiment runner, uncertainty
+estimation and the frozen external scoring batch remain upcoming work.
 
 Evaluating the frozen feature model from the newly prepared source data reproduced
 accuracy **0.8266296611**, macro-F1 **0.6533745630**, and every entry in the saved

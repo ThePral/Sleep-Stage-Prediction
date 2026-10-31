@@ -217,7 +217,7 @@ Three controls share a strided waveform CNN and a 64-unit temporal GRU:
 The default input is ten 30-second epochs. CNN downsampling produces 30 waveform
 tokens per epoch before fusion. Layer normalization avoids fitting target-batch
 statistics. The waveform encoder is accessible through `get_waveform_encoder()`
-for the subsequent self-supervised pretraining milestone.
+for self-supervised pretraining and checked downstream transfer.
 
 Run a short integration pilot first:
 
@@ -278,3 +278,112 @@ Waveforms must be in volts and spectral powers in volts squared, before scaling.
 The inference wrapper applies the saved normalization and rejects incomplete,
 modified, or dimensionally incompatible bundles. For the raw-only control,
 `predict_batch` only requires the waveform argument.
+
+**Source-only contrastive pretraining and probing**
+
+The initial SSL method uses two independently augmented versions of the same
+30-second waveform. The shared CNN feeds mean pooling and a two-layer projection
+head, trained with symmetric NT-Xent ([SimCLR](https://proceedings.mlr.press/v119/chen20j.html)).
+Downstream models receive the CNN weights before pooling/projector; the projector
+is discarded. This implementation does not pretrain the spectral branch.
+
+`SourceEpochPool` opens only frozen Sleep-EDF training participants. Eligibility
+uses `quality_valid`, including unscored epochs, and never uses stage availability.
+The shared store checker validates existing annotations for integrity, but the
+SSL pool retains neither stage labels nor spectral arrays. A separate waveform
+normalizer fits mean-removed RMS amplitude on unique quality-valid source epochs.
+Validation, test, and ISRUC signals cannot enter this fitting path.
+
+Defaults are gain 0.8–1.2, additive noise at 0.02 times each input epoch's RMS,
+and a randomly placed contiguous mask of zero to one second. These are candidate
+EEG invariances, requiring source-data inspection and augmentation ablations.
+No frequency masking, permutation, wraparound, or heavy cropping is applied.
+Clean spectral features are not paired with augmented raw signals during SSL.
+
+Epochs shuffle globally without replacement each pass; incomplete final batches
+are dropped. Two views of each original epoch are the positive pair. Other
+epochs supply negatives, except epochs from the same recording within one
+physical epoch (30 seconds) by default. Temporally separated same-participant
+negatives remain eligible. This exclusion is a declared starting assumption,
+not an optimized EEG rule; same-stage false negatives and identity shortcuts
+remain possible. If exclusion removes every negative for any anchor, training
+fails with an actionable message rather than silently changing the loss.
+
+Batch size 32 means 64 augmented inputs and at most 62 negatives per anchor.
+Changing gradient accumulation would not enlarge that denominator. The default
+ten-epoch budget is a starting diagnostic schedule, not evidence of convergence
+or a measured fit on a 4 GB GPU. Current pilots use CPU.
+
+Run a limited real-data pilot and recover its completed epoch into a new run:
+
+```powershell
+.venv\Scripts\python.exe -u -X utf8 -m src.training.contrastive --config configs/pretrain_raw.json --run-dir runs/my_ssl_epoch1 --train-recordings SC4001 SC4002 --epochs 1 --max-batches 2
+
+.venv\Scripts\python.exe -u -X utf8 -m src.training.contrastive --config configs/pretrain_raw.json --run-dir runs/my_ssl_epoch2 --train-recordings SC4001 SC4002 --epochs 2 --max-batches 2 --resume-from runs/my_ssl_epoch1
+```
+
+For full source pretraining omit recording selections and batch caps:
+
+```powershell
+.venv\Scripts\python.exe -u -X utf8 -m src.training.contrastive --config configs/pretrain_raw.json --run-dir runs/raw_ssl_seed42
+```
+
+SSL saves the last epoch of the declared schedule; it does not select a checkpoint
+using held-out signals or pretraining loss. A sealed `resume_state.json` is
+published after each complete epoch, with model/projector/optimizer tensors,
+epoch counter and history. Stateless augmentations and a seeded sampler reproduce
+the next epoch without an opaque RNG snapshot. Resume uses a new output directory,
+requires matching data, update settings, package versions and implementation
+hashes, and replays an interrupted partial epoch from its last complete boundary.
+The total epoch count can extend the constant-learning-rate schedule; batch caps
+and other training settings must match. Resume is an SSL capability; supervised
+training currently exports checkpoints but does not resume optimizer state.
+
+Completed runs contain `encoder.keras`, `waveform_normalizer.json`, configurations,
+data/code provenance, history, a hash-sealed pretraining bundle, and diagnostics.
+Diagnostics include positive/negative cosine similarity, contrastive retrieval,
+and normalized pooled-encoder variance/covariance effective rank on a fixed,
+label-free source training sample. Retrieval is augmentation-pair retrieval,
+not sleep-stage accuracy; these diagnostics alone establish no task improvement.
+
+Fine-tune the pilot encoder in a temporal classifier:
+
+```powershell
+.venv\Scripts\python.exe -u -X utf8 -m src.training.supervised --config configs/supervised_gated.json --run-dir runs/my_ssl_gated --pretrained runs/my_ssl_epoch2 --train-recordings SC4001 SC4002 --validation-recordings SC4011 --epochs 2 --max-train-batches 2 --max-validation-batches 2
+```
+
+Use `supervised_raw.json` or `supervised_concat.json` for the other controls.
+The trainer verifies backbone architecture, frozen source assignment, recording
+identities, content hashes and preprocessing before transfer. The current transfer
+policy requires the same source recording selection for SSL and downstream
+training. The waveform scale stays fixed at its SSL value; spectral statistics
+are fitted on unique supervised source training epochs. Both fitting populations
+are recorded separately in the downstream normalizer. Inference applies this
+combined frozen state to unscaled prepared inputs.
+
+A matched scratch control uses the same input scale without loading SSL weights:
+
+```powershell
+.venv\Scripts\python.exe -u -X utf8 -m src.training.supervised --config configs/supervised_gated.json --run-dir runs/my_matched_scratch --waveform-normalizer runs/my_ssl_epoch2/waveform_normalizer.json --train-recordings SC4001 SC4002 --validation-recordings SC4011 --epochs 2 --max-train-batches 2 --max-validation-batches 2
+```
+
+For a strict linear probe, freeze the CNN, mean-pool a single epoch, and train
+only a five-class affine softmax head. No GRU or hidden classifier is included:
+
+```powershell
+.venv\Scripts\python.exe -u -X utf8 -m src.training.supervised --config configs/linear_probe.json --linear-probe --run-dir runs/my_ssl_probe --pretrained runs/my_ssl_epoch2 --train-recordings SC4001 SC4002 --validation-recordings SC4011 --epochs 2 --max-train-batches 2 --max-validation-batches 2
+```
+
+The default probe has 325 trainable parameters. For a frozen random-encoder
+control, replace `--pretrained <run>` with `--waveform-normalizer <run>/waveform_normalizer.json`.
+`--freeze-backbone` on a temporal/fusion model trains its other modules; this is
+distinct from `--linear-probe`. All downstream checkpoints still maximize source
+validation macro-F1, and the existing inference wrapper loads both probe and
+fine-tuning bundles.
+
+The SSL tests include a direct numerical loss comparison, augmentation bounds,
+fully hidden-label invariance, temporal exclusion, an interrupted-run recovery
+comparison, exact transfer into all three variants, frozen-probe weight checks,
+and pretrain-to-fine-tune-to-inference execution. Participant label budgets,
+full experiment scheduling, GPU profiling and frozen external scoring remain
+subsequent milestones. Capped pilot metrics do not test the research hypotheses.

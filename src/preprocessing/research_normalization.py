@@ -7,6 +7,7 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 
 from src.preprocessing.normalization import ALL_FEATURES
+from src.preprocessing.waveform_normalization import WaveformNormalizer, source_identity
 
 
 def log_spectral(values):
@@ -80,6 +81,22 @@ class ResearchNormalizer:
             raise ValueError("Normalization provenance disagrees with its preprocessing fingerprint.")
         if state["fit_epochs"] != sum(r["fit_epochs"] for r in training["recordings"]):
             raise ValueError("Normalization epoch count disagrees with its provenance.")
+        if "pretraining_waveform" in state:
+            waveform = WaveformNormalizer(state["pretraining_waveform"])
+            if (state["waveform_scale"] != waveform.state["waveform_scale"]
+                    or state["preprocessing_fingerprint"] != waveform.state["preprocessing_fingerprint"]
+                    or source_identity(training) != source_identity(waveform.state["training_data"])):
+                raise ValueError("Pretraining waveform statistics disagree with the downstream state.")
+
+    def use_pretraining_waveform(self, waveform_normalizer, partition):
+        """Keep the SSL input scale unchanged; spectral fitting remains supervised."""
+        self.assert_compatible(partition, require_training_match=True)
+        waveform_normalizer.assert_compatible(partition, require_training_match=True)
+        # JSON copy prevents later mutation of the source object's provenance.
+        self.state["pretraining_waveform"] = json.loads(json.dumps(waveform_normalizer.state))
+        self.state["waveform_scale"] = waveform_normalizer.state["waveform_scale"]
+        self._validate()
+        return self
 
     def assert_compatible(self, partition, *, require_training_match=False):
         self._validate()

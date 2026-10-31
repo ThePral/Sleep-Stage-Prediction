@@ -212,7 +212,22 @@ def build_multiview_model(config=None):
 
 def get_waveform_encoder(model):
     """Expose the shared encoder for subsequent SSL checkpoint transfer."""
+    if any(layer.name == "waveform_encoder" for layer in model.layers):
+        return model.get_layer("waveform_encoder")
     return model.get_layer("epoch_sequence_encoder").epoch_encoder.get_layer("waveform_encoder")
+
+
+def build_linear_probe(config):
+    """Single-epoch frozen CNN mean pooling followed only by a linear head."""
+    if config.variant != "raw" or config.sequence_length != 1:
+        raise ValueError("Linear probes require raw single-epoch configuration.")
+    waveform = keras.Input((1, config.samples_per_epoch, 1), name="waveform")
+    epoch = layers.Reshape((config.samples_per_epoch, 1))(waveform)
+    encoder = build_waveform_encoder(config)
+    encoder.trainable = False
+    pooled = layers.GlobalAveragePooling1D()(encoder(epoch))
+    output = layers.Dense(len(CLASS_LABELS), activation="softmax", dtype="float32", name="sleep_stage")(pooled)
+    return keras.Model({"waveform": waveform}, output, name="linear_sleep_stage_probe")
 
 
 def compile_multiview_model(model, learning_rate=1e-3):

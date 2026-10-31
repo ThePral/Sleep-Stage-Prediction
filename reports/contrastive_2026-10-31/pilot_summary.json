@@ -1,0 +1,1398 @@
+{
+  "date": "2026-10-31",
+  "purpose": "CPU integration checks only; not convergence or comparative task performance evidence",
+  "device_names": [
+    "/physical_device:CPU:0"
+  ],
+  "pretraining_runs": {
+    "pretrain_epoch1": {
+      "summary": {
+        "epochs_completed": 1,
+        "resumed_after_epoch": 0,
+        "source_quality_epochs_available": 5480,
+        "normalization_fit_epochs": 5480,
+        "original_epochs_per_batch": 32,
+        "batches_per_epoch": 2,
+        "original_epochs_used_per_epoch": 64,
+        "incomplete_tail_epochs_per_pass": 8,
+        "maximum_negatives_per_anchor": 62,
+        "optimizer_iterations": 2,
+        "parameters": 35328,
+        "encoder_parameters": 27008,
+        "limited_data_run": true,
+        "elapsed_seconds_this_run": 3.997184899984859,
+        "encoder_max_weight_update_this_run": 0.002001242246478796,
+        "encoder_reload_max_difference": 0.0,
+        "last_epoch": {
+          "epoch": 1,
+          "loss": 3.5815553665161133,
+          "retrieval_accuracy": 1.0,
+          "positive_cosine": 0.9945997893810272,
+          "negative_cosine": 0.871029794216156,
+          "mean_negatives_per_anchor": 62.0,
+          "encoder_epochs": 64,
+          "encoder_embedding_dimension": 64,
+          "encoder_mean_dimension_std": 0.040168443708347365,
+          "encoder_covariance_effective_rank": 19.745879328507147,
+          "encoder_mean_embedding_norm": 2.449703060162243
+        }
+      },
+      "recordings": 2,
+      "participants": [
+        "SC400"
+      ],
+      "bundle_sha256": "0f8b3a0273621ba3f5cb5b7d9b80fc537cae196cfe83d2b365d8f32fc7949c5f",
+      "configuration": {
+        "model": {
+          "variant": "raw",
+          "sequence_length": 1,
+          "samples_per_epoch": 3000,
+          "filters": [
+            16,
+            32,
+            64
+          ],
+          "kernels": [
+            31,
+            15,
+            7
+          ],
+          "strides": [
+            4,
+            5,
+            5
+          ],
+          "token_dim": 64,
+          "attention_heads": 4,
+          "temporal_units": 64,
+          "dropout": 0.3
+        },
+        "pretraining": {
+          "batch_size": 32,
+          "epochs": 1,
+          "learning_rate": 0.001,
+          "temperature": 0.2,
+          "projection_dim": 64,
+          "seed": 42,
+          "exclusion_epochs": 1,
+          "diagnostic_epochs": 64
+        },
+        "augmentation": {
+          "gain_min": 0.8,
+          "gain_max": 1.2,
+          "noise_rms_fraction": 0.02,
+          "max_mask_seconds": 1.0
+        },
+        "max_batches": 2,
+        "train_recordings": [
+          "SC4001",
+          "SC4002"
+        ],
+        "limited_data_run": true,
+        "checkpoint_selection": "last_epoch_of_declared_fixed_schedule_no_held_out_inputs",
+        "sampling": "global_epoch_shuffle_without_replacement_drop_incomplete_batch",
+        "rng_policy": "stateless_views_and_sampler_seeded_by_seed_epoch_batch_at_epoch_boundaries",
+        "data_root": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\data\\processed\\research_v1",
+        "python": "3.13.7",
+        "packages": {
+          "tensorflow": "2.21.0",
+          "keras": "3.15.1",
+          "numpy": "2.5.2",
+          "pandas": "3.0.5"
+        },
+        "devices": [
+          "/physical_device:CPU:0"
+        ],
+        "resume_from": null,
+        "code_sha256": {
+          "src/training/contrastive.py": "77e3a1820d3148f3af078fbd8882c41b3311bb842620100db9be99dbdb6d6d6c",
+          "src/models/contrastive.py": "1a398a9632b3d56f37fbf0684e4b0d4cafb25353e9781707db1e4e46720344ff",
+          "src/models/multiview.py": "6d8d1c009b4dfacab509deab456a8ee51b3429ea5b1388a487d82bca0097171f",
+          "src/data/contrastive.py": "4791e47670ea8b34eda40fff9fc78f7edd122792f03241afb1217f9846a143d2",
+          "src/data/supervised.py": "61b7ddadec648a2d0d54bd43bcafc8c40176fafdc0b5646490058a9d12c5a4d6",
+          "src/preprocessing/waveform_normalization.py": "df3efe389317e168ec31dc5630a8af0d2e34201d54dc60877294b9f17cc0cf70"
+        }
+      },
+      "diagnostics": {
+        "initial": {
+          "epochs": 64,
+          "embedding_dimension": 64,
+          "mean_dimension_std": 0.02840281106167756,
+          "covariance_effective_rank": 19.34562432713639,
+          "mean_embedding_norm": 3.1396329740343853
+        },
+        "final": {
+          "epochs": 64,
+          "embedding_dimension": 64,
+          "mean_dimension_std": 0.040168443708347365,
+          "covariance_effective_rank": 19.745879328507147,
+          "mean_embedding_norm": 2.449703060162243
+        },
+        "epoch_ids": [
+          "sleepedf:SC4001:000000",
+          "sleepedf:SC4001:000086",
+          "sleepedf:SC4001:000173",
+          "sleepedf:SC4001:000260",
+          "sleepedf:SC4001:000347",
+          "sleepedf:SC4001:000434",
+          "sleepedf:SC4001:000521",
+          "sleepedf:SC4001:000608",
+          "sleepedf:SC4001:000695",
+          "sleepedf:SC4001:000782",
+          "sleepedf:SC4001:000869",
+          "sleepedf:SC4001:000956",
+          "sleepedf:SC4001:001043",
+          "sleepedf:SC4001:001130",
+          "sleepedf:SC4001:001217",
+          "sleepedf:SC4001:001304",
+          "sleepedf:SC4001:001391",
+          "sleepedf:SC4001:001478",
+          "sleepedf:SC4001:001565",
+          "sleepedf:SC4001:001652",
+          "sleepedf:SC4001:001739",
+          "sleepedf:SC4001:001826",
+          "sleepedf:SC4001:001913",
+          "sleepedf:SC4001:002000",
+          "sleepedf:SC4001:002087",
+          "sleepedf:SC4001:002174",
+          "sleepedf:SC4001:002261",
+          "sleepedf:SC4001:002348",
+          "sleepedf:SC4001:002435",
+          "sleepedf:SC4001:002522",
+          "sleepedf:SC4001:002609",
+          "sleepedf:SC4002:000046",
+          "sleepedf:SC4002:000132",
+          "sleepedf:SC4002:000219",
+          "sleepedf:SC4002:000306",
+          "sleepedf:SC4002:000393",
+          "sleepedf:SC4002:000480",
+          "sleepedf:SC4002:000567",
+          "sleepedf:SC4002:000654",
+          "sleepedf:SC4002:000741",
+          "sleepedf:SC4002:000828",
+          "sleepedf:SC4002:000915",
+          "sleepedf:SC4002:001002",
+          "sleepedf:SC4002:001089",
+          "sleepedf:SC4002:001176",
+          "sleepedf:SC4002:001263",
+          "sleepedf:SC4002:001350",
+          "sleepedf:SC4002:001437",
+          "sleepedf:SC4002:001524",
+          "sleepedf:SC4002:001611",
+          "sleepedf:SC4002:001698",
+          "sleepedf:SC4002:001785",
+          "sleepedf:SC4002:001872",
+          "sleepedf:SC4002:001959",
+          "sleepedf:SC4002:002046",
+          "sleepedf:SC4002:002133",
+          "sleepedf:SC4002:002220",
+          "sleepedf:SC4002:002307",
+          "sleepedf:SC4002:002394",
+          "sleepedf:SC4002:002481",
+          "sleepedf:SC4002:002568",
+          "sleepedf:SC4002:002655",
+          "sleepedf:SC4002:002742",
+          "sleepedf:SC4002:002829"
+        ]
+      }
+    },
+    "pretrain_epoch2_resumed": {
+      "summary": {
+        "epochs_completed": 2,
+        "resumed_after_epoch": 1,
+        "source_quality_epochs_available": 5480,
+        "normalization_fit_epochs": 5480,
+        "original_epochs_per_batch": 32,
+        "batches_per_epoch": 2,
+        "original_epochs_used_per_epoch": 64,
+        "incomplete_tail_epochs_per_pass": 8,
+        "maximum_negatives_per_anchor": 62,
+        "optimizer_iterations": 4,
+        "parameters": 35328,
+        "encoder_parameters": 27008,
+        "limited_data_run": true,
+        "elapsed_seconds_this_run": 5.830345399968792,
+        "encoder_max_weight_update_this_run": 0.002007942646741867,
+        "encoder_reload_max_difference": 0.0,
+        "last_epoch": {
+          "epoch": 2,
+          "loss": 2.6785162687301636,
+          "retrieval_accuracy": 1.0,
+          "positive_cosine": 0.9897628128528595,
+          "negative_cosine": 0.6386034190654755,
+          "mean_negatives_per_anchor": 61.875,
+          "encoder_epochs": 64,
+          "encoder_embedding_dimension": 64,
+          "encoder_mean_dimension_std": 0.04344565763876686,
+          "encoder_covariance_effective_rank": 19.326240724193685,
+          "encoder_mean_embedding_norm": 2.3680120493548973
+        }
+      },
+      "recordings": 2,
+      "participants": [
+        "SC400"
+      ],
+      "bundle_sha256": "669c2ab0815b469118c2a228c672781cc8d633cb83731194703259e8086ead5b",
+      "configuration": {
+        "model": {
+          "variant": "raw",
+          "sequence_length": 1,
+          "samples_per_epoch": 3000,
+          "filters": [
+            16,
+            32,
+            64
+          ],
+          "kernels": [
+            31,
+            15,
+            7
+          ],
+          "strides": [
+            4,
+            5,
+            5
+          ],
+          "token_dim": 64,
+          "attention_heads": 4,
+          "temporal_units": 64,
+          "dropout": 0.3
+        },
+        "pretraining": {
+          "batch_size": 32,
+          "epochs": 2,
+          "learning_rate": 0.001,
+          "temperature": 0.2,
+          "projection_dim": 64,
+          "seed": 42,
+          "exclusion_epochs": 1,
+          "diagnostic_epochs": 64
+        },
+        "augmentation": {
+          "gain_min": 0.8,
+          "gain_max": 1.2,
+          "noise_rms_fraction": 0.02,
+          "max_mask_seconds": 1.0
+        },
+        "max_batches": 2,
+        "train_recordings": [
+          "SC4001",
+          "SC4002"
+        ],
+        "limited_data_run": true,
+        "checkpoint_selection": "last_epoch_of_declared_fixed_schedule_no_held_out_inputs",
+        "sampling": "global_epoch_shuffle_without_replacement_drop_incomplete_batch",
+        "rng_policy": "stateless_views_and_sampler_seeded_by_seed_epoch_batch_at_epoch_boundaries",
+        "data_root": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\data\\processed\\research_v1",
+        "python": "3.13.7",
+        "packages": {
+          "tensorflow": "2.21.0",
+          "keras": "3.15.1",
+          "numpy": "2.5.2",
+          "pandas": "3.0.5"
+        },
+        "devices": [
+          "/physical_device:CPU:0"
+        ],
+        "resume_from": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\contrastive_2026-10-31\\pretrain_epoch1",
+        "code_sha256": {
+          "src/training/contrastive.py": "77e3a1820d3148f3af078fbd8882c41b3311bb842620100db9be99dbdb6d6d6c",
+          "src/models/contrastive.py": "1a398a9632b3d56f37fbf0684e4b0d4cafb25353e9781707db1e4e46720344ff",
+          "src/models/multiview.py": "6d8d1c009b4dfacab509deab456a8ee51b3429ea5b1388a487d82bca0097171f",
+          "src/data/contrastive.py": "4791e47670ea8b34eda40fff9fc78f7edd122792f03241afb1217f9846a143d2",
+          "src/data/supervised.py": "61b7ddadec648a2d0d54bd43bcafc8c40176fafdc0b5646490058a9d12c5a4d6",
+          "src/preprocessing/waveform_normalization.py": "df3efe389317e168ec31dc5630a8af0d2e34201d54dc60877294b9f17cc0cf70"
+        }
+      },
+      "diagnostics": {
+        "initial": {
+          "epochs": 64,
+          "embedding_dimension": 64,
+          "mean_dimension_std": 0.040168443708347365,
+          "covariance_effective_rank": 19.745879328507147,
+          "mean_embedding_norm": 2.449703060162243
+        },
+        "final": {
+          "epochs": 64,
+          "embedding_dimension": 64,
+          "mean_dimension_std": 0.04344565763876686,
+          "covariance_effective_rank": 19.326240724193685,
+          "mean_embedding_norm": 2.3680120493548973
+        },
+        "epoch_ids": [
+          "sleepedf:SC4001:000000",
+          "sleepedf:SC4001:000086",
+          "sleepedf:SC4001:000173",
+          "sleepedf:SC4001:000260",
+          "sleepedf:SC4001:000347",
+          "sleepedf:SC4001:000434",
+          "sleepedf:SC4001:000521",
+          "sleepedf:SC4001:000608",
+          "sleepedf:SC4001:000695",
+          "sleepedf:SC4001:000782",
+          "sleepedf:SC4001:000869",
+          "sleepedf:SC4001:000956",
+          "sleepedf:SC4001:001043",
+          "sleepedf:SC4001:001130",
+          "sleepedf:SC4001:001217",
+          "sleepedf:SC4001:001304",
+          "sleepedf:SC4001:001391",
+          "sleepedf:SC4001:001478",
+          "sleepedf:SC4001:001565",
+          "sleepedf:SC4001:001652",
+          "sleepedf:SC4001:001739",
+          "sleepedf:SC4001:001826",
+          "sleepedf:SC4001:001913",
+          "sleepedf:SC4001:002000",
+          "sleepedf:SC4001:002087",
+          "sleepedf:SC4001:002174",
+          "sleepedf:SC4001:002261",
+          "sleepedf:SC4001:002348",
+          "sleepedf:SC4001:002435",
+          "sleepedf:SC4001:002522",
+          "sleepedf:SC4001:002609",
+          "sleepedf:SC4002:000046",
+          "sleepedf:SC4002:000132",
+          "sleepedf:SC4002:000219",
+          "sleepedf:SC4002:000306",
+          "sleepedf:SC4002:000393",
+          "sleepedf:SC4002:000480",
+          "sleepedf:SC4002:000567",
+          "sleepedf:SC4002:000654",
+          "sleepedf:SC4002:000741",
+          "sleepedf:SC4002:000828",
+          "sleepedf:SC4002:000915",
+          "sleepedf:SC4002:001002",
+          "sleepedf:SC4002:001089",
+          "sleepedf:SC4002:001176",
+          "sleepedf:SC4002:001263",
+          "sleepedf:SC4002:001350",
+          "sleepedf:SC4002:001437",
+          "sleepedf:SC4002:001524",
+          "sleepedf:SC4002:001611",
+          "sleepedf:SC4002:001698",
+          "sleepedf:SC4002:001785",
+          "sleepedf:SC4002:001872",
+          "sleepedf:SC4002:001959",
+          "sleepedf:SC4002:002046",
+          "sleepedf:SC4002:002133",
+          "sleepedf:SC4002:002220",
+          "sleepedf:SC4002:002307",
+          "sleepedf:SC4002:002394",
+          "sleepedf:SC4002:002481",
+          "sleepedf:SC4002:002568",
+          "sleepedf:SC4002:002655",
+          "sleepedf:SC4002:002742",
+          "sleepedf:SC4002:002829"
+        ]
+      }
+    },
+    "full_source_pool_check": {
+      "summary": {
+        "epochs_completed": 1,
+        "resumed_after_epoch": 0,
+        "source_quality_epochs_available": 323423,
+        "normalization_fit_epochs": 323423,
+        "original_epochs_per_batch": 32,
+        "batches_per_epoch": 2,
+        "original_epochs_used_per_epoch": 64,
+        "incomplete_tail_epochs_per_pass": 31,
+        "maximum_negatives_per_anchor": 62,
+        "optimizer_iterations": 2,
+        "parameters": 35328,
+        "encoder_parameters": 27008,
+        "limited_data_run": true,
+        "elapsed_seconds_this_run": 58.32471010001609,
+        "encoder_max_weight_update_this_run": 0.0020012259483337402,
+        "encoder_reload_max_difference": 0.0,
+        "last_epoch": {
+          "epoch": 1,
+          "loss": 3.5420429706573486,
+          "retrieval_accuracy": 1.0,
+          "positive_cosine": 0.9953658282756805,
+          "negative_cosine": 0.8644334673881531,
+          "mean_negatives_per_anchor": 62.0,
+          "encoder_epochs": 64,
+          "encoder_embedding_dimension": 64,
+          "encoder_mean_dimension_std": 0.04669966585470136,
+          "encoder_covariance_effective_rank": 16.365745442369683,
+          "encoder_mean_embedding_norm": 2.4748666753952344
+        }
+      },
+      "recordings": 138,
+      "participants": [
+        "SC400",
+        "SC403",
+        "SC404",
+        "SC405",
+        "SC406",
+        "SC407",
+        "SC408",
+        "SC409",
+        "SC410",
+        "SC412",
+        "SC413",
+        "SC415",
+        "SC416",
+        "SC417",
+        "SC418",
+        "SC419",
+        "SC422",
+        "SC425",
+        "SC426",
+        "SC427",
+        "SC428",
+        "SC430",
+        "SC431",
+        "SC433",
+        "SC434",
+        "SC435",
+        "SC436",
+        "SC438",
+        "SC440",
+        "SC441",
+        "SC442",
+        "SC443",
+        "SC445",
+        "SC446",
+        "SC447",
+        "SC448",
+        "SC450",
+        "SC451",
+        "SC454",
+        "SC455",
+        "SC456",
+        "SC457",
+        "SC459",
+        "SC462",
+        "SC463",
+        "SC465",
+        "SC466",
+        "SC467",
+        "SC470",
+        "SC472",
+        "SC475",
+        "SC477",
+        "SC480",
+        "SC481",
+        "SC482",
+        "ST702",
+        "ST704",
+        "ST705",
+        "ST706",
+        "ST707",
+        "ST709",
+        "ST711",
+        "ST712",
+        "ST713",
+        "ST715",
+        "ST717",
+        "ST718",
+        "ST719",
+        "ST720",
+        "ST721"
+      ],
+      "bundle_sha256": "51889b79b71673caaae794f5f7884f85e4783ea3ab5cb364ab131f5e71b288de",
+      "configuration": {
+        "model": {
+          "variant": "raw",
+          "sequence_length": 1,
+          "samples_per_epoch": 3000,
+          "filters": [
+            16,
+            32,
+            64
+          ],
+          "kernels": [
+            31,
+            15,
+            7
+          ],
+          "strides": [
+            4,
+            5,
+            5
+          ],
+          "token_dim": 64,
+          "attention_heads": 4,
+          "temporal_units": 64,
+          "dropout": 0.3
+        },
+        "pretraining": {
+          "batch_size": 32,
+          "epochs": 1,
+          "learning_rate": 0.001,
+          "temperature": 0.2,
+          "projection_dim": 64,
+          "seed": 42,
+          "exclusion_epochs": 1,
+          "diagnostic_epochs": 64
+        },
+        "augmentation": {
+          "gain_min": 0.8,
+          "gain_max": 1.2,
+          "noise_rms_fraction": 0.02,
+          "max_mask_seconds": 1.0
+        },
+        "max_batches": 2,
+        "train_recordings": null,
+        "limited_data_run": true,
+        "checkpoint_selection": "last_epoch_of_declared_fixed_schedule_no_held_out_inputs",
+        "sampling": "global_epoch_shuffle_without_replacement_drop_incomplete_batch",
+        "rng_policy": "stateless_views_and_sampler_seeded_by_seed_epoch_batch_at_epoch_boundaries",
+        "data_root": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\data\\processed\\research_v1",
+        "python": "3.13.7",
+        "packages": {
+          "tensorflow": "2.21.0",
+          "keras": "3.15.1",
+          "numpy": "2.5.2",
+          "pandas": "3.0.5"
+        },
+        "devices": [
+          "/physical_device:CPU:0"
+        ],
+        "resume_from": null,
+        "code_sha256": {
+          "src/training/contrastive.py": "77e3a1820d3148f3af078fbd8882c41b3311bb842620100db9be99dbdb6d6d6c",
+          "src/models/contrastive.py": "1a398a9632b3d56f37fbf0684e4b0d4cafb25353e9781707db1e4e46720344ff",
+          "src/models/multiview.py": "6d8d1c009b4dfacab509deab456a8ee51b3429ea5b1388a487d82bca0097171f",
+          "src/data/contrastive.py": "4791e47670ea8b34eda40fff9fc78f7edd122792f03241afb1217f9846a143d2",
+          "src/data/supervised.py": "61b7ddadec648a2d0d54bd43bcafc8c40176fafdc0b5646490058a9d12c5a4d6",
+          "src/preprocessing/waveform_normalization.py": "df3efe389317e168ec31dc5630a8af0d2e34201d54dc60877294b9f17cc0cf70"
+        }
+      },
+      "diagnostics": {
+        "initial": {
+          "epochs": 64,
+          "embedding_dimension": 64,
+          "mean_dimension_std": 0.0331554837884684,
+          "covariance_effective_rank": 16.30025925414293,
+          "mean_embedding_norm": 3.1853032248396698
+        },
+        "final": {
+          "epochs": 64,
+          "embedding_dimension": 64,
+          "mean_dimension_std": 0.04669966585470136,
+          "covariance_effective_rank": 16.365745442369683,
+          "mean_embedding_norm": 2.4748666753952344
+        },
+        "epoch_ids": [
+          "sleepedf:SC4001:000000",
+          "sleepedf:SC4002:002483",
+          "sleepedf:SC4032:001967",
+          "sleepedf:SC4042:001799",
+          "sleepedf:SC4052:001418",
+          "sleepedf:SC4062:000976",
+          "sleepedf:SC4072:000470",
+          "sleepedf:SC4082:000037",
+          "sleepedf:SC4091:002537",
+          "sleepedf:SC4101:002081",
+          "sleepedf:SC4121:001636",
+          "sleepedf:SC4131:001378",
+          "sleepedf:SC4152:001078",
+          "sleepedf:SC4162:000721",
+          "sleepedf:SC4172:000361",
+          "sleepedf:SC4182:000015",
+          "sleepedf:SC4191:002306",
+          "sleepedf:SC4221:002056",
+          "sleepedf:SC4251:001730",
+          "sleepedf:SC4261:001437",
+          "sleepedf:SC4271:001051",
+          "sleepedf:SC4281:000875",
+          "sleepedf:SC4301:000407",
+          "sleepedf:SC4311:000086",
+          "sleepedf:SC4312:002550",
+          "sleepedf:SC4332:002174",
+          "sleepedf:SC4342:001797",
+          "sleepedf:SC4352:001431",
+          "sleepedf:SC4381:001767",
+          "sleepedf:SC4401:001380",
+          "sleepedf:SC4411:001094",
+          "sleepedf:SC4421:000642",
+          "sleepedf:SC4431:000329",
+          "sleepedf:SC4432:002653",
+          "sleepedf:SC4452:002217",
+          "sleepedf:SC4462:001984",
+          "sleepedf:SC4472:001522",
+          "sleepedf:SC4482:000986",
+          "sleepedf:SC4502:000489",
+          "sleepedf:SC4512:000141",
+          "sleepedf:SC4541:002525",
+          "sleepedf:SC4551:002238",
+          "sleepedf:SC4561:001790",
+          "sleepedf:SC4571:001420",
+          "sleepedf:SC4591:000824",
+          "sleepedf:SC4621:001097",
+          "sleepedf:SC4631:000763",
+          "sleepedf:SC4651:000291",
+          "sleepedf:SC4652:002564",
+          "sleepedf:SC4662:002118",
+          "sleepedf:SC4672:001652",
+          "sleepedf:SC4702:001525",
+          "sleepedf:SC4722:001693",
+          "sleepedf:SC4752:001401",
+          "sleepedf:SC4772:001308",
+          "sleepedf:SC4802:001426",
+          "sleepedf:SC4812:001348",
+          "sleepedf:SC4822:001343",
+          "sleepedf:ST7042:000786",
+          "sleepedf:ST7071:000610",
+          "sleepedf:ST7121:000134",
+          "sleepedf:ST7152:000569",
+          "sleepedf:ST7191:000827",
+          "sleepedf:ST7212:001010"
+        ]
+      }
+    }
+  },
+  "downstream_runs": {
+    "gated_finetune": {
+      "summary": {
+        "variant": "gated",
+        "parameters": 82757,
+        "training_mode": "temporal_classifier",
+        "trainable_parameters": 82757,
+        "pretrained_waveform": true,
+        "epochs_completed": 2,
+        "best_epoch": 1,
+        "train_windows_available": 5452,
+        "validation_windows_available": 2793,
+        "train_batches_per_epoch": 2,
+        "validation_batches": 2,
+        "normalization_fit_epochs": 5479,
+        "waveform_normalization_fit_epochs": 5480,
+        "limited_data_run": true,
+        "elapsed_seconds": 14.357862300006673,
+        "checkpoint_reload_max_probability_difference": 0.0,
+        "source_validation": {
+          "examples": 8,
+          "loss": 1.185864640426252,
+          "accuracy": 0.625,
+          "macro_f1": 0.15384615384615385,
+          "balanced_accuracy": 0.3333333333333333,
+          "weighted_f1": 0.4807692307692308,
+          "cohen_kappa": 0.0,
+          "macro_f1_policy": "fixed_five_classes_zero_division_zero",
+          "balanced_accuracy_policy": "mean_recall_over_truth_classes_present",
+          "per_stage": {
+            "W": {
+              "support": 5,
+              "precision": 0.625,
+              "recall": 1.0,
+              "f1": 0.7692307692307693
+            },
+            "N1": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "N2": {
+              "support": 2,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "N3": {
+              "support": 1,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "REM": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "confusion_matrix": [
+            [
+              5,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      },
+      "configuration": {
+        "model": {
+          "variant": "gated",
+          "sequence_length": 10,
+          "samples_per_epoch": 3000,
+          "filters": [
+            16,
+            32,
+            64
+          ],
+          "kernels": [
+            31,
+            15,
+            7
+          ],
+          "strides": [
+            4,
+            5,
+            5
+          ],
+          "token_dim": 64,
+          "attention_heads": 4,
+          "temporal_units": 64,
+          "dropout": 0.3
+        },
+        "training": {
+          "batch_size": 4,
+          "epochs": 2,
+          "learning_rate": 0.001,
+          "seed": 42,
+          "patience": 5
+        },
+        "data_root": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\data\\processed\\research_v1",
+        "selection": {
+          "train_recordings": [
+            "SC4001",
+            "SC4002"
+          ],
+          "validation_recordings": [
+            "SC4011"
+          ],
+          "max_train_batches": 2,
+          "max_validation_batches": 2
+        },
+        "limited_data_run": true,
+        "normalizer_reused_from": null,
+        "training_mode": "temporal_classifier",
+        "pretrained_from": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\contrastive_2026-10-31\\pretrain_epoch2_resumed",
+        "waveform_normalizer_from": null,
+        "frozen_waveform_encoder": false,
+        "checkpoint_selection": "maximum_source_validation_fixed_five_class_macro_f1",
+        "capped_validation_selection": "evenly_spaced_windows_without_using_labels",
+        "classes": [
+          "W",
+          "N1",
+          "N2",
+          "N3",
+          "REM"
+        ],
+        "features": [
+          "delta_absolute",
+          "theta_absolute",
+          "alpha_absolute",
+          "beta_absolute",
+          "delta_relative",
+          "theta_relative",
+          "alpha_relative",
+          "beta_relative",
+          "spectral_entropy",
+          "dominant_frequency"
+        ],
+        "python": "3.13.7",
+        "packages": {
+          "tensorflow": "2.21.0",
+          "keras": "3.15.1",
+          "numpy": "2.5.2",
+          "pandas": "3.0.5",
+          "scikit-learn": "1.9.0"
+        },
+        "devices": [
+          "/physical_device:CPU:0"
+        ],
+        "code_sha256": {
+          "src/training/supervised.py": "619cf61c0e1939635340f3c6bd76efa8554207d8eeb3ba0d650fa2fbe2679d08",
+          "src/models/multiview.py": "6d8d1c009b4dfacab509deab456a8ee51b3429ea5b1388a487d82bca0097171f",
+          "src/data/supervised.py": "61b7ddadec648a2d0d54bd43bcafc8c40176fafdc0b5646490058a9d12c5a4d6",
+          "src/preprocessing/research_normalization.py": "e07ec2cc0d63d880b4f2d3e90e9d0e4add237ed85bfee145b0a366e77026c87c"
+        },
+        "pretraining_transfer": {
+          "bundle_sha256": "669c2ab0815b469118c2a228c672781cc8d633cb83731194703259e8086ead5b",
+          "encoder_sha256": "97cccad57cb353243db971f5a7d6de6a9006d69f813c94ac118819a39f03ead0",
+          "frozen_waveform_encoder": false
+        }
+      },
+      "fresh_process_prediction_replay_max_difference": 5.960464477539063e-08,
+      "backbone_max_difference_from_pretrained": 0.0020012930035591125,
+      "normalizer_sha256": "d42275dea69017bd0eef2507c14c44e9e159d542b66acf5933887b844559770f",
+      "validation_epoch_ids": [
+        "sleepedf:SC4011:000009",
+        "sleepedf:SC4011:000407",
+        "sleepedf:SC4011:000806",
+        "sleepedf:SC4011:001205",
+        "sleepedf:SC4011:001604",
+        "sleepedf:SC4011:002003",
+        "sleepedf:SC4011:002402",
+        "sleepedf:SC4011:002801"
+      ]
+    },
+    "gated_matched_scratch": {
+      "summary": {
+        "variant": "gated",
+        "parameters": 82757,
+        "training_mode": "temporal_classifier",
+        "trainable_parameters": 82757,
+        "pretrained_waveform": false,
+        "epochs_completed": 2,
+        "best_epoch": 1,
+        "train_windows_available": 5452,
+        "validation_windows_available": 2793,
+        "train_batches_per_epoch": 2,
+        "validation_batches": 2,
+        "normalization_fit_epochs": 5479,
+        "waveform_normalization_fit_epochs": 5480,
+        "limited_data_run": true,
+        "elapsed_seconds": 11.226359400025103,
+        "checkpoint_reload_max_probability_difference": 0.0,
+        "source_validation": {
+          "examples": 8,
+          "loss": 1.2317171413421495,
+          "accuracy": 0.625,
+          "macro_f1": 0.15384615384615385,
+          "balanced_accuracy": 0.3333333333333333,
+          "weighted_f1": 0.4807692307692308,
+          "cohen_kappa": 0.0,
+          "macro_f1_policy": "fixed_five_classes_zero_division_zero",
+          "balanced_accuracy_policy": "mean_recall_over_truth_classes_present",
+          "per_stage": {
+            "W": {
+              "support": 5,
+              "precision": 0.625,
+              "recall": 1.0,
+              "f1": 0.7692307692307693
+            },
+            "N1": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "N2": {
+              "support": 2,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "N3": {
+              "support": 1,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "REM": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "confusion_matrix": [
+            [
+              5,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      },
+      "configuration": {
+        "model": {
+          "variant": "gated",
+          "sequence_length": 10,
+          "samples_per_epoch": 3000,
+          "filters": [
+            16,
+            32,
+            64
+          ],
+          "kernels": [
+            31,
+            15,
+            7
+          ],
+          "strides": [
+            4,
+            5,
+            5
+          ],
+          "token_dim": 64,
+          "attention_heads": 4,
+          "temporal_units": 64,
+          "dropout": 0.3
+        },
+        "training": {
+          "batch_size": 4,
+          "epochs": 2,
+          "learning_rate": 0.001,
+          "seed": 42,
+          "patience": 5
+        },
+        "data_root": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\data\\processed\\research_v1",
+        "selection": {
+          "train_recordings": [
+            "SC4001",
+            "SC4002"
+          ],
+          "validation_recordings": [
+            "SC4011"
+          ],
+          "max_train_batches": 2,
+          "max_validation_batches": 2
+        },
+        "limited_data_run": true,
+        "normalizer_reused_from": null,
+        "training_mode": "temporal_classifier",
+        "pretrained_from": null,
+        "waveform_normalizer_from": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\contrastive_2026-10-31\\pretrain_epoch2_resumed\\waveform_normalizer.json",
+        "frozen_waveform_encoder": false,
+        "checkpoint_selection": "maximum_source_validation_fixed_five_class_macro_f1",
+        "capped_validation_selection": "evenly_spaced_windows_without_using_labels",
+        "classes": [
+          "W",
+          "N1",
+          "N2",
+          "N3",
+          "REM"
+        ],
+        "features": [
+          "delta_absolute",
+          "theta_absolute",
+          "alpha_absolute",
+          "beta_absolute",
+          "delta_relative",
+          "theta_relative",
+          "alpha_relative",
+          "beta_relative",
+          "spectral_entropy",
+          "dominant_frequency"
+        ],
+        "python": "3.13.7",
+        "packages": {
+          "tensorflow": "2.21.0",
+          "keras": "3.15.1",
+          "numpy": "2.5.2",
+          "pandas": "3.0.5",
+          "scikit-learn": "1.9.0"
+        },
+        "devices": [
+          "/physical_device:CPU:0"
+        ],
+        "code_sha256": {
+          "src/training/supervised.py": "619cf61c0e1939635340f3c6bd76efa8554207d8eeb3ba0d650fa2fbe2679d08",
+          "src/models/multiview.py": "6d8d1c009b4dfacab509deab456a8ee51b3429ea5b1388a487d82bca0097171f",
+          "src/data/supervised.py": "61b7ddadec648a2d0d54bd43bcafc8c40176fafdc0b5646490058a9d12c5a4d6",
+          "src/preprocessing/research_normalization.py": "e07ec2cc0d63d880b4f2d3e90e9d0e4add237ed85bfee145b0a366e77026c87c"
+        }
+      },
+      "fresh_process_prediction_replay_max_difference": 1.1920928955078125e-07,
+      "backbone_max_difference_from_pretrained": 0.006004510447382927,
+      "normalizer_sha256": "d42275dea69017bd0eef2507c14c44e9e159d542b66acf5933887b844559770f",
+      "validation_epoch_ids": [
+        "sleepedf:SC4011:000009",
+        "sleepedf:SC4011:000407",
+        "sleepedf:SC4011:000806",
+        "sleepedf:SC4011:001205",
+        "sleepedf:SC4011:001604",
+        "sleepedf:SC4011:002003",
+        "sleepedf:SC4011:002402",
+        "sleepedf:SC4011:002801"
+      ]
+    },
+    "linear_probe": {
+      "summary": {
+        "variant": "raw",
+        "parameters": 27333,
+        "training_mode": "linear_probe",
+        "trainable_parameters": 325,
+        "pretrained_waveform": true,
+        "epochs_completed": 2,
+        "best_epoch": 2,
+        "train_windows_available": 5479,
+        "validation_windows_available": 2802,
+        "train_batches_per_epoch": 2,
+        "validation_batches": 2,
+        "normalization_fit_epochs": 5479,
+        "waveform_normalization_fit_epochs": 5480,
+        "limited_data_run": true,
+        "elapsed_seconds": 3.823368900048081,
+        "checkpoint_reload_max_probability_difference": 0.0,
+        "source_validation": {
+          "examples": 64,
+          "loss": 1.4153580855464556,
+          "accuracy": 0.578125,
+          "macro_f1": 0.2203991130820399,
+          "balanced_accuracy": 0.3119047619047619,
+          "weighted_f1": 0.5612527716186253,
+          "cohen_kappa": 0.23742277140335394,
+          "macro_f1_policy": "fixed_five_classes_zero_division_zero",
+          "balanced_accuracy_policy": "mean_recall_over_truth_classes_present",
+          "per_stage": {
+            "W": {
+              "support": 42,
+              "precision": 0.85,
+              "recall": 0.8095238095238095,
+              "f1": 0.8292682926829268
+            },
+            "N1": {
+              "support": 2,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "N2": {
+              "support": 13,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "N3": {
+              "support": 3,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "REM": {
+              "support": 4,
+              "precision": 0.16666666666666666,
+              "recall": 0.75,
+              "f1": 0.2727272727272727
+            }
+          },
+          "confusion_matrix": [
+            [
+              34,
+              0,
+              5,
+              0,
+              3
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              1
+            ],
+            [
+              2,
+              0,
+              0,
+              0,
+              11
+            ],
+            [
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1,
+              0,
+              3
+            ]
+          ]
+        }
+      },
+      "configuration": {
+        "model": {
+          "variant": "raw",
+          "sequence_length": 1,
+          "samples_per_epoch": 3000,
+          "filters": [
+            16,
+            32,
+            64
+          ],
+          "kernels": [
+            31,
+            15,
+            7
+          ],
+          "strides": [
+            4,
+            5,
+            5
+          ],
+          "token_dim": 64,
+          "attention_heads": 4,
+          "temporal_units": 64,
+          "dropout": 0.3
+        },
+        "training": {
+          "batch_size": 32,
+          "epochs": 2,
+          "learning_rate": 0.001,
+          "seed": 42,
+          "patience": 5
+        },
+        "data_root": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\data\\processed\\research_v1",
+        "selection": {
+          "train_recordings": [
+            "SC4001",
+            "SC4002"
+          ],
+          "validation_recordings": [
+            "SC4011"
+          ],
+          "max_train_batches": 2,
+          "max_validation_batches": 2
+        },
+        "limited_data_run": true,
+        "normalizer_reused_from": null,
+        "training_mode": "linear_probe",
+        "pretrained_from": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\contrastive_2026-10-31\\pretrain_epoch2_resumed",
+        "waveform_normalizer_from": null,
+        "frozen_waveform_encoder": true,
+        "checkpoint_selection": "maximum_source_validation_fixed_five_class_macro_f1",
+        "capped_validation_selection": "evenly_spaced_windows_without_using_labels",
+        "classes": [
+          "W",
+          "N1",
+          "N2",
+          "N3",
+          "REM"
+        ],
+        "features": [
+          "delta_absolute",
+          "theta_absolute",
+          "alpha_absolute",
+          "beta_absolute",
+          "delta_relative",
+          "theta_relative",
+          "alpha_relative",
+          "beta_relative",
+          "spectral_entropy",
+          "dominant_frequency"
+        ],
+        "python": "3.13.7",
+        "packages": {
+          "tensorflow": "2.21.0",
+          "keras": "3.15.1",
+          "numpy": "2.5.2",
+          "pandas": "3.0.5",
+          "scikit-learn": "1.9.0"
+        },
+        "devices": [
+          "/physical_device:CPU:0"
+        ],
+        "code_sha256": {
+          "src/training/supervised.py": "619cf61c0e1939635340f3c6bd76efa8554207d8eeb3ba0d650fa2fbe2679d08",
+          "src/models/multiview.py": "6d8d1c009b4dfacab509deab456a8ee51b3429ea5b1388a487d82bca0097171f",
+          "src/data/supervised.py": "61b7ddadec648a2d0d54bd43bcafc8c40176fafdc0b5646490058a9d12c5a4d6",
+          "src/preprocessing/research_normalization.py": "e07ec2cc0d63d880b4f2d3e90e9d0e4add237ed85bfee145b0a366e77026c87c"
+        },
+        "pretraining_transfer": {
+          "bundle_sha256": "669c2ab0815b469118c2a228c672781cc8d633cb83731194703259e8086ead5b",
+          "encoder_sha256": "97cccad57cb353243db971f5a7d6de6a9006d69f813c94ac118819a39f03ead0",
+          "frozen_waveform_encoder": true
+        }
+      },
+      "fresh_process_prediction_replay_max_difference": 2.9802322387695312e-08,
+      "backbone_max_difference_from_pretrained": 0.0,
+      "normalizer_sha256": "98a7c9426535330983a72fc27d90c2b333cb5084d227c3f8334c10c2f2b8d199",
+      "validation_epoch_ids": [
+        "sleepedf:SC4011:000000",
+        "sleepedf:SC4011:000044",
+        "sleepedf:SC4011:000088",
+        "sleepedf:SC4011:000133",
+        "sleepedf:SC4011:000177",
+        "sleepedf:SC4011:000222",
+        "sleepedf:SC4011:000266",
+        "sleepedf:SC4011:000311",
+        "sleepedf:SC4011:000355",
+        "sleepedf:SC4011:000400",
+        "sleepedf:SC4011:000444",
+        "sleepedf:SC4011:000489",
+        "sleepedf:SC4011:000533",
+        "sleepedf:SC4011:000577",
+        "sleepedf:SC4011:000622",
+        "sleepedf:SC4011:000666",
+        "sleepedf:SC4011:000711",
+        "sleepedf:SC4011:000755",
+        "sleepedf:SC4011:000800",
+        "sleepedf:SC4011:000844",
+        "sleepedf:SC4011:000889",
+        "sleepedf:SC4011:000933",
+        "sleepedf:SC4011:000978",
+        "sleepedf:SC4011:001022",
+        "sleepedf:SC4011:001067",
+        "sleepedf:SC4011:001111",
+        "sleepedf:SC4011:001155",
+        "sleepedf:SC4011:001200",
+        "sleepedf:SC4011:001244",
+        "sleepedf:SC4011:001289",
+        "sleepedf:SC4011:001333",
+        "sleepedf:SC4011:001378",
+        "sleepedf:SC4011:001422",
+        "sleepedf:SC4011:001467",
+        "sleepedf:SC4011:001511",
+        "sleepedf:SC4011:001556",
+        "sleepedf:SC4011:001600",
+        "sleepedf:SC4011:001645",
+        "sleepedf:SC4011:001689",
+        "sleepedf:SC4011:001733",
+        "sleepedf:SC4011:001778",
+        "sleepedf:SC4011:001822",
+        "sleepedf:SC4011:001867",
+        "sleepedf:SC4011:001911",
+        "sleepedf:SC4011:001956",
+        "sleepedf:SC4011:002000",
+        "sleepedf:SC4011:002045",
+        "sleepedf:SC4011:002089",
+        "sleepedf:SC4011:002134",
+        "sleepedf:SC4011:002178",
+        "sleepedf:SC4011:002223",
+        "sleepedf:SC4011:002267",
+        "sleepedf:SC4011:002311",
+        "sleepedf:SC4011:002356",
+        "sleepedf:SC4011:002400",
+        "sleepedf:SC4011:002445",
+        "sleepedf:SC4011:002489",
+        "sleepedf:SC4011:002534",
+        "sleepedf:SC4011:002578",
+        "sleepedf:SC4011:002623",
+        "sleepedf:SC4011:002667",
+        "sleepedf:SC4011:002712",
+        "sleepedf:SC4011:002756",
+        "sleepedf:SC4011:002801"
+      ]
+    }
+  },
+  "all_variant_encoder_transfer_max_difference": {
+    "raw": 0.0,
+    "concat": 0.0,
+    "gated": 0.0
+  },
+  "matched_control_checks": {
+    "identical_normalizer_files": true,
+    "identical_validation_epoch_ids": true,
+    "same_training_selection_seed_context_batch_caps": true
+  },
+  "preserved_artifact_hashes": {
+    "data/features/sleep_edf_features.csv": "33fbd5f1ac3455499215a8d971d841ef1dd11c63c0e893d748e9c624d52eaf19",
+    "data/features/subject_split.csv": "3b4b7fbf363f92d87cb9a34d52b3abb4cdf611d1b13c8699182a84621e414493",
+    "data/features/participant_split.csv": "cf1cd33a6a6b2376886119d0ca48d049b26f27f089fcc9e87ea54f5113a673c0",
+    "final_model/stacked_lstm_32_32_10_epochs.keras": "ba9f9bcae47246d1202fff3f0a686f29a06f1e534b9d789268c49713beeabefb",
+    "final_model/scaler.pkl": "d6331c15a782d31844d545c142815f23f02d9f4be61be4503f8575b4fad0606d",
+    "final_model/config.json": "4e1444828693a6b27b3dc2413fbef25eea5a38dfadf6b010046a920656ec220d",
+    "final_model_corrected/stacked_lstm_final.keras": "627bcea0773dae7a7884d494b9ba73a9e583b6551df3cc5ce97f12813f5975a6",
+    "results/final_evaluation/final_predictions.csv": "8b21f04f789dcc632228c89f5c59dbce577a4619f87b396613af42988b96959f",
+    "results/final_evaluation/final_confusion_matrix.csv": "19ad49a36befbbb95d2eca0850f6fb0be8e104fb0b309675d72b48ea1fe92be7",
+    "results/final_evaluation/definitive_experiment_record.json": "567c7f36a23dec43490ca6bd23f3b0f41a8c0bdc1586849885a632af64f09db7"
+  },
+  "unit_and_integration_tests": {
+    "command": ".venv/Scripts/python.exe -W ignore::DeprecationWarning -X utf8 -m unittest discover -s tests -v",
+    "tests": 68,
+    "passed": 68,
+    "seconds": 39.223,
+    "interruption_resume_comparison": "Synthetic integration test compares resumed and uninterrupted losses/encoder weights within 1e-6",
+    "hidden_label_invariance": "Fully hidden annotations leave quality-eligible pool, batch order and waveform scale unchanged"
+  },
+  "code_sha256": {
+    "src/training/artifacts.py": "a7e95ebe6a7bdfc04cac6f56b8b972289e747a06797a1ef55b5214c1f312c784",
+    "src/training/contrastive.py": "77e3a1820d3148f3af078fbd8882c41b3311bb842620100db9be99dbdb6d6d6c",
+    "src/training/supervised.py": "619cf61c0e1939635340f3c6bd76efa8554207d8eeb3ba0d650fa2fbe2679d08",
+    "src/training/__init__.py": "aceb0179252ef9a28702002d54695c2f9ea0d3bffca850d017f84bb16c4b2dde",
+    "src/models/contrastive.py": "1a398a9632b3d56f37fbf0684e4b0d4cafb25353e9781707db1e4e46720344ff",
+    "src/models/lstm.py": "e59c4c4d47cd2752080c7dd939346a677c2f08cf7a017c50d7456aff0a6affa0",
+    "src/models/multiview.py": "6d8d1c009b4dfacab509deab456a8ee51b3429ea5b1388a487d82bca0097171f",
+    "src/data/contrastive.py": "4791e47670ea8b34eda40fff9fc78f7edd122792f03241afb1217f9846a143d2",
+    "src/data/epoch_store.py": "efd6a3b7df99677db3ff0a468d8c74ab887f850aa78ff38d84ca0cde1c335a91",
+    "src/data/pairing.py": "551fed31e2f691771de637f1479e2b8c6fc4d59fac90836cd4e11596219b1878",
+    "src/data/prepare_research_data.py": "ed64d5d759e80a11380d7261435275f18eceab82929323db3767710a823c72f7",
+    "src/data/process_all.py": "63ba6b9a9c82db104bb65fd2e6384f6064e9a2e15f25153326dff33dce2de08c",
+    "src/data/process_dataset.py": "472aefc7b4765bb97173ce3f6db9f1ded7a1a1e65e7ec3396bb810dad06b9ef8",
+    "src/data/research.py": "bdb5bcb328e39534d7705874cc16b426cf10a08b935e8c64271f794b05c3a0dc",
+    "src/data/supervised.py": "61b7ddadec648a2d0d54bd43bcafc8c40176fafdc0b5646490058a9d12c5a4d6",
+    "src/data/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/preprocessing/annotations.py": "2dfa81bbcb97ad1e077212a481d5b2ab7266c0cbcba9d13e615eac579eb00e00",
+    "src/preprocessing/epoching.py": "db109c2e65136921ac8ef8abfabd8d98ea95852f52067572ebbb2308f69780f7",
+    "src/preprocessing/filtering.py": "e37eacb87d11b6aaad096e468b5b3a4e36cad283d3056b2d45ec01458ae1824d",
+    "src/preprocessing/normalization.py": "45c538bd2837e6391a62c348a7c860bcb7e4f1c21601deda058ae8c6f4887aa5",
+    "src/preprocessing/pipeline.py": "f1a3e575bb16c9d6a7d2b56462e37bb46de92b63d65d838c3b5db11f89ab171a",
+    "src/preprocessing/research_normalization.py": "e07ec2cc0d63d880b4f2d3e90e9d0e4add237ed85bfee145b0a366e77026c87c",
+    "src/preprocessing/sequences.py": "5509810a211df8528cbf250e92a50f8cdf31f0c6b9de6b6f57938440c407ab41",
+    "src/preprocessing/waveform_normalization.py": "df3efe389317e168ec31dc5630a8af0d2e34201d54dc60877294b9f17cc0cf70",
+    "tests/test_contrastive.py": "e20c6224fc9b51b3878bddf2259e62054567e573f18eb2662bea8d4a9d6bf3a2",
+    "tests/test_data_foundation.py": "521cd6f3df424fd257c892510d368dfab71cb385be11c1f602df83c1dba23d17",
+    "tests/test_inference_bundle.py": "53518e29a13b166b7716c88ac336db81654b3e2cbff13982e0d482ef7bedc3a8",
+    "tests/test_multiview.py": "eb2b039a55c831c2f51e6bfc31d5526c0f75e296060fdabbec6fbda9bc35eab2",
+    "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "configs/linear_probe.json": "5c0472ea3bf6a0e119ab016e8d8a48b6e75a0a187473b0cb6717941115464f73",
+    "configs/pretrain_raw.json": "1f4b03600c0d8c07895b7400e32858417de2c3aa9d78ef27f5e437e25dc8707c",
+    "configs/supervised_concat.json": "df1f330aacca060b23649fc68cc3ac2c7c344b5ce779febeff2f243d2dbe15ab",
+    "configs/supervised_gated.json": "1c8242bf7f1b389c730aed05b404ce26f43b5c769ab54039b0ce9ce13e0bbb69",
+    "configs/supervised_raw.json": "4d5997c7a7d9d46e5e102bcf8006c6acc67ab18cb9598b146290d4778ece4c35"
+  },
+  "source_test_predictive_scoring_performed": false,
+  "external_predictive_scoring_performed": false,
+  "limitations": [
+    "All recorded training runs are deliberately capped CPU checks; no convergence, label-efficiency or superiority conclusion is supported.",
+    "The full source pool run fits waveform statistics on all quality-valid training epochs, but optimizes only two batches (64 originals).",
+    "No GPU memory/throughput benchmark; the current TensorFlow installation exposes no GPU.",
+    "Augmentation physiological validity, stage-dependent degradation, false negatives and identity shortcuts need source-only investigation.",
+    "The linear probe uses one epoch and 64 validation examples; temporal pilots use ten epochs and eight examples, so these metrics are not comparable.",
+    "Participant label-budget selection, full experiment scheduling, participant uncertainty and frozen external scoring remain upcoming milestones."
+  ]
+}

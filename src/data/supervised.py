@@ -36,14 +36,17 @@ class SourcePartition:
     """
 
     def __init__(self, root, split, *, sequence_length=10, recordings=None,
-                 split_file=None, max_open_recordings=2):
+                 split_file=None, max_open_recordings=2, eligibility="supervised"):
         if split not in {"train", "val", "test"}:
             raise ValueError("SourcePartition only accepts source train/val/test splits.")
         if max_open_recordings < 1:
             raise ValueError("At least one recording memory map must be allowed.")
+        if eligibility not in {"supervised", "quality"} or (eligibility == "quality" and split != "train"):
+            raise ValueError("Quality-only selection is restricted to source training participants.")
         self.root = Path(root)
         self.split = split
         self.sequence_length = sequence_length
+        self.eligibility = eligibility
         self.max_open_recordings = max_open_recordings
         self._maps = OrderedDict()
         self.recordings = []
@@ -79,13 +82,15 @@ class SourcePartition:
                     self.preprocessing = store.config
                 elif self.preprocessing != store.config:
                     raise ValueError("A source partition cannot mix preprocessing versions.")
-                targets = frame.target_stage.map(CLASS_TO_INDEX).fillna(-1).to_numpy(dtype=np.int64)
+                supervised = eligibility == "supervised"
+                targets = frame.target_stage.map(CLASS_TO_INDEX).fillna(-1).to_numpy(dtype=np.int64) if supervised else None
                 stat = (manifest.parent / "waveforms.npy").stat()
                 self.recordings.append(RecordingIndex(
                     manifest.parent, str(frame.recording_id.iloc[0]), str(frame.participant_id.iloc[0]),
-                    split, sha256_file(manifest), store.sequence_positions(sequence_length),
-                    frame[ALL_FEATURES].to_numpy(dtype=np.float64, copy=True), targets,
-                    np.flatnonzero(frame.supervised_valid.to_numpy()), (stat.st_size, stat.st_mtime_ns),
+                    split, sha256_file(manifest), store.sequence_positions(sequence_length, supervised=supervised),
+                    frame[ALL_FEATURES].to_numpy(dtype=np.float64, copy=True) if supervised else None, targets,
+                    np.flatnonzero(frame["supervised_valid" if supervised else "quality_valid"].to_numpy()),
+                    (stat.st_size, stat.st_mtime_ns),
                 ))
         found = {record.recording_id for record in self.recordings}
         if selected is not None and selected != found:
@@ -127,6 +132,8 @@ class SourcePartition:
         return mapped
 
     def iter_fit_batches(self, batch_epochs=64):
+        if self.eligibility != "supervised":
+            raise ValueError("Supervised statistics cannot be fitted from a quality-only pool.")
         if self.split != "train":
             raise ValueError("Normalization can only be fitted on source training participants.")
         for record in self.recordings:
@@ -137,6 +144,7 @@ class SourcePartition:
     def manifest(self):
         return {
             "dataset": "sleepedf", "split": self.split, "sequence_length": self.sequence_length,
+            "eligibility": self.eligibility,
             "preprocessing_fingerprint": self.preprocessing.fingerprint,
             "split_manifest": self.split_manifest,
             "windows": len(self),
@@ -146,6 +154,8 @@ class SourcePartition:
         }
 
     def gather(self, indices):
+        if self.eligibility != "supervised":
+            raise ValueError("Use the label-free epoch pool for quality-only reads.")
         indices = np.asarray(indices)
         if indices.ndim != 1 or not np.issubdtype(indices.dtype, np.integer):
             raise ValueError("Window indices must be a one-dimensional integer array.")

@@ -1,0 +1,9 @@
+{
+  "model": {"variant": "raw", "sequence_length": 1, "samples_per_epoch": 3000},
+  "pretraining": {
+    "batch_size": 32, "epochs": 10, "learning_rate": 0.001,
+    "temperature": 0.2, "projection_dim": 64, "seed": 42,
+    "exclusion_epochs": 1, "diagnostic_epochs": 64
+  },
+  "augmentation": {"gain_min": 0.8, "gain_max": 1.2, "noise_rms_fraction": 0.02, "max_mask_seconds": 1.0}
+}

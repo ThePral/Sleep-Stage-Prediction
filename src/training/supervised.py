@@ -22,10 +22,13 @@ from src.data.epoch_store import sha256_file
 from src.data.prepare_research_data import ROOT
 from src.data.supervised import SourcePartition, WindowBatches
 from src.evaluation.classification import ClassificationAccumulator
-from src.models.multiview import ModelConfig, build_multiview_model, compile_multiview_model
+from src.models.multiview import (ModelConfig, build_linear_probe, build_multiview_model,
+                                  compile_multiview_model, get_waveform_encoder)
 from src.preprocessing.normalization import ALL_FEATURES
 from src.preprocessing.research_normalization import ResearchNormalizer
 from src.preprocessing.sequences import CLASS_LABELS
+from src.preprocessing.waveform_normalization import WaveformNormalizer
+from src.training.artifacts import write_json
 
 
 @dataclass(frozen=True)
@@ -88,17 +91,19 @@ class SourceValidation(keras.callbacks.Callback):
             logs[f"val_{key}"] = metrics[key]
 
 
-def write_json(path, content):
-    Path(path).write_text(json.dumps(content, indent=2) + "\n", encoding="utf-8")
-
-
 def train_supervised(
     root, run_directory, model_config=None, training_config=None, *,
     train_recordings=None, validation_recordings=None, split_file=None,
     max_train_batches=None, max_validation_batches=None, normalizer_path=None, verbose=2,
+    pretrained_path=None, freeze_backbone=False, linear_probe=False,
+    waveform_normalizer_path=None,
 ):
     model_config = model_config or ModelConfig()
     training_config = training_config or TrainingConfig()
+    if linear_probe and (model_config.variant != "raw" or model_config.sequence_length != 1):
+        raise ValueError("Linear probes require raw single-epoch configuration.")
+    if pretrained_path is not None and waveform_normalizer_path is not None:
+        raise ValueError("Pretrained bundles already supply their waveform normalizer.")
     run_directory = Path(run_directory).resolve()
     # Refuse to replace a previous experiment, including an interrupted run.
     run_directory.mkdir(parents=True, exist_ok=False)
@@ -130,6 +135,14 @@ def train_supervised(
             else:
                 normalizer = ResearchNormalizer.load(normalizer_path)
                 normalizer.assert_compatible(train, require_training_match=True)
+            pretrained = None
+            if pretrained_path is not None:
+                from src.training.contrastive import PretrainedEncoder
+                pretrained = PretrainedEncoder(pretrained_path)
+                normalizer.use_pretraining_waveform(pretrained.normalizer, train)
+            elif waveform_normalizer_path is not None:
+                # Match preprocessing in randomly initialized SSL controls.
+                normalizer.use_pretraining_waveform(WaveformNormalizer.load(waveform_normalizer_path), train)
             normalizer.save(run_directory / "normalizer.json")
             data_manifest = {"train": train.manifest(), "validation": validation.manifest()}
             write_json(run_directory / "data_manifest.json", data_manifest)
@@ -138,6 +151,10 @@ def train_supervised(
                 "model": model_config.to_dict(), "training": asdict(training_config),
                 "data_root": str(Path(root).resolve()), "selection": selection,
                 "limited_data_run": limited, "normalizer_reused_from": str(normalizer_path) if normalizer_path else None,
+                "training_mode": "linear_probe" if linear_probe else "temporal_classifier",
+                "pretrained_from": str(Path(pretrained_path).resolve()) if pretrained_path else None,
+                "waveform_normalizer_from": str(Path(waveform_normalizer_path).resolve()) if waveform_normalizer_path else None,
+                "frozen_waveform_encoder": freeze_backbone or linear_probe,
                 "checkpoint_selection": "maximum_source_validation_fixed_five_class_macro_f1",
                 "capped_validation_selection": "evenly_spaced_windows_without_using_labels",
                 "classes": CLASS_LABELS, "features": ALL_FEATURES,
@@ -148,7 +165,6 @@ def train_supervised(
                                 for p in [Path(__file__), ROOT / "src/models/multiview.py",
                                           ROOT / "src/data/supervised.py", ROOT / "src/preprocessing/research_normalization.py"]},
             }
-            write_json(run_directory / "resolved_config.json", resolved)
             training_batches = WindowBatches(
                 train, normalizer, variant=model_config.variant, batch_size=training_config.batch_size,
                 shuffle=True, seed=training_config.seed, max_batches=max_train_batches,
@@ -159,7 +175,15 @@ def train_supervised(
             )
             # Seeding occurs before constructing any layers/initializers.
             keras.utils.set_random_seed(training_config.seed)
-            model = compile_multiview_model(build_multiview_model(model_config), training_config.learning_rate)
+            model = build_linear_probe(model_config) if linear_probe else build_multiview_model(model_config)
+            if pretrained:
+                resolved["pretraining_transfer"] = pretrained.transfer(
+                    model, model_config, train, freeze=freeze_backbone or linear_probe)
+            elif freeze_backbone:
+                get_waveform_encoder(model).trainable = False
+            frozen_weights = [v.copy() for v in get_waveform_encoder(model).get_weights()] if freeze_backbone or linear_probe else None
+            model = compile_multiview_model(model, training_config.learning_rate)
+            write_json(run_directory / "resolved_config.json", resolved)
             checkpoint = run_directory / "model.keras"
             callbacks = [
                 SourceValidation(validation_batches),
@@ -171,6 +195,10 @@ def train_supervised(
             ]
             model.fit(training_batches.as_dataset(), epochs=training_config.epochs, callbacks=callbacks,
                       shuffle=False, verbose=verbose)
+            if frozen_weights is not None:
+                for before, after in zip(frozen_weights, get_waveform_encoder(model).get_weights()):
+                    if not np.array_equal(before, after):
+                        raise ValueError("Frozen waveform weights changed during head training.")
             # Verify the actual serialized checkpoint, not only the in-memory model.
             loaded = keras.models.load_model(checkpoint, compile=False)
             sample, _, _ = next(validation_batches.iter_batches(epoch=0))
@@ -183,11 +211,15 @@ def train_supervised(
             history = pd.read_csv(run_directory / "training_history.csv")
             summary = {
                 "variant": model_config.variant, "parameters": model.count_params(),
+                "training_mode": resolved["training_mode"],
+                "trainable_parameters": int(sum(np.prod(v.shape) for v in model.trainable_weights)),
+                "pretrained_waveform": pretrained is not None,
                 "epochs_completed": len(history),
                 "best_epoch": int(history["val_macro_f1"].to_numpy().argmax()) + 1,
                 "train_windows_available": len(train), "validation_windows_available": len(validation),
                 "train_batches_per_epoch": len(training_batches), "validation_batches": len(validation_batches),
                 "normalization_fit_epochs": normalizer.state["fit_epochs"],
+                "waveform_normalization_fit_epochs": normalizer.state.get("pretraining_waveform", normalizer.state)["fit_epochs"],
                 "limited_data_run": limited, "elapsed_seconds": time.perf_counter() - started,
                 "checkpoint_reload_max_probability_difference": reload_difference,
                 "source_validation": metrics,
@@ -220,6 +252,10 @@ def main(argv=None):
     parser.add_argument("--max-train-batches", type=int)
     parser.add_argument("--max-validation-batches", type=int)
     parser.add_argument("--normalizer", type=Path)
+    parser.add_argument("--pretrained", type=Path)
+    parser.add_argument("--waveform-normalizer", type=Path)
+    parser.add_argument("--freeze-backbone", action="store_true")
+    parser.add_argument("--linear-probe", action="store_true")
     args = parser.parse_args(argv)
     config = json.loads(args.config.read_text(encoding="utf-8"))
     if set(config) - {"model", "training"}:
@@ -233,6 +269,8 @@ def main(argv=None):
         train_recordings=args.train_recordings, validation_recordings=args.validation_recordings,
         split_file=args.split_file, max_train_batches=args.max_train_batches,
         max_validation_batches=args.max_validation_batches, normalizer_path=args.normalizer,
+        pretrained_path=args.pretrained, freeze_backbone=args.freeze_backbone, linear_probe=args.linear_probe,
+        waveform_normalizer_path=args.waveform_normalizer,
     )
     print(json.dumps(summary, indent=2))
 
