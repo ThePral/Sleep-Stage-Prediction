@@ -1,4 +1,5 @@
 # Sleep Stage Prediction from EEG Using Spectral Features and LSTM
+[![XERJ Corpus Hub contributor](https://hub.xerj.org/contributors/ThePral/badge.svg)](https://hub.xerj.org/contributors/ThePral)
 
 The research extension adds aligned waveform/spectral data for multi-view models,
 source-only self-supervised pretraining, and external ISRUC evaluation. See
