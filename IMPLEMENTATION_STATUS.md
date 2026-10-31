@@ -21,7 +21,10 @@ This file tracks delivered code separately from research conclusions.
 | Frozen-encoder linear probe | Implemented | Single-epoch mean pooling and affine classifier; CNN weights checked unchanged |
 | Matched participant label budgets | Implemented; automated checks pass | Nested whole-participant draws, class-coverage checks, full unlabeled pool, and explicit annotation costs |
 | Source experiment runner | Implemented; real-data CLI pilots passed | M0–M6 dependency graph, shared normalization/checkpoints, isolated serial workers, sealed attempts and paired source tables |
-| Uncertainty, profiling and external predictive evaluation | Planned | Participant intervals, measured compute budgets, and a predeclared frozen external scoring batch |
+| Source compute profiler | Implemented; CPU pilots passed | Disposable training/inference steps, cached-loader timing, host RSS and optional TF GPU allocator measurements |
+| Participant uncertainty and calibration | Implemented; automated checks pass | Participant-cluster paired intervals, separate seed variation, Brier/ECE and class support |
+| Frozen evaluation workflow | Implemented; synthetic external tests pass | Source-only freeze, immutable snapshots, enrollment/mask checks and whole-family scoring |
+| Full research campaign and real external evaluation | Pending | Adequately trained source models, GPU validation, repeated-seed results and prespecified ISRUC scoring |
 
 **Validation and data notes**
 
@@ -148,7 +151,7 @@ available separately. Source-validation result tables and paired differences
 require matching normalization and validation-target hashes. Source-test/ISRUC
 predictive scoring is excluded from the scheduler.
 
-The full current suite passes **79 tests**, including 11 new budget/runner
+At the experiment-runner milestone, the suite passed **79 tests**, including 11 new budget/runner
 checks. A real-data CLI study completed all 18 jobs (14 supervised models across
 the two pilot budgets), continued after a four-job boundary, and subsequently
 verified/skipped every completed job. All fourteen saved prediction exports
@@ -168,8 +171,51 @@ those CLI checks.
 Evidence is recorded under `reports/experiments_2026-10-31`, including canonical
 budget definitions, capped source-validation tables and the pilot summary.
 Full-budget convergence, repeated-seed scientific
-comparisons, GPU measurements, participant uncertainty and the external scoring
-batch remain separate work.
+comparisons, GPU measurements and real external scoring remain separate work.
+
+**Profiling and frozen-evaluation implementation — 31 October 2026**
+
+Participant-level analysis pools both source nights before computing five-class
+F1, resamples participants jointly across conditions/seeds, and reports seed
+variation separately. Calibration uses fixed-bin ECE and multiclass Brier score.
+One participant yields no confidence interval; conditions cannot gain fictitious
+sample size from repeated seeds. Missing-class support and physical transition
+subgroups remain explicit.
+
+The profiler measures the saved architecture using source records only, with
+disposable in-memory training updates and unchanged-file verification. It separates
+model/load/normalization/feature timing, sampled host memory and optional TF GPU
+allocator memory. Short CPU pilots do not establish GPU fit or full-campaign speed;
+SSL-specific profiling remains separate.
+
+Evaluation registries contain source-selected bundles. Freezing snapshots model,
+normalization, selection evidence, code/packages and the declared cohort/analysis
+policy without reading target stores. Confirmatory freezes reject limited pilot
+models. Scoring checks complete enrollment, provenance, preprocessing and identical
+target masks across the entire family. Models run in isolated processes, and a
+completed report is sealed only after all succeed. Real ISRUC/source-test scores
+remain unopened in this milestone; synthetic external stores and capped source
+validation exercise the scoring path.
+
+The full current suite passes **95 tests**, including 16 evaluation/profiling
+checks. Three fresh-process CPU profiles exercised the default 82,757-parameter
+gated model: inference at batch four and disposable training at batches one/four.
+Saved artifacts stayed unchanged. Sampled host RSS stayed below 530 MiB in these
+limited runs; this measures host memory, not GPU fit. Five timed steps per phase
+are timing checks, not a stable campaign benchmark, and inference/training use
+different execution modes.
+
+A source-only registry, freeze and isolated-worker scoring CLI completed M0/M3/M6
+on eight predeclared validation targets each from SC4011/SC4012. Analysis counted
+one independent participant and returned no confidence interval. Synthetic
+external fixtures separately exercised paired scoring and provenance/enrollment
+failures. No real external freeze or real ISRUC/source-test scoring was performed.
+
+Evidence is recorded in `reports/evaluation_2026-10-31`, including CPU profiles,
+source-validation coverage/analysis, participant tables and the evidence manifest.
+Full-budget convergence, repeated-seed scientific
+comparisons, GPU/SSL profiling, secondary scorer agreement and real external
+scoring remain outstanding research/validation work.
 
 Evaluating the frozen feature model from the newly prepared source data reproduced
 accuracy **0.8266296611**, macro-F1 **0.6533745630**, and every entry in the saved

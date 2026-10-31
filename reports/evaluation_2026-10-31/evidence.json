@@ -1,0 +1,453 @@
+{
+  "date": "2026-10-31",
+  "purpose": "Implementation/CPU validation only; not research performance evidence",
+  "unit_and_integration_tests": {
+    "command": ".venv/Scripts/python.exe -W ignore::DeprecationWarning -X utf8 -m unittest discover -s tests -v",
+    "tests": 95,
+    "passed": 95,
+    "new_tests": 16,
+    "seconds": 92.585,
+    "coverage": [
+      "participant rather than epoch/night resampling",
+      "seed variation without participant-seed pseudoreplication",
+      "paired identical target enforcement",
+      "uniform/perfect calibration golden values",
+      "single-participant interval suppression",
+      "physical transition handling across unknown-label gaps",
+      "freeze operation never opens target stores",
+      "limited-model rejection in confirmatory mode",
+      "scorer/cohort count mismatch",
+      "snapshot and enrolled-store content tampering",
+      "complete-family export checks and failed-result suppression",
+      "source-validation role checks",
+      "disposable profiling steps preserve original artifacts",
+      "synthetic external scoring end-to-end"
+    ]
+  },
+  "profiles": {
+    "profile_gated_inference_b4": {
+      "schema_version": 1,
+      "config": {
+        "batch_size": 4,
+        "warmup_steps": 2,
+        "measured_steps": 5,
+        "mode": "inference",
+        "split": "train",
+        "seed": 42
+      },
+      "parameters": 82757,
+      "bundle_sha256": "fb9a3d97ab870e694b1ed7c0ce650802ba84aadd5745d876b246c58323cca57a",
+      "source_data": {
+        "dataset": "sleepedf",
+        "split": "train",
+        "sequence_length": 10,
+        "eligibility": "supervised",
+        "preprocessing_fingerprint": "763c4523e75725605a517c2beb12362b9b83d09ed1aa693652f615354d315c8c",
+        "split_manifest": {
+          "path": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\final_model_corrected\\participant_split.csv",
+          "sha256": "cf1cd33a6a6b2376886119d0ca48d049b26f27f089fcc9e87ea54f5113a673c0"
+        },
+        "windows": 2641,
+        "recordings": [
+          {
+            "recording_id": "SC4001",
+            "participant_id": "SC400",
+            "split": "train",
+            "manifest_sha256": "03fbe1de18d0c4cb095c29ab190ddcdacf4d656e04132a912dc50a9914e71e53",
+            "windows": 2641,
+            "fit_epochs": 2650
+          }
+        ]
+      },
+      "source_recording_subset": [
+        "SC4001"
+      ],
+      "python": "3.13.7",
+      "tensorflow": "2.21.0",
+      "devices": [
+        "/physical_device:CPU:0"
+      ],
+      "model_load_seconds": 1.0624637000146322,
+      "source_integrity_verification_seconds": 0.3688353000325151,
+      "model_only": {
+        "steps": 5,
+        "median_seconds": 0.10002160002477467,
+        "p95_seconds": 0.10710919998819009,
+        "mean_seconds": 0.1000892600044608,
+        "examples_per_second": 39.96432783918801
+      },
+      "streaming_cached_epochs_including_normalization": {
+        "steps": 5,
+        "median_seconds": 0.1006444999948144,
+        "p95_seconds": 0.13435165998525916,
+        "mean_seconds": 0.1095842199982144,
+        "examples_per_second": 36.50160579748779
+      },
+      "loader_and_normalization": {
+        "steps": 5,
+        "median_seconds": 0.0011765999952331185,
+        "p95_seconds": 0.0013456600136123598,
+        "mean_seconds": 0.0011869999929331244,
+        "examples_per_second": 3369.8399526657454
+      },
+      "spectral_extraction": {
+        "unique_epochs": 13,
+        "seconds": 0.0024929000064730644,
+        "seconds_per_epoch": 0.0001917615389594665
+      },
+      "host_memory": {
+        "baseline_rss_bytes": 372768768,
+        "maximum_sampled_rss_bytes": 429006848,
+        "sampling_interval_seconds": 0.01
+      },
+      "tensorflow_gpu_allocator_bytes": null,
+      "gpu_measurement_error": null,
+      "memory_growth_configuration_errors": [],
+      "original_saved_artifacts_unchanged": true,
+      "limitations": [
+        "Host RSS is sampled, not an exact peak. TensorFlow memory excludes driver-reserved GPU memory.",
+        "Cached-epoch timing excludes original EDF decoding, resampling/filtering and integrity verification.",
+        "Feature extraction is measured separately on unique prefiltered waveform epochs when available.",
+        "Training profiles use a fresh in-memory optimizer and discard updates; no checkpoint is saved.",
+        "Use a fresh CLI process for each mode/batch. Few-step pilots are timing checks, not stable hardware benchmarks."
+      ]
+    },
+    "profile_gated_training_b1": {
+      "schema_version": 1,
+      "config": {
+        "batch_size": 1,
+        "warmup_steps": 2,
+        "measured_steps": 5,
+        "mode": "training",
+        "split": "train",
+        "seed": 42
+      },
+      "parameters": 82757,
+      "bundle_sha256": "fb9a3d97ab870e694b1ed7c0ce650802ba84aadd5745d876b246c58323cca57a",
+      "source_data": {
+        "dataset": "sleepedf",
+        "split": "train",
+        "sequence_length": 10,
+        "eligibility": "supervised",
+        "preprocessing_fingerprint": "763c4523e75725605a517c2beb12362b9b83d09ed1aa693652f615354d315c8c",
+        "split_manifest": {
+          "path": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\final_model_corrected\\participant_split.csv",
+          "sha256": "cf1cd33a6a6b2376886119d0ca48d049b26f27f089fcc9e87ea54f5113a673c0"
+        },
+        "windows": 2641,
+        "recordings": [
+          {
+            "recording_id": "SC4001",
+            "participant_id": "SC400",
+            "split": "train",
+            "manifest_sha256": "03fbe1de18d0c4cb095c29ab190ddcdacf4d656e04132a912dc50a9914e71e53",
+            "windows": 2641,
+            "fit_epochs": 2650
+          }
+        ]
+      },
+      "source_recording_subset": [
+        "SC4001"
+      ],
+      "python": "3.13.7",
+      "tensorflow": "2.21.0",
+      "devices": [
+        "/physical_device:CPU:0"
+      ],
+      "model_load_seconds": 1.6361414000275545,
+      "source_integrity_verification_seconds": 0.553206600015983,
+      "model_only": {
+        "steps": 5,
+        "median_seconds": 0.01686370000243187,
+        "p95_seconds": 0.01773982001468539,
+        "mean_seconds": 0.01684410000452772,
+        "examples_per_second": 59.367968590260006
+      },
+      "streaming_cached_epochs_including_normalization": {
+        "steps": 5,
+        "median_seconds": 0.01763720001326874,
+        "p95_seconds": 0.017682880000211298,
+        "mean_seconds": 0.017411680007353426,
+        "examples_per_second": 57.432711810558935
+      },
+      "loader_and_normalization": {
+        "steps": 5,
+        "median_seconds": 0.0006751000182703137,
+        "p95_seconds": 0.0006963999709114433,
+        "mean_seconds": 0.0006681199884042144,
+        "examples_per_second": 1496.7371390705905
+      },
+      "spectral_extraction": {
+        "unique_epochs": 10,
+        "seconds": 0.002227200020570308,
+        "seconds_per_epoch": 0.0002227200020570308
+      },
+      "host_memory": {
+        "baseline_rss_bytes": 372375552,
+        "maximum_sampled_rss_bytes": 528097280,
+        "sampling_interval_seconds": 0.01
+      },
+      "tensorflow_gpu_allocator_bytes": null,
+      "gpu_measurement_error": null,
+      "memory_growth_configuration_errors": [],
+      "original_saved_artifacts_unchanged": true,
+      "limitations": [
+        "Host RSS is sampled, not an exact peak. TensorFlow memory excludes driver-reserved GPU memory.",
+        "Cached-epoch timing excludes original EDF decoding, resampling/filtering and integrity verification.",
+        "Feature extraction is measured separately on unique prefiltered waveform epochs when available.",
+        "Training profiles use a fresh in-memory optimizer and discard updates; no checkpoint is saved.",
+        "Use a fresh CLI process for each mode/batch. Few-step pilots are timing checks, not stable hardware benchmarks."
+      ]
+    },
+    "profile_gated_training_b4": {
+      "schema_version": 1,
+      "config": {
+        "batch_size": 4,
+        "warmup_steps": 2,
+        "measured_steps": 5,
+        "mode": "training",
+        "split": "train",
+        "seed": 42
+      },
+      "parameters": 82757,
+      "bundle_sha256": "fb9a3d97ab870e694b1ed7c0ce650802ba84aadd5745d876b246c58323cca57a",
+      "source_data": {
+        "dataset": "sleepedf",
+        "split": "train",
+        "sequence_length": 10,
+        "eligibility": "supervised",
+        "preprocessing_fingerprint": "763c4523e75725605a517c2beb12362b9b83d09ed1aa693652f615354d315c8c",
+        "split_manifest": {
+          "path": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\final_model_corrected\\participant_split.csv",
+          "sha256": "cf1cd33a6a6b2376886119d0ca48d049b26f27f089fcc9e87ea54f5113a673c0"
+        },
+        "windows": 2641,
+        "recordings": [
+          {
+            "recording_id": "SC4001",
+            "participant_id": "SC400",
+            "split": "train",
+            "manifest_sha256": "03fbe1de18d0c4cb095c29ab190ddcdacf4d656e04132a912dc50a9914e71e53",
+            "windows": 2641,
+            "fit_epochs": 2650
+          }
+        ]
+      },
+      "source_recording_subset": [
+        "SC4001"
+      ],
+      "python": "3.13.7",
+      "tensorflow": "2.21.0",
+      "devices": [
+        "/physical_device:CPU:0"
+      ],
+      "model_load_seconds": 1.116032299993094,
+      "source_integrity_verification_seconds": 0.3169712000526488,
+      "model_only": {
+        "steps": 5,
+        "median_seconds": 0.03746840002713725,
+        "p95_seconds": 0.041978420014493166,
+        "mean_seconds": 0.03706828000722453,
+        "examples_per_second": 107.90897228628921
+      },
+      "streaming_cached_epochs_including_normalization": {
+        "steps": 5,
+        "median_seconds": 0.03631620004307479,
+        "p95_seconds": 0.04242827999405563,
+        "mean_seconds": 0.037300479994155464,
+        "examples_per_second": 107.23722591845338
+      },
+      "loader_and_normalization": {
+        "steps": 5,
+        "median_seconds": 0.0017441000090911984,
+        "p95_seconds": 0.0035294399829581377,
+        "mean_seconds": 0.0023305399925448,
+        "examples_per_second": 1716.3404244491237
+      },
+      "spectral_extraction": {
+        "unique_epochs": 13,
+        "seconds": 0.0031207000138238072,
+        "seconds_per_epoch": 0.00024005384721721595
+      },
+      "host_memory": {
+        "baseline_rss_bytes": 372764672,
+        "maximum_sampled_rss_bytes": 552833024,
+        "sampling_interval_seconds": 0.01
+      },
+      "tensorflow_gpu_allocator_bytes": null,
+      "gpu_measurement_error": null,
+      "memory_growth_configuration_errors": [],
+      "original_saved_artifacts_unchanged": true,
+      "limitations": [
+        "Host RSS is sampled, not an exact peak. TensorFlow memory excludes driver-reserved GPU memory.",
+        "Cached-epoch timing excludes original EDF decoding, resampling/filtering and integrity verification.",
+        "Feature extraction is measured separately on unique prefiltered waveform epochs when available.",
+        "Training profiles use a fresh in-memory optimizer and discard updates; no checkpoint is saved.",
+        "Use a fresh CLI process for each mode/batch. Few-step pilots are timing checks, not stable hardware benchmarks."
+      ]
+    }
+  },
+  "profiling_execution_policy": {
+    "inference": "eager_Keras_call_as_in_the_deployed_wrapper",
+    "training": "compiled_train_on_batch_with_fresh_discarded_optimizer",
+    "measured_steps_per_phase": 5,
+    "warmup_steps": 2,
+    "timing_interpretation": "Few-step execution/timing checks; modes use different execution paths and are not a controlled training-versus-inference speed comparison."
+  },
+  "frozen_source_validation_cli": {
+    "freeze_fingerprint": "40996731091ee0d5688a857bb99385e2ab9fe458f575bed7ae1bcee0f638dee8",
+    "freeze_protocol": {
+      "purpose": "integration",
+      "target": {
+        "dataset": "sleepedf",
+        "split": "val",
+        "expected_participants": 1,
+        "expected_recordings": 2,
+        "recordings": [
+          "SC4011",
+          "SC4012"
+        ],
+        "max_windows_per_record": 4
+      },
+      "analysis": {
+        "bootstrap_replicates": 200,
+        "confidence_level": 0.95,
+        "seed": 42,
+        "calibration_bins": 5
+      },
+      "paired_conditions": [
+        [
+          "M6",
+          "M3"
+        ]
+      ],
+      "transition_radius_epochs": 1
+    },
+    "frozen_model_ids": [
+      "M0_draw42_n2_seed42",
+      "M3_draw42_n2_seed42",
+      "M6_draw42_n2_seed42"
+    ],
+    "models_completed": 3,
+    "recordings": [
+      "SC4011",
+      "SC4012"
+    ],
+    "independent_participants": 1,
+    "selected_targets_per_model": 8,
+    "completed_result_seal_sha256": "0c6bef2c0011202ab11cd370567bb6a18c05a148c7829e050ca42af62918fbe0",
+    "confidence_intervals": "not_estimated_insufficient_independent_participants",
+    "target_coverage": [
+      {
+        "recording_id": "SC4011",
+        "participant_id": "SC401",
+        "manifest_sha256": "45cf19b278dbd3118f893e85ced5237b1b3ff0cff03060e888df8b1788c28085",
+        "physical_epochs": 2802,
+        "quality_epochs": 2802,
+        "annotated_epochs": 2802,
+        "supervised_epochs": 2802,
+        "eligible_windows_uncapped": 2793,
+        "selected_windows": 4,
+        "target_ids_sha256": "4240ee6540c88815776a59977bda7e4364c02c7b14d3650289c07770e4b38d52"
+      },
+      {
+        "recording_id": "SC4012",
+        "participant_id": "SC401",
+        "manifest_sha256": "01cf54d7e05b5c7e68c195004735b8908e5f3297a3b5c2acab893df9d764dd74",
+        "physical_epochs": 2850,
+        "quality_epochs": 2850,
+        "annotated_epochs": 2848,
+        "supervised_epochs": 2848,
+        "eligible_windows_uncapped": 2839,
+        "selected_windows": 4,
+        "target_ids_sha256": "4c1c334d9db2b8d2e76f95319c6e27d792ef6aad80cda0c60da855c34eda7120"
+      }
+    ]
+  },
+  "source_validation_export_analysis": {
+    "conditions": [
+      "M0",
+      "M3",
+      "M6"
+    ],
+    "participants": 1,
+    "both_nights_clustered_together": true
+  },
+  "synthetic_external_predictive_scoring_performed": true,
+  "real_external_predictive_scoring_performed": false,
+  "source_test_predictive_scoring_performed": false,
+  "real_external_model_freeze_created": false,
+  "code_sha256": {
+    "src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/data/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/data/adapters/__init__.py": "fad87a9484dfa388346fd266253b732b00af30e57883eea2c3a73a09435f4e7f",
+    "src/data/adapters/isruc.py": "c9c47210f5fd38318f3eff07d7565a3302eae6d9b3af88cfdadc1ffb43eace5c",
+    "src/data/adapters/sleepedf.py": "5a1ed803010718c999127eac30c6a8f8636b7054d4a21cdf1f0872fe821510d7",
+    "src/data/contrastive.py": "4791e47670ea8b34eda40fff9fc78f7edd122792f03241afb1217f9846a143d2",
+    "src/data/epoch_store.py": "efd6a3b7df99677db3ff0a468d8c74ab887f850aa78ff38d84ca0cde1c335a91",
+    "src/data/label_budgets.py": "069518bd5f8d112ee7a4eb9b2a50806740ccc28a25fd80251eb34301277715ea",
+    "src/data/pairing.py": "551fed31e2f691771de637f1479e2b8c6fc4d59fac90836cd4e11596219b1878",
+    "src/data/prepare_research_data.py": "ed64d5d759e80a11380d7261435275f18eceab82929323db3767710a823c72f7",
+    "src/data/process_all.py": "63ba6b9a9c82db104bb65fd2e6384f6064e9a2e15f25153326dff33dce2de08c",
+    "src/data/process_dataset.py": "472aefc7b4765bb97173ce3f6db9f1ded7a1a1e65e7ec3396bb810dad06b9ef8",
+    "src/data/research.py": "bdb5bcb328e39534d7705874cc16b426cf10a08b935e8c64271f794b05c3a0dc",
+    "src/data/supervised.py": "9d10e99e6584d82d0287ff9d585c6a0336ce186802f9e97dd51ffc12f49f5119",
+    "src/evaluation/artifacts.py": "67791463a79a4307bb947384a15590e07cfb66b91799176454ecf18d19f57259",
+    "src/evaluation/classification.py": "9fc7379331c425bde5f6b2873db2d88d90fdc29761b752445a2284df13e86b08",
+    "src/evaluation/frozen.py": "ea42a83c989e52ade0a809296d482dcd78b6716517923c97c531bdd0183b507d",
+    "src/evaluation/profile.py": "83b69f95e7130b35bcf99b39ef73b547cfec1854dbc4e3f79a2bd7e7b9221821",
+    "src/evaluation/uncertainty.py": "d6f1557b3903d844220c2fe99198f2faf84353385ac1f6df145f7460dca04489",
+    "src/evaluation/validate_final_model.py": "be225f3cd3e4ea3253fd560dacd532834823467e3719a81df6942482e1ca92b4",
+    "src/evaluation/validate_research_data.py": "293973e8709fae60b037a961b0a9da5036c1d15963b0c095fff06cc957765b29",
+    "src/experiments/__init__.py": "e475818df3e941e723d990568d7b5f024991be98b273812e5d203a5960cc8d26",
+    "src/experiments/run.py": "18a78d746a150bef50158c6192c9e3ba7d794a0d34d48786b131600f62e7bd9b",
+    "src/experiments/worker.py": "ea4055e06b55404fa35d08551b08ac8e7a645d11e7f97dfc25327c1614e6da9e",
+    "src/features/spectral.py": "cbc768a4ef7219a882a6ad6736443db681a9c092ad4ec020d785a9927c2dc4f2",
+    "src/inference/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/inference/multiview.py": "2ed79e0a43a57bb9592fd94b74cd6354be8a65020a154257f0d5ea329217e2af",
+    "src/inference/predict.py": "4e96555cd650803fe58d8fc6246e90485bac194e27cdd76a39475dac0bf4f9c9",
+    "src/models/contrastive.py": "1a398a9632b3d56f37fbf0684e4b0d4cafb25353e9781707db1e4e46720344ff",
+    "src/models/lstm.py": "e59c4c4d47cd2752080c7dd939346a677c2f08cf7a017c50d7456aff0a6affa0",
+    "src/models/multiview.py": "47768c77b031e78aee6fdf0053a83490f3ba65ff0d024d22de3b947b393ff0aa",
+    "src/preprocessing/annotations.py": "2dfa81bbcb97ad1e077212a481d5b2ab7266c0cbcba9d13e615eac579eb00e00",
+    "src/preprocessing/epoching.py": "db109c2e65136921ac8ef8abfabd8d98ea95852f52067572ebbb2308f69780f7",
+    "src/preprocessing/filtering.py": "e37eacb87d11b6aaad096e468b5b3a4e36cad283d3056b2d45ec01458ae1824d",
+    "src/preprocessing/normalization.py": "45c538bd2837e6391a62c348a7c860bcb7e4f1c21601deda058ae8c6f4887aa5",
+    "src/preprocessing/pipeline.py": "f1a3e575bb16c9d6a7d2b56462e37bb46de92b63d65d838c3b5db11f89ab171a",
+    "src/preprocessing/research_normalization.py": "a8e9f7b687e90b003a6c7616637b01c08b7c8d946c8ddbedb520042b81e6aad9",
+    "src/preprocessing/sequences.py": "5509810a211df8528cbf250e92a50f8cdf31f0c6b9de6b6f57938440c407ab41",
+    "src/preprocessing/waveform_normalization.py": "db215faa4fe848d64211e6581754e70b68191adebc63b3b0a60ddaddcd7cb5d2",
+    "src/training/__init__.py": "aceb0179252ef9a28702002d54695c2f9ea0d3bffca850d017f84bb16c4b2dde",
+    "src/training/artifacts.py": "a7e95ebe6a7bdfc04cac6f56b8b972289e747a06797a1ef55b5214c1f312c784",
+    "src/training/contrastive.py": "67b24b0ec1b68c86ab919560cf42c5d2ba7f09c2eb45220a3c5639bd3255040b",
+    "src/training/supervised.py": "b52f8767a427cd8f9137ac2d63699ee4610019ca1af4bd843ae82ca2a5403eb0"
+  },
+  "packages": {
+    "tensorflow": "2.21.0",
+    "keras": "3.15.1",
+    "numpy": "2.5.2",
+    "pandas": "3.0.5",
+    "scikit-learn": "1.9.0",
+    "mne": "1.12.1"
+  },
+  "preserved_artifact_hashes": {
+    "data/features/sleep_edf_features.csv": "33fbd5f1ac3455499215a8d971d841ef1dd11c63c0e893d748e9c624d52eaf19",
+    "data/features/subject_split.csv": "3b4b7fbf363f92d87cb9a34d52b3abb4cdf611d1b13c8699182a84621e414493",
+    "data/features/participant_split.csv": "cf1cd33a6a6b2376886119d0ca48d049b26f27f089fcc9e87ea54f5113a673c0",
+    "final_model/stacked_lstm_32_32_10_epochs.keras": "ba9f9bcae47246d1202fff3f0a686f29a06f1e534b9d789268c49713beeabefb",
+    "final_model/scaler.pkl": "d6331c15a782d31844d545c142815f23f02d9f4be61be4503f8575b4fad0606d",
+    "final_model/config.json": "4e1444828693a6b27b3dc2413fbef25eea5a38dfadf6b010046a920656ec220d",
+    "final_model_corrected/stacked_lstm_final.keras": "627bcea0773dae7a7884d494b9ba73a9e583b6551df3cc5ce97f12813f5975a6",
+    "results/final_evaluation/final_predictions.csv": "8b21f04f789dcc632228c89f5c59dbce577a4619f87b396613af42988b96959f",
+    "results/final_evaluation/final_confusion_matrix.csv": "19ad49a36befbbb95d2eca0850f6fb0be8e104fb0b309675d72b48ea1fe92be7",
+    "results/final_evaluation/definitive_experiment_record.json": "567c7f36a23dec43490ca6bd23f3b0f41a8c0bdc1586849885a632af64f09db7"
+  },
+  "limitations": [
+    "All real-data predictive checks use source validation only; the synthetic ISRUC-shaped fixtures are not real external results.",
+    "Only CPU is visible. Sampled host RSS and TF allocator bytes are different measures; no 4 GB GPU fit is established.",
+    "Five measured steps per phase are not a stable device benchmark. EDF decoding/filtering and SSL-specific profiling are excluded.",
+    "Validation scoring uses limited pilot architectures/checkpoints and eight targets from one participant. It supports no comparative efficacy claim or interval.",
+    "Percentile participant intervals are conditional on the supplied trained seeds; seed variability is reported separately, without a seed bootstrap or multiplicity correction.",
+    "Full-budget convergence, repeated seeds, GPU/SSL profiling, annotation/scorer agreement and real frozen external scoring remain outstanding."
+  ]
+}

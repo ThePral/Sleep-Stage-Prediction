@@ -1,0 +1,4 @@
+model_id,condition,training_seed,participant_id,recordings,examples,macro_f1,accuracy,loss,brier_score,missing_truth_classes,stage_support
+M0_draw42_n2_seed42,M0,42,SC401,2,8,0.04444444444444444,0.125,1.6222838868339808,0.8062634647373155,"['N1', 'REM']","{'W': 6, 'N1': 0, 'N2': 1, 'N3': 1, 'REM': 0}"
+M3_draw42_n2_seed42,M3,42,SC401,2,8,0.05,0.125,1.7024323078718382,0.8411728058775398,"['N1', 'REM']","{'W': 6, 'N1': 0, 'N2': 1, 'N3': 1, 'REM': 0}"
+M6_draw42_n2_seed42,M6,42,SC401,2,8,0.05,0.125,1.6901729855735035,0.8365760169096861,"['N1', 'REM']","{'W': 6, 'N1': 0, 'N2': 1, 'N3': 1, 'REM': 0}"

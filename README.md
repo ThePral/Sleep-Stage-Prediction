@@ -508,5 +508,150 @@ records M4–M1, M5–M2, M6–M3, M3–M2 and M6–M5 macro-F1 differences only
 conditions completed with identical normalizer and validation target hashes.
 These are pooled source-validation summaries. They do not provide confidence
 intervals, independent source-test results or external generalization estimates.
-Participant uncertainty, compute profiling and a predeclared frozen external
-scoring batch remain upcoming work.
+The participant analysis, source profiling and frozen scoring workflow are
+documented below. Full-budget source training and real external scoring remain
+separate from these implementation checks.
+
+**Participant uncertainty and calibration**
+
+`src.evaluation.uncertainty` computes pooled classification metrics, fixed-bin
+confidence calibration error, multiclass Brier score, and per-participant metrics.
+Both nights of a Sleep-EDF participant are pooled before calculating that person's
+five-class macro-F1. Absent truth classes still contribute zero F1, with class
+support/missing-class tables retained. The primary endpoint weights participants
+equally, so it differs from pooled-epoch macro-F1.
+
+Bootstrap draws resample participants with replacement, keeping their recordings,
+conditions and trained seeds together. Paired contrasts reuse the same draws.
+For several trained seeds, the endpoint averages participant F1 across those seeds;
+the interval is conditional on that seed set. Per-seed endpoints, sample SD and
+range report training variation separately. Participant-seed pairs are never
+counted as independent patients. The implementation uses percentile intervals;
+see the [SciPy bootstrap documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html)
+for resampling/paired-interval terminology. No multiplicity or model-selection
+correction is applied. A cohort of one participant gets no confidence interval.
+
+Create a source-model registry from a completed study and analyze its existing
+validation exports:
+
+```powershell
+.venv\Scripts\python.exe -X utf8 -m src.evaluation.frozen registry --study-dir runs/my_matrix_pilot --budget-id draw42_n2 --conditions M0 M3 M6 --output runs/my_source_registry.csv
+
+.venv\Scripts\python.exe -X utf8 -m src.evaluation.uncertainty --registry runs/my_source_registry.csv --output-dir runs/my_source_analysis --pair M6 M3
+```
+
+Registry columns are `model_id`, `condition`, `training_seed`, `bundle_directory`,
+`predictions` and `selection_basis`. Paths may be absolute or relative to the CSV.
+Development analysis verifies each bundle and checks prediction membership in its
+actual source-validation manifest. Pointing a Sleep-EDF test CSV at this command
+does not qualify it as validation data. Analysis writes `analysis.json`,
+`participant_metrics.csv` and paired comparisons into a new directory.
+
+Brier score is the mean sum of squared errors across the five probabilities
+(range 0–2). Calibration error uses the declared equal-width bins of the maximum
+class confidence, with probability 1 included in the final bin. These are
+descriptive probability diagnostics; no temperature fitting occurs.
+
+**Source-only compute profiling**
+
+Use a fresh CLI process for each batch size and mode:
+
+```powershell
+.venv\Scripts\python.exe -X utf8 -m src.evaluation.profile --bundle runs/my_ssl_gated --output-dir runs/profile_inference_b4 --recordings SC4001 --mode inference --batch-size 4 --warmup-steps 5 --measured-steps 50
+
+.venv\Scripts\python.exe -X utf8 -m src.evaluation.profile --bundle runs/my_ssl_gated --output-dir runs/profile_training_b4 --recordings SC4001 --mode training --batch-size 4 --warmup-steps 5 --measured-steps 50
+```
+
+Only records from the saved model's source training/validation partitions can be
+profiled; disposable training steps require training records. Model-file hashes
+are checked before and after. Training uses a fresh in-memory optimizer and
+discards updates. These measurements do not resume a scientific training run.
+
+Reports separate model load, data integrity verification, loader/normalization,
+model-only timing, and streaming from cached epochs. Feature extraction is timed
+separately on unique prefiltered raw epochs when available. Original EDF decoding,
+resampling and filtering are outside streaming timing. Inference uses the deployed
+eager Keras call; training uses compiled `train_on_batch`, so their execution
+modes differ. Median/p95 latency and examples per second describe the selected
+batch/mode, not guaranteed campaign throughput.
+
+Host RSS is sampled every 10 ms and can miss short peaks. On GPU, TensorFlow's
+allocator current/peak bytes are recorded when supported; these exclude other
+driver reservations ([TensorFlow memory API](https://www.tensorflow.org/api_docs/python/tf/config/experimental/get_memory_info)).
+CPU-only runs report null GPU memory. Successful CPU profiling does not establish
+a 4 GB GPU fit. SSL-specific memory/throughput profiling, device setup and longer
+steady-state measurements remain necessary before a full compute commitment.
+
+**Freeze models before external evaluation**
+
+`src.evaluation.frozen` separates registry creation, protocol freezing and scoring.
+Freezing reads source bundles and validation evidence only. It accepts no target
+data path. Snapshots include model weights, normalization, preprocessing/context,
+training and selection provenance, and validation predictions. The freeze also
+locks code/package hashes, target enrollment counts, scorer/electrode policy,
+eligible context policy, endpoints, bootstrap settings and paired contrasts.
+
+The default `configs/evaluation_isruc.json` declares all 100 canonical ISRUC-I
+participants/recordings, scorer-1 workbook labels and the C3 contralateral policy.
+Confirmatory mode rejects capped integration models and target-window caps.
+Models in one condition must share architecture, training settings, labeled
+scope and normalization across seeds; declared contrasts require matched seeds.
+Every model must use the same context, preprocessing and source-validation
+targets. Source test history remains explicitly marked as previously inspected.
+
+After completing source training and selection, create and review the entire
+model registry before opening external performance:
+
+```powershell
+.venv\Scripts\python.exe -X utf8 -m src.evaluation.frozen registry --study-dir runs/source_matrix_seed42 --budget-id draw42_n70 --output runs/source_selected_models.csv
+
+.venv\Scripts\python.exe -X utf8 -m src.evaluation.frozen freeze --registry runs/source_selected_models.csv --config configs/evaluation_isruc.json --freeze-dir runs/isruc_model_freeze
+
+# Execute the whole frozen family after source selection/protocol decisions are final.
+.venv\Scripts\python.exe -u -X utf8 -m src.evaluation.frozen score --freeze-dir runs/isruc_model_freeze --data-root data/processed/research_v1 --output-dir runs/isruc_frozen_results --batch-size 4
+```
+
+Include every predeclared condition/budget in the registry before scoring. For
+several budgets, use distinct condition names and declare corresponding contrasts
+in the protocol; do not choose another model family after looking at target scores.
+Snapshots survive relocation of original run directories. Frozen implementation,
+package or snapshot changes are rejected. A freeze and result each require a new
+directory; no old evaluation is overwritten.
+
+Scoring enrolls the declared cohort and verifies store contents, canonical IDs,
+preprocessing, scorer and channel provenance. Eligible windows require every
+context epoch to be signal-valid and label-valid, with no timeline gaps, matching
+the training/evaluation policy. Coverage reports distinguish physical, annotated,
+usable and eligible-window counts. Every model must export the identical complete
+target mask. A recording with no eligible windows fails instead of disappearing.
+
+Each model runs in a separate process using frozen inference only. No scaler,
+model, threshold or calibration statistics are fitted to the target cohort.
+Exports retain participant/recording/epoch IDs, truth, five probabilities, scorer,
+run/condition/seed and eligibility. Retrospective transition groups use physical
+stage boundaries within the declared radius (default ±1 epoch); unknown labels
+do not create a boundary across a gap. Group results are descriptive.
+
+The complete family report and `evaluation_bundle.json` are published only after
+every model succeeds and its targets match enrollment. Failed attempts have no
+completed report seal; preserve/disclose any prior target inspection if it affects
+later development. Per-model CSVs can remain in a failed output directory.
+Final output includes pooled/per-stage metrics, participant support and F1,
+calibration/Brier scores, paired participant-cluster intervals and separate seed
+variation. It does not establish physiological explanations or isolate domain
+shift from montage, prevalence and population differences.
+
+Validate the same CLI on source validation before using any external data:
+
+```powershell
+.venv\Scripts\python.exe -X utf8 -m src.evaluation.frozen freeze --registry runs/my_source_registry.csv --config configs/evaluation_source_validation_pilot.json --freeze-dir runs/my_validation_freeze
+
+.venv\Scripts\python.exe -u -X utf8 -m src.evaluation.frozen score --freeze-dir runs/my_validation_freeze --output-dir runs/my_validation_scoring
+```
+
+This integration protocol permits capped pilot models and four windows per record
+from SC4011/SC4012. It is a one-participant source-validation execution check.
+Synthetic fixtures separately test external-record scoring and cohort failures.
+No real ISRUC performance was opened during this implementation milestone.
+Secondary scorer/channel sensitivity and agreement analyses need separately
+prepared annotation stores, declared alignment/cohort policies and further work.

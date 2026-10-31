@@ -1,0 +1,29 @@
+{
+  "freeze_fingerprint": "40996731091ee0d5688a857bb99385e2ab9fe458f575bed7ae1bcee0f638dee8",
+  "records": [
+    {
+      "recording_id": "SC4011",
+      "participant_id": "SC401",
+      "manifest_sha256": "45cf19b278dbd3118f893e85ced5237b1b3ff0cff03060e888df8b1788c28085",
+      "physical_epochs": 2802,
+      "quality_epochs": 2802,
+      "annotated_epochs": 2802,
+      "supervised_epochs": 2802,
+      "eligible_windows_uncapped": 2793,
+      "selected_windows": 4,
+      "target_ids_sha256": "4240ee6540c88815776a59977bda7e4364c02c7b14d3650289c07770e4b38d52"
+    },
+    {
+      "recording_id": "SC4012",
+      "participant_id": "SC401",
+      "manifest_sha256": "01cf54d7e05b5c7e68c195004735b8908e5f3297a3b5c2acab893df9d764dd74",
+      "physical_epochs": 2850,
+      "quality_epochs": 2850,
+      "annotated_epochs": 2848,
+      "supervised_epochs": 2848,
+      "eligible_windows_uncapped": 2839,
+      "selected_windows": 4,
+      "target_ids_sha256": "4c1c334d9db2b8d2e76f95319c6e27d792ef6aad80cda0c60da855c34eda7120"
+    }
+  ]
+}

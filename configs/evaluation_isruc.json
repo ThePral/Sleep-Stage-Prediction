@@ -1,0 +1,7 @@
+{
+  "purpose": "confirmatory",
+  "target": {"dataset": "isruc", "split": "external", "expected_participants": 100, "expected_recordings": 100, "scorer": 1, "electrode_policy": "C3"},
+  "analysis": {"bootstrap_replicates": 2000, "confidence_level": 0.95, "seed": 42, "calibration_bins": 15},
+  "paired_conditions": [["M4", "M1"], ["M5", "M2"], ["M6", "M3"], ["M3", "M2"], ["M6", "M5"]],
+  "transition_radius_epochs": 1
+}

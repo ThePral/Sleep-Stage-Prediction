@@ -1,0 +1,2 @@
+first,second,participant_mean_macro_f1_difference,confidence_interval
+M6,M3,0.0,"{'lower': None, 'upper': None, 'status': 'insufficient_independent_participants'}"

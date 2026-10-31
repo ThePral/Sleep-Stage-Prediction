@@ -1,0 +1,7 @@
+{
+  "purpose": "integration",
+  "target": {"dataset": "sleepedf", "split": "val", "expected_participants": 1, "expected_recordings": 2, "recordings": ["SC4011", "SC4012"], "max_windows_per_record": 4},
+  "analysis": {"bootstrap_replicates": 200, "confidence_level": 0.95, "seed": 42, "calibration_bins": 5},
+  "paired_conditions": [["M6", "M3"]],
+  "transition_radius_epochs": 1
+}
