@@ -1,0 +1,384 @@
+{
+  "date": "2026-10-27",
+  "purpose": "CPU integration smoke tests of supervised controls; not performance-comparison evidence",
+  "tests": {
+    "command": ".venv/Scripts/python.exe -X utf8 -m unittest discover -s tests -v",
+    "run": 56,
+    "passed": 56
+  },
+  "training_recordings": [
+    "SC4001",
+    "SC4002"
+  ],
+  "validation_recordings": [
+    "SC4011"
+  ],
+  "training_participants": [
+    "SC400"
+  ],
+  "validation_participants": [
+    "SC401"
+  ],
+  "source_test_or_external_predictive_evaluation": false,
+  "shared_normalization_state": true,
+  "matching_validation_targets": true,
+  "validation_target_ids": [
+    "sleepedf:SC4011:000009",
+    "sleepedf:SC4011:000407",
+    "sleepedf:SC4011:000806",
+    "sleepedf:SC4011:001205",
+    "sleepedf:SC4011:001604",
+    "sleepedf:SC4011:002003",
+    "sleepedf:SC4011:002402",
+    "sleepedf:SC4011:002801"
+  ],
+  "raw_input_replay_tolerance": 1e-06,
+  "replay_method": "Fresh-process MultiviewPredictor; EpochStore windows selected by exported epoch_index; compare five probabilities with validation_predictions.csv",
+  "models": [
+    {
+      "variant": "raw",
+      "run_directory": "runs/supervised_pilot/raw_v2",
+      "summary": {
+        "variant": "raw",
+        "parameters": 56453,
+        "epochs_completed": 2,
+        "train_windows_available": 5452,
+        "validation_windows_available": 2793,
+        "train_batches_per_epoch": 2,
+        "validation_batches": 2,
+        "normalization_fit_epochs": 5479,
+        "limited_data_run": true,
+        "elapsed_seconds": 9.249064600007841,
+        "checkpoint_reload_max_probability_difference": 0.0,
+        "source_validation": {
+          "examples": 8,
+          "loss": 1.2321170920895477,
+          "accuracy": 0.625,
+          "macro_f1": 0.15384615384615385,
+          "balanced_accuracy": 0.3333333333333333,
+          "weighted_f1": 0.4807692307692308,
+          "cohen_kappa": 0.0,
+          "macro_f1_policy": "fixed_five_classes_zero_division_zero",
+          "balanced_accuracy_policy": "mean_recall_over_truth_classes_present",
+          "per_stage": {
+            "W": {
+              "support": 5,
+              "precision": 0.625,
+              "recall": 1.0,
+              "f1": 0.7692307692307693
+            },
+            "N1": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "N2": {
+              "support": 2,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "N3": {
+              "support": 1,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "REM": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "confusion_matrix": [
+            [
+              5,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      },
+      "best_epoch": 1,
+      "devices": [
+        "/physical_device:CPU:0"
+      ],
+      "raw_input_replay_max_probability_difference": 2.2351741707504758e-08,
+      "normalizer_sha256": "60d7a7f9c89d8e354a999436a1c1c71d982672a44d35619c29c56045e1cae639",
+      "bundle_sha256": "92072e98cb7e6eac6135159a13ade25d1ed438aac7d411fafa244919ed3229dc",
+      "run_code_sha256": {
+        "src/training/supervised.py": "163509f503a8a91fd1f44861d5def222ebbbfc39137a4d8107686518a8ab74d1",
+        "src/models/multiview.py": "f6ee14d9ee41af5be773fbd0023c42b085969b526deec68c6b64881e83b45b89",
+        "src/data/supervised.py": "792d6eee32a8e2cc2b19f26a6e5bd6bd2492f7f3d5d968d28e550968bac9fd67",
+        "src/preprocessing/research_normalization.py": "1cc302dad434c97b0eb3a8c71bf79c986a8a334da20c850391b0d747186e2fd4"
+      }
+    },
+    {
+      "variant": "concat",
+      "run_directory": "runs/supervised_pilot/concat_v2",
+      "summary": {
+        "variant": "concat",
+        "parameters": 65989,
+        "epochs_completed": 2,
+        "train_windows_available": 5452,
+        "validation_windows_available": 2793,
+        "train_batches_per_epoch": 2,
+        "validation_batches": 2,
+        "normalization_fit_epochs": 5479,
+        "limited_data_run": true,
+        "elapsed_seconds": 10.29755460000888,
+        "checkpoint_reload_max_probability_difference": 0.0,
+        "source_validation": {
+          "examples": 8,
+          "loss": 1.2918335240609022,
+          "accuracy": 0.625,
+          "macro_f1": 0.15384615384615385,
+          "balanced_accuracy": 0.3333333333333333,
+          "weighted_f1": 0.4807692307692308,
+          "cohen_kappa": 0.0,
+          "macro_f1_policy": "fixed_five_classes_zero_division_zero",
+          "balanced_accuracy_policy": "mean_recall_over_truth_classes_present",
+          "per_stage": {
+            "W": {
+              "support": 5,
+              "precision": 0.625,
+              "recall": 1.0,
+              "f1": 0.7692307692307693
+            },
+            "N1": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "N2": {
+              "support": 2,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "N3": {
+              "support": 1,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "REM": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "confusion_matrix": [
+            [
+              5,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      },
+      "best_epoch": 1,
+      "devices": [
+        "/physical_device:CPU:0"
+      ],
+      "raw_input_replay_max_probability_difference": 8.940696716308594e-08,
+      "normalizer_sha256": "60d7a7f9c89d8e354a999436a1c1c71d982672a44d35619c29c56045e1cae639",
+      "bundle_sha256": "6df509897b1b66e950d133f7d1e6ac1ea6943bd3cd90d6dcb3d1d15d1542c9c0",
+      "run_code_sha256": {
+        "src/training/supervised.py": "163509f503a8a91fd1f44861d5def222ebbbfc39137a4d8107686518a8ab74d1",
+        "src/models/multiview.py": "f6ee14d9ee41af5be773fbd0023c42b085969b526deec68c6b64881e83b45b89",
+        "src/data/supervised.py": "792d6eee32a8e2cc2b19f26a6e5bd6bd2492f7f3d5d968d28e550968bac9fd67",
+        "src/preprocessing/research_normalization.py": "1cc302dad434c97b0eb3a8c71bf79c986a8a334da20c850391b0d747186e2fd4"
+      }
+    },
+    {
+      "variant": "gated",
+      "run_directory": "runs/supervised_pilot/gated_v2",
+      "summary": {
+        "variant": "gated",
+        "parameters": 82757,
+        "epochs_completed": 2,
+        "train_windows_available": 5452,
+        "validation_windows_available": 2793,
+        "train_batches_per_epoch": 2,
+        "validation_batches": 2,
+        "normalization_fit_epochs": 5479,
+        "limited_data_run": true,
+        "elapsed_seconds": 9.605148899994674,
+        "checkpoint_reload_max_probability_difference": 0.0,
+        "source_validation": {
+          "examples": 8,
+          "loss": 1.2317171428453015,
+          "accuracy": 0.625,
+          "macro_f1": 0.15384615384615385,
+          "balanced_accuracy": 0.3333333333333333,
+          "weighted_f1": 0.4807692307692308,
+          "cohen_kappa": 0.0,
+          "macro_f1_policy": "fixed_five_classes_zero_division_zero",
+          "balanced_accuracy_policy": "mean_recall_over_truth_classes_present",
+          "per_stage": {
+            "W": {
+              "support": 5,
+              "precision": 0.625,
+              "recall": 1.0,
+              "f1": 0.7692307692307693
+            },
+            "N1": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "N2": {
+              "support": 2,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "N3": {
+              "support": 1,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            },
+            "REM": {
+              "support": 0,
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0
+            }
+          },
+          "confusion_matrix": [
+            [
+              5,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        }
+      },
+      "best_epoch": 1,
+      "devices": [
+        "/physical_device:CPU:0"
+      ],
+      "raw_input_replay_max_probability_difference": 5.960464483090178e-08,
+      "normalizer_sha256": "60d7a7f9c89d8e354a999436a1c1c71d982672a44d35619c29c56045e1cae639",
+      "bundle_sha256": "dc52cd28ac0bae222ea176213aa1eff377712f487efc7c1f669356a4194a6f23",
+      "run_code_sha256": {
+        "src/training/supervised.py": "163509f503a8a91fd1f44861d5def222ebbbfc39137a4d8107686518a8ab74d1",
+        "src/models/multiview.py": "f6ee14d9ee41af5be773fbd0023c42b085969b526deec68c6b64881e83b45b89",
+        "src/data/supervised.py": "bccf0b1d76541e46c0818c10d9365a2d0c87948eaef3ac588d47dfb5344d6e45",
+        "src/preprocessing/research_normalization.py": "1cc302dad434c97b0eb3a8c71bf79c986a8a334da20c850391b0d747186e2fd4"
+      }
+    }
+  ],
+  "current_code_sha256": {
+    "src/models/multiview.py": "f1dc99c3b5200b887f7ad1401cf8805218a7406f255cad95067d1c0a81d97a40",
+    "src/data/supervised.py": "792d6eee32a8e2cc2b19f26a6e5bd6bd2492f7f3d5d968d28e550968bac9fd67",
+    "src/preprocessing/research_normalization.py": "1cc302dad434c97b0eb3a8c71bf79c986a8a334da20c850391b0d747186e2fd4",
+    "src/training/supervised.py": "90f54a8a7b84ccce70a35e5e399e6f521f88a20d4ca0fd6e0ea77c416c61b562",
+    "src/evaluation/classification.py": "9fc7379331c425bde5f6b2873db2d88d90fdc29761b752445a2284df13e86b08",
+    "src/inference/multiview.py": "67011076aaa888d7df329a39378cfd674633a840a9adee160acabaca4905863c",
+    "tests/test_multiview.py": "eb2b039a55c831c2f51e6bfc31d5526c0f75e296060fdabbec6fbda9bc35eab2"
+  },
+  "preserved_baseline_artifacts_verified": 10,
+  "limitations": [
+    "Two epochs with two batches per training/validation pass; no convergence or superiority claims.",
+    "No GPU devices were visible in the tested environment; 4 GB GPU memory and throughput remain unmeasured.",
+    "Pilot run code hashes are retained separately from the final source snapshot; subsequent changes include diagnostics, metadata, and tests."
+  ]
+}

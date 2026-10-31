@@ -229,5 +229,8 @@ data/features
 # data/external
 data/external
 
+# Research checkpoints and per-run artifacts (retain selected summaries in reports/).
+runs/
+
 # .vscode
 .vscode

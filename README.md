@@ -202,3 +202,78 @@ split, and can write incompatible artifacts into legacy result directories.
 Use the research commands and corrected bundle for the extension. The local
 dependency snapshot is `requirements-windows-py313.lock.txt`; it records the
 tested Windows/Python 3.13 environment and is not a cloud GPU environment lock.
+
+**Supervised waveform and fusion models**
+
+Three controls share a strided waveform CNN and a 64-unit temporal GRU:
+
+| Configuration | Epoch representation | Parameters |
+|---|---|---:|
+| `configs/supervised_raw.json` | Waveform only | 56,453 |
+| `configs/supervised_concat.json` | Waveform plus spectral-token concatenation | 65,989 |
+| `configs/supervised_gated.json` | Waveform queries over ten spectral keys/values, with gated residual fusion | 82,757 |
+
+The default input is ten 30-second epochs. CNN downsampling produces 30 waveform
+tokens per epoch before fusion. Layer normalization avoids fitting target-batch
+statistics. The waveform encoder is accessible through `get_waveform_encoder()`
+for the subsequent self-supervised pretraining milestone.
+
+Run a short integration pilot first:
+
+```powershell
+.venv\Scripts\python.exe -u -X utf8 -m src.training.supervised --config configs/supervised_gated.json --run-dir runs/my_gated_pilot --epochs 2 --train-recordings SC4001 SC4002 --validation-recordings SC4011 --max-train-batches 2 --max-validation-batches 2
+```
+
+This example trains on two source recordings and evaluates eight evenly spaced
+validation windows. It checks execution, gradient updates, and checkpoint reload;
+its metrics do not establish model quality. Capped validation sampling uses no
+stage labels, and all limited runs are marked in their saved configuration.
+
+For a full source training run, omit the recording selections and batch caps:
+
+```powershell
+.venv\Scripts\python.exe -u -X utf8 -m src.training.supervised --config configs/supervised_gated.json --run-dir runs/gated_seed42
+```
+
+The default is 30 epochs and batch size four. Benchmark the configured device and
+adjust the batch size before a large experiment; the current integration pilots
+ran on CPU. Each run requires a new output directory. `runs/` is ignored by Git;
+selected experiment summaries should be retained under `reports/`.
+
+The trainer opens only source training and validation stores matching the frozen
+participant manifest. It fits normalization once on unique eligible training
+epochs: per-epoch waveform mean removal with a single source RMS amplitude scale,
+and log-power/standard spectral scaling. No per-epoch variance normalization or
+target-cohort fitting occurs. Use `--normalizer <previous-run>/normalizer.json`
+to reuse the same statistics for a matched comparison; recording identities,
+manifest hashes, and preprocessing must agree.
+
+Checkpoints maximize source-validation macro-F1 over the fixed five classes;
+absent classes contribute zero F1. Validation loss drives learning-rate reduction.
+Training windows shuffle reproducibly, and memory maps plus one prefetched batch
+bound loader memory without caching overlapping raw windows.
+
+Completed runs contain `model.keras`, `normalizer.json`, resolved configuration,
+data/code provenance, training history, validation predictions with epoch IDs,
+metrics, confusion matrix, and a hashed `bundle.json`. The bundle is published
+only after the best checkpoint reloads with matching predictions. Source test and
+ISRUC predictive evaluation remain outside this development trainer.
+
+Predict from raw prepared inputs using the frozen bundle:
+
+```python
+from src.data.epoch_store import EpochStore
+from src.inference.multiview import MultiviewPredictor
+
+predictor = MultiviewPredictor("runs/my_gated_pilot")
+with EpochStore("data/processed/research_v1/sleepedf/SC4011") as store:
+    batch = store.gather(store.sequence_positions(10)[:4])
+    predicted_indices, probabilities = predictor.predict_batch(
+        batch["waveform"], batch["spectral"]
+    )
+```
+
+Waveforms must be in volts and spectral powers in volts squared, before scaling.
+The inference wrapper applies the saved normalization and rejects incomplete,
+modified, or dimensionally incompatible bundles. For the raw-only control,
+`predict_batch` only requires the waveform argument.
