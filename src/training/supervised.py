@@ -21,6 +21,7 @@ from tensorflow import keras
 from src.data.epoch_store import sha256_file
 from src.data.prepare_research_data import ROOT
 from src.data.supervised import SourcePartition, WindowBatches
+from src.data.label_budgets import (authorize_waveform_pool, get_budget, load_budget_plan, verify_plan_scope)
 from src.evaluation.classification import ClassificationAccumulator
 from src.models.multiview import (ModelConfig, build_linear_probe, build_multiview_model,
                                   compile_multiview_model, get_waveform_encoder)
@@ -97,6 +98,7 @@ def train_supervised(
     max_train_batches=None, max_validation_batches=None, normalizer_path=None, verbose=2,
     pretrained_path=None, freeze_backbone=False, linear_probe=False,
     waveform_normalizer_path=None,
+    budget_plan_path=None, budget_id=None,
 ):
     model_config = model_config or ModelConfig()
     training_config = training_config or TrainingConfig()
@@ -104,6 +106,21 @@ def train_supervised(
         raise ValueError("Linear probes require raw single-epoch configuration.")
     if pretrained_path is not None and waveform_normalizer_path is not None:
         raise ValueError("Pretrained bundles already supply their waveform normalizer.")
+    if model_config.variant == "spectral" and (pretrained_path is not None or freeze_backbone):
+        raise ValueError("The spectral reference has no waveform backbone to transfer or freeze.")
+    budget_plan, budget = None, None
+    if (budget_plan_path is None) != (budget_id is None):
+        raise ValueError("A label budget requires both its plan and budget ID.")
+    if budget_plan_path is not None:
+        budget_plan = load_budget_plan(budget_plan_path)
+        verify_plan_scope(budget_plan, root, split_file)
+        budget = get_budget(budget_plan, budget_id)
+        if train_recordings is not None or validation_recordings is not None:
+            raise ValueError("A label budget controls complete training/validation recording selections.")
+        if model_config.sequence_length != budget_plan["sequence_length"]:
+            raise ValueError("Model context disagrees with label budget planning.")
+        train_recordings = budget["recordings"]
+        validation_recordings = [r["recording_id"] for r in budget_plan["source_records"] if r["split"] == "val"]
     run_directory = Path(run_directory).resolve()
     # Refuse to replace a previous experiment, including an interrupted run.
     run_directory.mkdir(parents=True, exist_ok=False)
@@ -117,6 +134,8 @@ def train_supervised(
             "max_train_batches": max_train_batches, "max_validation_batches": max_validation_batches,
         }
         limited = any(value is not None for value in selection.values())
+        if budget_plan:
+            limited = budget_plan["limited_participant_scope"] or max_train_batches is not None or max_validation_batches is not None
         with SourcePartition(root, "train", sequence_length=model_config.sequence_length,
                              recordings=train_recordings, split_file=split_file) as train, \
              SourcePartition(root, "val", sequence_length=model_config.sequence_length,
@@ -139,10 +158,22 @@ def train_supervised(
             if pretrained_path is not None:
                 from src.training.contrastive import PretrainedEncoder
                 pretrained = PretrainedEncoder(pretrained_path)
-                normalizer.use_pretraining_waveform(pretrained.normalizer, train)
+                if budget_plan:
+                    authorize_waveform_pool(budget_plan, pretrained.normalizer)
+                normalizer.use_pretraining_waveform(pretrained.normalizer, train, allow_source_subset=budget_plan is not None)
             elif waveform_normalizer_path is not None:
                 # Match preprocessing in randomly initialized SSL controls.
-                normalizer.use_pretraining_waveform(WaveformNormalizer.load(waveform_normalizer_path), train)
+                waveform = WaveformNormalizer.load(waveform_normalizer_path)
+                if budget_plan:
+                    authorize_waveform_pool(budget_plan, waveform)
+                normalizer.use_pretraining_waveform(waveform, train, allow_source_subset=budget_plan is not None)
+            if budget_plan:
+                if "pretraining_waveform" not in normalizer.state:
+                    raise ValueError("Budget comparisons require the fixed full-pool waveform normalizer.")
+                authorize_waveform_pool(budget_plan, WaveformNormalizer(normalizer.state["pretraining_waveform"]))
+                if (len(train) != budget["annotation_cost"]["windows"]
+                        or train.preprocessing.fingerprint != budget_plan["preprocessing_fingerprint"]):
+                    raise ValueError("Actual training windows disagree with the planned label budget.")
             normalizer.save(run_directory / "normalizer.json")
             data_manifest = {"train": train.manifest(), "validation": validation.manifest()}
             write_json(run_directory / "data_manifest.json", data_manifest)
@@ -151,10 +182,11 @@ def train_supervised(
                 "model": model_config.to_dict(), "training": asdict(training_config),
                 "data_root": str(Path(root).resolve()), "selection": selection,
                 "limited_data_run": limited, "normalizer_reused_from": str(normalizer_path) if normalizer_path else None,
-                "training_mode": "linear_probe" if linear_probe else "temporal_classifier",
+                "training_mode": "linear_probe" if linear_probe else "spectral_reference" if model_config.variant == "spectral" else "temporal_classifier",
                 "pretrained_from": str(Path(pretrained_path).resolve()) if pretrained_path else None,
                 "waveform_normalizer_from": str(Path(waveform_normalizer_path).resolve()) if waveform_normalizer_path else None,
                 "frozen_waveform_encoder": freeze_backbone or linear_probe,
+                "label_budget": {"plan": budget_plan, "budget_id": budget_id} if budget_plan else None,
                 "checkpoint_selection": "maximum_source_validation_fixed_five_class_macro_f1",
                 "capped_validation_selection": "evenly_spaced_windows_without_using_labels",
                 "classes": CLASS_LABELS, "features": ALL_FEATURES,
@@ -178,7 +210,7 @@ def train_supervised(
             model = build_linear_probe(model_config) if linear_probe else build_multiview_model(model_config)
             if pretrained:
                 resolved["pretraining_transfer"] = pretrained.transfer(
-                    model, model_config, train, freeze=freeze_backbone or linear_probe)
+                    model, model_config, train, freeze=freeze_backbone or linear_probe, allow_source_subset=budget_plan is not None)
             elif freeze_backbone:
                 get_waveform_encoder(model).trainable = False
             frozen_weights = [v.copy() for v in get_waveform_encoder(model).get_weights()] if freeze_backbone or linear_probe else None
@@ -214,6 +246,8 @@ def train_supervised(
                 "training_mode": resolved["training_mode"],
                 "trainable_parameters": int(sum(np.prod(v.shape) for v in model.trainable_weights)),
                 "pretrained_waveform": pretrained is not None,
+                "label_budget": budget,
+                "validation_annotation_cost": budget_plan["validation_annotation_cost"] if budget_plan else None,
                 "epochs_completed": len(history),
                 "best_epoch": int(history["val_macro_f1"].to_numpy().argmax()) + 1,
                 "train_windows_available": len(train), "validation_windows_available": len(validation),
@@ -256,6 +290,8 @@ def main(argv=None):
     parser.add_argument("--waveform-normalizer", type=Path)
     parser.add_argument("--freeze-backbone", action="store_true")
     parser.add_argument("--linear-probe", action="store_true")
+    parser.add_argument("--budget-plan", type=Path)
+    parser.add_argument("--budget-id")
     args = parser.parse_args(argv)
     config = json.loads(args.config.read_text(encoding="utf-8"))
     if set(config) - {"model", "training"}:
@@ -271,6 +307,7 @@ def main(argv=None):
         max_validation_batches=args.max_validation_batches, normalizer_path=args.normalizer,
         pretrained_path=args.pretrained, freeze_backbone=args.freeze_backbone, linear_probe=args.linear_probe,
         waveform_normalizer_path=args.waveform_normalizer,
+        budget_plan_path=args.budget_plan, budget_id=args.budget_id,
     )
     print(json.dumps(summary, indent=2))
 

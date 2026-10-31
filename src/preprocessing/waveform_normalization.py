@@ -12,6 +12,13 @@ def source_identity(manifest):
                    for r in manifest["recordings"]))
 
 
+def source_subset(subset, pool):
+    """Compare frozen, content-addressed source identities, without using labels."""
+    child, parent = source_identity(subset), source_identity(pool)
+    return (child[:3] == parent[:3] and child[0:2] == ("sleepedf", "train")
+            and bool(child[3]) and set(child[3]).issubset(parent[3]))
+
+
 class WaveformNormalizer:
     def __init__(self, state=None):
         self.state = state
@@ -53,12 +60,15 @@ class WaveformNormalizer:
                 or s["preprocessing_fingerprint"] != data["preprocessing_fingerprint"]):
             raise ValueError("Invalid waveform statistics or provenance.")
 
-    def assert_compatible(self, partition, *, require_training_match=False):
+    def assert_compatible(self, partition, *, require_training_match=False, allow_source_subset=False):
         self.validate()
         if self.state["preprocessing_fingerprint"] != partition.preprocessing.fingerprint:
             raise ValueError("Waveform preprocessing fingerprints disagree.")
-        if require_training_match and source_identity(self.state["training_data"]) != source_identity(partition.manifest()):
-            raise ValueError("Pretraining and downstream source training selections disagree.")
+        if require_training_match:
+            data = partition.manifest()
+            matches = source_subset(data, self.state["training_data"]) if allow_source_subset else source_identity(self.state["training_data"]) == source_identity(data)
+            if not matches:
+                raise ValueError("Pretraining and downstream source training selections disagree.")
 
     def transform_waveform(self, values):
         self.validate()

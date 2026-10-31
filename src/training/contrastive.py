@@ -86,8 +86,8 @@ class PretrainedEncoder:
                 or self.encoder.output_shape[-1] != self.config.token_dim):
             raise ValueError("Pretraining encoder and configuration dimensions disagree.")
 
-    def transfer(self, model, config, partition, *, freeze=False):
-        self.normalizer.assert_compatible(partition, require_training_match=True)
+    def transfer(self, model, config, partition, *, freeze=False, allow_source_subset=False):
+        self.normalizer.assert_compatible(partition, require_training_match=True, allow_source_subset=allow_source_subset)
         for key in ["samples_per_epoch", "filters", "kernels", "strides", "token_dim"]:
             if getattr(config, key) != getattr(self.config, key):
                 raise ValueError(f"Pretrained waveform architecture disagrees: {key}")
@@ -99,7 +99,8 @@ class PretrainedEncoder:
 
 
 def train_contrastive(root, run_directory, model_config=None, pretraining_config=None, augmentation_config=None, *,
-                      train_recordings=None, split_file=None, max_batches=None, resume_from=None, verbose=2):
+                      train_recordings=None, split_file=None, max_batches=None, resume_from=None, verbose=2,
+                      normalizer_path=None):
     config = model_config or ModelConfig(variant="raw")
     training = pretraining_config or PretrainingConfig()
     augmentation = augmentation_config or AugmentationConfig()
@@ -127,6 +128,7 @@ def train_contrastive(root, run_directory, model_config=None, pretraining_config
                 "packages": {p: importlib.metadata.version(p) for p in ["tensorflow", "keras", "numpy", "pandas"]},
                 "devices": [device.name for device in tf.config.list_physical_devices()],
                 "resume_from": str(Path(resume_from).resolve()) if resume_from else None,
+                "normalizer_reused_from": str(Path(normalizer_path).resolve()) if normalizer_path else None,
                 "code_sha256": {str(p.relative_to(ROOT)).replace("\\", "/"): sha256_file(p) for p in [
                     Path(__file__), ROOT / "src/models/contrastive.py", ROOT / "src/models/multiview.py",
                     ROOT / "src/data/contrastive.py", ROOT / "src/data/supervised.py",
@@ -171,7 +173,13 @@ def train_contrastive(root, run_directory, model_config=None, pretraining_config
                 if len(history) != int(epoch_state.numpy()):
                     raise ValueError("Resume history disagrees with the checkpoint.")
             else:
-                normalizer = WaveformNormalizer().fit(pool)
+                normalizer = WaveformNormalizer.load(normalizer_path) if normalizer_path else WaveformNormalizer().fit(pool)
+                normalizer.assert_compatible(pool, require_training_match=True)
+            if resume_from and normalizer_path:
+                supplied = WaveformNormalizer.load(normalizer_path)
+                supplied.assert_compatible(pool, require_training_match=True)
+                if supplied.state["waveform_scale"] != normalizer.state["waveform_scale"]:
+                    raise ValueError("Resume waveform scale disagrees with supplied normalization.")
             initial_epoch = int(epoch_state.numpy())
             if initial_epoch >= training.epochs:
                 raise ValueError("Resume target epochs must exceed the saved completed epoch count.")
@@ -280,6 +288,7 @@ def main(argv=None):
     parser.add_argument("--epochs", type=int)
     parser.add_argument("--batch-size", type=int)
     parser.add_argument("--resume-from", type=Path)
+    parser.add_argument("--normalizer", type=Path)
     args = parser.parse_args(argv)
     config = json.loads(args.config.read_text(encoding="utf-8"))
     if set(config) - {"model", "pretraining", "augmentation"}:
@@ -291,7 +300,7 @@ def main(argv=None):
     summary = train_contrastive(args.data_root, args.run_dir, ModelConfig(**config.get("model", {"variant": "raw"})),
                                 PretrainingConfig(**training), AugmentationConfig(**config.get("augmentation", {})),
                                 train_recordings=args.train_recordings, split_file=args.split_file,
-                                max_batches=args.max_batches, resume_from=args.resume_from)
+                                max_batches=args.max_batches, resume_from=args.resume_from, normalizer_path=args.normalizer)
     print(json.dumps(summary, indent=2))
 
 

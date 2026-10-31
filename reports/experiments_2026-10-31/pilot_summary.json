@@ -1,0 +1,3767 @@
+{
+  "date": "2026-10-31",
+  "purpose": "CPU integration evidence, not convergence or comparative performance evidence",
+  "code_sha256": {
+    "src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/data/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/data/adapters/__init__.py": "fad87a9484dfa388346fd266253b732b00af30e57883eea2c3a73a09435f4e7f",
+    "src/data/adapters/isruc.py": "c9c47210f5fd38318f3eff07d7565a3302eae6d9b3af88cfdadc1ffb43eace5c",
+    "src/data/adapters/sleepedf.py": "5a1ed803010718c999127eac30c6a8f8636b7054d4a21cdf1f0872fe821510d7",
+    "src/data/contrastive.py": "4791e47670ea8b34eda40fff9fc78f7edd122792f03241afb1217f9846a143d2",
+    "src/data/epoch_store.py": "efd6a3b7df99677db3ff0a468d8c74ab887f850aa78ff38d84ca0cde1c335a91",
+    "src/data/label_budgets.py": "069518bd5f8d112ee7a4eb9b2a50806740ccc28a25fd80251eb34301277715ea",
+    "src/data/pairing.py": "551fed31e2f691771de637f1479e2b8c6fc4d59fac90836cd4e11596219b1878",
+    "src/data/prepare_research_data.py": "ed64d5d759e80a11380d7261435275f18eceab82929323db3767710a823c72f7",
+    "src/data/process_all.py": "63ba6b9a9c82db104bb65fd2e6384f6064e9a2e15f25153326dff33dce2de08c",
+    "src/data/process_dataset.py": "472aefc7b4765bb97173ce3f6db9f1ded7a1a1e65e7ec3396bb810dad06b9ef8",
+    "src/data/research.py": "bdb5bcb328e39534d7705874cc16b426cf10a08b935e8c64271f794b05c3a0dc",
+    "src/data/supervised.py": "9d10e99e6584d82d0287ff9d585c6a0336ce186802f9e97dd51ffc12f49f5119",
+    "src/evaluation/classification.py": "9fc7379331c425bde5f6b2873db2d88d90fdc29761b752445a2284df13e86b08",
+    "src/evaluation/validate_final_model.py": "be225f3cd3e4ea3253fd560dacd532834823467e3719a81df6942482e1ca92b4",
+    "src/evaluation/validate_research_data.py": "293973e8709fae60b037a961b0a9da5036c1d15963b0c095fff06cc957765b29",
+    "src/experiments/__init__.py": "e475818df3e941e723d990568d7b5f024991be98b273812e5d203a5960cc8d26",
+    "src/experiments/run.py": "18a78d746a150bef50158c6192c9e3ba7d794a0d34d48786b131600f62e7bd9b",
+    "src/experiments/worker.py": "ea4055e06b55404fa35d08551b08ac8e7a645d11e7f97dfc25327c1614e6da9e",
+    "src/features/spectral.py": "cbc768a4ef7219a882a6ad6736443db681a9c092ad4ec020d785a9927c2dc4f2",
+    "src/inference/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/inference/multiview.py": "2ed79e0a43a57bb9592fd94b74cd6354be8a65020a154257f0d5ea329217e2af",
+    "src/inference/predict.py": "4e96555cd650803fe58d8fc6246e90485bac194e27cdd76a39475dac0bf4f9c9",
+    "src/models/contrastive.py": "1a398a9632b3d56f37fbf0684e4b0d4cafb25353e9781707db1e4e46720344ff",
+    "src/models/lstm.py": "e59c4c4d47cd2752080c7dd939346a677c2f08cf7a017c50d7456aff0a6affa0",
+    "src/models/multiview.py": "47768c77b031e78aee6fdf0053a83490f3ba65ff0d024d22de3b947b393ff0aa",
+    "src/preprocessing/annotations.py": "2dfa81bbcb97ad1e077212a481d5b2ab7266c0cbcba9d13e615eac579eb00e00",
+    "src/preprocessing/epoching.py": "db109c2e65136921ac8ef8abfabd8d98ea95852f52067572ebbb2308f69780f7",
+    "src/preprocessing/filtering.py": "e37eacb87d11b6aaad096e468b5b3a4e36cad283d3056b2d45ec01458ae1824d",
+    "src/preprocessing/normalization.py": "45c538bd2837e6391a62c348a7c860bcb7e4f1c21601deda058ae8c6f4887aa5",
+    "src/preprocessing/pipeline.py": "f1a3e575bb16c9d6a7d2b56462e37bb46de92b63d65d838c3b5db11f89ab171a",
+    "src/preprocessing/research_normalization.py": "a8e9f7b687e90b003a6c7616637b01c08b7c8d946c8ddbedb520042b81e6aad9",
+    "src/preprocessing/sequences.py": "5509810a211df8528cbf250e92a50f8cdf31f0c6b9de6b6f57938440c407ab41",
+    "src/preprocessing/waveform_normalization.py": "db215faa4fe848d64211e6581754e70b68191adebc63b3b0a60ddaddcd7cb5d2",
+    "src/training/__init__.py": "aceb0179252ef9a28702002d54695c2f9ea0d3bffca850d017f84bb16c4b2dde",
+    "src/training/artifacts.py": "a7e95ebe6a7bdfc04cac6f56b8b972289e747a06797a1ef55b5214c1f312c784",
+    "src/training/contrastive.py": "67b24b0ec1b68c86ab919560cf42c5d2ba7f09c2eb45220a3c5639bd3255040b",
+    "src/training/supervised.py": "b52f8767a427cd8f9137ac2d63699ee4610019ca1af4bd843ae82ca2a5403eb0"
+  },
+  "packages": {
+    "tensorflow": "2.21.0",
+    "keras": "3.15.1",
+    "numpy": "2.5.2",
+    "pandas": "3.0.5",
+    "scikit-learn": "1.9.0",
+    "mne": "1.12.1"
+  },
+  "unit_and_integration_tests": {
+    "command": ".venv/Scripts/python.exe -W ignore::DeprecationWarning -X utf8 -m unittest discover -s tests -v",
+    "tests": 79,
+    "passed": 79,
+    "seconds": 62.49,
+    "new_tests": 11,
+    "coverage": [
+      "nested participant draws and annotation accounting",
+      "held-out exclusion and class coverage",
+      "manifest/content tampering",
+      "explicit full-pool-to-labeled-subset transfer",
+      "all-seven-condition paired dependency graph",
+      "worker failure, retry, completed-job skip and concurrency lock",
+      "frozen implementation guards",
+      "budgeted spectral/scratch/SSL training and inference",
+      "comparison hash mismatch rejection",
+      "interrupted atomic worker completion publication and recovery"
+    ]
+  },
+  "execution_mode": "serial CLI subprocess workers",
+  "devices": [
+    "/physical_device:CPU:0"
+  ],
+  "pilot": {
+    "study_fingerprint": "f4764e15e2150b4fb30b7b26ff9d84a0f686484e15257d8fddb42b59e564f4c2",
+    "limited_run": true,
+    "configuration": {
+      "model": {
+        "sequence_length": 10,
+        "samples_per_epoch": 3000,
+        "filters": [
+          4,
+          8
+        ],
+        "kernels": [
+          7,
+          5
+        ],
+        "strides": [
+          10,
+          10
+        ],
+        "token_dim": 8,
+        "attention_heads": 2,
+        "temporal_units": 8,
+        "dropout": 0.0,
+        "spectral_units": 8
+      },
+      "training": {
+        "batch_size": 2,
+        "epochs": 1,
+        "learning_rate": 0.001,
+        "patience": 1
+      },
+      "pretraining": {
+        "batch_size": 8,
+        "epochs": 1,
+        "learning_rate": 0.001,
+        "temperature": 0.2,
+        "projection_dim": 8,
+        "exclusion_epochs": 1,
+        "diagnostic_epochs": 8
+      },
+      "augmentation": {
+        "gain_min": 0.8,
+        "gain_max": 1.2,
+        "noise_rms_fraction": 0.02,
+        "max_mask_seconds": 1.0
+      },
+      "fractions": [
+        0.25,
+        1.0
+      ],
+      "draw_seeds": [
+        42
+      ],
+      "training_seeds": [
+        42
+      ],
+      "conditions": [
+        "M0",
+        "M1",
+        "M2",
+        "M3",
+        "M4",
+        "M5",
+        "M6"
+      ],
+      "limits": {
+        "max_train_batches": 1,
+        "max_validation_batches": 2,
+        "max_pretraining_batches": 2
+      },
+      "train_participants": [
+        "SC400",
+        "SC403"
+      ],
+      "validation_participants": [
+        "SC401"
+      ]
+    },
+    "initial_boundary": {
+      "jobs_planned": 18,
+      "jobs_completed": 4,
+      "jobs_executed_this_call": 4,
+      "limited_run": true
+    },
+    "completed_replay": {
+      "jobs_planned": 18,
+      "jobs_completed": 18,
+      "jobs_executed_this_call": 0,
+      "limited_run": true
+    },
+    "budgets": [
+      {
+        "budget_id": "draw42_n1",
+        "draw_seed": 42,
+        "fraction": 0.25,
+        "actual_fraction": 0.5,
+        "participants": [
+          "SC403"
+        ],
+        "recordings": [
+          "SC4031",
+          "SC4032"
+        ],
+        "annotation_cost": {
+          "participants": 1,
+          "recordings": 2,
+          "physical_epochs": 5552,
+          "annotated_epochs": 5552,
+          "supervised_epochs": 5552,
+          "windows": 5534,
+          "recorded_hours": 46.266666666666666,
+          "annotated_hours": 46.266666666666666,
+          "supervised_hours": 46.266666666666666,
+          "target_stage_counts": {
+            "W": 3947,
+            "N1": 106,
+            "N2": 885,
+            "N3": 188,
+            "REM": 408
+          }
+        }
+      },
+      {
+        "budget_id": "draw42_n2",
+        "draw_seed": 42,
+        "fraction": 1.0,
+        "actual_fraction": 1.0,
+        "participants": [
+          "SC400",
+          "SC403"
+        ],
+        "recordings": [
+          "SC4001",
+          "SC4002",
+          "SC4031",
+          "SC4032"
+        ],
+        "annotation_cost": {
+          "participants": 2,
+          "recordings": 4,
+          "physical_epochs": 11032,
+          "annotated_epochs": 11031,
+          "supervised_epochs": 11031,
+          "windows": 10986,
+          "recorded_hours": 91.93333333333334,
+          "annotated_hours": 91.925,
+          "supervised_hours": 91.925,
+          "target_stage_counts": {
+            "W": 7811,
+            "N1": 223,
+            "N2": 1508,
+            "N3": 696,
+            "REM": 748
+          }
+        }
+      }
+    ],
+    "validation_annotation_cost": {
+      "participants": 1,
+      "recordings": 2,
+      "physical_epochs": 5652,
+      "annotated_epochs": 5650,
+      "supervised_epochs": 5650,
+      "windows": 5632,
+      "recorded_hours": 47.1,
+      "annotated_hours": 47.083333333333336,
+      "supervised_hours": 47.083333333333336,
+      "target_stage_counts": {
+        "W": 3662,
+        "N1": 201,
+        "N2": 1222,
+        "N3": 201,
+        "REM": 346
+      }
+    },
+    "jobs": {
+      "waveform_statistics": {
+        "specification": {
+          "job_id": "waveform_statistics",
+          "kind": "waveform_statistics",
+          "dependencies": []
+        },
+        "summary": {
+          "fit_epochs": 11032,
+          "participants": 2,
+          "label_use": "none_for_selection_or_fitting",
+          "source_data": {
+            "dataset": "sleepedf",
+            "split": "train",
+            "sequence_length": 1,
+            "eligibility": "quality",
+            "preprocessing_fingerprint": "763c4523e75725605a517c2beb12362b9b83d09ed1aa693652f615354d315c8c",
+            "split_manifest": {
+              "path": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\final_model_corrected\\participant_split.csv",
+              "sha256": "cf1cd33a6a6b2376886119d0ca48d049b26f27f089fcc9e87ea54f5113a673c0"
+            },
+            "windows": 11032,
+            "recordings": [
+              {
+                "recording_id": "SC4001",
+                "participant_id": "SC400",
+                "split": "train",
+                "manifest_sha256": "03fbe1de18d0c4cb095c29ab190ddcdacf4d656e04132a912dc50a9914e71e53",
+                "windows": 2650,
+                "fit_epochs": 2650
+              },
+              {
+                "recording_id": "SC4002",
+                "participant_id": "SC400",
+                "split": "train",
+                "manifest_sha256": "f5529b49826a0e7da7aff27f0496fdaa376cee305d20895fde9f4b24a74e4a61",
+                "windows": 2830,
+                "fit_epochs": 2830
+              },
+              {
+                "recording_id": "SC4031",
+                "participant_id": "SC403",
+                "split": "train",
+                "manifest_sha256": "c46a42cf152b1a5712ec8941ff9a5caf803efeee4891b87476beda89bc47193b",
+                "windows": 2820,
+                "fit_epochs": 2820
+              },
+              {
+                "recording_id": "SC4032",
+                "participant_id": "SC403",
+                "split": "train",
+                "manifest_sha256": "0050e58831c0f34a95192427f41430891a606b61c87835f6c0c2f088c00e3e9f",
+                "windows": 2732,
+                "fit_epochs": 2732
+              }
+            ]
+          }
+        },
+        "job_result_sha256": "74a582a250c33c86b9f22fc96792decd99a777689af5b046f474db645132221a"
+      },
+      "normalizer_draw42_n1": {
+        "specification": {
+          "job_id": "normalizer_draw42_n1",
+          "kind": "normalizer",
+          "budget_id": "draw42_n1",
+          "dependencies": [
+            "waveform_statistics"
+          ]
+        },
+        "summary": {
+          "label_budget": {
+            "budget_id": "draw42_n1",
+            "draw_seed": 42,
+            "fraction": 0.25,
+            "actual_fraction": 0.5,
+            "participants": [
+              "SC403"
+            ],
+            "recordings": [
+              "SC4031",
+              "SC4032"
+            ],
+            "annotation_cost": {
+              "participants": 1,
+              "recordings": 2,
+              "physical_epochs": 5552,
+              "annotated_epochs": 5552,
+              "supervised_epochs": 5552,
+              "windows": 5534,
+              "recorded_hours": 46.266666666666666,
+              "annotated_hours": 46.266666666666666,
+              "supervised_hours": 46.266666666666666,
+              "target_stage_counts": {
+                "W": 3947,
+                "N1": 106,
+                "N2": 885,
+                "N3": 188,
+                "REM": 408
+              }
+            }
+          },
+          "spectral_fit_epochs": 5552,
+          "waveform_fit_epochs": 11032
+        },
+        "job_result_sha256": "aefa8e3be5c3d1eebb768deb459167004e4e4fe1191eaa51b06128f9b230903a"
+      },
+      "normalizer_draw42_n2": {
+        "specification": {
+          "job_id": "normalizer_draw42_n2",
+          "kind": "normalizer",
+          "budget_id": "draw42_n2",
+          "dependencies": [
+            "waveform_statistics"
+          ]
+        },
+        "summary": {
+          "label_budget": {
+            "budget_id": "draw42_n2",
+            "draw_seed": 42,
+            "fraction": 1.0,
+            "actual_fraction": 1.0,
+            "participants": [
+              "SC400",
+              "SC403"
+            ],
+            "recordings": [
+              "SC4001",
+              "SC4002",
+              "SC4031",
+              "SC4032"
+            ],
+            "annotation_cost": {
+              "participants": 2,
+              "recordings": 4,
+              "physical_epochs": 11032,
+              "annotated_epochs": 11031,
+              "supervised_epochs": 11031,
+              "windows": 10986,
+              "recorded_hours": 91.93333333333334,
+              "annotated_hours": 91.925,
+              "supervised_hours": 91.925,
+              "target_stage_counts": {
+                "W": 7811,
+                "N1": 223,
+                "N2": 1508,
+                "N3": 696,
+                "REM": 748
+              }
+            }
+          },
+          "spectral_fit_epochs": 11031,
+          "waveform_fit_epochs": 11032
+        },
+        "job_result_sha256": "fc197d1acff0939b8dc22ea2decef8cbbf0778822975d56a2b826d71a3570466"
+      },
+      "ssl_seed42": {
+        "specification": {
+          "job_id": "ssl_seed42",
+          "kind": "pretrain",
+          "seed": 42,
+          "dependencies": [
+            "waveform_statistics"
+          ]
+        },
+        "summary": {
+          "epochs_completed": 1,
+          "resumed_after_epoch": 0,
+          "source_quality_epochs_available": 11032,
+          "normalization_fit_epochs": 11032,
+          "original_epochs_per_batch": 8,
+          "batches_per_epoch": 2,
+          "original_epochs_used_per_epoch": 16,
+          "incomplete_tail_epochs_per_pass": 0,
+          "maximum_negatives_per_anchor": 14,
+          "optimizer_iterations": 2,
+          "parameters": 440,
+          "encoder_parameters": 296,
+          "limited_data_run": true,
+          "elapsed_seconds_this_run": 3.482944999996107,
+          "encoder_max_weight_update_this_run": 0.0020012855529785156,
+          "encoder_reload_max_difference": 0.0,
+          "last_epoch": {
+            "epoch": 1,
+            "loss": 2.4694011211395264,
+            "retrieval_accuracy": 0.90625,
+            "positive_cosine": 0.994543194770813,
+            "negative_cosine": 0.9371270835399628,
+            "mean_negatives_per_anchor": 14.0,
+            "encoder_epochs": 8,
+            "encoder_embedding_dimension": 8,
+            "encoder_mean_dimension_std": 0.07713590659239575,
+            "encoder_covariance_effective_rank": 2.684082208246167,
+            "encoder_mean_embedding_norm": 1.2213296094994623
+          }
+        },
+        "job_result_sha256": "de0ee2e2d5b4f39ccabfd35633731ec6012d44a1711d8c36c795596c2e6398e8"
+      },
+      "M0_draw42_n1_seed42": {
+        "specification": {
+          "job_id": "M0_draw42_n1_seed42",
+          "kind": "supervised",
+          "budget_id": "draw42_n1",
+          "seed": 42,
+          "condition": "M0",
+          "variant": "spectral",
+          "pretrained": false,
+          "dependencies": [
+            "normalizer_draw42_n1"
+          ]
+        },
+        "summary": {
+          "variant": "spectral",
+          "parameters": 1197,
+          "training_mode": "spectral_reference",
+          "trainable_parameters": 1197,
+          "pretrained_waveform": false,
+          "label_budget": {
+            "budget_id": "draw42_n1",
+            "draw_seed": 42,
+            "fraction": 0.25,
+            "actual_fraction": 0.5,
+            "participants": [
+              "SC403"
+            ],
+            "recordings": [
+              "SC4031",
+              "SC4032"
+            ],
+            "annotation_cost": {
+              "participants": 1,
+              "recordings": 2,
+              "physical_epochs": 5552,
+              "annotated_epochs": 5552,
+              "supervised_epochs": 5552,
+              "windows": 5534,
+              "recorded_hours": 46.266666666666666,
+              "annotated_hours": 46.266666666666666,
+              "supervised_hours": 46.266666666666666,
+              "target_stage_counts": {
+                "W": 3947,
+                "N1": 106,
+                "N2": 885,
+                "N3": 188,
+                "REM": 408
+              }
+            }
+          },
+          "validation_annotation_cost": {
+            "participants": 1,
+            "recordings": 2,
+            "physical_epochs": 5652,
+            "annotated_epochs": 5650,
+            "supervised_epochs": 5650,
+            "windows": 5632,
+            "recorded_hours": 47.1,
+            "annotated_hours": 47.083333333333336,
+            "supervised_hours": 47.083333333333336,
+            "target_stage_counts": {
+              "W": 3662,
+              "N1": 201,
+              "N2": 1222,
+              "N3": 201,
+              "REM": 346
+            }
+          },
+          "epochs_completed": 1,
+          "best_epoch": 1,
+          "train_windows_available": 5534,
+          "validation_windows_available": 5632,
+          "train_batches_per_epoch": 1,
+          "validation_batches": 2,
+          "normalization_fit_epochs": 5552,
+          "waveform_normalization_fit_epochs": 11032,
+          "limited_data_run": true,
+          "elapsed_seconds": 7.573491400049534,
+          "checkpoint_reload_max_probability_difference": 0.0,
+          "source_validation": {
+            "examples": 4,
+            "loss": 1.607339090695813,
+            "accuracy": 0.25,
+            "macro_f1": 0.08,
+            "balanced_accuracy": 0.5,
+            "weighted_f1": 0.1,
+            "cohen_kappa": 0.0,
+            "macro_f1_policy": "fixed_five_classes_zero_division_zero",
+            "balanced_accuracy_policy": "mean_recall_over_truth_classes_present",
+            "per_stage": {
+              "W": {
+                "support": 3,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N1": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N2": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N3": {
+                "support": 1,
+                "precision": 0.25,
+                "recall": 1.0,
+                "f1": 0.4
+              },
+              "REM": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                3,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ]
+          }
+        },
+        "job_result_sha256": "c5abb5cb9d069739a935fc5427d0a8fe4c6a314710076c5d179aac987114a3f6"
+      },
+      "M1_draw42_n1_seed42": {
+        "specification": {
+          "job_id": "M1_draw42_n1_seed42",
+          "kind": "supervised",
+          "budget_id": "draw42_n1",
+          "seed": 42,
+          "condition": "M1",
+          "variant": "raw",
+          "pretrained": false,
+          "dependencies": [
+            "normalizer_draw42_n1"
+          ]
+        },
+        "summary": {
+          "variant": "raw",
+          "parameters": 845,
+          "training_mode": "temporal_classifier",
+          "trainable_parameters": 845,
+          "pretrained_waveform": false,
+          "label_budget": {
+            "budget_id": "draw42_n1",
+            "draw_seed": 42,
+            "fraction": 0.25,
+            "actual_fraction": 0.5,
+            "participants": [
+              "SC403"
+            ],
+            "recordings": [
+              "SC4031",
+              "SC4032"
+            ],
+            "annotation_cost": {
+              "participants": 1,
+              "recordings": 2,
+              "physical_epochs": 5552,
+              "annotated_epochs": 5552,
+              "supervised_epochs": 5552,
+              "windows": 5534,
+              "recorded_hours": 46.266666666666666,
+              "annotated_hours": 46.266666666666666,
+              "supervised_hours": 46.266666666666666,
+              "target_stage_counts": {
+                "W": 3947,
+                "N1": 106,
+                "N2": 885,
+                "N3": 188,
+                "REM": 408
+              }
+            }
+          },
+          "validation_annotation_cost": {
+            "participants": 1,
+            "recordings": 2,
+            "physical_epochs": 5652,
+            "annotated_epochs": 5650,
+            "supervised_epochs": 5650,
+            "windows": 5632,
+            "recorded_hours": 47.1,
+            "annotated_hours": 47.083333333333336,
+            "supervised_hours": 47.083333333333336,
+            "target_stage_counts": {
+              "W": 3662,
+              "N1": 201,
+              "N2": 1222,
+              "N3": 201,
+              "REM": 346
+            }
+          },
+          "epochs_completed": 1,
+          "best_epoch": 1,
+          "train_windows_available": 5534,
+          "validation_windows_available": 5632,
+          "train_batches_per_epoch": 1,
+          "validation_batches": 2,
+          "normalization_fit_epochs": 5552,
+          "waveform_normalization_fit_epochs": 11032,
+          "limited_data_run": true,
+          "elapsed_seconds": 5.936052699980792,
+          "checkpoint_reload_max_probability_difference": 0.0,
+          "source_validation": {
+            "examples": 4,
+            "loss": 1.5892440087823427,
+            "accuracy": 0.25,
+            "macro_f1": 0.1,
+            "balanced_accuracy": 0.16666666666666666,
+            "weighted_f1": 0.375,
+            "cohen_kappa": 0.07692307692307693,
+            "macro_f1_policy": "fixed_five_classes_zero_division_zero",
+            "balanced_accuracy_policy": "mean_recall_over_truth_classes_present",
+            "per_stage": {
+              "W": {
+                "support": 3,
+                "precision": 1.0,
+                "recall": 0.3333333333333333,
+                "f1": 0.5
+              },
+              "N1": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N2": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N3": {
+                "support": 1,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "REM": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                1,
+                0,
+                2,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ]
+          }
+        },
+        "job_result_sha256": "74b7853b045482a939a754dd74973e8654fbda93a6b3c416a936dfe2bf5a1937"
+      },
+      "M2_draw42_n1_seed42": {
+        "specification": {
+          "job_id": "M2_draw42_n1_seed42",
+          "kind": "supervised",
+          "budget_id": "draw42_n1",
+          "seed": 42,
+          "condition": "M2",
+          "variant": "concat",
+          "pretrained": false,
+          "dependencies": [
+            "normalizer_draw42_n1"
+          ]
+        },
+        "summary": {
+          "variant": "concat",
+          "parameters": 1141,
+          "training_mode": "temporal_classifier",
+          "trainable_parameters": 1141,
+          "pretrained_waveform": false,
+          "label_budget": {
+            "budget_id": "draw42_n1",
+            "draw_seed": 42,
+            "fraction": 0.25,
+            "actual_fraction": 0.5,
+            "participants": [
+              "SC403"
+            ],
+            "recordings": [
+              "SC4031",
+              "SC4032"
+            ],
+            "annotation_cost": {
+              "participants": 1,
+              "recordings": 2,
+              "physical_epochs": 5552,
+              "annotated_epochs": 5552,
+              "supervised_epochs": 5552,
+              "windows": 5534,
+              "recorded_hours": 46.266666666666666,
+              "annotated_hours": 46.266666666666666,
+              "supervised_hours": 46.266666666666666,
+              "target_stage_counts": {
+                "W": 3947,
+                "N1": 106,
+                "N2": 885,
+                "N3": 188,
+                "REM": 408
+              }
+            }
+          },
+          "validation_annotation_cost": {
+            "participants": 1,
+            "recordings": 2,
+            "physical_epochs": 5652,
+            "annotated_epochs": 5650,
+            "supervised_epochs": 5650,
+            "windows": 5632,
+            "recorded_hours": 47.1,
+            "annotated_hours": 47.083333333333336,
+            "supervised_hours": 47.083333333333336,
+            "target_stage_counts": {
+              "W": 3662,
+              "N1": 201,
+              "N2": 1222,
+              "N3": 201,
+              "REM": 346
+            }
+          },
+          "epochs_completed": 1,
+          "best_epoch": 1,
+          "train_windows_available": 5534,
+          "validation_windows_available": 5632,
+          "train_batches_per_epoch": 1,
+          "validation_batches": 2,
+          "normalization_fit_epochs": 5552,
+          "waveform_normalization_fit_epochs": 11032,
+          "limited_data_run": true,
+          "elapsed_seconds": 8.782317900040653,
+          "checkpoint_reload_max_probability_difference": 0.0,
+          "source_validation": {
+            "examples": 4,
+            "loss": 1.8491004359000236,
+            "accuracy": 0.0,
+            "macro_f1": 0.0,
+            "balanced_accuracy": 0.0,
+            "weighted_f1": 0.0,
+            "cohen_kappa": 0.0,
+            "macro_f1_policy": "fixed_five_classes_zero_division_zero",
+            "balanced_accuracy_policy": "mean_recall_over_truth_classes_present",
+            "per_stage": {
+              "W": {
+                "support": 3,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N1": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N2": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N3": {
+                "support": 1,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "REM": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                3,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ]
+          }
+        },
+        "job_result_sha256": "ff0ff9887517b29c5a50f2d916e3ccfa1dd3557487adcc55c79cafe382be82e0"
+      },
+      "M3_draw42_n1_seed42": {
+        "specification": {
+          "job_id": "M3_draw42_n1_seed42",
+          "kind": "supervised",
+          "budget_id": "draw42_n1",
+          "seed": 42,
+          "condition": "M3",
+          "variant": "gated",
+          "pretrained": false,
+          "dependencies": [
+            "normalizer_draw42_n1"
+          ]
+        },
+        "summary": {
+          "variant": "gated",
+          "parameters": 1445,
+          "training_mode": "temporal_classifier",
+          "trainable_parameters": 1445,
+          "pretrained_waveform": false,
+          "label_budget": {
+            "budget_id": "draw42_n1",
+            "draw_seed": 42,
+            "fraction": 0.25,
+            "actual_fraction": 0.5,
+            "participants": [
+              "SC403"
+            ],
+            "recordings": [
+              "SC4031",
+              "SC4032"
+            ],
+            "annotation_cost": {
+              "participants": 1,
+              "recordings": 2,
+              "physical_epochs": 5552,
+              "annotated_epochs": 5552,
+              "supervised_epochs": 5552,
+              "windows": 5534,
+              "recorded_hours": 46.266666666666666,
+              "annotated_hours": 46.266666666666666,
+              "supervised_hours": 46.266666666666666,
+              "target_stage_counts": {
+                "W": 3947,
+                "N1": 106,
+                "N2": 885,
+                "N3": 188,
+                "REM": 408
+              }
+            }
+          },
+          "validation_annotation_cost": {
+            "participants": 1,
+            "recordings": 2,
+            "physical_epochs": 5652,
+            "annotated_epochs": 5650,
+            "supervised_epochs": 5650,
+            "windows": 5632,
+            "recorded_hours": 47.1,
+            "annotated_hours": 47.083333333333336,
+            "supervised_hours": 47.083333333333336,
+            "target_stage_counts": {
+              "W": 3662,
+              "N1": 201,
+              "N2": 1222,
+              "N3": 201,
+              "REM": 346
+            }
+          },
+          "epochs_completed": 1,
+          "best_epoch": 1,
+          "train_windows_available": 5534,
+          "validation_windows_available": 5632,
+          "train_batches_per_epoch": 1,
+          "validation_batches": 2,
+          "normalization_fit_epochs": 5552,
+          "waveform_normalization_fit_epochs": 11032,
+          "limited_data_run": true,
+          "elapsed_seconds": 9.70158499997342,
+          "checkpoint_reload_max_probability_difference": 0.0,
+          "source_validation": {
+            "examples": 4,
+            "loss": 1.7348851602528894,
+            "accuracy": 0.0,
+            "macro_f1": 0.0,
+            "balanced_accuracy": 0.0,
+            "weighted_f1": 0.0,
+            "cohen_kappa": 0.0,
+            "macro_f1_policy": "fixed_five_classes_zero_division_zero",
+            "balanced_accuracy_policy": "mean_recall_over_truth_classes_present",
+            "per_stage": {
+              "W": {
+                "support": 3,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N1": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N2": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N3": {
+                "support": 1,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "REM": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                0,
+                1,
+                2,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ]
+          }
+        },
+        "job_result_sha256": "b586060b4b067f0b63e0c5689ffbe832d6e11ce9223d7b57e55664fbea079bc6"
+      },
+      "M4_draw42_n1_seed42": {
+        "specification": {
+          "job_id": "M4_draw42_n1_seed42",
+          "kind": "supervised",
+          "budget_id": "draw42_n1",
+          "seed": 42,
+          "condition": "M4",
+          "variant": "raw",
+          "pretrained": true,
+          "dependencies": [
+            "normalizer_draw42_n1",
+            "ssl_seed42"
+          ]
+        },
+        "summary": {
+          "variant": "raw",
+          "parameters": 845,
+          "training_mode": "temporal_classifier",
+          "trainable_parameters": 845,
+          "pretrained_waveform": true,
+          "label_budget": {
+            "budget_id": "draw42_n1",
+            "draw_seed": 42,
+            "fraction": 0.25,
+            "actual_fraction": 0.5,
+            "participants": [
+              "SC403"
+            ],
+            "recordings": [
+              "SC4031",
+              "SC4032"
+            ],
+            "annotation_cost": {
+              "participants": 1,
+              "recordings": 2,
+              "physical_epochs": 5552,
+              "annotated_epochs": 5552,
+              "supervised_epochs": 5552,
+              "windows": 5534,
+              "recorded_hours": 46.266666666666666,
+              "annotated_hours": 46.266666666666666,
+              "supervised_hours": 46.266666666666666,
+              "target_stage_counts": {
+                "W": 3947,
+                "N1": 106,
+                "N2": 885,
+                "N3": 188,
+                "REM": 408
+              }
+            }
+          },
+          "validation_annotation_cost": {
+            "participants": 1,
+            "recordings": 2,
+            "physical_epochs": 5652,
+            "annotated_epochs": 5650,
+            "supervised_epochs": 5650,
+            "windows": 5632,
+            "recorded_hours": 47.1,
+            "annotated_hours": 47.083333333333336,
+            "supervised_hours": 47.083333333333336,
+            "target_stage_counts": {
+              "W": 3662,
+              "N1": 201,
+              "N2": 1222,
+              "N3": 201,
+              "REM": 346
+            }
+          },
+          "epochs_completed": 1,
+          "best_epoch": 1,
+          "train_windows_available": 5534,
+          "validation_windows_available": 5632,
+          "train_batches_per_epoch": 1,
+          "validation_batches": 2,
+          "normalization_fit_epochs": 5552,
+          "waveform_normalization_fit_epochs": 11032,
+          "limited_data_run": true,
+          "elapsed_seconds": 6.1349000000045635,
+          "checkpoint_reload_max_probability_difference": 0.0,
+          "source_validation": {
+            "examples": 4,
+            "loss": 1.5939900889759326,
+            "accuracy": 0.25,
+            "macro_f1": 0.1,
+            "balanced_accuracy": 0.16666666666666666,
+            "weighted_f1": 0.375,
+            "cohen_kappa": 0.07692307692307693,
+            "macro_f1_policy": "fixed_five_classes_zero_division_zero",
+            "balanced_accuracy_policy": "mean_recall_over_truth_classes_present",
+            "per_stage": {
+              "W": {
+                "support": 3,
+                "precision": 1.0,
+                "recall": 0.3333333333333333,
+                "f1": 0.5
+              },
+              "N1": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N2": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N3": {
+                "support": 1,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "REM": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                1,
+                0,
+                2,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ]
+          }
+        },
+        "job_result_sha256": "34965d0d041cd24e2a7e40ba1cb9857cd42c48dabf2eb9962ac5fcf6ea1502e4"
+      },
+      "M5_draw42_n1_seed42": {
+        "specification": {
+          "job_id": "M5_draw42_n1_seed42",
+          "kind": "supervised",
+          "budget_id": "draw42_n1",
+          "seed": 42,
+          "condition": "M5",
+          "variant": "concat",
+          "pretrained": true,
+          "dependencies": [
+            "normalizer_draw42_n1",
+            "ssl_seed42"
+          ]
+        },
+        "summary": {
+          "variant": "concat",
+          "parameters": 1141,
+          "training_mode": "temporal_classifier",
+          "trainable_parameters": 1141,
+          "pretrained_waveform": true,
+          "label_budget": {
+            "budget_id": "draw42_n1",
+            "draw_seed": 42,
+            "fraction": 0.25,
+            "actual_fraction": 0.5,
+            "participants": [
+              "SC403"
+            ],
+            "recordings": [
+              "SC4031",
+              "SC4032"
+            ],
+            "annotation_cost": {
+              "participants": 1,
+              "recordings": 2,
+              "physical_epochs": 5552,
+              "annotated_epochs": 5552,
+              "supervised_epochs": 5552,
+              "windows": 5534,
+              "recorded_hours": 46.266666666666666,
+              "annotated_hours": 46.266666666666666,
+              "supervised_hours": 46.266666666666666,
+              "target_stage_counts": {
+                "W": 3947,
+                "N1": 106,
+                "N2": 885,
+                "N3": 188,
+                "REM": 408
+              }
+            }
+          },
+          "validation_annotation_cost": {
+            "participants": 1,
+            "recordings": 2,
+            "physical_epochs": 5652,
+            "annotated_epochs": 5650,
+            "supervised_epochs": 5650,
+            "windows": 5632,
+            "recorded_hours": 47.1,
+            "annotated_hours": 47.083333333333336,
+            "supervised_hours": 47.083333333333336,
+            "target_stage_counts": {
+              "W": 3662,
+              "N1": 201,
+              "N2": 1222,
+              "N3": 201,
+              "REM": 346
+            }
+          },
+          "epochs_completed": 1,
+          "best_epoch": 1,
+          "train_windows_available": 5534,
+          "validation_windows_available": 5632,
+          "train_batches_per_epoch": 1,
+          "validation_batches": 2,
+          "normalization_fit_epochs": 5552,
+          "waveform_normalization_fit_epochs": 11032,
+          "limited_data_run": true,
+          "elapsed_seconds": 6.999446099973284,
+          "checkpoint_reload_max_probability_difference": 0.0,
+          "source_validation": {
+            "examples": 4,
+            "loss": 1.8511543527599066,
+            "accuracy": 0.0,
+            "macro_f1": 0.0,
+            "balanced_accuracy": 0.0,
+            "weighted_f1": 0.0,
+            "cohen_kappa": 0.0,
+            "macro_f1_policy": "fixed_five_classes_zero_division_zero",
+            "balanced_accuracy_policy": "mean_recall_over_truth_classes_present",
+            "per_stage": {
+              "W": {
+                "support": 3,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N1": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N2": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N3": {
+                "support": 1,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "REM": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                3,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ]
+          }
+        },
+        "job_result_sha256": "83647721d6c13da86ed75c5a7d96a983cf8d71598747f2b9a9ba7221e396ab5c"
+      },
+      "M6_draw42_n1_seed42": {
+        "specification": {
+          "job_id": "M6_draw42_n1_seed42",
+          "kind": "supervised",
+          "budget_id": "draw42_n1",
+          "seed": 42,
+          "condition": "M6",
+          "variant": "gated",
+          "pretrained": true,
+          "dependencies": [
+            "normalizer_draw42_n1",
+            "ssl_seed42"
+          ]
+        },
+        "summary": {
+          "variant": "gated",
+          "parameters": 1445,
+          "training_mode": "temporal_classifier",
+          "trainable_parameters": 1445,
+          "pretrained_waveform": true,
+          "label_budget": {
+            "budget_id": "draw42_n1",
+            "draw_seed": 42,
+            "fraction": 0.25,
+            "actual_fraction": 0.5,
+            "participants": [
+              "SC403"
+            ],
+            "recordings": [
+              "SC4031",
+              "SC4032"
+            ],
+            "annotation_cost": {
+              "participants": 1,
+              "recordings": 2,
+              "physical_epochs": 5552,
+              "annotated_epochs": 5552,
+              "supervised_epochs": 5552,
+              "windows": 5534,
+              "recorded_hours": 46.266666666666666,
+              "annotated_hours": 46.266666666666666,
+              "supervised_hours": 46.266666666666666,
+              "target_stage_counts": {
+                "W": 3947,
+                "N1": 106,
+                "N2": 885,
+                "N3": 188,
+                "REM": 408
+              }
+            }
+          },
+          "validation_annotation_cost": {
+            "participants": 1,
+            "recordings": 2,
+            "physical_epochs": 5652,
+            "annotated_epochs": 5650,
+            "supervised_epochs": 5650,
+            "windows": 5632,
+            "recorded_hours": 47.1,
+            "annotated_hours": 47.083333333333336,
+            "supervised_hours": 47.083333333333336,
+            "target_stage_counts": {
+              "W": 3662,
+              "N1": 201,
+              "N2": 1222,
+              "N3": 201,
+              "REM": 346
+            }
+          },
+          "epochs_completed": 1,
+          "best_epoch": 1,
+          "train_windows_available": 5534,
+          "validation_windows_available": 5632,
+          "train_batches_per_epoch": 1,
+          "validation_batches": 2,
+          "normalization_fit_epochs": 5552,
+          "waveform_normalization_fit_epochs": 11032,
+          "limited_data_run": true,
+          "elapsed_seconds": 9.598379999981262,
+          "checkpoint_reload_max_probability_difference": 0.0,
+          "source_validation": {
+            "examples": 4,
+            "loss": 1.7252217611098382,
+            "accuracy": 0.0,
+            "macro_f1": 0.0,
+            "balanced_accuracy": 0.0,
+            "weighted_f1": 0.0,
+            "cohen_kappa": 0.0,
+            "macro_f1_policy": "fixed_five_classes_zero_division_zero",
+            "balanced_accuracy_policy": "mean_recall_over_truth_classes_present",
+            "per_stage": {
+              "W": {
+                "support": 3,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N1": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N2": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N3": {
+                "support": 1,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "REM": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                3,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ]
+          }
+        },
+        "job_result_sha256": "c84e7d09b38e756b2b6c3dfde3284d5221970f936f56b6b6ead5800085f18653"
+      },
+      "M0_draw42_n2_seed42": {
+        "specification": {
+          "job_id": "M0_draw42_n2_seed42",
+          "kind": "supervised",
+          "budget_id": "draw42_n2",
+          "seed": 42,
+          "condition": "M0",
+          "variant": "spectral",
+          "pretrained": false,
+          "dependencies": [
+            "normalizer_draw42_n2"
+          ]
+        },
+        "summary": {
+          "variant": "spectral",
+          "parameters": 1197,
+          "training_mode": "spectral_reference",
+          "trainable_parameters": 1197,
+          "pretrained_waveform": false,
+          "label_budget": {
+            "budget_id": "draw42_n2",
+            "draw_seed": 42,
+            "fraction": 1.0,
+            "actual_fraction": 1.0,
+            "participants": [
+              "SC400",
+              "SC403"
+            ],
+            "recordings": [
+              "SC4001",
+              "SC4002",
+              "SC4031",
+              "SC4032"
+            ],
+            "annotation_cost": {
+              "participants": 2,
+              "recordings": 4,
+              "physical_epochs": 11032,
+              "annotated_epochs": 11031,
+              "supervised_epochs": 11031,
+              "windows": 10986,
+              "recorded_hours": 91.93333333333334,
+              "annotated_hours": 91.925,
+              "supervised_hours": 91.925,
+              "target_stage_counts": {
+                "W": 7811,
+                "N1": 223,
+                "N2": 1508,
+                "N3": 696,
+                "REM": 748
+              }
+            }
+          },
+          "validation_annotation_cost": {
+            "participants": 1,
+            "recordings": 2,
+            "physical_epochs": 5652,
+            "annotated_epochs": 5650,
+            "supervised_epochs": 5650,
+            "windows": 5632,
+            "recorded_hours": 47.1,
+            "annotated_hours": 47.083333333333336,
+            "supervised_hours": 47.083333333333336,
+            "target_stage_counts": {
+              "W": 3662,
+              "N1": 201,
+              "N2": 1222,
+              "N3": 201,
+              "REM": 346
+            }
+          },
+          "epochs_completed": 1,
+          "best_epoch": 1,
+          "train_windows_available": 10986,
+          "validation_windows_available": 5632,
+          "train_batches_per_epoch": 1,
+          "validation_batches": 2,
+          "normalization_fit_epochs": 11031,
+          "waveform_normalization_fit_epochs": 11032,
+          "limited_data_run": true,
+          "elapsed_seconds": 5.2211606000200845,
+          "checkpoint_reload_max_probability_difference": 0.0,
+          "source_validation": {
+            "examples": 4,
+            "loss": 1.5912175549629746,
+            "accuracy": 0.25,
+            "macro_f1": 0.08,
+            "balanced_accuracy": 0.5,
+            "weighted_f1": 0.1,
+            "cohen_kappa": 0.0,
+            "macro_f1_policy": "fixed_five_classes_zero_division_zero",
+            "balanced_accuracy_policy": "mean_recall_over_truth_classes_present",
+            "per_stage": {
+              "W": {
+                "support": 3,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N1": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N2": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N3": {
+                "support": 1,
+                "precision": 0.25,
+                "recall": 1.0,
+                "f1": 0.4
+              },
+              "REM": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                0,
+                3,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ]
+          }
+        },
+        "job_result_sha256": "bb747a51ffa53bdf7bcad7f1cabb7272e8c951e7f30e1d644ee47a124f838848"
+      },
+      "M1_draw42_n2_seed42": {
+        "specification": {
+          "job_id": "M1_draw42_n2_seed42",
+          "kind": "supervised",
+          "budget_id": "draw42_n2",
+          "seed": 42,
+          "condition": "M1",
+          "variant": "raw",
+          "pretrained": false,
+          "dependencies": [
+            "normalizer_draw42_n2"
+          ]
+        },
+        "summary": {
+          "variant": "raw",
+          "parameters": 845,
+          "training_mode": "temporal_classifier",
+          "trainable_parameters": 845,
+          "pretrained_waveform": false,
+          "label_budget": {
+            "budget_id": "draw42_n2",
+            "draw_seed": 42,
+            "fraction": 1.0,
+            "actual_fraction": 1.0,
+            "participants": [
+              "SC400",
+              "SC403"
+            ],
+            "recordings": [
+              "SC4001",
+              "SC4002",
+              "SC4031",
+              "SC4032"
+            ],
+            "annotation_cost": {
+              "participants": 2,
+              "recordings": 4,
+              "physical_epochs": 11032,
+              "annotated_epochs": 11031,
+              "supervised_epochs": 11031,
+              "windows": 10986,
+              "recorded_hours": 91.93333333333334,
+              "annotated_hours": 91.925,
+              "supervised_hours": 91.925,
+              "target_stage_counts": {
+                "W": 7811,
+                "N1": 223,
+                "N2": 1508,
+                "N3": 696,
+                "REM": 748
+              }
+            }
+          },
+          "validation_annotation_cost": {
+            "participants": 1,
+            "recordings": 2,
+            "physical_epochs": 5652,
+            "annotated_epochs": 5650,
+            "supervised_epochs": 5650,
+            "windows": 5632,
+            "recorded_hours": 47.1,
+            "annotated_hours": 47.083333333333336,
+            "supervised_hours": 47.083333333333336,
+            "target_stage_counts": {
+              "W": 3662,
+              "N1": 201,
+              "N2": 1222,
+              "N3": 201,
+              "REM": 346
+            }
+          },
+          "epochs_completed": 1,
+          "best_epoch": 1,
+          "train_windows_available": 10986,
+          "validation_windows_available": 5632,
+          "train_batches_per_epoch": 1,
+          "validation_batches": 2,
+          "normalization_fit_epochs": 11031,
+          "waveform_normalization_fit_epochs": 11032,
+          "limited_data_run": true,
+          "elapsed_seconds": 6.084077799983788,
+          "checkpoint_reload_max_probability_difference": 0.0,
+          "source_validation": {
+            "examples": 4,
+            "loss": 1.610684341067932,
+            "accuracy": 0.25,
+            "macro_f1": 0.1,
+            "balanced_accuracy": 0.16666666666666666,
+            "weighted_f1": 0.375,
+            "cohen_kappa": 0.07692307692307693,
+            "macro_f1_policy": "fixed_five_classes_zero_division_zero",
+            "balanced_accuracy_policy": "mean_recall_over_truth_classes_present",
+            "per_stage": {
+              "W": {
+                "support": 3,
+                "precision": 1.0,
+                "recall": 0.3333333333333333,
+                "f1": 0.5
+              },
+              "N1": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N2": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N3": {
+                "support": 1,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "REM": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                1,
+                0,
+                2,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ]
+          }
+        },
+        "job_result_sha256": "f44bb1adeaf4fb5a876213c39122e5496e526943b127e056e6bafbe755f5c49c"
+      },
+      "M2_draw42_n2_seed42": {
+        "specification": {
+          "job_id": "M2_draw42_n2_seed42",
+          "kind": "supervised",
+          "budget_id": "draw42_n2",
+          "seed": 42,
+          "condition": "M2",
+          "variant": "concat",
+          "pretrained": false,
+          "dependencies": [
+            "normalizer_draw42_n2"
+          ]
+        },
+        "summary": {
+          "variant": "concat",
+          "parameters": 1141,
+          "training_mode": "temporal_classifier",
+          "trainable_parameters": 1141,
+          "pretrained_waveform": false,
+          "label_budget": {
+            "budget_id": "draw42_n2",
+            "draw_seed": 42,
+            "fraction": 1.0,
+            "actual_fraction": 1.0,
+            "participants": [
+              "SC400",
+              "SC403"
+            ],
+            "recordings": [
+              "SC4001",
+              "SC4002",
+              "SC4031",
+              "SC4032"
+            ],
+            "annotation_cost": {
+              "participants": 2,
+              "recordings": 4,
+              "physical_epochs": 11032,
+              "annotated_epochs": 11031,
+              "supervised_epochs": 11031,
+              "windows": 10986,
+              "recorded_hours": 91.93333333333334,
+              "annotated_hours": 91.925,
+              "supervised_hours": 91.925,
+              "target_stage_counts": {
+                "W": 7811,
+                "N1": 223,
+                "N2": 1508,
+                "N3": 696,
+                "REM": 748
+              }
+            }
+          },
+          "validation_annotation_cost": {
+            "participants": 1,
+            "recordings": 2,
+            "physical_epochs": 5652,
+            "annotated_epochs": 5650,
+            "supervised_epochs": 5650,
+            "windows": 5632,
+            "recorded_hours": 47.1,
+            "annotated_hours": 47.083333333333336,
+            "supervised_hours": 47.083333333333336,
+            "target_stage_counts": {
+              "W": 3662,
+              "N1": 201,
+              "N2": 1222,
+              "N3": 201,
+              "REM": 346
+            }
+          },
+          "epochs_completed": 1,
+          "best_epoch": 1,
+          "train_windows_available": 10986,
+          "validation_windows_available": 5632,
+          "train_batches_per_epoch": 1,
+          "validation_batches": 2,
+          "normalization_fit_epochs": 11031,
+          "waveform_normalization_fit_epochs": 11032,
+          "limited_data_run": true,
+          "elapsed_seconds": 7.00544609996723,
+          "checkpoint_reload_max_probability_difference": 0.0,
+          "source_validation": {
+            "examples": 4,
+            "loss": 1.8769100123634048,
+            "accuracy": 0.0,
+            "macro_f1": 0.0,
+            "balanced_accuracy": 0.0,
+            "weighted_f1": 0.0,
+            "cohen_kappa": 0.0,
+            "macro_f1_policy": "fixed_five_classes_zero_division_zero",
+            "balanced_accuracy_policy": "mean_recall_over_truth_classes_present",
+            "per_stage": {
+              "W": {
+                "support": 3,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N1": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N2": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N3": {
+                "support": 1,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "REM": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                3,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ]
+          }
+        },
+        "job_result_sha256": "f677960c660b95b940609730cf7c79939f4912f2bbe67be64d781a7d2e07d45f"
+      },
+      "M3_draw42_n2_seed42": {
+        "specification": {
+          "job_id": "M3_draw42_n2_seed42",
+          "kind": "supervised",
+          "budget_id": "draw42_n2",
+          "seed": 42,
+          "condition": "M3",
+          "variant": "gated",
+          "pretrained": false,
+          "dependencies": [
+            "normalizer_draw42_n2"
+          ]
+        },
+        "summary": {
+          "variant": "gated",
+          "parameters": 1445,
+          "training_mode": "temporal_classifier",
+          "trainable_parameters": 1445,
+          "pretrained_waveform": false,
+          "label_budget": {
+            "budget_id": "draw42_n2",
+            "draw_seed": 42,
+            "fraction": 1.0,
+            "actual_fraction": 1.0,
+            "participants": [
+              "SC400",
+              "SC403"
+            ],
+            "recordings": [
+              "SC4001",
+              "SC4002",
+              "SC4031",
+              "SC4032"
+            ],
+            "annotation_cost": {
+              "participants": 2,
+              "recordings": 4,
+              "physical_epochs": 11032,
+              "annotated_epochs": 11031,
+              "supervised_epochs": 11031,
+              "windows": 10986,
+              "recorded_hours": 91.93333333333334,
+              "annotated_hours": 91.925,
+              "supervised_hours": 91.925,
+              "target_stage_counts": {
+                "W": 7811,
+                "N1": 223,
+                "N2": 1508,
+                "N3": 696,
+                "REM": 748
+              }
+            }
+          },
+          "validation_annotation_cost": {
+            "participants": 1,
+            "recordings": 2,
+            "physical_epochs": 5652,
+            "annotated_epochs": 5650,
+            "supervised_epochs": 5650,
+            "windows": 5632,
+            "recorded_hours": 47.1,
+            "annotated_hours": 47.083333333333336,
+            "supervised_hours": 47.083333333333336,
+            "target_stage_counts": {
+              "W": 3662,
+              "N1": 201,
+              "N2": 1222,
+              "N3": 201,
+              "REM": 346
+            }
+          },
+          "epochs_completed": 1,
+          "best_epoch": 1,
+          "train_windows_available": 10986,
+          "validation_windows_available": 5632,
+          "train_batches_per_epoch": 1,
+          "validation_batches": 2,
+          "normalization_fit_epochs": 11031,
+          "waveform_normalization_fit_epochs": 11032,
+          "limited_data_run": true,
+          "elapsed_seconds": 9.374660899979062,
+          "checkpoint_reload_max_probability_difference": 0.0,
+          "source_validation": {
+            "examples": 4,
+            "loss": 1.749867349436962,
+            "accuracy": 0.0,
+            "macro_f1": 0.0,
+            "balanced_accuracy": 0.0,
+            "weighted_f1": 0.0,
+            "cohen_kappa": 0.0,
+            "macro_f1_policy": "fixed_five_classes_zero_division_zero",
+            "balanced_accuracy_policy": "mean_recall_over_truth_classes_present",
+            "per_stage": {
+              "W": {
+                "support": 3,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N1": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N2": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N3": {
+                "support": 1,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "REM": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                0,
+                1,
+                2,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ]
+          }
+        },
+        "job_result_sha256": "58ec4e0a50cf2b407ed1324d79524835060f6c313900a724711bcf0a5def2aae"
+      },
+      "M4_draw42_n2_seed42": {
+        "specification": {
+          "job_id": "M4_draw42_n2_seed42",
+          "kind": "supervised",
+          "budget_id": "draw42_n2",
+          "seed": 42,
+          "condition": "M4",
+          "variant": "raw",
+          "pretrained": true,
+          "dependencies": [
+            "normalizer_draw42_n2",
+            "ssl_seed42"
+          ]
+        },
+        "summary": {
+          "variant": "raw",
+          "parameters": 845,
+          "training_mode": "temporal_classifier",
+          "trainable_parameters": 845,
+          "pretrained_waveform": true,
+          "label_budget": {
+            "budget_id": "draw42_n2",
+            "draw_seed": 42,
+            "fraction": 1.0,
+            "actual_fraction": 1.0,
+            "participants": [
+              "SC400",
+              "SC403"
+            ],
+            "recordings": [
+              "SC4001",
+              "SC4002",
+              "SC4031",
+              "SC4032"
+            ],
+            "annotation_cost": {
+              "participants": 2,
+              "recordings": 4,
+              "physical_epochs": 11032,
+              "annotated_epochs": 11031,
+              "supervised_epochs": 11031,
+              "windows": 10986,
+              "recorded_hours": 91.93333333333334,
+              "annotated_hours": 91.925,
+              "supervised_hours": 91.925,
+              "target_stage_counts": {
+                "W": 7811,
+                "N1": 223,
+                "N2": 1508,
+                "N3": 696,
+                "REM": 748
+              }
+            }
+          },
+          "validation_annotation_cost": {
+            "participants": 1,
+            "recordings": 2,
+            "physical_epochs": 5652,
+            "annotated_epochs": 5650,
+            "supervised_epochs": 5650,
+            "windows": 5632,
+            "recorded_hours": 47.1,
+            "annotated_hours": 47.083333333333336,
+            "supervised_hours": 47.083333333333336,
+            "target_stage_counts": {
+              "W": 3662,
+              "N1": 201,
+              "N2": 1222,
+              "N3": 201,
+              "REM": 346
+            }
+          },
+          "epochs_completed": 1,
+          "best_epoch": 1,
+          "train_windows_available": 10986,
+          "validation_windows_available": 5632,
+          "train_batches_per_epoch": 1,
+          "validation_batches": 2,
+          "normalization_fit_epochs": 11031,
+          "waveform_normalization_fit_epochs": 11032,
+          "limited_data_run": true,
+          "elapsed_seconds": 7.713137699989602,
+          "checkpoint_reload_max_probability_difference": 0.0,
+          "source_validation": {
+            "examples": 4,
+            "loss": 1.6152262618290143,
+            "accuracy": 0.25,
+            "macro_f1": 0.1,
+            "balanced_accuracy": 0.16666666666666666,
+            "weighted_f1": 0.375,
+            "cohen_kappa": 0.07692307692307693,
+            "macro_f1_policy": "fixed_five_classes_zero_division_zero",
+            "balanced_accuracy_policy": "mean_recall_over_truth_classes_present",
+            "per_stage": {
+              "W": {
+                "support": 3,
+                "precision": 1.0,
+                "recall": 0.3333333333333333,
+                "f1": 0.5
+              },
+              "N1": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N2": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N3": {
+                "support": 1,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "REM": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                1,
+                0,
+                2,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ]
+          }
+        },
+        "job_result_sha256": "e7d3322a84cf647adfb66242a14b4beb8b180d6982134d2c75aeec2490b80826"
+      },
+      "M5_draw42_n2_seed42": {
+        "specification": {
+          "job_id": "M5_draw42_n2_seed42",
+          "kind": "supervised",
+          "budget_id": "draw42_n2",
+          "seed": 42,
+          "condition": "M5",
+          "variant": "concat",
+          "pretrained": true,
+          "dependencies": [
+            "normalizer_draw42_n2",
+            "ssl_seed42"
+          ]
+        },
+        "summary": {
+          "variant": "concat",
+          "parameters": 1141,
+          "training_mode": "temporal_classifier",
+          "trainable_parameters": 1141,
+          "pretrained_waveform": true,
+          "label_budget": {
+            "budget_id": "draw42_n2",
+            "draw_seed": 42,
+            "fraction": 1.0,
+            "actual_fraction": 1.0,
+            "participants": [
+              "SC400",
+              "SC403"
+            ],
+            "recordings": [
+              "SC4001",
+              "SC4002",
+              "SC4031",
+              "SC4032"
+            ],
+            "annotation_cost": {
+              "participants": 2,
+              "recordings": 4,
+              "physical_epochs": 11032,
+              "annotated_epochs": 11031,
+              "supervised_epochs": 11031,
+              "windows": 10986,
+              "recorded_hours": 91.93333333333334,
+              "annotated_hours": 91.925,
+              "supervised_hours": 91.925,
+              "target_stage_counts": {
+                "W": 7811,
+                "N1": 223,
+                "N2": 1508,
+                "N3": 696,
+                "REM": 748
+              }
+            }
+          },
+          "validation_annotation_cost": {
+            "participants": 1,
+            "recordings": 2,
+            "physical_epochs": 5652,
+            "annotated_epochs": 5650,
+            "supervised_epochs": 5650,
+            "windows": 5632,
+            "recorded_hours": 47.1,
+            "annotated_hours": 47.083333333333336,
+            "supervised_hours": 47.083333333333336,
+            "target_stage_counts": {
+              "W": 3662,
+              "N1": 201,
+              "N2": 1222,
+              "N3": 201,
+              "REM": 346
+            }
+          },
+          "epochs_completed": 1,
+          "best_epoch": 1,
+          "train_windows_available": 10986,
+          "validation_windows_available": 5632,
+          "train_batches_per_epoch": 1,
+          "validation_batches": 2,
+          "normalization_fit_epochs": 11031,
+          "waveform_normalization_fit_epochs": 11032,
+          "limited_data_run": true,
+          "elapsed_seconds": 9.205805099976715,
+          "checkpoint_reload_max_probability_difference": 0.0,
+          "source_validation": {
+            "examples": 4,
+            "loss": 1.8790207397437855,
+            "accuracy": 0.0,
+            "macro_f1": 0.0,
+            "balanced_accuracy": 0.0,
+            "weighted_f1": 0.0,
+            "cohen_kappa": 0.0,
+            "macro_f1_policy": "fixed_five_classes_zero_division_zero",
+            "balanced_accuracy_policy": "mean_recall_over_truth_classes_present",
+            "per_stage": {
+              "W": {
+                "support": 3,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N1": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N2": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N3": {
+                "support": 1,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "REM": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                0,
+                0,
+                3,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ]
+          }
+        },
+        "job_result_sha256": "fcaf3978c7dd68f6ace96e87648753efe04a4c3cdc73cc423d1fc42091a0b0b7"
+      },
+      "M6_draw42_n2_seed42": {
+        "specification": {
+          "job_id": "M6_draw42_n2_seed42",
+          "kind": "supervised",
+          "budget_id": "draw42_n2",
+          "seed": 42,
+          "condition": "M6",
+          "variant": "gated",
+          "pretrained": true,
+          "dependencies": [
+            "normalizer_draw42_n2",
+            "ssl_seed42"
+          ]
+        },
+        "summary": {
+          "variant": "gated",
+          "parameters": 1445,
+          "training_mode": "temporal_classifier",
+          "trainable_parameters": 1445,
+          "pretrained_waveform": true,
+          "label_budget": {
+            "budget_id": "draw42_n2",
+            "draw_seed": 42,
+            "fraction": 1.0,
+            "actual_fraction": 1.0,
+            "participants": [
+              "SC400",
+              "SC403"
+            ],
+            "recordings": [
+              "SC4001",
+              "SC4002",
+              "SC4031",
+              "SC4032"
+            ],
+            "annotation_cost": {
+              "participants": 2,
+              "recordings": 4,
+              "physical_epochs": 11032,
+              "annotated_epochs": 11031,
+              "supervised_epochs": 11031,
+              "windows": 10986,
+              "recorded_hours": 91.93333333333334,
+              "annotated_hours": 91.925,
+              "supervised_hours": 91.925,
+              "target_stage_counts": {
+                "W": 7811,
+                "N1": 223,
+                "N2": 1508,
+                "N3": 696,
+                "REM": 748
+              }
+            }
+          },
+          "validation_annotation_cost": {
+            "participants": 1,
+            "recordings": 2,
+            "physical_epochs": 5652,
+            "annotated_epochs": 5650,
+            "supervised_epochs": 5650,
+            "windows": 5632,
+            "recorded_hours": 47.1,
+            "annotated_hours": 47.083333333333336,
+            "supervised_hours": 47.083333333333336,
+            "target_stage_counts": {
+              "W": 3662,
+              "N1": 201,
+              "N2": 1222,
+              "N3": 201,
+              "REM": 346
+            }
+          },
+          "epochs_completed": 1,
+          "best_epoch": 1,
+          "train_windows_available": 10986,
+          "validation_windows_available": 5632,
+          "train_batches_per_epoch": 1,
+          "validation_batches": 2,
+          "normalization_fit_epochs": 11031,
+          "waveform_normalization_fit_epochs": 11032,
+          "limited_data_run": true,
+          "elapsed_seconds": 10.356885600020178,
+          "checkpoint_reload_max_probability_difference": 0.0,
+          "source_validation": {
+            "examples": 4,
+            "loss": 1.7407131546018118,
+            "accuracy": 0.0,
+            "macro_f1": 0.0,
+            "balanced_accuracy": 0.0,
+            "weighted_f1": 0.0,
+            "cohen_kappa": 0.0,
+            "macro_f1_policy": "fixed_five_classes_zero_division_zero",
+            "balanced_accuracy_policy": "mean_recall_over_truth_classes_present",
+            "per_stage": {
+              "W": {
+                "support": 3,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N1": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N2": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "N3": {
+                "support": 1,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              },
+              "REM": {
+                "support": 0,
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0
+              }
+            },
+            "confusion_matrix": [
+              [
+                0,
+                1,
+                2,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            ]
+          }
+        },
+        "job_result_sha256": "34b7b19f7cfa3e68aa6365d09307a973839a846c9dc54304545c88cb15d0feda"
+      }
+    },
+    "fresh_process_replay": {
+      "M0_draw42_n1_seed42": 2.980232241545089e-08,
+      "M1_draw42_n1_seed42": 8.326672684688674e-17,
+      "M2_draw42_n1_seed42": 2.9802322443206464e-08,
+      "M3_draw42_n1_seed42": 2.9802322387695312e-08,
+      "M4_draw42_n1_seed42": 8.326672684688674e-17,
+      "M5_draw42_n1_seed42": 2.9802322443206464e-08,
+      "M6_draw42_n1_seed42": 1.4901161221603232e-08,
+      "M0_draw42_n2_seed42": 1.4901161277114383e-08,
+      "M1_draw42_n2_seed42": 8.326672684688674e-17,
+      "M2_draw42_n2_seed42": 1.490116116609208e-08,
+      "M3_draw42_n2_seed42": 2.9802322387695312e-08,
+      "M4_draw42_n2_seed42": 8.326672684688674e-17,
+      "M5_draw42_n2_seed42": 1.4901161221603232e-08,
+      "M6_draw42_n2_seed42": 2.9802322387695312e-08
+    },
+    "paired_checks": {
+      "completed_seals_unchanged_after_continuation": true,
+      "all_seven_conditions_per_budget": true,
+      "identical_normalizers_per_budget": true,
+      "identical_validation_target_ids_and_labels_per_budget": true,
+      "ssl_checkpoint_shared_across_budgets_and_ssl_conditions": true,
+      "independent_training_seeds_executed": [
+        42
+      ]
+    }
+  },
+  "canonical_planning": {
+    "executed": false,
+    "study_fingerprint": "00e5ca3c364787f0b4023c2b75a2a21c5b49105f4e312e4900080bf5af0d0d4c",
+    "jobs_planned": 18,
+    "training_participants": 70,
+    "validation_participants": 15,
+    "budgets": [
+      {
+        "budget_id": "draw42_n18",
+        "draw_seed": 42,
+        "fraction": 0.25,
+        "actual_fraction": 0.2571428571428571,
+        "participants": [
+          "SC406",
+          "SC407",
+          "SC409",
+          "SC425",
+          "SC426",
+          "SC434",
+          "SC436",
+          "SC445",
+          "SC451",
+          "SC456",
+          "SC459",
+          "SC463",
+          "SC482",
+          "ST707",
+          "ST711",
+          "ST712",
+          "ST713",
+          "ST721"
+        ],
+        "recordings": [
+          "SC4061",
+          "SC4062",
+          "SC4071",
+          "SC4072",
+          "SC4091",
+          "SC4092",
+          "SC4251",
+          "SC4252",
+          "SC4261",
+          "SC4262",
+          "SC4341",
+          "SC4342",
+          "SC4362",
+          "SC4451",
+          "SC4452",
+          "SC4511",
+          "SC4512",
+          "SC4561",
+          "SC4562",
+          "SC4591",
+          "SC4592",
+          "SC4631",
+          "SC4632",
+          "SC4821",
+          "SC4822",
+          "ST7071",
+          "ST7072",
+          "ST7111",
+          "ST7112",
+          "ST7121",
+          "ST7122",
+          "ST7131",
+          "ST7132",
+          "ST7211",
+          "ST7212"
+        ],
+        "annotation_cost": {
+          "participants": 18,
+          "recordings": 35,
+          "physical_epochs": 77849,
+          "annotated_epochs": 76615,
+          "supervised_epochs": 76604,
+          "windows": 75687,
+          "recorded_hours": 648.7416666666667,
+          "annotated_hours": 638.4583333333334,
+          "supervised_hours": 638.3666666666667,
+          "target_stage_counts": {
+            "W": 46404,
+            "N1": 4598,
+            "N2": 14461,
+            "N3": 4249,
+            "REM": 5975
+          }
+        }
+      },
+      {
+        "budget_id": "draw42_n70",
+        "draw_seed": 42,
+        "fraction": 1.0,
+        "actual_fraction": 1.0,
+        "participants": [
+          "SC400",
+          "SC403",
+          "SC404",
+          "SC405",
+          "SC406",
+          "SC407",
+          "SC408",
+          "SC409",
+          "SC410",
+          "SC412",
+          "SC413",
+          "SC415",
+          "SC416",
+          "SC417",
+          "SC418",
+          "SC419",
+          "SC422",
+          "SC425",
+          "SC426",
+          "SC427",
+          "SC428",
+          "SC430",
+          "SC431",
+          "SC433",
+          "SC434",
+          "SC435",
+          "SC436",
+          "SC438",
+          "SC440",
+          "SC441",
+          "SC442",
+          "SC443",
+          "SC445",
+          "SC446",
+          "SC447",
+          "SC448",
+          "SC450",
+          "SC451",
+          "SC454",
+          "SC455",
+          "SC456",
+          "SC457",
+          "SC459",
+          "SC462",
+          "SC463",
+          "SC465",
+          "SC466",
+          "SC467",
+          "SC470",
+          "SC472",
+          "SC475",
+          "SC477",
+          "SC480",
+          "SC481",
+          "SC482",
+          "ST702",
+          "ST704",
+          "ST705",
+          "ST706",
+          "ST707",
+          "ST709",
+          "ST711",
+          "ST712",
+          "ST713",
+          "ST715",
+          "ST717",
+          "ST718",
+          "ST719",
+          "ST720",
+          "ST721"
+        ],
+        "recordings": [
+          "SC4001",
+          "SC4002",
+          "SC4031",
+          "SC4032",
+          "SC4041",
+          "SC4042",
+          "SC4051",
+          "SC4052",
+          "SC4061",
+          "SC4062",
+          "SC4071",
+          "SC4072",
+          "SC4081",
+          "SC4082",
+          "SC4091",
+          "SC4092",
+          "SC4101",
+          "SC4102",
+          "SC4121",
+          "SC4122",
+          "SC4131",
+          "SC4151",
+          "SC4152",
+          "SC4161",
+          "SC4162",
+          "SC4171",
+          "SC4172",
+          "SC4181",
+          "SC4182",
+          "SC4191",
+          "SC4192",
+          "SC4221",
+          "SC4222",
+          "SC4251",
+          "SC4252",
+          "SC4261",
+          "SC4262",
+          "SC4271",
+          "SC4272",
+          "SC4281",
+          "SC4282",
+          "SC4301",
+          "SC4302",
+          "SC4311",
+          "SC4312",
+          "SC4331",
+          "SC4332",
+          "SC4341",
+          "SC4342",
+          "SC4351",
+          "SC4352",
+          "SC4362",
+          "SC4381",
+          "SC4382",
+          "SC4401",
+          "SC4402",
+          "SC4411",
+          "SC4412",
+          "SC4421",
+          "SC4422",
+          "SC4431",
+          "SC4432",
+          "SC4451",
+          "SC4452",
+          "SC4461",
+          "SC4462",
+          "SC4471",
+          "SC4472",
+          "SC4481",
+          "SC4482",
+          "SC4501",
+          "SC4502",
+          "SC4511",
+          "SC4512",
+          "SC4541",
+          "SC4542",
+          "SC4551",
+          "SC4552",
+          "SC4561",
+          "SC4562",
+          "SC4571",
+          "SC4572",
+          "SC4591",
+          "SC4592",
+          "SC4621",
+          "SC4622",
+          "SC4631",
+          "SC4632",
+          "SC4651",
+          "SC4652",
+          "SC4661",
+          "SC4662",
+          "SC4671",
+          "SC4672",
+          "SC4701",
+          "SC4702",
+          "SC4721",
+          "SC4722",
+          "SC4751",
+          "SC4752",
+          "SC4771",
+          "SC4772",
+          "SC4801",
+          "SC4802",
+          "SC4811",
+          "SC4812",
+          "SC4821",
+          "SC4822",
+          "ST7021",
+          "ST7022",
+          "ST7041",
+          "ST7042",
+          "ST7051",
+          "ST7052",
+          "ST7061",
+          "ST7062",
+          "ST7071",
+          "ST7072",
+          "ST7091",
+          "ST7092",
+          "ST7111",
+          "ST7112",
+          "ST7121",
+          "ST7122",
+          "ST7131",
+          "ST7132",
+          "ST7151",
+          "ST7152",
+          "ST7171",
+          "ST7172",
+          "ST7181",
+          "ST7182",
+          "ST7191",
+          "ST7192",
+          "ST7201",
+          "ST7202",
+          "ST7211",
+          "ST7212"
+        ],
+        "annotation_cost": {
+          "participants": 70,
+          "recordings": 138,
+          "physical_epochs": 325210,
+          "annotated_epochs": 321744,
+          "supervised_epochs": 321688,
+          "windows": 319226,
+          "recorded_hours": 2710.0833333333335,
+          "annotated_hours": 2681.2,
+          "supervised_hours": 2680.733333333333,
+          "target_stage_counts": {
+            "W": 202168,
+            "N1": 16984,
+            "N2": 61539,
+            "N3": 14982,
+            "REM": 23553
+          }
+        }
+      }
+    ],
+    "validation_annotation_cost": {
+      "participants": 15,
+      "recordings": 29,
+      "physical_epochs": 66235,
+      "annotated_epochs": 65750,
+      "supervised_epochs": 65736,
+      "windows": 65133,
+      "recorded_hours": 551.9583333333334,
+      "annotated_hours": 547.9166666666666,
+      "supervised_hours": 547.8,
+      "target_stage_counts": {
+        "W": 41060,
+        "N1": 3336,
+        "N2": 14041,
+        "N3": 2016,
+        "REM": 4680
+      }
+    },
+    "extended_fraction_support": [
+      {
+        "budget_id": "draw42_n7",
+        "draw_seed": 42,
+        "fraction": 0.1,
+        "actual_fraction": 0.1,
+        "participants": [
+          "SC406",
+          "SC434",
+          "SC445",
+          "SC456",
+          "SC482",
+          "ST712",
+          "ST713"
+        ],
+        "recordings": [
+          "SC4061",
+          "SC4062",
+          "SC4341",
+          "SC4342",
+          "SC4451",
+          "SC4452",
+          "SC4561",
+          "SC4562",
+          "SC4821",
+          "SC4822",
+          "ST7121",
+          "ST7122",
+          "ST7131",
+          "ST7132"
+        ],
+        "annotation_cost": {
+          "participants": 7,
+          "recordings": 14,
+          "physical_epochs": 31508,
+          "annotated_epochs": 31315,
+          "supervised_epochs": 31315,
+          "windows": 30939,
+          "recorded_hours": 262.56666666666666,
+          "annotated_hours": 260.9583333333333,
+          "supervised_hours": 260.9583333333333,
+          "target_stage_counts": {
+            "W": 18960,
+            "N1": 2107,
+            "N2": 5650,
+            "N3": 1848,
+            "REM": 2374
+          }
+        }
+      },
+      {
+        "budget_id": "draw42_n18",
+        "draw_seed": 42,
+        "fraction": 0.25,
+        "actual_fraction": 0.2571428571428571,
+        "participants": [
+          "SC406",
+          "SC407",
+          "SC409",
+          "SC425",
+          "SC426",
+          "SC434",
+          "SC436",
+          "SC445",
+          "SC451",
+          "SC456",
+          "SC459",
+          "SC463",
+          "SC482",
+          "ST707",
+          "ST711",
+          "ST712",
+          "ST713",
+          "ST721"
+        ],
+        "recordings": [
+          "SC4061",
+          "SC4062",
+          "SC4071",
+          "SC4072",
+          "SC4091",
+          "SC4092",
+          "SC4251",
+          "SC4252",
+          "SC4261",
+          "SC4262",
+          "SC4341",
+          "SC4342",
+          "SC4362",
+          "SC4451",
+          "SC4452",
+          "SC4511",
+          "SC4512",
+          "SC4561",
+          "SC4562",
+          "SC4591",
+          "SC4592",
+          "SC4631",
+          "SC4632",
+          "SC4821",
+          "SC4822",
+          "ST7071",
+          "ST7072",
+          "ST7111",
+          "ST7112",
+          "ST7121",
+          "ST7122",
+          "ST7131",
+          "ST7132",
+          "ST7211",
+          "ST7212"
+        ],
+        "annotation_cost": {
+          "participants": 18,
+          "recordings": 35,
+          "physical_epochs": 77849,
+          "annotated_epochs": 76615,
+          "supervised_epochs": 76604,
+          "windows": 75687,
+          "recorded_hours": 648.7416666666667,
+          "annotated_hours": 638.4583333333334,
+          "supervised_hours": 638.3666666666667,
+          "target_stage_counts": {
+            "W": 46404,
+            "N1": 4598,
+            "N2": 14461,
+            "N3": 4249,
+            "REM": 5975
+          }
+        }
+      },
+      {
+        "budget_id": "draw42_n35",
+        "draw_seed": 42,
+        "fraction": 0.5,
+        "actual_fraction": 0.5,
+        "participants": [
+          "SC403",
+          "SC404",
+          "SC406",
+          "SC407",
+          "SC409",
+          "SC425",
+          "SC426",
+          "SC428",
+          "SC430",
+          "SC433",
+          "SC434",
+          "SC435",
+          "SC436",
+          "SC438",
+          "SC440",
+          "SC441",
+          "SC445",
+          "SC446",
+          "SC451",
+          "SC455",
+          "SC456",
+          "SC459",
+          "SC463",
+          "SC470",
+          "SC475",
+          "SC482",
+          "ST702",
+          "ST705",
+          "ST707",
+          "ST711",
+          "ST712",
+          "ST713",
+          "ST715",
+          "ST719",
+          "ST721"
+        ],
+        "recordings": [
+          "SC4031",
+          "SC4032",
+          "SC4041",
+          "SC4042",
+          "SC4061",
+          "SC4062",
+          "SC4071",
+          "SC4072",
+          "SC4091",
+          "SC4092",
+          "SC4251",
+          "SC4252",
+          "SC4261",
+          "SC4262",
+          "SC4281",
+          "SC4282",
+          "SC4301",
+          "SC4302",
+          "SC4331",
+          "SC4332",
+          "SC4341",
+          "SC4342",
+          "SC4351",
+          "SC4352",
+          "SC4362",
+          "SC4381",
+          "SC4382",
+          "SC4401",
+          "SC4402",
+          "SC4411",
+          "SC4412",
+          "SC4451",
+          "SC4452",
+          "SC4461",
+          "SC4462",
+          "SC4511",
+          "SC4512",
+          "SC4551",
+          "SC4552",
+          "SC4561",
+          "SC4562",
+          "SC4591",
+          "SC4592",
+          "SC4631",
+          "SC4632",
+          "SC4701",
+          "SC4702",
+          "SC4751",
+          "SC4752",
+          "SC4821",
+          "SC4822",
+          "ST7021",
+          "ST7022",
+          "ST7051",
+          "ST7052",
+          "ST7071",
+          "ST7072",
+          "ST7111",
+          "ST7112",
+          "ST7121",
+          "ST7122",
+          "ST7131",
+          "ST7132",
+          "ST7151",
+          "ST7152",
+          "ST7191",
+          "ST7192",
+          "ST7211",
+          "ST7212"
+        ],
+        "annotation_cost": {
+          "participants": 35,
+          "recordings": 69,
+          "physical_epochs": 157537,
+          "annotated_epochs": 155146,
+          "supervised_epochs": 155113,
+          "windows": 153710,
+          "recorded_hours": 1312.8083333333334,
+          "annotated_hours": 1292.8833333333334,
+          "supervised_hours": 1292.6083333333333,
+          "target_stage_counts": {
+            "W": 96339,
+            "N1": 8177,
+            "N2": 30249,
+            "N3": 7551,
+            "REM": 11394
+          }
+        }
+      },
+      {
+        "budget_id": "draw42_n70",
+        "draw_seed": 42,
+        "fraction": 1.0,
+        "actual_fraction": 1.0,
+        "participants": [
+          "SC400",
+          "SC403",
+          "SC404",
+          "SC405",
+          "SC406",
+          "SC407",
+          "SC408",
+          "SC409",
+          "SC410",
+          "SC412",
+          "SC413",
+          "SC415",
+          "SC416",
+          "SC417",
+          "SC418",
+          "SC419",
+          "SC422",
+          "SC425",
+          "SC426",
+          "SC427",
+          "SC428",
+          "SC430",
+          "SC431",
+          "SC433",
+          "SC434",
+          "SC435",
+          "SC436",
+          "SC438",
+          "SC440",
+          "SC441",
+          "SC442",
+          "SC443",
+          "SC445",
+          "SC446",
+          "SC447",
+          "SC448",
+          "SC450",
+          "SC451",
+          "SC454",
+          "SC455",
+          "SC456",
+          "SC457",
+          "SC459",
+          "SC462",
+          "SC463",
+          "SC465",
+          "SC466",
+          "SC467",
+          "SC470",
+          "SC472",
+          "SC475",
+          "SC477",
+          "SC480",
+          "SC481",
+          "SC482",
+          "ST702",
+          "ST704",
+          "ST705",
+          "ST706",
+          "ST707",
+          "ST709",
+          "ST711",
+          "ST712",
+          "ST713",
+          "ST715",
+          "ST717",
+          "ST718",
+          "ST719",
+          "ST720",
+          "ST721"
+        ],
+        "recordings": [
+          "SC4001",
+          "SC4002",
+          "SC4031",
+          "SC4032",
+          "SC4041",
+          "SC4042",
+          "SC4051",
+          "SC4052",
+          "SC4061",
+          "SC4062",
+          "SC4071",
+          "SC4072",
+          "SC4081",
+          "SC4082",
+          "SC4091",
+          "SC4092",
+          "SC4101",
+          "SC4102",
+          "SC4121",
+          "SC4122",
+          "SC4131",
+          "SC4151",
+          "SC4152",
+          "SC4161",
+          "SC4162",
+          "SC4171",
+          "SC4172",
+          "SC4181",
+          "SC4182",
+          "SC4191",
+          "SC4192",
+          "SC4221",
+          "SC4222",
+          "SC4251",
+          "SC4252",
+          "SC4261",
+          "SC4262",
+          "SC4271",
+          "SC4272",
+          "SC4281",
+          "SC4282",
+          "SC4301",
+          "SC4302",
+          "SC4311",
+          "SC4312",
+          "SC4331",
+          "SC4332",
+          "SC4341",
+          "SC4342",
+          "SC4351",
+          "SC4352",
+          "SC4362",
+          "SC4381",
+          "SC4382",
+          "SC4401",
+          "SC4402",
+          "SC4411",
+          "SC4412",
+          "SC4421",
+          "SC4422",
+          "SC4431",
+          "SC4432",
+          "SC4451",
+          "SC4452",
+          "SC4461",
+          "SC4462",
+          "SC4471",
+          "SC4472",
+          "SC4481",
+          "SC4482",
+          "SC4501",
+          "SC4502",
+          "SC4511",
+          "SC4512",
+          "SC4541",
+          "SC4542",
+          "SC4551",
+          "SC4552",
+          "SC4561",
+          "SC4562",
+          "SC4571",
+          "SC4572",
+          "SC4591",
+          "SC4592",
+          "SC4621",
+          "SC4622",
+          "SC4631",
+          "SC4632",
+          "SC4651",
+          "SC4652",
+          "SC4661",
+          "SC4662",
+          "SC4671",
+          "SC4672",
+          "SC4701",
+          "SC4702",
+          "SC4721",
+          "SC4722",
+          "SC4751",
+          "SC4752",
+          "SC4771",
+          "SC4772",
+          "SC4801",
+          "SC4802",
+          "SC4811",
+          "SC4812",
+          "SC4821",
+          "SC4822",
+          "ST7021",
+          "ST7022",
+          "ST7041",
+          "ST7042",
+          "ST7051",
+          "ST7052",
+          "ST7061",
+          "ST7062",
+          "ST7071",
+          "ST7072",
+          "ST7091",
+          "ST7092",
+          "ST7111",
+          "ST7112",
+          "ST7121",
+          "ST7122",
+          "ST7131",
+          "ST7132",
+          "ST7151",
+          "ST7152",
+          "ST7171",
+          "ST7172",
+          "ST7181",
+          "ST7182",
+          "ST7191",
+          "ST7192",
+          "ST7201",
+          "ST7202",
+          "ST7211",
+          "ST7212"
+        ],
+        "annotation_cost": {
+          "participants": 70,
+          "recordings": 138,
+          "physical_epochs": 325210,
+          "annotated_epochs": 321744,
+          "supervised_epochs": 321688,
+          "windows": 319226,
+          "recorded_hours": 2710.0833333333335,
+          "annotated_hours": 2681.2,
+          "supervised_hours": 2680.733333333333,
+          "target_stage_counts": {
+            "W": 202168,
+            "N1": 16984,
+            "N2": 61539,
+            "N3": 14982,
+            "REM": 23553
+          }
+        }
+      }
+    ]
+  },
+  "preserved_artifact_hashes": {
+    "data/features/sleep_edf_features.csv": "33fbd5f1ac3455499215a8d971d841ef1dd11c63c0e893d748e9c624d52eaf19",
+    "data/features/subject_split.csv": "3b4b7fbf363f92d87cb9a34d52b3abb4cdf611d1b13c8699182a84621e414493",
+    "data/features/participant_split.csv": "cf1cd33a6a6b2376886119d0ca48d049b26f27f089fcc9e87ea54f5113a673c0",
+    "final_model/stacked_lstm_32_32_10_epochs.keras": "ba9f9bcae47246d1202fff3f0a686f29a06f1e534b9d789268c49713beeabefb",
+    "final_model/scaler.pkl": "d6331c15a782d31844d545c142815f23f02d9f4be61be4503f8575b4fad0606d",
+    "final_model/config.json": "4e1444828693a6b27b3dc2413fbef25eea5a38dfadf6b010046a920656ec220d",
+    "final_model_corrected/stacked_lstm_final.keras": "627bcea0773dae7a7884d494b9ba73a9e583b6551df3cc5ce97f12813f5975a6",
+    "results/final_evaluation/final_predictions.csv": "8b21f04f789dcc632228c89f5c59dbce577a4619f87b396613af42988b96959f",
+    "results/final_evaluation/final_confusion_matrix.csv": "19ad49a36befbbb95d2eca0850f6fb0be8e104fb0b309675d72b48ea1fe92be7",
+    "results/final_evaluation/definitive_experiment_record.json": "567c7f36a23dec43490ca6bd23f3b0f41a8c0bdc1586849885a632af64f09db7"
+  },
+  "source_test_predictive_scoring_performed": false,
+  "external_predictive_scoring_performed": false,
+  "limitations": [
+    "Pilot fractions 25/100% refer to a two-participant training scope: actual counts 1 and 2, not the canonical 18 and 70.",
+    "All 14 supervised pilots use one epoch and one training batch; their source-validation metrics support no efficacy claim.",
+    "Canonical full-source budgets were prepared and validated, but full-budget training was not executed.",
+    "One optimization seed was executed; repeated-seed scientific comparisons remain outstanding.",
+    "Validation annotations remain fully available within the chosen scope; this is training-label efficiency, not total annotation cost reduction.",
+    "Scheduler retries restart failed training jobs; optimizer-state SSL resume is available in the standalone pretraining CLI.",
+    "No GPU profiling, full-budget convergence, participant confidence intervals or external predictive scoring is included.",
+    "The full matrix pilot preceded atomic completion-publication hardening; the subsequent representative CLI study and current regression suite validate that final change. Both source hash inventories are retained."
+  ],
+  "matrix_pilot_code_sha256": {
+    "src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/data/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/data/adapters/__init__.py": "fad87a9484dfa388346fd266253b732b00af30e57883eea2c3a73a09435f4e7f",
+    "src/data/adapters/isruc.py": "c9c47210f5fd38318f3eff07d7565a3302eae6d9b3af88cfdadc1ffb43eace5c",
+    "src/data/adapters/sleepedf.py": "5a1ed803010718c999127eac30c6a8f8636b7054d4a21cdf1f0872fe821510d7",
+    "src/data/contrastive.py": "4791e47670ea8b34eda40fff9fc78f7edd122792f03241afb1217f9846a143d2",
+    "src/data/epoch_store.py": "efd6a3b7df99677db3ff0a468d8c74ab887f850aa78ff38d84ca0cde1c335a91",
+    "src/data/label_budgets.py": "069518bd5f8d112ee7a4eb9b2a50806740ccc28a25fd80251eb34301277715ea",
+    "src/data/pairing.py": "551fed31e2f691771de637f1479e2b8c6fc4d59fac90836cd4e11596219b1878",
+    "src/data/prepare_research_data.py": "ed64d5d759e80a11380d7261435275f18eceab82929323db3767710a823c72f7",
+    "src/data/process_all.py": "63ba6b9a9c82db104bb65fd2e6384f6064e9a2e15f25153326dff33dce2de08c",
+    "src/data/process_dataset.py": "472aefc7b4765bb97173ce3f6db9f1ded7a1a1e65e7ec3396bb810dad06b9ef8",
+    "src/data/research.py": "bdb5bcb328e39534d7705874cc16b426cf10a08b935e8c64271f794b05c3a0dc",
+    "src/data/supervised.py": "9d10e99e6584d82d0287ff9d585c6a0336ce186802f9e97dd51ffc12f49f5119",
+    "src/evaluation/classification.py": "9fc7379331c425bde5f6b2873db2d88d90fdc29761b752445a2284df13e86b08",
+    "src/evaluation/validate_final_model.py": "be225f3cd3e4ea3253fd560dacd532834823467e3719a81df6942482e1ca92b4",
+    "src/evaluation/validate_research_data.py": "293973e8709fae60b037a961b0a9da5036c1d15963b0c095fff06cc957765b29",
+    "src/experiments/__init__.py": "e475818df3e941e723d990568d7b5f024991be98b273812e5d203a5960cc8d26",
+    "src/experiments/run.py": "18a78d746a150bef50158c6192c9e3ba7d794a0d34d48786b131600f62e7bd9b",
+    "src/experiments/worker.py": "57db17cf67b077c63e3954e5944b93bf4680b69c392309b10ebfb04cd5e769c0",
+    "src/features/spectral.py": "cbc768a4ef7219a882a6ad6736443db681a9c092ad4ec020d785a9927c2dc4f2",
+    "src/inference/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/inference/multiview.py": "2ed79e0a43a57bb9592fd94b74cd6354be8a65020a154257f0d5ea329217e2af",
+    "src/inference/predict.py": "4e96555cd650803fe58d8fc6246e90485bac194e27cdd76a39475dac0bf4f9c9",
+    "src/models/contrastive.py": "1a398a9632b3d56f37fbf0684e4b0d4cafb25353e9781707db1e4e46720344ff",
+    "src/models/lstm.py": "e59c4c4d47cd2752080c7dd939346a677c2f08cf7a017c50d7456aff0a6affa0",
+    "src/models/multiview.py": "47768c77b031e78aee6fdf0053a83490f3ba65ff0d024d22de3b947b393ff0aa",
+    "src/preprocessing/annotations.py": "2dfa81bbcb97ad1e077212a481d5b2ab7266c0cbcba9d13e615eac579eb00e00",
+    "src/preprocessing/epoching.py": "db109c2e65136921ac8ef8abfabd8d98ea95852f52067572ebbb2308f69780f7",
+    "src/preprocessing/filtering.py": "e37eacb87d11b6aaad096e468b5b3a4e36cad283d3056b2d45ec01458ae1824d",
+    "src/preprocessing/normalization.py": "45c538bd2837e6391a62c348a7c860bcb7e4f1c21601deda058ae8c6f4887aa5",
+    "src/preprocessing/pipeline.py": "f1a3e575bb16c9d6a7d2b56462e37bb46de92b63d65d838c3b5db11f89ab171a",
+    "src/preprocessing/research_normalization.py": "a8e9f7b687e90b003a6c7616637b01c08b7c8d946c8ddbedb520042b81e6aad9",
+    "src/preprocessing/sequences.py": "5509810a211df8528cbf250e92a50f8cdf31f0c6b9de6b6f57938440c407ab41",
+    "src/preprocessing/waveform_normalization.py": "db215faa4fe848d64211e6581754e70b68191adebc63b3b0a60ddaddcd7cb5d2",
+    "src/training/__init__.py": "aceb0179252ef9a28702002d54695c2f9ea0d3bffca850d017f84bb16c4b2dde",
+    "src/training/artifacts.py": "a7e95ebe6a7bdfc04cac6f56b8b972289e747a06797a1ef55b5214c1f312c784",
+    "src/training/contrastive.py": "67b24b0ec1b68c86ab919560cf42c5d2ba7f09c2eb45220a3c5639bd3255040b",
+    "src/training/supervised.py": "b52f8767a427cd8f9137ac2d63699ee4610019ca1af4bd843ae82ca2a5403eb0"
+  },
+  "publication_hardening_validation": {
+    "change": "Final worker completion manifest is now atomically published.",
+    "changed_files_since_matrix_pilot": [
+      "src/experiments/worker.py"
+    ],
+    "study_fingerprint": "e88c69fcc28a7f74ecb2763d2555cdb3298bafd0ee0c07254882a2db390f83d8",
+    "execution_summary": {
+      "jobs_planned": 3,
+      "jobs_completed": 3,
+      "jobs_executed_this_call": 3,
+      "limited_run": true
+    },
+    "configuration": {
+      "model": {
+        "sequence_length": 10,
+        "samples_per_epoch": 3000,
+        "filters": [
+          4,
+          8
+        ],
+        "kernels": [
+          7,
+          5
+        ],
+        "strides": [
+          10,
+          10
+        ],
+        "token_dim": 8,
+        "attention_heads": 2,
+        "temporal_units": 8,
+        "dropout": 0.0,
+        "spectral_units": 8
+      },
+      "training": {
+        "batch_size": 2,
+        "epochs": 1,
+        "learning_rate": 0.001,
+        "patience": 1
+      },
+      "pretraining": {
+        "batch_size": 8,
+        "epochs": 1,
+        "learning_rate": 0.001,
+        "temperature": 0.2,
+        "projection_dim": 8,
+        "exclusion_epochs": 1,
+        "diagnostic_epochs": 8
+      },
+      "augmentation": {
+        "gain_min": 0.8,
+        "gain_max": 1.2,
+        "noise_rms_fraction": 0.02,
+        "max_mask_seconds": 1.0
+      },
+      "fractions": [
+        0.25
+      ],
+      "draw_seeds": [
+        42
+      ],
+      "training_seeds": [
+        42
+      ],
+      "conditions": [
+        "M0"
+      ],
+      "limits": {
+        "max_train_batches": 1,
+        "max_validation_batches": 2,
+        "max_pretraining_batches": 2
+      },
+      "train_participants": [
+        "SC400",
+        "SC403"
+      ],
+      "validation_participants": [
+        "SC401"
+      ]
+    },
+    "completed_job_result_sha256": {
+      "waveform_statistics": "0ec1cc44f2aeb5ac668ac96ce10139adf9f987229acfcd873f35997ef632102e",
+      "normalizer_draw42_n1": "07748e0965b2e724c9964b05bb8291c8edb1f2889eb9f87c8434e44d05f37ef2",
+      "M0_draw42_n1_seed42": "4aad851cd237707213ab67c6ce9c94025bd4b3327ee539eb1fa45aaedf481d03"
+    },
+    "failure_injection": "Current regression suite interrupts immediately before final completion publication, verifies no partial final seal, and retries successfully in a preserved new attempt."
+  }
+}

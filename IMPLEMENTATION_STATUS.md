@@ -19,8 +19,9 @@ This file tracks delivered code separately from research conclusions.
 | Supervised trainer and multiview inference | Implemented; source integration pilots passed | Validation macro-F1 checkpoints, hashed completed bundles, prediction exports, and checkpoint reload checks |
 | Contrastive pretraining and fine-tuning | Implemented; CPU integration pilots passed | Quality-only source pool, stateless augmentations, masked NT-Xent, recoverable optimizer state, verified encoder transfer |
 | Frozen-encoder linear probe | Implemented | Single-epoch mean pooling and affine classifier; CNN weights checked unchanged |
-| Matched participant label budgets | Planned | Nested training-participant selections shared across model/initialization comparisons |
-| Full experiment runner and external predictive evaluation | Planned | Repeated comparisons, label budgets, participant uncertainty, and a frozen external scoring batch |
+| Matched participant label budgets | Implemented; automated checks pass | Nested whole-participant draws, class-coverage checks, full unlabeled pool, and explicit annotation costs |
+| Source experiment runner | Implemented; real-data CLI pilots passed | M0–M6 dependency graph, shared normalization/checkpoints, isolated serial workers, sealed attempts and paired source tables |
+| Uncertainty, profiling and external predictive evaluation | Planned | Participant intervals, measured compute budgets, and a predeclared frozen external scoring batch |
 
 **Validation and data notes**
 
@@ -97,14 +98,15 @@ suite compares recovery after a simulated interruption with uninterrupted
 updates. Completed bundles verify file hashes and reloaded encoder outputs.
 
 Downstream transfer validates architecture, source identities and preprocessing.
-SSL and downstream currently require the same source recording selection. The
+Ordinary SSL transfer requires the same source recording selection; the later
+budget workflow authorizes labeled subsets of a verified full training pool. The
 SSL waveform scale is preserved, while the spectral scaler retains its separate
 supervised source fitting population. Scratch controls can reuse that exact
 waveform scale without loading pretrained weights. Linear probes freeze the CNN
 and fit only a 325-parameter affine head on a single epoch; frozen temporal/fusion
 head training is also supported and is explicitly distinguished from probing.
 
-The full current suite passes **68 tests**, including 12 contrastive/data/transfer
+At the contrastive milestone, the suite passed **68 tests**, including 12 contrastive/data/transfer
 checks. CPU pilots completed raw pretraining, epoch-boundary resume, gated
 fine-tuning, a matched scratch control and a frozen linear probe. The complete
 70-participant source-training pool contains 323,423 quality-valid epochs. Its
@@ -117,8 +119,57 @@ Implementation pilots, test totals and limitations are recorded in
 `reports/contrastive_2026-10-31/pilot_summary.json`. These runs verify execution
 and source boundaries; they do not demonstrate convergence, label efficiency,
 physiological invariance, or external generalization. No new test/ISRUC predictive
-scores are used. Participant label budgets, the experiment runner, uncertainty
-estimation and the frozen external scoring batch remain upcoming work.
+scores are used. Participant label budgets and the source runner are delivered
+in the next milestone below; uncertainty estimation and the frozen external
+scoring batch remain upcoming work.
+
+**Participant-budget and experiment-runner implementation — 31 October 2026**
+
+Nested participant draws retain all recordings for each chosen participant.
+Fractions round up, so the 70-participant source pool yields 7/18/35/70 labeled
+participants for 10/25/50/100% budgets. Class coverage is checked on eligible
+training targets after selection, without label-driven redrawing. The manifest
+reports recording hours, available five-class annotation hours and usable hours,
+plus the fixed validation annotation cost. This is training-label efficiency
+with a fully labeled validation set, rather than a total annotation-budget claim.
+
+Waveform statistics use the fixed full quality-valid training pool for every
+condition. Spectral statistics use only each labeled budget. Paired models share
+the same normalizer file; one SSL checkpoint per optimization seed is reused
+across draws and budgets. Transfer permits a subset only when its frozen split,
+recording contents and complete unlabeled pool agree with the budget manifest.
+
+The runner includes the fresh spectral stacked-LSTM reference and all six
+raw/fusion conditions. It executes jobs in separate serial processes, verifies
+dependencies, preserves every failed attempt, and skips verified completed jobs.
+Study definitions freeze configuration, source/package hashes and participant
+scope. Scheduler retries start a fresh job; standalone SSL recovery remains
+available separately. Source-validation result tables and paired differences
+require matching normalization and validation-target hashes. Source-test/ISRUC
+predictive scoring is excluded from the scheduler.
+
+The full current suite passes **79 tests**, including 11 new budget/runner
+checks. A real-data CLI study completed all 18 jobs (14 supervised models across
+the two pilot budgets), continued after a four-job boundary, and subsequently
+verified/skipped every completed job. All fourteen saved prediction exports
+replayed within 3e-8 in a fresh process. The two-participant pilot uses smaller
+models and capped one-epoch schedules; its nominal 25% fraction selects one
+participant, so its actual fraction is 50%. Canonical full-source planning
+separately validated the 18- and 70-participant budgets and the fixed 15-participant
+validation scope without executing the full training campaign.
+
+After that matrix pilot, final completion-manifest publication was made atomic.
+The updated suite injects an interruption immediately before publication and
+verifies successful retry with no partial final seal. A subsequent three-job CLI
+study validated the hardened worker. Historical matrix and current code hashes
+are recorded separately; only the worker's publication logic changed between
+those CLI checks.
+
+Evidence is recorded under `reports/experiments_2026-10-31`, including canonical
+budget definitions, capped source-validation tables and the pilot summary.
+Full-budget convergence, repeated-seed scientific
+comparisons, GPU measurements, participant uncertainty and the external scoring
+batch remain separate work.
 
 Evaluating the frozen feature model from the newly prepared source data reproduced
 accuracy **0.8266296611**, macro-F1 **0.6533745630**, and every entry in the saved

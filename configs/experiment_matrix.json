@@ -1,0 +1,9 @@
+{
+  "model": {"sequence_length": 10, "samples_per_epoch": 3000},
+  "training": {"batch_size": 4, "epochs": 30, "learning_rate": 0.001, "patience": 5},
+  "pretraining": {"batch_size": 32, "epochs": 10, "learning_rate": 0.001, "temperature": 0.2},
+  "fractions": [0.25, 1.0],
+  "draw_seeds": [42],
+  "training_seeds": [42],
+  "conditions": ["M0", "M1", "M2", "M3", "M4", "M5", "M6"]
+}

@@ -33,33 +33,36 @@ class MultiviewPredictor:
             raise ValueError("Model bundle and normalizer preprocessing fingerprints disagree.")
         self.model = keras.models.load_model(directory / "model.keras", compile=False)
         actual = {tensor.name.split(":")[0]: tuple(tensor.shape[1:]) for tensor in self.model.inputs}
-        expected = {"waveform": (self.config.sequence_length, self.config.samples_per_epoch, 1)}
+        expected = {"waveform": (self.config.sequence_length, self.config.samples_per_epoch, 1)} if self.config.variant != "spectral" else {}
         if self.config.variant != "raw":
             expected["spectral"] = (self.config.sequence_length, len(ALL_FEATURES))
         if actual != expected or self.model.output_shape[-1] != len(CLASS_LABELS):
             raise ValueError("Model/configuration input or output dimensions disagree.")
 
-    def predict_batch(self, waveforms, spectral_features=None):
+    def predict_batch(self, waveforms=None, spectral_features=None):
         """Predict raw windows in volts, and raw spectral powers in volts squared.
 
         Epochs must already use the bundle's declared preprocessing. Scaling is
         applied once here; no model or normalization statistics are updated.
         """
-        waveforms = np.asarray(waveforms)
-        expected = (self.config.sequence_length, self.config.samples_per_epoch, 1)
-        if waveforms.ndim != 4 or waveforms.shape[1:] != expected or not len(waveforms):
-            raise ValueError(f"Expected a nonempty waveform batch shaped (batch, {expected}).")
-        inputs = {"waveform": self.normalizer.transform_waveform(waveforms)}
+        inputs = {}
+        if self.config.variant != "spectral":
+            waveforms = np.asarray(waveforms)
+            expected = (self.config.sequence_length, self.config.samples_per_epoch, 1)
+            if waveforms.ndim != 4 or waveforms.shape[1:] != expected or not len(waveforms):
+                raise ValueError(f"Expected a nonempty waveform batch shaped (batch, {expected}).")
+            inputs["waveform"] = self.normalizer.transform_waveform(waveforms)
         if self.config.variant != "raw":
             features = np.asarray(spectral_features)
-            if features.shape != (len(waveforms), self.config.sequence_length, len(ALL_FEATURES)):
+            if (features.ndim != 3 or features.shape[1:] != (self.config.sequence_length, len(ALL_FEATURES))
+                    or not len(features) or (self.config.variant != "spectral" and len(features) != len(waveforms))):
                 raise ValueError("Spectral feature windows must align with waveform windows.")
             inputs["spectral"] = self.normalizer.transform_spectral(features)
         probabilities = self.model(inputs, training=False).numpy()
         return probabilities.argmax(axis=1), probabilities
 
-    def predict_sequence(self, waveform, spectral_features=None):
+    def predict_sequence(self, waveform=None, spectral_features=None):
         features = None if spectral_features is None else np.asarray(spectral_features)[None]
-        predicted, probabilities = self.predict_batch(np.asarray(waveform)[None], features)
+        predicted, probabilities = self.predict_batch(None if waveform is None else np.asarray(waveform)[None], features)
         return {"predicted_stage": CLASS_LABELS[int(predicted[0])],
                 "probabilities": {stage: float(p) for stage, p in zip(CLASS_LABELS, probabilities[0])}}

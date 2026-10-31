@@ -22,11 +22,12 @@ class ModelConfig:
     attention_heads: int = 4
     temporal_units: int = 64
     dropout: float = 0.3
+    spectral_units: int = 32
 
     def __post_init__(self):
-        if self.variant not in {"raw", "concat", "gated"}:
-            raise ValueError("variant must be raw, concat, or gated.")
-        for name in ["sequence_length", "samples_per_epoch", "token_dim", "attention_heads", "temporal_units"]:
+        if self.variant not in {"raw", "concat", "gated", "spectral"}:
+            raise ValueError("variant must be raw, concat, gated, or spectral.")
+        for name in ["sequence_length", "samples_per_epoch", "token_dim", "attention_heads", "temporal_units", "spectral_units"]:
             value = getattr(self, name)
             if isinstance(value, bool) or not isinstance(value, int) or value < 1:
                 raise ValueError(f"{name} must be a positive integer.")
@@ -177,6 +178,8 @@ def build_waveform_encoder(config=None):
 
 def build_epoch_encoder(config=None):
     config = config or ModelConfig()
+    if config.variant == "spectral":
+        raise ValueError("The spectral LSTM reference does not have a waveform epoch encoder.")
     inputs = {"waveform": keras.Input((config.samples_per_epoch, 1), name="waveform")}
     raw_tokens = build_waveform_encoder(config)(inputs["waveform"])
     raw_pool = layers.GlobalAveragePooling1D(name="waveform_pool")
@@ -200,6 +203,13 @@ def build_epoch_encoder(config=None):
 
 def build_multiview_model(config=None):
     config = config or ModelConfig()
+    if config.variant == "spectral":
+        inputs = {"spectral": keras.Input((config.sequence_length, len(ALL_FEATURES)), name="spectral")}
+        sequence = layers.LSTM(config.spectral_units, return_sequences=True, name="lstm_1")(inputs["spectral"])
+        sequence = layers.LSTM(config.spectral_units, name="lstm_2")(sequence)
+        sequence = layers.Dropout(config.dropout, name="temporal_dropout")(sequence)
+        output = layers.Dense(len(CLASS_LABELS), activation="softmax", dtype="float32", name="sleep_stage")(sequence)
+        return keras.Model(inputs, output, name="spectral_stacked_lstm_reference")
     inputs = {"waveform": keras.Input((config.sequence_length, config.samples_per_epoch, 1), name="waveform")}
     if config.variant != "raw":
         inputs["spectral"] = keras.Input((config.sequence_length, len(ALL_FEATURES)), name="spectral")

@@ -1,0 +1,17 @@
+{
+  "model": {
+    "sequence_length": 10, "samples_per_epoch": 3000,
+    "filters": [4, 8], "kernels": [7, 5], "strides": [10, 10],
+    "token_dim": 8, "attention_heads": 2, "temporal_units": 8,
+    "spectral_units": 8, "dropout": 0.0
+  },
+  "training": {"batch_size": 2, "epochs": 1, "patience": 1},
+  "pretraining": {"batch_size": 8, "epochs": 1, "projection_dim": 8, "diagnostic_epochs": 8},
+  "fractions": [0.25, 1.0],
+  "draw_seeds": [42],
+  "training_seeds": [42],
+  "conditions": ["M0", "M1", "M2", "M3", "M4", "M5", "M6"],
+  "train_participants": ["SC400", "SC403"],
+  "validation_participants": ["SC401"],
+  "limits": {"max_train_batches": 1, "max_validation_batches": 2, "max_pretraining_batches": 2}
+}

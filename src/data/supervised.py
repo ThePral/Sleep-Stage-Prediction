@@ -153,7 +153,7 @@ class SourcePartition:
                             "windows": len(r.positions), "fit_epochs": len(r.fit_rows)} for r in self.recordings],
         }
 
-    def gather(self, indices):
+    def gather(self, indices, *, include_waveform=True):
         if self.eligibility != "supervised":
             raise ValueError("Use the label-free epoch pool for quality-only reads.")
         indices = np.asarray(indices)
@@ -163,7 +163,7 @@ class SourcePartition:
             raise IndexError("Window indices fall outside the source partition.")
         length = self.sequence_length
         samples = int(round(self.preprocessing.epoch_duration * self.preprocessing.sampling_frequency))
-        raw = np.empty((len(indices), length, samples, 1), dtype=np.float32)
+        raw = np.empty((len(indices), length, samples, 1), dtype=np.float32) if include_waveform else None
         spectral = np.empty((len(indices), length, len(ALL_FEATURES)), dtype=np.float64)
         targets = np.empty(len(indices), dtype=np.int64)
         metadata = [None] * len(indices)
@@ -172,7 +172,8 @@ class SourcePartition:
             record = self.recordings[number]
             selected = np.flatnonzero(record_numbers == number)
             positions = record.positions[indices[selected] - self.offsets[number]]
-            raw[selected, ..., 0] = self._waveforms(record)[positions]
+            if raw is not None:
+                raw[selected, ..., 0] = self._waveforms(record)[positions]
             spectral[selected] = record.spectral[positions]
             targets[selected] = record.labels[positions[:, -1]]
             for target, epoch in zip(selected, positions[:, -1]):
@@ -189,7 +190,7 @@ class SourcePartition:
 class WindowBatches:
     def __init__(self, partition, normalizer, *, variant, batch_size=4,
                  shuffle=False, seed=42, max_batches=None):
-        if variant not in {"raw", "concat", "gated"}:
+        if variant not in {"raw", "concat", "gated", "spectral"}:
             raise ValueError("Unknown supervised model variant.")
         if isinstance(batch_size, bool) or not isinstance(batch_size, int) or batch_size < 1:
             raise ValueError("batch_size must be a positive integer.")
@@ -218,8 +219,8 @@ class WindowBatches:
             order = np.linspace(0, len(order) - 1, count, dtype=np.int64)
         for batch in range(len(self)):
             indices = order[batch * self.batch_size:(batch + 1) * self.batch_size]
-            raw, spectral, targets, metadata = self.partition.gather(indices)
-            inputs = {"waveform": self.normalizer.transform_waveform(raw)}
+            raw, spectral, targets, metadata = self.partition.gather(indices, include_waveform=self.variant != "spectral")
+            inputs = {"waveform": self.normalizer.transform_waveform(raw)} if self.variant != "spectral" else {}
             if self.variant != "raw":
                 inputs["spectral"] = self.normalizer.transform_spectral(spectral)
             yield inputs, targets, metadata
@@ -228,7 +229,7 @@ class WindowBatches:
         import tensorflow as tf
         length = self.partition.sequence_length
         samples = int(round(self.partition.preprocessing.epoch_duration * self.partition.preprocessing.sampling_frequency))
-        signature = {"waveform": tf.TensorSpec((None, length, samples, 1), tf.float32)}
+        signature = {"waveform": tf.TensorSpec((None, length, samples, 1), tf.float32)} if self.variant != "spectral" else {}
         if self.variant != "raw":
             signature["spectral"] = tf.TensorSpec((None, length, len(ALL_FEATURES)), tf.float32)
 

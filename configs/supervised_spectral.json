@@ -1,0 +1,4 @@
+{
+  "model": {"variant": "spectral", "sequence_length": 10, "samples_per_epoch": 3000, "spectral_units": 32},
+  "training": {"batch_size": 4, "epochs": 30, "learning_rate": 0.001, "seed": 42, "patience": 5}
+}

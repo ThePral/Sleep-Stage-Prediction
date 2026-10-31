@@ -7,7 +7,7 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 
 from src.preprocessing.normalization import ALL_FEATURES
-from src.preprocessing.waveform_normalization import WaveformNormalizer, source_identity
+from src.preprocessing.waveform_normalization import WaveformNormalizer, source_identity, source_subset
 
 
 def log_spectral(values):
@@ -83,18 +83,25 @@ class ResearchNormalizer:
             raise ValueError("Normalization epoch count disagrees with its provenance.")
         if "pretraining_waveform" in state:
             waveform = WaveformNormalizer(state["pretraining_waveform"])
+            policy = state.get("pretraining_waveform_policy", "same_source_training_selection")
+            matches = source_identity(training) == source_identity(waveform.state["training_data"])
+            if policy == "label_budget_source_training_superset":
+                matches = source_subset(training, waveform.state["training_data"])
+            elif policy != "same_source_training_selection":
+                raise ValueError("Unknown pretraining waveform fitting policy.")
             if (state["waveform_scale"] != waveform.state["waveform_scale"]
                     or state["preprocessing_fingerprint"] != waveform.state["preprocessing_fingerprint"]
-                    or source_identity(training) != source_identity(waveform.state["training_data"])):
+                    or not matches):
                 raise ValueError("Pretraining waveform statistics disagree with the downstream state.")
 
-    def use_pretraining_waveform(self, waveform_normalizer, partition):
+    def use_pretraining_waveform(self, waveform_normalizer, partition, *, allow_source_subset=False):
         """Keep the SSL input scale unchanged; spectral fitting remains supervised."""
         self.assert_compatible(partition, require_training_match=True)
-        waveform_normalizer.assert_compatible(partition, require_training_match=True)
+        waveform_normalizer.assert_compatible(partition, require_training_match=True, allow_source_subset=allow_source_subset)
         # JSON copy prevents later mutation of the source object's provenance.
         self.state["pretraining_waveform"] = json.loads(json.dumps(waveform_normalizer.state))
         self.state["waveform_scale"] = waveform_normalizer.state["waveform_scale"]
+        self.state["pretraining_waveform_policy"] = "label_budget_source_training_superset" if allow_source_subset else "same_source_training_selection"
         self._validate()
         return self
 

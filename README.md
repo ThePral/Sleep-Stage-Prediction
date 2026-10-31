@@ -356,7 +356,8 @@ Use `supervised_raw.json` or `supervised_concat.json` for the other controls.
 The trainer verifies backbone architecture, frozen source assignment, recording
 identities, content hashes and preprocessing before transfer. The current transfer
 policy requires the same source recording selection for SSL and downstream
-training. The waveform scale stays fixed at its SSL value; spectral statistics
+training unless a verified participant-budget plan authorizes a labeled subset
+of the fixed source pool. The waveform scale stays fixed at its SSL value; spectral statistics
 are fitted on unique supervised source training epochs. Both fitting populations
 are recorded separately in the downstream normalizer. Inference applies this
 combined frozen state to unscaled prepared inputs.
@@ -384,6 +385,128 @@ fine-tuning bundles.
 The SSL tests include a direct numerical loss comparison, augmentation bounds,
 fully hidden-label invariance, temporal exclusion, an interrupted-run recovery
 comparison, exact transfer into all three variants, frozen-probe weight checks,
-and pretrain-to-fine-tune-to-inference execution. Participant label budgets,
-full experiment scheduling, GPU profiling and frozen external scoring remain
-subsequent milestones. Capped pilot metrics do not test the research hypotheses.
+and pretrain-to-fine-tune-to-inference execution. Participant label budgets and
+serial study execution are documented below. GPU profiling and frozen external
+scoring remain subsequent milestones. Capped pilot metrics do not test the research hypotheses.
+
+**Participant budgets and the source-only experiment runner**
+
+The study runner implements the seven roadmap conditions:
+
+| ID | Representation | Initialization |
+|---|---|---|
+| M0 | Ten features and two stacked LSTM layers (32 units by default) | Scratch |
+| M1 | Waveform CNN + temporal GRU | Scratch |
+| M2 | Waveform + spectral concatenation + GRU | Scratch |
+| M3 | Waveform + gated spectral attention + GRU | Scratch |
+| M4 | Same architecture as M1 | Raw SSL |
+| M5 | Same architecture as M2 | Same raw SSL |
+| M6 | Same architecture as M3 | Same raw SSL |
+
+M0 is a newly trained reference using the historical spectral architecture and
+the new shared training policy. It does not replace or reproduce the preserved
+historical checkpoint's training history. `configs/supervised_spectral.json`
+also runs this path independently. Its inference bundle accepts
+`predict_batch(spectral_features=features)` without waveform inputs.
+
+Plan an entire study before executing it. Planning validates source stores and
+writes a frozen participant-budget manifest, configuration/code/package hashes,
+and a dependency graph; it does not train models. Start with the deliberately
+small real-data pilot:
+
+```powershell
+.venv\Scripts\python.exe -u -X utf8 -m src.experiments.run plan --config configs/experiment_pilot.json --study-dir runs/my_matrix_pilot
+
+# Execute four jobs, then return with the rest pending.
+.venv\Scripts\python.exe -u -X utf8 -m src.experiments.run execute --study-dir runs/my_matrix_pilot --max-jobs 4
+
+# Verify/skip completed artifacts and execute the remaining jobs.
+.venv\Scripts\python.exe -u -X utf8 -m src.experiments.run execute --study-dir runs/my_matrix_pilot
+```
+
+The pilot covers two source training participants, one validation participant,
+one seed and two nested budgets. Its 25% fraction rounds up to one of those two
+training participants (50% actual); the full pilot budget uses both. It uses
+a smaller CNN/LSTM and capped one-epoch runs. These are execution checks, with
+the actual fractions and costs recorded, not a 25%-of-70-participant study or
+a performance comparison.
+
+For the canonical full scope, use a new directory and the main configuration:
+
+```powershell
+.venv\Scripts\python.exe -u -X utf8 -m src.experiments.run plan --config configs/experiment_matrix.json --study-dir runs/source_matrix_seed42
+
+# Launch only after choosing an appropriate measured compute budget.
+.venv\Scripts\python.exe -u -X utf8 -m src.experiments.run execute --study-dir runs/source_matrix_seed42
+```
+
+The main configuration plans 18 jobs: one waveform-statistics job, two budget
+normalizers, one SSL checkpoint, and fourteen supervised conditions. It uses all
+70 source training participants as the unlabeled pool and the fixed 15 labeled
+validation participants. Its default fractions 0.25 and 1.0 select **18 and 70**
+training participants. Fractions 0.1 and 0.5 are also supported (**7 and 35**).
+Participant counts use ceiling, and actual fractions are saved explicitly.
+
+Budget draws use a seeded permutation of participant IDs and nested prefixes,
+including every discovered recording of each selected participant. Selection
+uses no stage balancing. Source-training labels are subsequently used to report
+costs and assert that all five stages occur among eligible training targets.
+If a draw fails this check, planning fails; it never redraws based on labels.
+Duplicate fractions/counts or repeated seeds are rejected. Every condition uses
+the same draw and optimization seed. Add `draw_seeds` and `training_seeds` in
+the JSON configuration before planning repeated experiments; the initial
+single-seed screen is exploratory.
+
+`label_budgets.json` reports physical/annotated/usable epochs, labeled hours,
+participants, recordings, target class counts and validation cost separately.
+Annotated hours count available five-class labels, including QC-rejected epochs;
+usable hours count supervised-eligible epochs. Whole-recording hours are also
+recorded. A fixed fully labeled validation set remains an annotation expense:
+this protocol measures **training-label efficiency**, not total annotation-cost
+reduction. Planning statistics exclude source-test annotations. Discovery reads
+identity columns from Sleep-EDF roster rows before filtering held-out records;
+ISRUC stores are not opened by the study planner or runner.
+
+All budgets share waveform RMS statistics fitted once on the full quality-valid
+training scope. The spectral scaler is fitted separately on unique supervised
+epochs from each labeled budget. That combined normalizer is shared byte-for-byte
+across its M0–M6 conditions and optimization seeds. SSL is trained once per
+optimization seed on the same full unlabeled pool, then reused across all draws,
+budgets and SSL conditions. No hidden labels determine SSL batches or statistics.
+Scratch controls receive the same unlabeled-pool waveform scale without SSL
+weights, isolating encoder initialization in each matched comparison.
+
+Content hashes and the frozen split authorize transfer from the full SSL pool
+to the smaller labeled budget. An arbitrary source superset is rejected; it must
+be exactly the planned unlabeled scope. Standalone training can use a generated
+manifest with `--budget-plan <study>/label_budgets.json --budget-id draw42_n18`,
+plus `--pretrained <ssl-artifacts>` or a compatible fixed-pool normalizer. Budget
+mode controls complete recording selections; do not combine it with recording
+overrides. Ordinary training keeps the stricter matching-selection policy.
+
+Jobs run serially in fresh Python processes. Each dependency is verified before
+use, and every completed attempt seals model, configuration, normalization,
+predictions, metrics and optimizer-state files. The final completion manifest is
+published atomically; an interrupted write cannot leave a partial completed seal.
+The ledger and per-job logs show
+progress. Repeating `execute` verifies and skips completed attempts. Use
+`--retry-failed` to start a fresh attempt for a failed/interrupted job; earlier
+attempts are preserved. This scheduler retry restarts that job's training;
+the standalone SSL entry point separately supports epoch-boundary optimizer
+resume. Two schedulers cannot share an active study. After a hard-killed
+scheduler, inspect the PID in `.runner.lock` and remove that file only once
+the scheduler and its worker have stopped.
+
+Study definitions and relevant source/package versions must stay unchanged
+between planning and execution. Create a new study after implementation/config
+changes. For relocation, `execute --data-root <new-root> --split-file <new-file>`
+supports new absolute paths when the frozen split and recording contents match.
+
+Completed supervised jobs appear in `source_validation_results.csv` with seed,
+budget, labeled hours, parameters and source-validation scores. The paired table
+records M4–M1, M5–M2, M6–M3, M3–M2 and M6–M5 macro-F1 differences only when both
+conditions completed with identical normalizer and validation target hashes.
+These are pooled source-validation summaries. They do not provide confidence
+intervals, independent source-test results or external generalization estimates.
+Participant uncertainty, compute profiling and a predeclared frozen external
+scoring batch remain upcoming work.

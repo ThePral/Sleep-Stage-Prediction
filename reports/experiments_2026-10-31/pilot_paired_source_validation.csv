@@ -1,0 +1,11 @@
+budget_id,training_seed,first,second,source_validation_macro_f1_difference,limited_run
+draw42_n1,42,M4,M1,0.0,True
+draw42_n1,42,M5,M2,0.0,True
+draw42_n1,42,M6,M3,0.0,True
+draw42_n1,42,M3,M2,0.0,True
+draw42_n1,42,M6,M5,0.0,True
+draw42_n2,42,M4,M1,0.0,True
+draw42_n2,42,M5,M2,0.0,True
+draw42_n2,42,M6,M3,0.0,True
+draw42_n2,42,M3,M2,0.0,True
+draw42_n2,42,M6,M5,0.0,True
