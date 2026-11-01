@@ -217,6 +217,51 @@ Full-budget convergence, repeated-seed scientific
 comparisons, GPU/SSL profiling, secondary scorer agreement and real external
 scoring remain outstanding research/validation work.
 
+**Full-source execution and compute workflow — 1 November 2026**
+
+The suite now passes **103 tests**, including eight checks for source-only capsule
+integrity and actual synthetic supervised/contrastive training kernels. Required
+GPU preflight fails closed on native Windows; CPU-allowed preflight completes the
+default gated batch-four and SSL batch-32 workloads.
+
+The bounded full-source study completed all five jobs using 70 training and 15
+validation participants (138/29 recordings). Waveform statistics use all 323,423
+quality-valid source training epochs. Two short SSL epochs and two short epochs
+for each gated scratch/fine-tuned model exercise the default architectures,
+checked transfer, source validation, saving and reloading. Each epoch is capped
+at 128 training/pretraining batches and 64 validation batches. Both models export
+the same 256 validation targets across all 15 validation participants and share
+normalization. M6 did not outperform M3 in this limited run; the capped schedules
+do not establish an SSL benefit, harm, convergence, or confirmatory performance.
+
+A separate 50-step CPU training profile of the saved gated model measured about
+110 examples/second including cached loading/normalization and sampled peak host
+RSS below 535 MiB. This one-record CPU profile excludes preprocessing/integrity
+startup and does not measure GPU memory or full-campaign throughput.
+
+The source-only capsule contains 573 allowlisted files, including all 167 source
+training/validation stores. Its 4,891,279,360-byte archive passed a complete
+extraction, per-file verification and source-identity check. Test epoch data,
+ISRUC, raw recordings, checkpoints and hidden credentials are excluded. The
+frozen split retains test identities. This is a local archive; no upload or paid
+compute was initiated. The archive reflects its creation snapshot; later
+documentation/evidence changes require a new capsule before transfer.
+
+Hardware inspection identified a GTX 1050 with 4 GB VRAM and Pascal capability
+6.1. Existing Ubuntu 24.04/WSL2 exposes that GPU. Project-local Linux setup uses
+pinned TensorFlow/CUDA/cuDNN requirements, but its 2.52 GB GPU-wheel download is
+still in progress at the tracked evidence snapshot. No passed GPU check is
+claimed. An unattended continuation records dependency/import checks, required-GPU
+training preflight and, if successful, a 50-step source-only GPU profile under
+`runs/compute_2026-10-31`; it starts no full campaign. Inspect
+`gpu_setup_status_2026-11-01.json` there for the live result. System packages,
+drivers and cloud accounts were not changed.
+
+Evidence is in `reports/compute_2026-11-01`; operational instructions are in
+`COMPUTE_GUIDE.md`. All ten preserved historical artifact hashes remain unchanged.
+No new source-test or real ISRUC predictive scores were opened. Full-budget
+convergence, repeated seeds and confirmatory external evaluation remain ahead.
+
 Evaluating the frozen feature model from the newly prepared source data reproduced
 accuracy **0.8266296611**, macro-F1 **0.6533745630**, and every entry in the saved
 confusion matrix. These checks validate the data migration and baseline; no

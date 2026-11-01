@@ -1,0 +1,13 @@
+{
+  "unpacked": {
+    "destination": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\compute_2026-10-31\\restored_source_2026-11-01",
+    "manifest_fingerprint": "a173e8202b0d651e3bc28256bb8f99b1a523194d003e97aafbfa8e69fde1365b",
+    "files_verified": 573
+  },
+  "verified": {
+    "manifest_fingerprint": "a173e8202b0d651e3bc28256bb8f99b1a523194d003e97aafbfa8e69fde1365b",
+    "files_verified": 573,
+    "training_participants": 70,
+    "validation_participants": 15
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "epochs_completed": 2,
+  "resumed_after_epoch": 0,
+  "source_quality_epochs_available": 323423,
+  "normalization_fit_epochs": 323423,
+  "original_epochs_per_batch": 32,
+  "batches_per_epoch": 128,
+  "original_epochs_used_per_epoch": 4096,
+  "incomplete_tail_epochs_per_pass": 31,
+  "maximum_negatives_per_anchor": 62,
+  "optimizer_iterations": 256,
+  "parameters": 35328,
+  "encoder_parameters": 27008,
+  "limited_data_run": true,
+  "elapsed_seconds_this_run": 59.61361180001404,
+  "encoder_max_weight_update_this_run": 0.06042332574725151,
+  "encoder_reload_max_difference": 0.0,
+  "last_epoch": {
+    "epoch": 2,
+    "loss": 0.8722354611381888,
+    "retrieval_accuracy": 1.0,
+    "positive_cosine": 0.9714946863241494,
+    "negative_cosine": 0.08128687466523843,
+    "mean_negatives_per_anchor": 61.998046875,
+    "encoder_epochs": 64,
+    "encoder_embedding_dimension": 64,
+    "encoder_mean_dimension_std": 0.08964982316975707,
+    "encoder_covariance_effective_rank": 16.95311090825384,
+    "encoder_mean_embedding_norm": 1.6804662218573725
+  }
+}

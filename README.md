@@ -655,3 +655,14 @@ Synthetic fixtures separately test external-record scoring and cohort failures.
 No real ISRUC performance was opened during this implementation milestone.
 Secondary scorer/channel sensitivity and agreement analyses need separately
 prepared annotation stores, declared alignment/cohort policies and further work.
+
+**Compute setup and portable source training**
+
+See [COMPUTE_GUIDE.md](COMPUTE_GUIDE.md) for the inspected GTX 1050/4 GB hardware,
+isolated WSL setup, pinned CUDA dependencies, actual training-kernel preflight,
+bounded full-source benchmark and source-only training capsule. The capsule
+supports verified local transfer preparation without uploading data or starting
+paid compute. It includes Sleep-EDF training/validation stores and excludes test
+epoch files and ISRUC. `configs/experiment_source_benchmark.json` exercises M3/M6
+with the default model and capped schedules; it is separate from the full matrix.
+GPU readiness requires a passed kernel check on the recorded environment.

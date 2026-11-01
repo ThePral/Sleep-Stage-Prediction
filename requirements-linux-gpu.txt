@@ -1,0 +1,4 @@
+# Linux/WSL2 NVIDIA environment; install in an isolated virtual environment.
+-r requirements-research-common.txt
+-c constraints-cuda125-pascal.txt
+tensorflow[and-cuda]==2.21.0

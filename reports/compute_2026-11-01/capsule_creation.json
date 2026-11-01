@@ -1,0 +1,1105 @@
+{
+  "archive": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\compute_2026-10-31\\source_training_2026-11-01.tar",
+  "archive_sha256": "c79e70cfa4e18cffccbec5d970ad7eb14ca10fdd423853d75c969b87c0cc1f37",
+  "archive_bytes": 4891279360,
+  "manifest_fingerprint": "a173e8202b0d651e3bc28256bb8f99b1a523194d003e97aafbfa8e69fde1365b",
+  "files": 573,
+  "source_scope": {
+    "training_participants": [
+      "SC400",
+      "SC403",
+      "SC404",
+      "SC405",
+      "SC406",
+      "SC407",
+      "SC408",
+      "SC409",
+      "SC410",
+      "SC412",
+      "SC413",
+      "SC415",
+      "SC416",
+      "SC417",
+      "SC418",
+      "SC419",
+      "SC422",
+      "SC425",
+      "SC426",
+      "SC427",
+      "SC428",
+      "SC430",
+      "SC431",
+      "SC433",
+      "SC434",
+      "SC435",
+      "SC436",
+      "SC438",
+      "SC440",
+      "SC441",
+      "SC442",
+      "SC443",
+      "SC445",
+      "SC446",
+      "SC447",
+      "SC448",
+      "SC450",
+      "SC451",
+      "SC454",
+      "SC455",
+      "SC456",
+      "SC457",
+      "SC459",
+      "SC462",
+      "SC463",
+      "SC465",
+      "SC466",
+      "SC467",
+      "SC470",
+      "SC472",
+      "SC475",
+      "SC477",
+      "SC480",
+      "SC481",
+      "SC482",
+      "ST702",
+      "ST704",
+      "ST705",
+      "ST706",
+      "ST707",
+      "ST709",
+      "ST711",
+      "ST712",
+      "ST713",
+      "ST715",
+      "ST717",
+      "ST718",
+      "ST719",
+      "ST720",
+      "ST721"
+    ],
+    "validation_participants": [
+      "SC401",
+      "SC414",
+      "SC420",
+      "SC421",
+      "SC424",
+      "SC429",
+      "SC432",
+      "SC437",
+      "SC452",
+      "SC471",
+      "SC476",
+      "ST701",
+      "ST708",
+      "ST716",
+      "ST724"
+    ],
+    "recordings": [
+      {
+        "recording_id": "SC4001",
+        "participant_id": "SC400",
+        "split": "train",
+        "manifest_sha256": "03fbe1de18d0c4cb095c29ab190ddcdacf4d656e04132a912dc50a9914e71e53"
+      },
+      {
+        "recording_id": "SC4002",
+        "participant_id": "SC400",
+        "split": "train",
+        "manifest_sha256": "f5529b49826a0e7da7aff27f0496fdaa376cee305d20895fde9f4b24a74e4a61"
+      },
+      {
+        "recording_id": "SC4011",
+        "participant_id": "SC401",
+        "split": "val",
+        "manifest_sha256": "45cf19b278dbd3118f893e85ced5237b1b3ff0cff03060e888df8b1788c28085"
+      },
+      {
+        "recording_id": "SC4012",
+        "participant_id": "SC401",
+        "split": "val",
+        "manifest_sha256": "01cf54d7e05b5c7e68c195004735b8908e5f3297a3b5c2acab893df9d764dd74"
+      },
+      {
+        "recording_id": "SC4031",
+        "participant_id": "SC403",
+        "split": "train",
+        "manifest_sha256": "c46a42cf152b1a5712ec8941ff9a5caf803efeee4891b87476beda89bc47193b"
+      },
+      {
+        "recording_id": "SC4032",
+        "participant_id": "SC403",
+        "split": "train",
+        "manifest_sha256": "0050e58831c0f34a95192427f41430891a606b61c87835f6c0c2f088c00e3e9f"
+      },
+      {
+        "recording_id": "SC4041",
+        "participant_id": "SC404",
+        "split": "train",
+        "manifest_sha256": "debfacc1ed9c6aaf785b9e791d5eb12314a3c6d21b395634dc219cdb37e64ace"
+      },
+      {
+        "recording_id": "SC4042",
+        "participant_id": "SC404",
+        "split": "train",
+        "manifest_sha256": "00b44e6ff945a7eda32d9cbd9577012cdde49b73c867bd64e4b94bbd3a73b357"
+      },
+      {
+        "recording_id": "SC4051",
+        "participant_id": "SC405",
+        "split": "train",
+        "manifest_sha256": "845bbd71c57306e6e162915fe39b3114a826b3782ce4933a49cd02dceaf52d0a"
+      },
+      {
+        "recording_id": "SC4052",
+        "participant_id": "SC405",
+        "split": "train",
+        "manifest_sha256": "3c5307cbd2aac0cb18f4538789bea118c4312cd7e18f3a1452f600367df3b9fd"
+      },
+      {
+        "recording_id": "SC4061",
+        "participant_id": "SC406",
+        "split": "train",
+        "manifest_sha256": "5c678b714024f7db5f809a1b06b94070cb67c628d6788354625636c7933cba49"
+      },
+      {
+        "recording_id": "SC4062",
+        "participant_id": "SC406",
+        "split": "train",
+        "manifest_sha256": "0902679d183ca692106112ccb84fdad3ea0241c8b4ee5c82d2e55d4a878e4daf"
+      },
+      {
+        "recording_id": "SC4071",
+        "participant_id": "SC407",
+        "split": "train",
+        "manifest_sha256": "7881d004e29aed4b4deb099e404a2f5a9f73d1f18fbb521607b95af73ca2a7de"
+      },
+      {
+        "recording_id": "SC4072",
+        "participant_id": "SC407",
+        "split": "train",
+        "manifest_sha256": "e37b59f243e01167a845b7298ada338d93216289843cc8b3e751f68d19b4664f"
+      },
+      {
+        "recording_id": "SC4081",
+        "participant_id": "SC408",
+        "split": "train",
+        "manifest_sha256": "0e216b79135185944c26ba4a0757197de4d5bb0ba0db4721f57f34a239be6627"
+      },
+      {
+        "recording_id": "SC4082",
+        "participant_id": "SC408",
+        "split": "train",
+        "manifest_sha256": "0bbb8f22591a89e441c00888f4df5c4afa0816b5048b387f66cedc577b6e9836"
+      },
+      {
+        "recording_id": "SC4091",
+        "participant_id": "SC409",
+        "split": "train",
+        "manifest_sha256": "add842a93db9fcc440b1145472719979f2bca410d87f55f074216a936b80294d"
+      },
+      {
+        "recording_id": "SC4092",
+        "participant_id": "SC409",
+        "split": "train",
+        "manifest_sha256": "023553fbfb3210621196356ff241159fd7dd3525996e985b4bdfa28ae38a67d6"
+      },
+      {
+        "recording_id": "SC4101",
+        "participant_id": "SC410",
+        "split": "train",
+        "manifest_sha256": "a2852dadd0382874bb69cdf5591bad4f24c63eb4e4bcb312a684756471264664"
+      },
+      {
+        "recording_id": "SC4102",
+        "participant_id": "SC410",
+        "split": "train",
+        "manifest_sha256": "6100ef32821f63c95e79b3fce8947813d23c5a8cb42affda61ec527e2841769b"
+      },
+      {
+        "recording_id": "SC4121",
+        "participant_id": "SC412",
+        "split": "train",
+        "manifest_sha256": "5a37b51764553fc6657c61bca84d43afcafb1582f8d25bc2b68069e75c4d114e"
+      },
+      {
+        "recording_id": "SC4122",
+        "participant_id": "SC412",
+        "split": "train",
+        "manifest_sha256": "45922b257b617ee9cd7f9114ba6b9a94fd7db5bb0753e7c4c6037b2b768949d5"
+      },
+      {
+        "recording_id": "SC4131",
+        "participant_id": "SC413",
+        "split": "train",
+        "manifest_sha256": "549bb7b4e0694d1793411e01541d3833af482e43f2387ee7e3767cca64d3bed9"
+      },
+      {
+        "recording_id": "SC4141",
+        "participant_id": "SC414",
+        "split": "val",
+        "manifest_sha256": "0f8cfd3d57e7e4e515366d6d7dfab086f494bac697f3f08d79b727e595d4e216"
+      },
+      {
+        "recording_id": "SC4142",
+        "participant_id": "SC414",
+        "split": "val",
+        "manifest_sha256": "7d5e9fa9bbd715e33e6e6a4c55cb762e0176ba1b67575d294239180cf081cf05"
+      },
+      {
+        "recording_id": "SC4151",
+        "participant_id": "SC415",
+        "split": "train",
+        "manifest_sha256": "e7c267e13d77da22c2bdc388ecdd6d85e181c67f6f8b80b894a80dabd55d89fd"
+      },
+      {
+        "recording_id": "SC4152",
+        "participant_id": "SC415",
+        "split": "train",
+        "manifest_sha256": "1138c49003e96472b2d2d0adf47af35c73368c0b2fda0ef2d882a7ebf30d7b0e"
+      },
+      {
+        "recording_id": "SC4161",
+        "participant_id": "SC416",
+        "split": "train",
+        "manifest_sha256": "4d662b09b2e7ff132749ebb91c8a90086c4fd3cd3194e24ae478ebdcc13bcc32"
+      },
+      {
+        "recording_id": "SC4162",
+        "participant_id": "SC416",
+        "split": "train",
+        "manifest_sha256": "a5d84d07bdf1d286ca9561899bcc2b57d39ec4c14ba7102de2022e98c71cc87c"
+      },
+      {
+        "recording_id": "SC4171",
+        "participant_id": "SC417",
+        "split": "train",
+        "manifest_sha256": "0129110a5762eb5442f0d9149f9b7e3a7edbc718d7d8fb5548fbf51b97713814"
+      },
+      {
+        "recording_id": "SC4172",
+        "participant_id": "SC417",
+        "split": "train",
+        "manifest_sha256": "c6f0bd412117e70856e22a738c5b5bf92f9cf3bf6fc84492638a9cf8c6e99a8b"
+      },
+      {
+        "recording_id": "SC4181",
+        "participant_id": "SC418",
+        "split": "train",
+        "manifest_sha256": "328a7bdd244f67c3f7dbe31b0693f40d60e58edb85c9ba7a0b3125a48beb71eb"
+      },
+      {
+        "recording_id": "SC4182",
+        "participant_id": "SC418",
+        "split": "train",
+        "manifest_sha256": "12adafd9fdf4a629633dc9b557b6de5df3adccfd3b6cae9a1dfcf7c7d94bb2b2"
+      },
+      {
+        "recording_id": "SC4191",
+        "participant_id": "SC419",
+        "split": "train",
+        "manifest_sha256": "9e1d0a64ae06f818285d0487db29cf7e4b3da38b239386a7a96335f6d3e8229b"
+      },
+      {
+        "recording_id": "SC4192",
+        "participant_id": "SC419",
+        "split": "train",
+        "manifest_sha256": "f8c621fe06635e44eff9e31a502cf812494226a707a5bb5a00a61a860d0c0545"
+      },
+      {
+        "recording_id": "SC4201",
+        "participant_id": "SC420",
+        "split": "val",
+        "manifest_sha256": "0afdb9a48af9f6dce94708d438dc9923d07f045bf4292f4273beae8ba41c1e5b"
+      },
+      {
+        "recording_id": "SC4202",
+        "participant_id": "SC420",
+        "split": "val",
+        "manifest_sha256": "17eac1b082cf3a4ca556deecb19ac23bae516a2ed541b01ada58bc109cfea910"
+      },
+      {
+        "recording_id": "SC4211",
+        "participant_id": "SC421",
+        "split": "val",
+        "manifest_sha256": "7cce3eda96911295b1fff669f9ccdced314bb9df5b78135b8b6d9b54f7d2f8fe"
+      },
+      {
+        "recording_id": "SC4212",
+        "participant_id": "SC421",
+        "split": "val",
+        "manifest_sha256": "d8278409786d599121241e55acd5846b99015accac6245f7918f28670c25a2fe"
+      },
+      {
+        "recording_id": "SC4221",
+        "participant_id": "SC422",
+        "split": "train",
+        "manifest_sha256": "168512ee1dbf2e0efe43de89d5e752c8dbd25a5fdfb702b01de52ed138bd7289"
+      },
+      {
+        "recording_id": "SC4222",
+        "participant_id": "SC422",
+        "split": "train",
+        "manifest_sha256": "114eff59dd200fbdc254b183dab7c3e902caa15815b192bb386e51f2c096b94c"
+      },
+      {
+        "recording_id": "SC4241",
+        "participant_id": "SC424",
+        "split": "val",
+        "manifest_sha256": "6f668ed51de6fe9b2cdf51cb76251a4c1f4bf0a50bd137fc02fee50081ae3d71"
+      },
+      {
+        "recording_id": "SC4242",
+        "participant_id": "SC424",
+        "split": "val",
+        "manifest_sha256": "4ddeb10954f7731a84d87d2f8c9085280d0684f78af5241ffdc180ef8b957681"
+      },
+      {
+        "recording_id": "SC4251",
+        "participant_id": "SC425",
+        "split": "train",
+        "manifest_sha256": "f33354d3606c89379fb40616f0cdc1a96f65c7b5c7c66ac6e21e016973639d96"
+      },
+      {
+        "recording_id": "SC4252",
+        "participant_id": "SC425",
+        "split": "train",
+        "manifest_sha256": "8b23015b306dcdb88aceec4b032a2aa6877c5bbbdfefee1152b06b346b1fb4ee"
+      },
+      {
+        "recording_id": "SC4261",
+        "participant_id": "SC426",
+        "split": "train",
+        "manifest_sha256": "fb243d85fd28fca59d7e315df15756b14bc97814a4ffda31f9caae84aaaf5e39"
+      },
+      {
+        "recording_id": "SC4262",
+        "participant_id": "SC426",
+        "split": "train",
+        "manifest_sha256": "96c19f79feb00f3bd6565e4aa3cfd271737fe4e12673a7d3dcc119c99643d886"
+      },
+      {
+        "recording_id": "SC4271",
+        "participant_id": "SC427",
+        "split": "train",
+        "manifest_sha256": "858123a0c596e4d88d037b50e56daf756bdf44532e1a651ab64cbd333c8b1adf"
+      },
+      {
+        "recording_id": "SC4272",
+        "participant_id": "SC427",
+        "split": "train",
+        "manifest_sha256": "cdbcdfc6d80c12c2f9d10192103e2728d44fa75e4874c4ef7a9e5980f500cff3"
+      },
+      {
+        "recording_id": "SC4281",
+        "participant_id": "SC428",
+        "split": "train",
+        "manifest_sha256": "6cd50b64d2b4ece3100c584608726833d1f3677e2f58835be575eef2b0109f8d"
+      },
+      {
+        "recording_id": "SC4282",
+        "participant_id": "SC428",
+        "split": "train",
+        "manifest_sha256": "71ee5e44c43e065588ee5840a4cc29411bcd16a0472aae215b21be9f3d5f958e"
+      },
+      {
+        "recording_id": "SC4291",
+        "participant_id": "SC429",
+        "split": "val",
+        "manifest_sha256": "7060efd23e4b706f342e19b4e546bb849a5615364a9f7145749fedfe565fee28"
+      },
+      {
+        "recording_id": "SC4292",
+        "participant_id": "SC429",
+        "split": "val",
+        "manifest_sha256": "cc0193cf3863dd76f888633c7327da8de7badd491ee03478074d1e7edeba34c4"
+      },
+      {
+        "recording_id": "SC4301",
+        "participant_id": "SC430",
+        "split": "train",
+        "manifest_sha256": "07c1d4b7277bdc5e1da417959ca5db2c6aaa6538d8009b62de8a0da82702d55b"
+      },
+      {
+        "recording_id": "SC4302",
+        "participant_id": "SC430",
+        "split": "train",
+        "manifest_sha256": "47e3dd56132684963185013b37039720e3edca0ee1427ec85f392f4311157e62"
+      },
+      {
+        "recording_id": "SC4311",
+        "participant_id": "SC431",
+        "split": "train",
+        "manifest_sha256": "0e1eb2cf75a68892380ba7d0cbddc2f0428da2a66cc16ab20da7b756d8ff8794"
+      },
+      {
+        "recording_id": "SC4312",
+        "participant_id": "SC431",
+        "split": "train",
+        "manifest_sha256": "c303e3d37c3ac3426cc250de53524a157758ac4413b97a5a0f0bc0a6267a1f50"
+      },
+      {
+        "recording_id": "SC4321",
+        "participant_id": "SC432",
+        "split": "val",
+        "manifest_sha256": "afc14e1da0ea9d69c5406c54196683f949e7091577320098367b3302fa431b6b"
+      },
+      {
+        "recording_id": "SC4322",
+        "participant_id": "SC432",
+        "split": "val",
+        "manifest_sha256": "4ccae5f361f76e5309242effe82aaac0356adb3d58fc5c85138a1e7a2a4e28dc"
+      },
+      {
+        "recording_id": "SC4331",
+        "participant_id": "SC433",
+        "split": "train",
+        "manifest_sha256": "f91bc4a476525b14e51db45e138a20c9cea19b360b9c12b68ae4aed3acb65dfb"
+      },
+      {
+        "recording_id": "SC4332",
+        "participant_id": "SC433",
+        "split": "train",
+        "manifest_sha256": "de628db06e51053f94055ffb178c11bee74f5180029adc7598f998b3961475b8"
+      },
+      {
+        "recording_id": "SC4341",
+        "participant_id": "SC434",
+        "split": "train",
+        "manifest_sha256": "7ae940c65ff677db97473bd717e10717179c8946607e98e1490d5cb0976b8a49"
+      },
+      {
+        "recording_id": "SC4342",
+        "participant_id": "SC434",
+        "split": "train",
+        "manifest_sha256": "1eb7d21204b2fd33cbc15f7836b5b3b94074024023120d6456b9b7241b8db561"
+      },
+      {
+        "recording_id": "SC4351",
+        "participant_id": "SC435",
+        "split": "train",
+        "manifest_sha256": "e198d060a35d89f89ca53d8af7d69e74e1a8da520c44ae92afd3d35953ad4404"
+      },
+      {
+        "recording_id": "SC4352",
+        "participant_id": "SC435",
+        "split": "train",
+        "manifest_sha256": "3a736a9077487021b4f98c0bc5b15cd8d44fca1d139848ffa0974f30aaa5e7a4"
+      },
+      {
+        "recording_id": "SC4362",
+        "participant_id": "SC436",
+        "split": "train",
+        "manifest_sha256": "20fce8e55cfad528fa9b130ec84519af2ba4c2db574314870e24bedb3a0e87f5"
+      },
+      {
+        "recording_id": "SC4371",
+        "participant_id": "SC437",
+        "split": "val",
+        "manifest_sha256": "acb98e528c5f8eec02bf9d9293230d10db24ae0679f9323453458505478bad3b"
+      },
+      {
+        "recording_id": "SC4372",
+        "participant_id": "SC437",
+        "split": "val",
+        "manifest_sha256": "2dd941b4434359a4228dcfba03a67646f149b3909d2cdda9df91ac01c0066cf1"
+      },
+      {
+        "recording_id": "SC4381",
+        "participant_id": "SC438",
+        "split": "train",
+        "manifest_sha256": "3c2370de37d859ac3ded0459fa26c03d87b4fe25493bca42706652b981e99c3e"
+      },
+      {
+        "recording_id": "SC4382",
+        "participant_id": "SC438",
+        "split": "train",
+        "manifest_sha256": "f6b54a5415c9aa83748d9786a4de02bd65d48be9bfcadee0cf43e0a090de6e76"
+      },
+      {
+        "recording_id": "SC4401",
+        "participant_id": "SC440",
+        "split": "train",
+        "manifest_sha256": "145c652579882a65785041802f1a7e8c8179bb158db7d9a758b5f37eb2594396"
+      },
+      {
+        "recording_id": "SC4402",
+        "participant_id": "SC440",
+        "split": "train",
+        "manifest_sha256": "ed7bc991b0b90a151365723577df156da6ae2ee8a06e44c1161c120ef6b8c543"
+      },
+      {
+        "recording_id": "SC4411",
+        "participant_id": "SC441",
+        "split": "train",
+        "manifest_sha256": "fee0fe76006f104d7c17748eb674276eb22b419037fc3a1602159fb3f54bf705"
+      },
+      {
+        "recording_id": "SC4412",
+        "participant_id": "SC441",
+        "split": "train",
+        "manifest_sha256": "64a54c786374a2fd7effd757fa6da880901eebac8352ae67047385ce3c9ec0bc"
+      },
+      {
+        "recording_id": "SC4421",
+        "participant_id": "SC442",
+        "split": "train",
+        "manifest_sha256": "2721f440fe17b1d2b647a84c8f399e9f57aeabbc81153a751eef84895c470226"
+      },
+      {
+        "recording_id": "SC4422",
+        "participant_id": "SC442",
+        "split": "train",
+        "manifest_sha256": "975db1901a1b63c627f5d91078a8907f91d15aeae7fdbdc6a19f30e3915d1035"
+      },
+      {
+        "recording_id": "SC4431",
+        "participant_id": "SC443",
+        "split": "train",
+        "manifest_sha256": "bb7ce1eeee1eef29eb00c2f8e2fa382b8f39cc026e666327dc11cef3ffeca0b0"
+      },
+      {
+        "recording_id": "SC4432",
+        "participant_id": "SC443",
+        "split": "train",
+        "manifest_sha256": "ccee9013cad4cc415de1c50e30946ea042fada3f93d070586bb03ee33a119021"
+      },
+      {
+        "recording_id": "SC4451",
+        "participant_id": "SC445",
+        "split": "train",
+        "manifest_sha256": "88ad79afe2d2266d9a905fdea26b797b8c0726f5d37d6bfec780261f8a1b2e96"
+      },
+      {
+        "recording_id": "SC4452",
+        "participant_id": "SC445",
+        "split": "train",
+        "manifest_sha256": "6c909e73eb37a2b8210f48d8689b9c3f08aaa43b017d263c316d6d1738b67568"
+      },
+      {
+        "recording_id": "SC4461",
+        "participant_id": "SC446",
+        "split": "train",
+        "manifest_sha256": "0b6a842639855a01e334044b683cc9920464954f8d6a617bdb5b6e1675e7ad76"
+      },
+      {
+        "recording_id": "SC4462",
+        "participant_id": "SC446",
+        "split": "train",
+        "manifest_sha256": "9b3241cca43db68cba66d2bd6719f2ebfe914449d1379ea0703fdb14e70bacf5"
+      },
+      {
+        "recording_id": "SC4471",
+        "participant_id": "SC447",
+        "split": "train",
+        "manifest_sha256": "7fdfc63912ff8ba091fbc1109b23ec9cff51ad9635a0aede266b979d805d660e"
+      },
+      {
+        "recording_id": "SC4472",
+        "participant_id": "SC447",
+        "split": "train",
+        "manifest_sha256": "94b985ea5606f2f0439c2ffadd7fd19b443def450adac5b3a21ba2de3919061e"
+      },
+      {
+        "recording_id": "SC4481",
+        "participant_id": "SC448",
+        "split": "train",
+        "manifest_sha256": "1a64727701c6a0a425ab45535148eb3ae6acc2484019c206e35d4b03461d507d"
+      },
+      {
+        "recording_id": "SC4482",
+        "participant_id": "SC448",
+        "split": "train",
+        "manifest_sha256": "418a26a2d7d885a8fed8607a4db19176bfefd8bc3a27d86acae3736e2d8d7462"
+      },
+      {
+        "recording_id": "SC4501",
+        "participant_id": "SC450",
+        "split": "train",
+        "manifest_sha256": "afdec8bcac8ee037b3b09658e7e79ceb416a5da0062aaaf447dac26e94239b6b"
+      },
+      {
+        "recording_id": "SC4502",
+        "participant_id": "SC450",
+        "split": "train",
+        "manifest_sha256": "2079d12576f8d16cd72ee690ed02e000f7217e9dd1bed6dbc5c6098ffbb33e01"
+      },
+      {
+        "recording_id": "SC4511",
+        "participant_id": "SC451",
+        "split": "train",
+        "manifest_sha256": "769b931966d549c65a405ac61c793f9f6f5f19f7cb913d6546c18f72f52b2cd9"
+      },
+      {
+        "recording_id": "SC4512",
+        "participant_id": "SC451",
+        "split": "train",
+        "manifest_sha256": "d607bf359b939dcbcead2b4716a0b2b638f17e878edebfb610c285e444e19da8"
+      },
+      {
+        "recording_id": "SC4522",
+        "participant_id": "SC452",
+        "split": "val",
+        "manifest_sha256": "e6ff3bed03c635913bf353c460c9fd6acfc037787c6a0a43233e067481e841ac"
+      },
+      {
+        "recording_id": "SC4541",
+        "participant_id": "SC454",
+        "split": "train",
+        "manifest_sha256": "9a416b1c5ede349f41c0ae13e8154335314ff442990f7eab90fc03a30de7a360"
+      },
+      {
+        "recording_id": "SC4542",
+        "participant_id": "SC454",
+        "split": "train",
+        "manifest_sha256": "c178d597d01993476750463a214b9ec2b7629fc51e294fa00d2a6dbc2bfdbb1d"
+      },
+      {
+        "recording_id": "SC4551",
+        "participant_id": "SC455",
+        "split": "train",
+        "manifest_sha256": "477209107858fed33a270c34e4d811f55554c84a95abeb79167b7f694c0a7023"
+      },
+      {
+        "recording_id": "SC4552",
+        "participant_id": "SC455",
+        "split": "train",
+        "manifest_sha256": "fc7171f323bde22b12af367ff4eb8eaa0eb1946e2d68b8ce85825163a659b280"
+      },
+      {
+        "recording_id": "SC4561",
+        "participant_id": "SC456",
+        "split": "train",
+        "manifest_sha256": "b7f341c0888753a3f6872116b5d608be6eed910824bd3c8e7b5e4cc7f40cb7ab"
+      },
+      {
+        "recording_id": "SC4562",
+        "participant_id": "SC456",
+        "split": "train",
+        "manifest_sha256": "ea3914ee6826885ca042478cad40448327340ff319800af9c883ec572f3fc0e7"
+      },
+      {
+        "recording_id": "SC4571",
+        "participant_id": "SC457",
+        "split": "train",
+        "manifest_sha256": "75fada8057549335f071416da0053e1955ef9ed0cb127b516f5bba3376ac2702"
+      },
+      {
+        "recording_id": "SC4572",
+        "participant_id": "SC457",
+        "split": "train",
+        "manifest_sha256": "ce91e6a59816a97c50ba8e802d532ce08ff3562a57a4829ef77882d2c6769af1"
+      },
+      {
+        "recording_id": "SC4591",
+        "participant_id": "SC459",
+        "split": "train",
+        "manifest_sha256": "7741c60dbe9e3338c415bab450e22548cbcbcc359a644e85ccd69a2f071ac675"
+      },
+      {
+        "recording_id": "SC4592",
+        "participant_id": "SC459",
+        "split": "train",
+        "manifest_sha256": "231f816b049ab12a13ab6dc29cdc2b197c7b4603e330681efead6c3c55a139f6"
+      },
+      {
+        "recording_id": "SC4621",
+        "participant_id": "SC462",
+        "split": "train",
+        "manifest_sha256": "f35773453c8d3cdc86acba7dc7e745d0a44de70316c805b76de01fc8f589e00f"
+      },
+      {
+        "recording_id": "SC4622",
+        "participant_id": "SC462",
+        "split": "train",
+        "manifest_sha256": "020983541b1015aa7c26fd7e2a84538ceebcc9e9bf926697f5cf6b5ec86b1837"
+      },
+      {
+        "recording_id": "SC4631",
+        "participant_id": "SC463",
+        "split": "train",
+        "manifest_sha256": "1c36aae91c7ad543a6c93bd8a5f726aa015dc69c7e385b9ae550f7fd4e773ace"
+      },
+      {
+        "recording_id": "SC4632",
+        "participant_id": "SC463",
+        "split": "train",
+        "manifest_sha256": "1ebde362046cbf7f7a5216d5b003cd60b955647da0e10d301a52ea935643185f"
+      },
+      {
+        "recording_id": "SC4651",
+        "participant_id": "SC465",
+        "split": "train",
+        "manifest_sha256": "9c4dda913ef46e56336dbc565397780b5c0062f55257f12f2ec831798560e031"
+      },
+      {
+        "recording_id": "SC4652",
+        "participant_id": "SC465",
+        "split": "train",
+        "manifest_sha256": "9f7b216939dd4a861e2dd389b8798bbbb76b54e06d29d19c5d1dc59e0862018c"
+      },
+      {
+        "recording_id": "SC4661",
+        "participant_id": "SC466",
+        "split": "train",
+        "manifest_sha256": "5d9ed87cf093c471d32ddda0728f972c3d425f4daa6473387559e6f3e2321316"
+      },
+      {
+        "recording_id": "SC4662",
+        "participant_id": "SC466",
+        "split": "train",
+        "manifest_sha256": "d35227fa48b0c95ac3b0a17fc9da9acba67d87d77f7afa8f4774041d5777a570"
+      },
+      {
+        "recording_id": "SC4671",
+        "participant_id": "SC467",
+        "split": "train",
+        "manifest_sha256": "7afca49da7e65abd76c2acd452c3784c28995730b54f65429c31366fb9895797"
+      },
+      {
+        "recording_id": "SC4672",
+        "participant_id": "SC467",
+        "split": "train",
+        "manifest_sha256": "52991b949e7b71411b52edd17d167b0e39cd537feaf7c8fe64eea04070e62d5b"
+      },
+      {
+        "recording_id": "SC4701",
+        "participant_id": "SC470",
+        "split": "train",
+        "manifest_sha256": "33dddaf76402e92117bb46e6f48673abe1cfcdd8fa268ae910a4aaff0ba098bd"
+      },
+      {
+        "recording_id": "SC4702",
+        "participant_id": "SC470",
+        "split": "train",
+        "manifest_sha256": "fe9256154292aeee25a7ed82dfda4ee47ad40b144f2d671acbd6c0de6742ae5a"
+      },
+      {
+        "recording_id": "SC4711",
+        "participant_id": "SC471",
+        "split": "val",
+        "manifest_sha256": "04e504d6c3e893e41a1323a19e4acb034e3e72fbe7fb3b0386c44637a64b96f1"
+      },
+      {
+        "recording_id": "SC4712",
+        "participant_id": "SC471",
+        "split": "val",
+        "manifest_sha256": "21c3d06686c23c23b4937cc7502ecea043cfc364cdc117099374551121760fd5"
+      },
+      {
+        "recording_id": "SC4721",
+        "participant_id": "SC472",
+        "split": "train",
+        "manifest_sha256": "07506aa51daf5860912f3f1e7fdcf523ef33ca4d892a34367e51e830566ebd08"
+      },
+      {
+        "recording_id": "SC4722",
+        "participant_id": "SC472",
+        "split": "train",
+        "manifest_sha256": "44962201264287ea08db1a41b15a4eb828aa116ff551f4d4f8c8686af03e2b7d"
+      },
+      {
+        "recording_id": "SC4751",
+        "participant_id": "SC475",
+        "split": "train",
+        "manifest_sha256": "d1e01c501ff9e75a2d718fade80a0bb12b606faae01603ec9a5a9e4b22dbc986"
+      },
+      {
+        "recording_id": "SC4752",
+        "participant_id": "SC475",
+        "split": "train",
+        "manifest_sha256": "9ab00a2b2af34801ef47a55a1caf487a5eb0b9c7a8610814971ba8a191653c55"
+      },
+      {
+        "recording_id": "SC4761",
+        "participant_id": "SC476",
+        "split": "val",
+        "manifest_sha256": "beeaa611ebf3e3fe1bfd9ca3bac435da4649d68ec179f665a1b42b81af5eeee8"
+      },
+      {
+        "recording_id": "SC4762",
+        "participant_id": "SC476",
+        "split": "val",
+        "manifest_sha256": "06195220328a8279238ed7397a67eb50348548eda56b5b13f36f94fd1e5aad10"
+      },
+      {
+        "recording_id": "SC4771",
+        "participant_id": "SC477",
+        "split": "train",
+        "manifest_sha256": "897d3e7618f7e4432b6e0e78477bc675f938821ed7180c89d7f1ba03cac0fe86"
+      },
+      {
+        "recording_id": "SC4772",
+        "participant_id": "SC477",
+        "split": "train",
+        "manifest_sha256": "f1f54a3d1bbe85b2530d624bd05d59721e12c8322aeb949d7d4ec0ccd941f1f6"
+      },
+      {
+        "recording_id": "SC4801",
+        "participant_id": "SC480",
+        "split": "train",
+        "manifest_sha256": "0d8625913ea55fb7575f6e2ca6fd14bb9dcc7d1ec053eb54c663a8bb37680d6c"
+      },
+      {
+        "recording_id": "SC4802",
+        "participant_id": "SC480",
+        "split": "train",
+        "manifest_sha256": "e2b0292574558eb53b4ddfe12cdadeb119608c6a6c375a38363db6c9d0ae6cd2"
+      },
+      {
+        "recording_id": "SC4811",
+        "participant_id": "SC481",
+        "split": "train",
+        "manifest_sha256": "68ba2f4cf2e1016d13285c9c48c85680a2736bfd1699aefa6bc8ff92681420fc"
+      },
+      {
+        "recording_id": "SC4812",
+        "participant_id": "SC481",
+        "split": "train",
+        "manifest_sha256": "42638a1acbd620ca6f6d15a00743e18d6b7513ca35953b8c0a4772df57363072"
+      },
+      {
+        "recording_id": "SC4821",
+        "participant_id": "SC482",
+        "split": "train",
+        "manifest_sha256": "c719faf34d16d04ff89dfeaae4a2c88c9c8cc3c7992351195533e601ab7e6971"
+      },
+      {
+        "recording_id": "SC4822",
+        "participant_id": "SC482",
+        "split": "train",
+        "manifest_sha256": "dc2572dac49feb1cfcc5f9b28891bd4b2fd19830c5fe7d31d68e268fe11f5a78"
+      },
+      {
+        "recording_id": "ST7011",
+        "participant_id": "ST701",
+        "split": "val",
+        "manifest_sha256": "266dbf8d050cec977f9e3fe3ae70965f18318776db3cc624e0516788c21109bc"
+      },
+      {
+        "recording_id": "ST7012",
+        "participant_id": "ST701",
+        "split": "val",
+        "manifest_sha256": "85c78665ed6044eecdb194fb7d25f95829d1aca7f4531cdcf6471616122c8bcc"
+      },
+      {
+        "recording_id": "ST7021",
+        "participant_id": "ST702",
+        "split": "train",
+        "manifest_sha256": "eee91a73e413dabfad699c7232fbfdb6e36ee8b9cfcebca6396a2ac156412704"
+      },
+      {
+        "recording_id": "ST7022",
+        "participant_id": "ST702",
+        "split": "train",
+        "manifest_sha256": "4a07c659037c08cfe8ff95e2452a5cc96667df382914bd48b6f269e04659cec2"
+      },
+      {
+        "recording_id": "ST7041",
+        "participant_id": "ST704",
+        "split": "train",
+        "manifest_sha256": "50e36d98fcebd0e27764e5b9ade53b6c7c9b7620cc4b0e19a86fb68fb1eba948"
+      },
+      {
+        "recording_id": "ST7042",
+        "participant_id": "ST704",
+        "split": "train",
+        "manifest_sha256": "bd2cc9e00b659baed087ae660e7acb172068d1d69380c6ee4fb5051c5559b906"
+      },
+      {
+        "recording_id": "ST7051",
+        "participant_id": "ST705",
+        "split": "train",
+        "manifest_sha256": "2427235bdc0c049ea47bf455721bbda8d6fe953d5c8af20a73454037a966bb55"
+      },
+      {
+        "recording_id": "ST7052",
+        "participant_id": "ST705",
+        "split": "train",
+        "manifest_sha256": "ebc02e7d993234b0255a038a40fcb5293baa3a6356a9adac2d05296c14d9167c"
+      },
+      {
+        "recording_id": "ST7061",
+        "participant_id": "ST706",
+        "split": "train",
+        "manifest_sha256": "3cbcde84190f8ab7524ace4f99b440bf895928f272e7ec4590216250046b704e"
+      },
+      {
+        "recording_id": "ST7062",
+        "participant_id": "ST706",
+        "split": "train",
+        "manifest_sha256": "372bc4dfc922105432d5d908cbbfea29d9644bcedf55a3be041eae6f0416c036"
+      },
+      {
+        "recording_id": "ST7071",
+        "participant_id": "ST707",
+        "split": "train",
+        "manifest_sha256": "f937f367f6e2091f886f05ff4226fb642d95aa44b26f452dbca14b92a113d5d5"
+      },
+      {
+        "recording_id": "ST7072",
+        "participant_id": "ST707",
+        "split": "train",
+        "manifest_sha256": "ca48a96b72225071b0251c398d1e08dee537332b6074fefd3fe8711f2b9bee9a"
+      },
+      {
+        "recording_id": "ST7081",
+        "participant_id": "ST708",
+        "split": "val",
+        "manifest_sha256": "00823acad36fb435db11cc23fc017ab68c255bfea343c73835699cfebaee8d75"
+      },
+      {
+        "recording_id": "ST7082",
+        "participant_id": "ST708",
+        "split": "val",
+        "manifest_sha256": "42e16214c94318915117f342ef286794939750c6d46c93d0c2c41d6d006768ba"
+      },
+      {
+        "recording_id": "ST7091",
+        "participant_id": "ST709",
+        "split": "train",
+        "manifest_sha256": "ddeee26f91a5b8836fb71cba5d3c3929de8b99310c9782ea8abb27b4de5d0690"
+      },
+      {
+        "recording_id": "ST7092",
+        "participant_id": "ST709",
+        "split": "train",
+        "manifest_sha256": "0e4fe7560713f8d0402add21ac5c62a5de5ead6e90ce49d1a20645cfae5c85e3"
+      },
+      {
+        "recording_id": "ST7111",
+        "participant_id": "ST711",
+        "split": "train",
+        "manifest_sha256": "be28993f5cee8f1c01dbab52092fefd727849b9a1ecc9bf039f1d29a63bd74b7"
+      },
+      {
+        "recording_id": "ST7112",
+        "participant_id": "ST711",
+        "split": "train",
+        "manifest_sha256": "af9128d953229037bc12e4f2cb904af501cf0955dcc0a8e13e17966377c68be6"
+      },
+      {
+        "recording_id": "ST7121",
+        "participant_id": "ST712",
+        "split": "train",
+        "manifest_sha256": "a40693708ca3e41ab63c974ae81bdc6c32c60c002f469cad97dac7855bd98b8d"
+      },
+      {
+        "recording_id": "ST7122",
+        "participant_id": "ST712",
+        "split": "train",
+        "manifest_sha256": "36eed3626382e88cb635f727e797421fea16ca7dc6439129f3232c41bc660790"
+      },
+      {
+        "recording_id": "ST7131",
+        "participant_id": "ST713",
+        "split": "train",
+        "manifest_sha256": "49d2b9d9a395660ee8c5f7df6a3f4152849ff24e44c85d539f2dd4f1160b652d"
+      },
+      {
+        "recording_id": "ST7132",
+        "participant_id": "ST713",
+        "split": "train",
+        "manifest_sha256": "3fb2929611f5c345704a0c6b8bbbdaf1203f63ebc170665849432bbc20b741da"
+      },
+      {
+        "recording_id": "ST7151",
+        "participant_id": "ST715",
+        "split": "train",
+        "manifest_sha256": "af833e48c430823c6ca188e0135180a300b5dbe1ef8b42043a174ed116cfff79"
+      },
+      {
+        "recording_id": "ST7152",
+        "participant_id": "ST715",
+        "split": "train",
+        "manifest_sha256": "8b11950f0541d8907b1cc5e9bac9cc3362fbba21ceea03137b3a2852ae57bb25"
+      },
+      {
+        "recording_id": "ST7161",
+        "participant_id": "ST716",
+        "split": "val",
+        "manifest_sha256": "16b1f77c6b967bda96bcabbde364cbc2f3dcce3aee347ddf0fbe889d25cfe6a4"
+      },
+      {
+        "recording_id": "ST7162",
+        "participant_id": "ST716",
+        "split": "val",
+        "manifest_sha256": "7f64a7ef05a2a6f863b0faa7b2646c786bde2de62340cba5f0966ec46c16948d"
+      },
+      {
+        "recording_id": "ST7171",
+        "participant_id": "ST717",
+        "split": "train",
+        "manifest_sha256": "e075050d8c67fc0a4814a7b6e32cd77c3d28ac88b2cc4d18667c0dec930ba67d"
+      },
+      {
+        "recording_id": "ST7172",
+        "participant_id": "ST717",
+        "split": "train",
+        "manifest_sha256": "925d408c77f43bd1df123af40dad79f17dda9c59dd4ef6f35c3c4c3ffbc5bb4e"
+      },
+      {
+        "recording_id": "ST7181",
+        "participant_id": "ST718",
+        "split": "train",
+        "manifest_sha256": "acdeee554ce16b3a982de08592c7818a98584f8a5613ce5c94e48adbba745620"
+      },
+      {
+        "recording_id": "ST7182",
+        "participant_id": "ST718",
+        "split": "train",
+        "manifest_sha256": "463d99bb982f3014de9b450c206b1a5d6e43707be362cba729decf988d566399"
+      },
+      {
+        "recording_id": "ST7191",
+        "participant_id": "ST719",
+        "split": "train",
+        "manifest_sha256": "ba70e4372ed12a050b747ec6ae339fc9d90dfe855f54dcbcadc717237dcc8a2d"
+      },
+      {
+        "recording_id": "ST7192",
+        "participant_id": "ST719",
+        "split": "train",
+        "manifest_sha256": "e734698abba8255ebce91ed66804189122b9878d518e15e86985b915523630e8"
+      },
+      {
+        "recording_id": "ST7201",
+        "participant_id": "ST720",
+        "split": "train",
+        "manifest_sha256": "a341c22f6dc794897826b9ead5d2eba459140bccf8f02a94660942b945cfbc5f"
+      },
+      {
+        "recording_id": "ST7202",
+        "participant_id": "ST720",
+        "split": "train",
+        "manifest_sha256": "900c3d6fc52a39c7a26be03b42857e85430d1995340a6730317065fa240ef641"
+      },
+      {
+        "recording_id": "ST7211",
+        "participant_id": "ST721",
+        "split": "train",
+        "manifest_sha256": "a9082543255ab26e68f123e5486fbe3e6f5765c15a99d87f3212ce22e0a89956"
+      },
+      {
+        "recording_id": "ST7212",
+        "participant_id": "ST721",
+        "split": "train",
+        "manifest_sha256": "bb9e3298770413ca385a2d337d5904d70fb33ac4f54e770e058b5d8b153155f8"
+      },
+      {
+        "recording_id": "ST7241",
+        "participant_id": "ST724",
+        "split": "val",
+        "manifest_sha256": "da02252868071fab212cd1d4c4b518cc0c0663f13eed6c39d691e696c5922551"
+      },
+      {
+        "recording_id": "ST7242",
+        "participant_id": "ST724",
+        "split": "val",
+        "manifest_sha256": "ebcb1094c9fc752f6c1801b3682a79ca57eddcdca4647f79fadae19177634440"
+      }
+    ],
+    "split_sha256": "cf1cd33a6a6b2376886119d0ca48d049b26f27f089fcc9e87ea54f5113a673c0",
+    "preprocessing_fingerprint": "763c4523e75725605a517c2beb12362b9b83d09ed1aa693652f615354d315c8c",
+    "data_policy": "prepared_sleepedf_train_and_validation_only_no_test_or_isruc_epoch_payloads"
+  }
+}
