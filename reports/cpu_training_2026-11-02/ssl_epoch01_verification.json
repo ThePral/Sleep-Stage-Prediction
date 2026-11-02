@@ -1,0 +1,51 @@
+{
+  "observed_at_utc": "2026-11-02T16:58:57.025327+00:00",
+  "passed": true,
+  "study_fingerprint": "92a0c9a6993467f2ff6fa12a6688b8fac4d2469e83edfd400887de9eb502e4a0",
+  "source_hashes_match": true,
+  "resume_seal_sha256": "3b94ccaa6aa7cb6155557a0adab472702316b2dd4018cbe04ef022ec4627bdad",
+  "checkpoint_prefix": "runs\\training_execution_2026-11-02_cpu\\source_matrix\\jobs\\ssl_seed42\\attempt_0001\\artifacts\\checkpoints\\epoch_0001\\state",
+  "verified_files": {
+    "waveform_normalizer.json": "ba7f25e98d73ad648bf8727dda52ff265327b8f6bc6c15d2a250ab86ee9e927f",
+    "model_config.json": "42474c4a15776e40a61c5c3e6a0a35e25f80f49a73c24988031c041b60fe5264",
+    "data_manifest.json": "7d63573188779a2e5c03a732ff1b58eda511bd958a215d105793e1cd5c05322f",
+    "resolved_config.json": "9a744f83e1fdc622a87c45f73745f1c6a9b159e4f218173c155e656aed7a07df",
+    "checkpoints/epoch_0001/history.json": "2959e1a6aac9857c22047f4bf6142a5c7e9bf06cb0be275df7ce210377c23a6b",
+    "checkpoints/epoch_0001/state.data-00000-of-00001": "a1686ff691726465e0c89e6c3045892a3592f8317365c57cd7f59a2d1ce9c0e3",
+    "checkpoints/epoch_0001/state.index": "7a7f0c5f77b2e5950f3190816a37f8f3a691056bd62df3b1443e33bfaea4533c"
+  },
+  "checkpoint_completed_epochs": 1,
+  "checkpoint_optimizer_iterations": 10106,
+  "numeric_checkpoint_tensors_finite": 57,
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 0.5573252686298462,
+      "retrieval_accuracy": 0.9999969077775579,
+      "positive_cosine": 0.9763348658451014,
+      "negative_cosine": 0.01828011823181205,
+      "mean_negatives_per_anchor": 61.99956708885811,
+      "encoder_epochs": 64,
+      "encoder_embedding_dimension": 64,
+      "encoder_mean_dimension_std": 0.1136620276494466,
+      "encoder_covariance_effective_rank": 14.323898834748004,
+      "encoder_mean_embedding_norm": 2.9488513766593423
+    }
+  ],
+  "available_quality_epochs": 323423,
+  "epochs_used_in_pass": 323392,
+  "dropped_tail_epochs_in_pass": 31,
+  "device": "CPU",
+  "first_checkpoint_seconds_since_task_creation": 951.6647725105286,
+  "remaining_ssl_hours_if_same_wall_time_per_epoch": 2.3791619312763213,
+  "timing_limitations": [
+    "First checkpoint interval includes startup, integrity checks, compilation and diagnostics.",
+    "One epoch does not establish steady-state throughput; this is a conditional SSL-only projection.",
+    "Supervised training, validation, early stopping and later jobs are excluded."
+  ],
+  "checkpoint_files_unchanged_after_read": true,
+  "optimizer_updates_performed_by_verifier": false,
+  "model_constructed_or_restored": false,
+  "full_resume_exercised": false,
+  "interpretation": "Contrastive diagnostics and saved state integrity; no sleep-stage or cross-dataset performance claim."
+}

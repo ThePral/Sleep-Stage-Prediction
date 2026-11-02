@@ -365,3 +365,15 @@ leaves the study unchanged. Reproducible commands are in `TRAINING_RUNBOOK.md`;
 dated progress snapshots and monitor checks are retained with the CPU evidence.
 Initial activity samples precede the first SSL epoch seal, so no epoch timing,
 convergence or comparative performance claim is available yet.
+
+The first full SSL epoch subsequently completed. Its saved state passed all
+seven declared file hashes, epoch/optimizer-counter readback (1 epoch and
+10,106 updates), and finiteness checks on 57 numeric tensors. This is checkpoint
+integrity evidence; no model was restored by this check and no sleep-stage
+benefit is established. Training continues for the declared ten SSL epochs
+before the 14 supervised jobs. The first checkpoint interval was 15.9 minutes,
+including startup; subsequent epoch timing and total matrix duration remain
+unmeasured. Evidence is in `ssl_epoch01_verification.json` alongside the CPU
+progress snapshots. The frozen source methods and exact budgets are recorded
+in `reports/source_campaign_2026-11-02/METHODS.md` and `methods.json` without
+opening target predictions or changing source/environment/configuration.

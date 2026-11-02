@@ -65,6 +65,13 @@ If the scheduler is missing or its PID identity cannot be checked, inspect the
 logs/processes before any recovery. The monitor never deletes a lock or restarts
 a job automatically. It opens no source-test or ISRUC predictions.
 
+The actual campaign's source scope, annotation-hour costs, normalization pools,
+M0-M6 definitions and planned comparisons are recorded in
+`reports/source_campaign_2026-11-02/METHODS.md` with a machine-readable JSON
+companion. This is a methods record, not an executed external freeze. The first
+full SSL epoch's saved counter/hash/finiteness checks are recorded separately in
+`reports/cpu_training_2026-11-02/ssl_epoch01_verification.json`.
+
 ## Historical WSL/GPU route (stopped; retain for reproduction)
 
 The user subsequently delegated training execution to the assistant on

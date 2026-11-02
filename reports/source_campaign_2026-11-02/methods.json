@@ -1,0 +1,304 @@
+{
+  "date": "2026-11-02",
+  "kind": "methods_record_of_running_source_study_not_results_or_external_freeze",
+  "study_directory": "runs\\training_execution_2026-11-02_cpu\\source_matrix",
+  "study_fingerprint": "92a0c9a6993467f2ff6fa12a6688b8fac4d2469e83edfd400887de9eb502e4a0",
+  "source_code_matches": true,
+  "model_results_inspected_for_this_export": false,
+  "source_scope": {
+    "training_participants": 70,
+    "training_recordings": 138,
+    "validation_participants": 15,
+    "validation_recordings": 29
+  },
+  "preprocessing": {
+    "sampling_frequency": 100.0,
+    "epoch_duration": 30.0,
+    "low_frequency": 0.3,
+    "high_frequency": 35.0,
+    "welch_samples": 1024,
+    "flat_std_threshold": 1e-10,
+    "version": "research-epochs-v1"
+  },
+  "preprocessing_fingerprint": "763c4523e75725605a517c2beb12362b9b83d09ed1aa693652f615354d315c8c",
+  "sequence_length_epochs": 10,
+  "label_budgets": [
+    {
+      "budget_id": "draw42_n18",
+      "draw_seed": 42,
+      "requested_participant_fraction": 0.25,
+      "actual_participant_fraction": 0.2571428571428571,
+      "participants": 18,
+      "recordings": 35,
+      "physical_epochs": 77849,
+      "annotated_epochs": 76615,
+      "supervised_epochs": 76604,
+      "windows": 75687,
+      "recorded_hours": 648.7416666666667,
+      "annotated_hours": 638.4583333333334,
+      "supervised_hours": 638.3666666666667,
+      "target_stage_counts": {
+        "W": 46404,
+        "N1": 4598,
+        "N2": 14461,
+        "N3": 4249,
+        "REM": 5975
+      },
+      "spectral_fit_epochs": 76604,
+      "waveform_fit_epochs": 323423,
+      "supervised_batches_per_full_pass": 18922,
+      "annotation_hours_fraction_of_full_budget": 0.23812409866229053
+    },
+    {
+      "budget_id": "draw42_n70",
+      "draw_seed": 42,
+      "requested_participant_fraction": 1.0,
+      "actual_participant_fraction": 1.0,
+      "participants": 70,
+      "recordings": 138,
+      "physical_epochs": 325210,
+      "annotated_epochs": 321744,
+      "supervised_epochs": 321688,
+      "windows": 319226,
+      "recorded_hours": 2710.0833333333335,
+      "annotated_hours": 2681.2,
+      "supervised_hours": 2680.733333333333,
+      "target_stage_counts": {
+        "W": 202168,
+        "N1": 16984,
+        "N2": 61539,
+        "N3": 14982,
+        "REM": 23553
+      },
+      "spectral_fit_epochs": 321688,
+      "waveform_fit_epochs": 323423,
+      "supervised_batches_per_full_pass": 79807,
+      "annotation_hours_fraction_of_full_budget": 1.0
+    }
+  ],
+  "validation_annotation_cost": {
+    "participants": 15,
+    "recordings": 29,
+    "physical_epochs": 66235,
+    "annotated_epochs": 65750,
+    "supervised_epochs": 65736,
+    "windows": 65133,
+    "recorded_hours": 551.9583333333334,
+    "annotated_hours": 547.9166666666666,
+    "supervised_hours": 547.8,
+    "target_stage_counts": {
+      "W": 41060,
+      "N1": 3336,
+      "N2": 14041,
+      "N3": 2016,
+      "REM": 4680
+    }
+  },
+  "conditions": [
+    {
+      "id": "M0",
+      "view": "spectral",
+      "initialization": "scratch",
+      "head": "two 32-unit LSTMs"
+    },
+    {
+      "id": "M1",
+      "view": "raw",
+      "initialization": "scratch",
+      "head": "64-unit GRU"
+    },
+    {
+      "id": "M2",
+      "view": "concatenation",
+      "initialization": "scratch",
+      "head": "64-unit GRU"
+    },
+    {
+      "id": "M3",
+      "view": "gated cross-attention",
+      "initialization": "scratch",
+      "head": "64-unit GRU"
+    },
+    {
+      "id": "M4",
+      "view": "raw",
+      "initialization": "SSL waveform encoder",
+      "head": "64-unit GRU"
+    },
+    {
+      "id": "M5",
+      "view": "concatenation",
+      "initialization": "SSL waveform encoder",
+      "head": "64-unit GRU"
+    },
+    {
+      "id": "M6",
+      "view": "gated cross-attention",
+      "initialization": "SSL waveform encoder",
+      "head": "64-unit GRU"
+    }
+  ],
+  "frozen_config": {
+    "model": {
+      "sequence_length": 10,
+      "samples_per_epoch": 3000,
+      "filters": [
+        16,
+        32,
+        64
+      ],
+      "kernels": [
+        31,
+        15,
+        7
+      ],
+      "strides": [
+        4,
+        5,
+        5
+      ],
+      "token_dim": 64,
+      "attention_heads": 4,
+      "temporal_units": 64,
+      "dropout": 0.3,
+      "spectral_units": 32
+    },
+    "training": {
+      "batch_size": 4,
+      "epochs": 30,
+      "learning_rate": 0.001,
+      "patience": 5
+    },
+    "pretraining": {
+      "batch_size": 32,
+      "epochs": 10,
+      "learning_rate": 0.001,
+      "temperature": 0.2,
+      "projection_dim": 64,
+      "exclusion_epochs": 1,
+      "diagnostic_epochs": 64
+    },
+    "augmentation": {
+      "gain_min": 0.8,
+      "gain_max": 1.2,
+      "noise_rms_fraction": 0.02,
+      "max_mask_seconds": 1.0
+    },
+    "fractions": [
+      0.25,
+      1.0
+    ],
+    "draw_seeds": [
+      42
+    ],
+    "training_seeds": [
+      42
+    ],
+    "conditions": [
+      "M0",
+      "M1",
+      "M2",
+      "M3",
+      "M4",
+      "M5",
+      "M6"
+    ],
+    "limits": {
+      "max_train_batches": null,
+      "max_validation_batches": null,
+      "max_pretraining_batches": null
+    },
+    "train_participants": null,
+    "validation_participants": null
+  },
+  "packages": {
+    "tensorflow": "2.21.0",
+    "keras": "3.15.1",
+    "numpy": "2.5.2",
+    "pandas": "3.0.5",
+    "scikit-learn": "1.9.0",
+    "mne": "1.12.1"
+  },
+  "ssl_accounting": {
+    "quality_epochs_available": 323423,
+    "original_epochs_per_batch": 32,
+    "batches_per_epoch": 10106,
+    "original_epochs_used_per_full_pass": 323392,
+    "dropped_tail_per_pass": 31,
+    "planned_optimizer_steps": 101060,
+    "maximum_negatives_per_anchor": 62,
+    "checkpoint_policy": "last of ten declared epochs, no held-out inputs"
+  },
+  "selection": {
+    "supervised_checkpoint": "maximum source-validation macro-F1",
+    "supervised_early_stop_patience": 5,
+    "learning_rate_reduction": {
+      "monitor": "val_loss",
+      "factor": 0.5,
+      "patience": 2,
+      "minimum": 1e-06
+    },
+    "optimizer": "Adam",
+    "clipnorm": 1.0
+  },
+  "external_config_snapshot_not_execution": {
+    "purpose": "confirmatory",
+    "target": {
+      "dataset": "isruc",
+      "split": "external",
+      "expected_participants": 100,
+      "expected_recordings": 100,
+      "scorer": 1,
+      "electrode_policy": "C3"
+    },
+    "analysis": {
+      "bootstrap_replicates": 2000,
+      "confidence_level": 0.95,
+      "seed": 42,
+      "calibration_bins": 15
+    },
+    "paired_conditions": [
+      [
+        "M4",
+        "M1"
+      ],
+      [
+        "M5",
+        "M2"
+      ],
+      [
+        "M6",
+        "M3"
+      ],
+      [
+        "M3",
+        "M2"
+      ],
+      [
+        "M6",
+        "M5"
+      ]
+    ],
+    "transition_radius_epochs": 1
+  },
+  "external_policy_frozen": false,
+  "real_isruc_predictions_opened": false,
+  "new_source_test_predictions_opened": false,
+  "limitations": [
+    "One optimization seed and one participant-budget draw; repeated-seed conclusions are unavailable.",
+    "All waveform normalization uses the fixed 70-person unlabeled source pool, including scratch controls.",
+    "M0 uses a different temporal architecture; M3 versus M2 is not an equal-parameter attention ablation.",
+    "Untrimmed recording coverage and class prevalence limit direct comparisons with cropped published protocols.",
+    "Source-test performance was inspected historically; disclose this before later source-test evaluation.",
+    "The ISRUC config is a candidate specification, not a completed source-selected model-family freeze."
+  ],
+  "inputs_sha256": {
+    "runs/training_execution_2026-11-02_cpu/source_matrix/study.json": "0de91bdce74fe5fd6f67b200001f1790ee68f2d97dc67da339872fcc84174c59",
+    "runs/training_execution_2026-11-02_cpu/source_matrix/label_budgets.json": "4541ff713120c7a03170c5eb147e1f1b48557eb5d7f0ed19a8c0782fde2492a4",
+    "configs/evaluation_isruc.json": "3b6be75edf7943f9405125ad0eecdaaab15a64aea60f87e0608c6928f7d1c196",
+    "runs/training_execution_2026-11-02_cpu/source_matrix/jobs/waveform_statistics/attempt_0001/job_result.json": "71c1c15e1ff21378a9f4757d1b410f0cc75bf212949c3b1c18713e46553ef851",
+    "runs/training_execution_2026-11-02_cpu/source_matrix/jobs/normalizer_draw42_n18/attempt_0001/job_result.json": "9a5ccbc7ee0c77d44c9a5572093a02ea37004e2fe6eed3cf5edd8501a105434f",
+    "runs/training_execution_2026-11-02_cpu/source_matrix/jobs/normalizer_draw42_n70/attempt_0001/job_result.json": "ef61c92f9067ee278be8a8a1edad6db243e39e4fd5bba72cad8ad7f267bc1073"
+  },
+  "fingerprint": "10790dae7a5075c0fbdf2b8095087eeb469d19810512e1a4494cb467b76a478c"
+}

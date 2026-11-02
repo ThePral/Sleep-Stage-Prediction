@@ -1,0 +1,71 @@
+{
+  "observed_at_utc": "2026-11-02T16:57:34.567710+00:00",
+  "status": "running",
+  "study_directory": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\training_execution_2026-11-02_cpu\\source_matrix",
+  "study_fingerprint": "92a0c9a6993467f2ff6fa12a6688b8fac4d2469e83edfd400887de9eb502e4a0",
+  "limited_run": false,
+  "jobs_planned": 18,
+  "jobs": {
+    "completed": 3,
+    "running": 1,
+    "failed": 0,
+    "pending": 14
+  },
+  "scheduler_identity": "verified_live_scheduler",
+  "processes": [
+    {
+      "pid": 126668,
+      "created": 1793637472.9217253,
+      "rss_bytes": 147537920,
+      "cpu_seconds": 3.578125
+    },
+    {
+      "pid": 77112,
+      "created": 1793637646.090722,
+      "rss_bytes": 5603328,
+      "cpu_seconds": 0.0
+    },
+    {
+      "pid": 121912,
+      "created": 1793637646.1111069,
+      "rss_bytes": 537804800,
+      "cpu_seconds": 4343.28125
+    }
+  ],
+  "sample_seconds": 5.0,
+  "observed_process_tree_cpu_seconds": 27.3438,
+  "sampled_process_tree_rss_bytes": 690946048,
+  "host_available_memory_bytes": 3029774336,
+  "workspace_free_bytes": 139371429888,
+  "c_drive_free_bytes": 9119711232,
+  "source_hashes_match": true,
+  "packages_match": true,
+  "training_participants": 70,
+  "validation_participants": 15,
+  "completed_artifacts_verified": [
+    "waveform_statistics",
+    "normalizer_draw42_n18",
+    "normalizer_draw42_n70"
+  ],
+  "active_jobs": [
+    {
+      "job_id": "ssl_seed42",
+      "kind": "pretrain",
+      "log": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\training_execution_2026-11-02_cpu\\source_matrix\\jobs\\ssl_seed42\\attempt_0001.log",
+      "recorded_status": {
+        "status": "running"
+      },
+      "devices": [
+        "/physical_device:CPU:0"
+      ],
+      "published_epochs": 1,
+      "scheduled_epochs": 10
+    }
+  ],
+  "tensorflow_imported": false,
+  "limitations": [
+    "A process sample is not proof of optimizer progress; epoch seals provide stronger evidence.",
+    "Ledger and process observations can span a job transition; rerun if they disagree.",
+    "Published epoch counts do not establish convergence; no predictive evaluation is performed."
+  ]
+}

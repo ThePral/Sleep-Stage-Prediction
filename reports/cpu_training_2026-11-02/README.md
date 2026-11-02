@@ -58,3 +58,28 @@ live scheduler. `monitor_cli_validation.json` records rejection of report
 overwrites and reports inside the frozen study, including exit codes. These
 checks perform no optimizer updates. The original regression suite was not
 rerun while the campaign was active; no source modules or packages changed.
+
+The first uncapped SSL epoch has now completed. `progress_04.json` records
+1/10 published epochs; the three preparation jobs remain complete and the
+14 supervised jobs remain pending. `ssl_epoch01_verification.json` verifies
+all seven files declared by the epoch seal, reads the saved epoch counter (1)
+and optimizer iterations (10,106), and confirms that all 57 numeric checkpoint
+tensors are finite. The verifier reads saved tensors only, constructs/restores
+no model or optimizer, and leaves the checkpoint files unchanged. It does not
+exercise a full training resume or establish downstream staging performance.
+
+The first checkpoint appeared 951.7 seconds (15.9 minutes) after task creation,
+including startup, integrity checks, compilation and diagnostics. At that same
+wall time per epoch, nine more SSL epochs would take about 2.38 hours. This is a
+conditional SSL-only projection from one interval, not a measured steady-state
+rate or an estimate for the later supervised matrix. Epoch-one contrastive
+loss is 0.557325 and encoder effective rank is 14.3239 on the fixed diagnostic
+sample. Retrieval accuracy near one is not sleep-stage accuracy and does not
+by itself establish useful transfer. Keep the declared ten-epoch schedule.
+
+`../source_campaign_2026-11-02/METHODS.md` and its JSON companion record the
+actual frozen source methods, exact label/annotation budgets, model conditions,
+class support, planned contrasts, and the remaining external-freeze decisions.
+The nominal 25% budget contains 18/70 participants (25.71%) and 23.81% of the
+full-budget annotation hours. No performance results or external freeze are
+created by that methods export, and no ISRUC data are read.
