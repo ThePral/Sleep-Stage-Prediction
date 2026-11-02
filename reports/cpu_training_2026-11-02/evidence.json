@@ -1,0 +1,114 @@
+{
+  "date": "2026-11-02",
+  "request": "Native CPU training with project-managed files on D: owing to C: disk pressure",
+  "new_packages_installed": false,
+  "source_modules_changed_for_cpu_switch": false,
+  "source_matches_passed_110_test_snapshot": true,
+  "baseline_artifacts_unchanged": {
+    "data/features/sleep_edf_features.csv": "33fbd5f1ac3455499215a8d971d841ef1dd11c63c0e893d748e9c624d52eaf19",
+    "data/features/subject_split.csv": "3b4b7fbf363f92d87cb9a34d52b3abb4cdf611d1b13c8699182a84621e414493",
+    "data/features/participant_split.csv": "cf1cd33a6a6b2376886119d0ca48d049b26f27f089fcc9e87ea54f5113a673c0",
+    "final_model/stacked_lstm_32_32_10_epochs.keras": "ba9f9bcae47246d1202fff3f0a686f29a06f1e534b9d789268c49713beeabefb",
+    "final_model/scaler.pkl": "d6331c15a782d31844d545c142815f23f02d9f4be61be4503f8575b4fad0606d",
+    "final_model/config.json": "4e1444828693a6b27b3dc2413fbef25eea5a38dfadf6b010046a920656ec220d",
+    "final_model_corrected/stacked_lstm_final.keras": "627bcea0773dae7a7884d494b9ba73a9e583b6551df3cc5ce97f12813f5975a6",
+    "results/final_evaluation/final_predictions.csv": "8b21f04f789dcc632228c89f5c59dbce577a4619f87b396613af42988b96959f",
+    "results/final_evaluation/final_confusion_matrix.csv": "19ad49a36befbbb95d2eca0850f6fb0be8e104fb0b309675d72b48ea1fe92be7",
+    "results/final_evaluation/definitive_experiment_record.json": "567c7f36a23dec43490ca6bd23f3b0f41a8c0bdc1586849885a632af64f09db7"
+  },
+  "dependency_check": "pip check: No broken requirements found.",
+  "wsl_transition": {
+    "active_project_jobs": [],
+    "cache_path": "/dev/shm/sleep-stage-prediction-2026-11-01",
+    "cache_removed": false,
+    "original_data_modified": false,
+    "wsl_distro_shutdown": false
+  },
+  "gpu_pipeline_snapshot": {
+    "date": "2026-11-01",
+    "status": "failed",
+    "stage": "benchmark_execute",
+    "orchestrator_pid": 277,
+    "authorization": "User explicitly delegated training execution after manual handoff.",
+    "data_policy": "Sleep-EDF train/validation only; no real source-test or ISRUC predictive scoring",
+    "full_matrix_completed": false,
+    "completed_stages": [
+      "dependency_check",
+      "gpu_preflight_b32_ssl128_verified",
+      "benchmark_plan"
+    ],
+    "command": [
+      "/mnt/d/Local Disk/Uni Sources/Term 8/Final Project/Sleep-Stage-Prediction/runs/compute_2026-10-31/linux_env/bin/python",
+      "-m",
+      "src.experiments.run",
+      "execute",
+      "--study-dir",
+      "/mnt/d/Local Disk/Uni Sources/Term 8/Final Project/Sleep-Stage-Prediction/runs/training_execution_2026-11-01_gpu/gpu_benchmark",
+      "--require-gpu"
+    ],
+    "preflight_report": "/mnt/d/Local Disk/Uni Sources/Term 8/Final Project/Sleep-Stage-Prediction/runs/training_execution_2026-11-01_library_path/gpu_preflight_b32_ssl128.json",
+    "gpu_preflight_passed": true,
+    "error": "RuntimeError",
+    "message": "benchmark_execute exited 1; inspect /mnt/d/Local Disk/Uni Sources/Term 8/Final Project/Sleep-Stage-Prediction/runs/training_execution_2026-11-01_gpu/benchmark_execute.log",
+    "traceback": "Traceback (most recent call last):\n  File \"/mnt/d/Local Disk/Uni Sources/Term 8/Final Project/Sleep-Stage-Prediction/runs/training_execution_2026-11-01_gpu/orchestrate_source.py\", line 77, in <module>\n    run('benchmark_execute',['-m','src.experiments.run','execute','--study-dir',str(benchmark),'--require-gpu'])\n  File \"/mnt/d/Local Disk/Uni Sources/Term 8/Final Project/Sleep-Stage-Prediction/runs/training_execution_2026-11-01_gpu/orchestrate_source.py\", line 45, in run\n    raise RuntimeError(f'{stage} exited {returncode}; inspect {base/(stage+\".log\")}')\nRuntimeError: benchmark_execute exited 1; inspect /mnt/d/Local Disk/Uni Sources/Term 8/Final Project/Sleep-Stage-Prediction/runs/training_execution_2026-11-01_gpu/benchmark_execute.log\n"
+  },
+  "cpu_pipeline_snapshot": {
+    "date": "2026-11-02",
+    "status": "running",
+    "orchestrator_pid": 126344,
+    "route": "native_windows_cpu",
+    "study_directory": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\training_execution_2026-11-02_cpu\\source_matrix",
+    "data_policy": "Sleep-EDF train/validation only; real ISRUC and source-test scoring unopened",
+    "full_matrix_completed": false,
+    "storage_policy": "Project-managed temp/cache/checkpoints/logs on D:; Windows system writes not controlled",
+    "cpu_preflight": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\reports\\cpu_training_2026-11-02\\cpu_preflight_b4_ssl32.json",
+    "regression_snapshot_matches": true,
+    "free_gib_before": {
+      "C:/": 10.26,
+      "D:/": 129.8
+    },
+    "stage": "source_execute",
+    "command": [
+      "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\.venv\\Scripts\\python.exe",
+      "-m",
+      "src.experiments.run",
+      "execute",
+      "--study-dir",
+      "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\training_execution_2026-11-02_cpu\\source_matrix"
+    ],
+    "completed_stages": [
+      "source_plan"
+    ],
+    "child_pid": 126504
+  },
+  "cpu_study_fingerprint": "92a0c9a6993467f2ff6fa12a6688b8fac4d2469e83edfd400887de9eb502e4a0",
+  "cpu_jobs_planned": 18,
+  "cpu_ledger_snapshot": {
+    "schema_version": 1,
+    "study_fingerprint": "92a0c9a6993467f2ff6fa12a6688b8fac4d2469e83edfd400887de9eb502e4a0",
+    "jobs": {
+      "waveform_statistics": {
+        "status": "running",
+        "attempt": "jobs/waveform_statistics/attempt_0001"
+      }
+    }
+  },
+  "runtime_environment_inherited_by_workers": true,
+  "cpu_route_requires_wsl": false,
+  "full_matrix_completed_at_snapshot": false,
+  "real_isruc_scoring_opened": false,
+  "new_source_test_scoring_opened": false,
+  "free_gib_at_snapshot": {
+    "C:/": 10.26,
+    "D:/": 129.8
+  },
+  "system_storage_or_pagefile_settings_changed": false,
+  "limitation": "Project storage is directed to D:; Windows system/paging writes to C: cannot be ruled out.",
+  "files": {
+    "scripts/research_cpu.ps1": "a84b91e5e1d84c32d8dae620258ee21bcf99aff462fb00995f76e91477df2892",
+    "reports/cpu_training_2026-11-02/cpu_preflight_b32_ssl128.json": "302e5cb0a911a77173bae88b84905b1a96e55e52c2f6396f7a4897bd1ff1473d",
+    "reports/cpu_training_2026-11-02/cpu_preflight_b4_ssl32.json": "f4f8134e0a45723eebff0506ac9970adb29ac8a9a12669151c6b6bc460478480",
+    "reports/cpu_training_2026-11-02/launcher_validation.json": "5e7f097657bb45225887bce0d9de55c8a0a384fcf294773598a9463d602e4154",
+    "reports/cpu_training_2026-11-02/runtime_validation.json": "7221c19987062129a8b9020af80e2f40333aa62bd89b518955c573a999a627a7"
+  }
+}

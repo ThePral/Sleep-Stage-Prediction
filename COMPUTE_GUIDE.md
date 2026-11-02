@@ -1,7 +1,9 @@
 # Source-training compute workflow
 
 The bounded source-only benchmark has completed on CPU. The next training step
-is the full experiment matrix after reviewing measured speed and memory. The benchmark uses
+is GPU verification, then the full experiment matrix after reviewing
+measured speed and memory. Follow [TRAINING_RUNBOOK.md](TRAINING_RUNBOOK.md) for
+the exact PowerShell commands. The benchmark uses
 all 70 training and 15 validation participants, the default architecture, and
 short capped schedules. Its scores cannot establish convergence or support a
 confirmatory ISRUC freeze.
@@ -34,6 +36,7 @@ python3 -m venv .venv-linux
 .venv-linux/bin/python -m pip install -r requirements-linux-gpu.txt
 .venv-linux/bin/python -m pip check
 .venv-linux/bin/python -m pip freeze > requirements-linux-installed.lock.txt
+.venv-linux/bin/python scripts/configure_wsl_cuda.py --report runs/cuda_links.json
 .venv-linux/bin/python -u -m src.compute.preflight --report runs/gpu_preflight.json
 ```
 
@@ -52,16 +55,34 @@ on a CPU-only installation; that result does not establish GPU fit. Synthetic
 checks do not measure disk loading, convergence, or the full experiment duration.
 Reports are immutable; choose a new path for every attempt.
 
+The first installed WSL preflight failed GPU discovery because the loader could
+not find pip-installed CUDA libraries. `scripts/configure_wsl_cuda.py` implements
+TensorFlow's documented virtual-environment shared-library links. It operates
+inside the inspected venv, checks all conflicts first and never replaces existing
+files. It changes no drivers or system library paths. A fresh preflight is still
+required after configuration; discovery alone does not establish usable kernels.
+
+This WSL setup also requires process-local CUDA library search paths. The
+PowerShell launcher provides them without changing system paths. Measured
+synthetic GPU checks pass at supervised batch 32 and SSL batch 128 (about 199 MiB
+combined TF allocator peak). GPU recipes live in `configs/experiment_gpu_*.json`;
+the original CPU/reference configs remain intact. Follow the runbook's explicit
+data-root selection: WSL cannot enumerate the original traversal-only store
+directories, so the active run reads the verified source-only capsule copy.
+
 Recorded on 1 November 2026: all 103 regression tests passed. A fresh-process CPU
 preflight completed both default-batch workloads. The required-GPU check correctly
 failed on native Windows. The WSL GPU runtime download is still in progress at
 the evidence snapshot; Linux dependency compatibility and GPU kernels remain
-unverified. An unattended local continuation checks dependencies after installation,
-runs the required-GPU preflight, then runs a disposable source-training profile
-only if preflight passes. It records success or failure in
-`runs/compute_2026-10-31/gpu_setup_status_2026-11-01.json`. This continuation starts
-no full training campaign. Inspect the status and actual reports before using the
-GPU environment. Interruption or download failure can leave the setup incomplete.
+unverified. The initially queued automatic preflight/profile was stopped when the
+user initially requested ownership of all training. The dependency continuation installs
+dependencies only, then records `dependencies_installed_pending_user_gpu_checks`
+in `runs/compute_2026-10-31/gpu_setup_status_2026-11-01.json`. It executes no model
+or optimizer checks. The user subsequently delegated training to the assistant.
+A separate execution pipeline now gates preflight, profiling and source training
+on successful checks; inspect `runs/training_execution_2026-11-01_gpu/status.json`.
+The runbook retains the exact reproduction commands. Interruption or download
+failure can leave setup incomplete.
 
 ```powershell
 Get-Content runs/compute_2026-10-31/gpu_setup_status_2026-11-01.json
@@ -79,7 +100,7 @@ python -u -m src.experiments.run plan \
   --config configs/experiment_source_benchmark.json \
   --study-dir runs/source_benchmark
 python -u -m src.experiments.run execute \
-  --study-dir runs/source_benchmark
+  --study-dir runs/source_benchmark --require-gpu
 ```
 
 The five jobs fit full-source waveform statistics, fit the 100% labeled-budget
@@ -159,6 +180,29 @@ source experiment, not a repeated-seed result. Freeze any additional seeds,
 budgets and ablations before confirmatory comparisons. Estimate compute from
 actual loader/training timings and epoch counts; early stopping makes the total
 uncertain. Keep checkpoints and logs on persistent storage.
+
+The `--require-gpu` execution flag fails before scheduling any job when TensorFlow
+exposes no GPU. It checks visibility rather than kernel compatibility; complete
+the user-run preflight first. CPU execution remains available by omitting the flag.
+
+## Native CPU route with runtime storage on D: (2 November 2026)
+
+Use `scripts/research_cpu.ps1`, as documented in `TRAINING_RUNBOOK.md`, instead
+of the WSL launcher. It uses the existing `.venv` on D:, disables CUDA, and
+redirects Python temporary files, pip/Keras/Matplotlib caches and worker scratch
+files under `runs/cpu_runtime`. Checkpoints and studies also stay on D:.
+No new installation is required. The original batch sizes (4 supervised, 32 SSL)
+keep working memory small; the uncapped matrix can take days on this CPU.
+Synthetic timings do not establish full-campaign duration or convergence.
+
+The stopped GPU benchmark retains two completed preparation jobs and an
+interrupted SSL attempt; the GPU full matrix never started. The shared-memory
+cache was absent when inspected on 2 November. No original stores were changed,
+no global WSL shutdown was issued, and no WSL images/pagefiles/C: files were
+modified. Windows can still write its own logs or pagefile to C:; the CPU route
+controls project-managed storage rather than all operating-system writes.
+Current CPU evidence is in `reports/cpu_training_2026-11-02` and live state in
+`runs/training_execution_2026-11-02_cpu`.
 
 Cloud training means renting a remote GPU and running these same commands there.
 No provider account, paid instance, upload or spending commitment is needed for

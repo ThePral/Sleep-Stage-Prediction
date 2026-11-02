@@ -196,7 +196,14 @@ def write_tables(directory, study, ledger):
         Path(directory) / "paired_source_validation.csv", index=False)
 
 
-def execute_study(directory, *, root=None, split_file=None, max_jobs=None, retry_failed=False, executor=None):
+def execute_study(directory, *, root=None, split_file=None, max_jobs=None, retry_failed=False, executor=None,
+                  require_gpu=False):
+    if not isinstance(require_gpu, bool):
+        raise ValueError("require_gpu must be boolean.")
+    gpu_devices = None
+    if require_gpu:
+        from src.compute.devices import require_gpu_device
+        gpu_devices = require_gpu_device()
     directory = Path(directory).resolve()
     study, plan = load_study(directory)
     root = Path(root or study["data_root"]).resolve()
@@ -263,6 +270,8 @@ def execute_study(directory, *, root=None, split_file=None, max_jobs=None, retry
         write_tables(directory, study, ledger)
         summary = {"jobs_planned": len(study["jobs"]), "jobs_completed": sum(v["status"] == "completed" for v in ledger["jobs"].values()),
                    "jobs_executed_this_call": attempted, "limited_run": study["limited_run"]}
+        if require_gpu:
+            summary["required_gpu_devices"] = gpu_devices
         atomic_json(directory / "execution_summary.json", summary)
         return summary
     finally:
@@ -283,13 +292,15 @@ def main(argv=None):
     run.add_argument("--split-file", type=Path)
     run.add_argument("--max-jobs", type=int)
     run.add_argument("--retry-failed", action="store_true")
+    run.add_argument("--require-gpu", action="store_true", help="Fail before scheduling jobs if TensorFlow exposes no GPU.")
     args = parser.parse_args(argv)
     if args.command == "plan":
         study = create_study(args.data_root, args.study_dir, json.loads(args.config.read_text(encoding="utf-8")), split_file=args.split_file)
         print(json.dumps({"jobs_planned": len(study["jobs"]), "limited_run": study["limited_run"], "study_fingerprint": study["fingerprint"]}, indent=2))
     else:
         print(json.dumps(execute_study(args.study_dir, root=args.data_root, split_file=args.split_file,
-                                       max_jobs=args.max_jobs, retry_failed=args.retry_failed), indent=2))
+                                       max_jobs=args.max_jobs, retry_failed=args.retry_failed,
+                                       require_gpu=args.require_gpu), indent=2))
 
 
 if __name__ == "__main__":

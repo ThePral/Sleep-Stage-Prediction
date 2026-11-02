@@ -666,3 +666,14 @@ paid compute. It includes Sleep-EDF training/validation stores and excludes test
 epoch files and ISRUC. `configs/experiment_source_benchmark.json` exercises M3/M6
 with the default model and capped schedules; it is separate from the full matrix.
 GPU readiness requires a passed kernel check on the recorded environment.
+
+Training execution is currently delegated to the assistant. Follow
+[TRAINING_RUNBOOK.md](TRAINING_RUNBOOK.md) for native CPU training and recovery
+commands. Following the user's C: storage concern on 2 November 2026, the WSL/GPU
+pipeline is stopped. `scripts/research_cpu.ps1` uses the existing Windows Python
+on D: and directs project-managed temporary files and framework caches to
+`runs/cpu_runtime`; checkpoints/logs also stay in this checkout. Windows system
+and paging writes to C: remain possible. The fresh CPU run uses the original
+`configs/experiment_matrix.json` (supervised batch 4, SSL batch 32); its live
+state is under `runs/training_execution_2026-11-02_cpu`. Historical GPU commands
+and evidence remain available in the runbook.

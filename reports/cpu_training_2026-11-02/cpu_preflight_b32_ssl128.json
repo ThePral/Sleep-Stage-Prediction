@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "config": {
+    "supervised_batch_size": 32,
+    "contrastive_batch_size": 128,
+    "warmup_steps": 2,
+    "measured_steps": 5,
+    "require_gpu": false
+  },
+  "hardware": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.13.7",
+    "python_executable": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\.venv\\Scripts\\python.exe",
+    "logical_cpus": 12,
+    "physical_memory_bytes": 17023971328,
+    "workspace_free_bytes": 139372822528,
+    "nvidia_smi": {
+      "returncode": 0,
+      "stdout": "NVIDIA GeForce GTX 1050, 4096 MiB, 581.80, 6.1",
+      "stderr": ""
+    }
+  },
+  "packages": {
+    "tensorflow": "2.21.0",
+    "keras": "3.15.1",
+    "numpy": "2.5.2",
+    "pandas": "3.0.5",
+    "scipy": "1.18.0",
+    "mne": "1.12.1",
+    "psutil": "7.2.2"
+  },
+  "passed": true,
+  "checks": {
+    "gated_supervised_updates": {
+      "passed": true,
+      "parameters": 82757,
+      "output_device": "/job:localhost/replica:0/task:0/device:CPU:0",
+      "median_seconds": 0.2970226000761613,
+      "measured_steps": 5,
+      "last_loss": 1.5854756832122803
+    },
+    "contrastive_updates": {
+      "passed": true,
+      "parameters": 35328,
+      "loss_device": "/job:localhost/replica:0/task:0/device:CPU:0",
+      "original_epochs_per_batch": 128,
+      "maximum_negatives_per_anchor": 254,
+      "median_seconds": 0.17949750006664544,
+      "measured_steps": 5,
+      "last_loss": 2.878169536590576
+    }
+  },
+  "data_access": "synthetic_only_no_recordings_or_labels_loaded",
+  "tensorflow_build": {
+    "is_cuda_build": false,
+    "is_rocm_build": false,
+    "is_tensorrt_build": false,
+    "msvcp_dll_names": "msvcp140.dll,msvcp140_1.dll"
+  },
+  "tensorflow_devices": [
+    "/physical_device:CPU:0"
+  ],
+  "requested_device": "/CPU:0",
+  "tensorflow_gpu_allocator_bytes": null,
+  "limitations": [
+    "Synthetic kernel checks establish neither data-loader throughput nor convergence.",
+    "A passed check applies only to the recorded framework, hardware and batch sizes.",
+    "TF allocator bytes exclude driver reservations; host memory is a different resource."
+  ]
+}

@@ -277,3 +277,82 @@ policy. TXT/Excel disagreements, reference-electrode differences, and scorer-2
 sensitivity analyses remain research-protocol considerations. Preparing ISRUC
 does not establish external model performance or resolve every annotation
 provenance question.
+
+**User-run training handoff — 1 November 2026**
+
+The user now owns research training, pretraining, fine-tuning and optimizer-based
+hardware checks. The previously queued automatic GPU preflight/profile was
+stopped. The current background helper installs dependencies only, then waits
+for user-run GPU verification; GPU readiness remains unverified.
+
+`TRAINING_RUNBOOK.md` contains exact PowerShell commands for the WSL preflight,
+capped GPU benchmark, disposable source profile, first full source matrix and
+job recovery. `scripts/research.ps1` selects the existing project-local Linux
+Python and redirects framework caches into the workspace. Its real argument
+forwarding check preserved a string containing spaces and selected the expected
+Linux executable without running any model.
+
+`execute --require-gpu` checks TensorFlow GPU visibility before reading a study
+or scheduling workers. This guard does not replace kernel preflight. Existing
+CPU callers retain their prior behavior when the flag is omitted. Capsules now
+include the launcher, runbook and training-ownership instructions.
+
+Eleven targeted tests passed: six mocked GPU/CLI handoff checks and five capsule
+checks, with no model-weight updates. The earlier 103-test full suite is
+historical evidence; the optimizer-based suite was not rerun under the user's
+new training-ownership policy. A full regression command is provided below for
+the user to run if desired:
+
+```powershell
+.venv\Scripts\python.exe -W ignore::DeprecationWarning -X utf8 -m unittest discover -s tests -v
+```
+
+Fresh studies are required after these source changes. No research training,
+synthetic optimizer preflight, training-mode profile or real ISRUC/source-test
+scoring was started in this handoff. Evidence is in
+`reports/training_handoff_2026-11-01`.
+
+**Delegated source training execution — 1 November 2026**
+
+The user subsequently delegated training execution to the assistant. The current
+authorization includes GPU preflight, profiling, source-only pretraining,
+fine-tuning and the source matrix. Manual commands remain available for
+reproduction; the earlier user-only handoff is historical.
+
+Each worker now rechecks frozen code and package versions immediately before its
+job, in addition to the scheduler's startup check. This prevents an active study
+from silently mixing implementations after an edit during a long campaign.
+The full regression suite passes **110 tests** after this change.
+
+The staged execution pipeline records live state under
+`runs/training_execution_2026-11-01_gpu/status.json`. It waits for dependency setup,
+checks the tested source hashes, then requires a passed GPU kernel preflight,
+five completed bounded benchmark jobs and a successful GPU source-training
+profile before starting the 18-job uncapped source matrix. A failed stage stops
+execution and preserves its logs. Only source training/validation data are used;
+no real source-test or ISRUC prediction is scheduled. Recorded execution evidence
+is under `reports/training_execution_2026-11-01`; live status determines which
+stages have actually completed.
+
+**Native CPU training and D: runtime storage - 2 November 2026**
+
+The user's C: storage concern supersedes the WSL/GPU route for the current
+campaign. That pipeline is stopped: two preparation jobs completed, SSL was
+interrupted, and the full GPU matrix never started. No project jobs remained
+in WSL and the optional RAM cache was absent when checked. Historical attempts
+and original data remain intact.
+
+`scripts/research_cpu.ps1` uses the existing D: Windows environment, disables
+CUDA and bytecode writes, and routes process/worker temporary files and framework
+caches to `runs/cpu_runtime`. The real temporary-directory and worker-inheritance
+probe passes, as does dependency consistency. No packages or source modules
+were changed for this switch; the prior 110-test regression snapshot still
+matches the source. Windows system/paging writes to C: remain possible.
+
+The CPU campaign uses a fresh study under
+`runs/training_execution_2026-11-02_cpu/source_matrix` and the original uncapped
+batch-4/SSL-32 matrix. Source-only scope, frozen worker checks, and all 18 planned
+jobs are retained. Track actual progress in its ledger and logs; startup does
+not establish completion, convergence or an SSL benefit. ISRUC and new real
+source-test predictive scoring remain unopened. Evidence for runtime routing,
+CPU optimizer checks and the transition is in `reports/cpu_training_2026-11-02`.

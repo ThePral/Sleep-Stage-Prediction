@@ -1,0 +1,21 @@
+{
+  "selection_policy": "Synthetic GPU throughput and memory only; no held-out labels or convergence metrics used to choose batches.",
+  "measured_steps_per_phase": 5,
+  "supervised": {
+    "small_batch": 4,
+    "selected_batch": 32,
+    "small_batch_examples_per_second": 68.31413256471964,
+    "selected_batch_examples_per_second": 376.6332849524796,
+    "ratio": 5.513255761473128
+  },
+  "contrastive": {
+    "small_batch": 32,
+    "selected_batch": 128,
+    "small_batch_examples_per_second": 624.3601893347418,
+    "selected_batch_examples_per_second": 1938.3295028105242,
+    "ratio": 3.104505277435805
+  },
+  "limits": "Short synthetic medians exclude dataset loading, validation, startup and driver reservations; contrastive losses are not comparable across different batch sizes.",
+  "small_batch_tf_allocator_peak_bytes": 86447104,
+  "selected_batch_tf_allocator_peak_bytes": 208257280
+}

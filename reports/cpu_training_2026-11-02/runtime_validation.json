@@ -1,0 +1,28 @@
+{
+  "date": "2026-11-02",
+  "passed": true,
+  "python": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\.venv\\Scripts\\python.exe",
+  "working_directory": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction",
+  "runtime_directories": {
+    "TEMP": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\cpu_runtime\\temp",
+    "TMP": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\cpu_runtime\\temp",
+    "TMPDIR": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\cpu_runtime\\temp",
+    "PIP_CACHE_DIR": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\cpu_runtime\\pip-cache",
+    "KERAS_HOME": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\cpu_runtime\\keras-cache",
+    "MPLCONFIGDIR": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\cpu_runtime\\matplotlib-cache",
+    "XDG_CACHE_HOME": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\cpu_runtime\\xdg-cache",
+    "CUDA_CACHE_PATH": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\cpu_runtime\\cuda-cache",
+    "TRITON_CACHE_DIR": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\cpu_runtime\\triton-cache",
+    "JOBLIB_TEMP_FOLDER": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\cpu_runtime\\joblib-temp",
+    "NUMBA_CACHE_DIR": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\cpu_runtime\\numba-cache"
+  },
+  "temporary_file_probe": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\cpu_runtime\\temp\\tmpaxoo0a5i",
+  "worker_inherited_temp": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\cpu_runtime\\temp",
+  "bytecode_writes_disabled": true,
+  "cuda_visible_devices": "-1",
+  "free_gib": {
+    "C:/": 10.22,
+    "D:/": 129.8
+  },
+  "limitation": "Windows paging and system activity may still write to C:; no system settings were changed."
+}

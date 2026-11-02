@@ -25,6 +25,11 @@ class SourceCapsuleTests(unittest.TestCase):
         self.project = self.root / "project"
         (self.project / "src").mkdir(parents=True)
         (self.project / "src/example.py").write_text("VALUE = 42\n")
+        (self.project / "scripts").mkdir()
+        (self.project / "scripts/research.ps1").write_text("Write-Output 'launcher fixture'\n")
+        (self.project / "scripts/configure_wsl_cuda.py").write_text("# Environment configuration fixture.\n")
+        (self.project / "TRAINING_RUNBOOK.md").write_text("User-run training commands.\n")
+        (self.project / "AGENTS.md").write_text("Training belongs to the user.\n")
         (self.project / ".env").write_text("SECRET=do-not-copy")
         (self.project / "src/.private.py").write_text("SECRET=do-not-copy")
         (self.project / ".aws").mkdir()
@@ -41,6 +46,8 @@ class SourceCapsuleTests(unittest.TestCase):
         with tarfile.open(self.archive, "r:") as tar:
             names = tar.getnames()
         self.assertNotIn(".env", names)
+        for name in ["scripts/research.ps1", "scripts/configure_wsl_cuda.py", "TRAINING_RUNBOOK.md", "AGENTS.md"]:
+            self.assertIn(name, names)
         self.assertFalse(any(".aws" in n or ".private" in n or "isruc" in n or "SC4021" in n for n in names))
         self.assertEqual(len(self.result["source_scope"]["training_participants"]), 4)
         destination = self.root / "restored"

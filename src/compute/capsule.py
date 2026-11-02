@@ -17,7 +17,9 @@ from src.data.prepare_research_data import ROOT, participant_assignments
 
 
 MANIFEST = "training_capsule.json"
-DOCUMENTS = {"README.md", "IMPLEMENTATION_STATUS.md", "COMPUTE_GUIDE.md", "requirements-research-common.txt", "requirements-linux-gpu.txt", "constraints-cuda125-pascal.txt"}
+DOCUMENTS = {"README.md", "IMPLEMENTATION_STATUS.md", "COMPUTE_GUIDE.md", "TRAINING_RUNBOOK.md", "AGENTS.md",
+             "scripts/research.ps1", "scripts/configure_wsl_cuda.py", "requirements-research-common.txt",
+             "requirements-linux-gpu.txt", "constraints-cuda125-pascal.txt"}
 
 
 def safe_member(name):
@@ -69,7 +71,7 @@ def _payload(project_root, data_root, split_file):
     for name in sorted(DOCUMENTS):
         path = project_root / name
         if path.is_file():
-            if path.is_symlink():
+            if path.is_symlink() or not path.resolve().is_relative_to(project_root):
                 raise ValueError("Capsule documentation/dependencies cannot be symlinks.")
             files[name] = path
     assignments = participant_assignments(split_file)

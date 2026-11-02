@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-01",
+  "milestone": "user-run training handoff",
+  "training_ownership": "user_executes_all_research_training_and_optimizer_based_checks",
+  "automatic_training_continuation_stopped": true,
+  "dependency_installation_only": true,
+  "gpu_training_verified": false,
+  "live_setup_status": "runs/compute_2026-10-31/gpu_setup_status_2026-11-01.json",
+  "validation": {
+    "tests": 11,
+    "passed": 11,
+    "elapsed_seconds": 4.01,
+    "optimizer_updates_executed": false,
+    "command": ".venv/Scripts/python.exe -W ignore::DeprecationWarning -X utf8 -m unittest tests.test_training_handoff tests.test_compute.SourceCapsuleTests -v",
+    "powershell_parser": "passed",
+    "actual_wsl_launcher_arguments": "preserved argument with spaces",
+    "actual_wsl_python": "runs/compute_2026-10-31/linux_env/bin/python",
+    "cli_help": "execute --require-gpu and preflight flags verified",
+    "full_optimizer_based_suite": "not run; command supplied to user"
+  },
+  "fresh_study_required": true,
+  "historical_compute_report_inventory_unchanged": true,
+  "historical_artifacts_unchanged": 10,
+  "new_research_training": false,
+  "synthetic_optimizer_checks": false,
+  "new_training_profile": false,
+  "new_source_test_scoring": false,
+  "real_isruc_scoring": false,
+  "changed_file_sha256": {
+    "AGENTS.md": "e5d9caadee1c7c9e06c7809c0c890e233d5ad1dc88f33b2ef17b9f665fb65fdd",
+    "TRAINING_RUNBOOK.md": "8f1a082df4dddfda51f47565a62e6ee57132f870d1c26c0370a12a13bcffc1ae",
+    "COMPUTE_GUIDE.md": "db2dd0632100590bf46ec648b321ba64f139d0c7116561067e9ca5023c52b657",
+    "README.md": "2b36942e94f44d1fb20393598f0b96b60d04a1d69cc66581d7dcb5ef0211b4a2",
+    "IMPLEMENTATION_STATUS.md": "c2b1e83da3478acc487bf4b3d8ddb883fa369b6332ea331c49dfac10ea7b0648",
+    "scripts/research.ps1": "c7ddd2973357f875ce5bac893ba858179989f2b846487c75a008a1f2aad2cfbd",
+    "src/compute/devices.py": "075acd89cf0f7b3e8137f239b7ae7a5a2545bc65a56969202144ed79e1d736c5",
+    "src/compute/capsule.py": "b87bd6d9dc15eb3b0d52b1790b41d366839f735498397c1a0e2cfb68da08fbf6",
+    "src/experiments/run.py": "6d0a28dcaea437b5b5a71ea90a2cb1e743bd8c5ddda14c5aa48b88e704f4f1af",
+    "tests/test_training_handoff.py": "4b6ceeb2c54101a828ad5ccc5bcf21eb7276d95c803359737009c306ad13174f",
+    "tests/test_compute.py": "1de15ae84e506a5358f71d671a1ae976f09795f03a7ffea7fd8325ae6a87b8cb"
+  },
+  "report_file_sha256": {
+    "checks.txt": "240dbb5fb09c8b4a92c145ffa78971f4fe086889d01640f1e8727ef404c31ba6",
+    "README.md": "10ead73367991230a08d96768e318384616455b9031df40940e6280a371c6af5"
+  }
+}

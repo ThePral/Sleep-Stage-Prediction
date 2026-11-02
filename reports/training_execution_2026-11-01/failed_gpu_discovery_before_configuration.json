@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "config": {
+    "supervised_batch_size": 4,
+    "contrastive_batch_size": 32,
+    "warmup_steps": 2,
+    "measured_steps": 5,
+    "require_gpu": true
+  },
+  "hardware": {
+    "platform": "Linux-5.15.146.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "python_executable": "/mnt/d/Local Disk/Uni Sources/Term 8/Final Project/Sleep-Stage-Prediction/runs/compute_2026-10-31/linux_env/bin/python",
+    "logical_cpus": 12,
+    "physical_memory_bytes": 8251494400,
+    "workspace_free_bytes": 139375251456,
+    "nvidia_smi": {
+      "returncode": 0,
+      "stdout": "NVIDIA GeForce GTX 1050, 4096 MiB, 581.80, 6.1",
+      "stderr": ""
+    }
+  },
+  "packages": {
+    "tensorflow": "2.21.0",
+    "keras": "3.15.1",
+    "numpy": "2.5.2",
+    "pandas": "3.0.5",
+    "scipy": "1.18.0",
+    "mne": "1.12.1",
+    "psutil": "7.2.2"
+  },
+  "passed": false,
+  "checks": {},
+  "data_access": "synthetic_only_no_recordings_or_labels_loaded",
+  "tensorflow_build": {
+    "cpu_compiler": "clang",
+    "cuda_compute_capabilities": [
+      "sm_60",
+      "sm_70",
+      "sm_80",
+      "sm_89",
+      "compute_90"
+    ],
+    "cuda_version": "12.5.1",
+    "cudnn_version": "9",
+    "is_cuda_build": true,
+    "is_rocm_build": false,
+    "is_tensorrt_build": false
+  },
+  "tensorflow_devices": [
+    "/physical_device:CPU:0"
+  ],
+  "error": {
+    "type": "RuntimeError",
+    "message": "TensorFlow exposes no GPU. GPU training readiness is unverified."
+  },
+  "limitations": [
+    "Synthetic kernel checks establish neither data-loader throughput nor convergence.",
+    "A passed check applies only to the recorded framework, hardware and batch sizes.",
+    "TF allocator bytes exclude driver reservations; host memory is a different resource."
+  ]
+}

@@ -6,9 +6,9 @@ from pathlib import Path
 
 from src.data.contrastive import SourceEpochPool
 from src.data.epoch_store import sha256_file
-from src.data.label_budgets import authorize_waveform_pool, get_budget, verify_plan_scope
+from src.data.label_budgets import authorize_waveform_pool, get_budget
 from src.data.supervised import SourcePartition
-from src.experiments.run import atomic_json, load_study, verify_job_result
+from src.experiments.run import atomic_json, load_study, verify_job_result, verify_runtime
 from src.models.contrastive import AugmentationConfig
 from src.models.multiview import ModelConfig
 from src.preprocessing.research_normalization import ResearchNormalizer
@@ -32,7 +32,9 @@ def run_task(task_path):
     for name, path in task["dependencies"].items():
         verify_job_result(Path(path).parent, study, name)
     root, split = Path(task["data_root"]), Path(task["split_file"])
-    verify_plan_scope(plan, root, split)
+    # A long-lived scheduler may outlive an edit or package update. Recheck the
+    # frozen implementation before each job, not only at scheduler startup.
+    verify_runtime(study, plan, root, split)
     config = study["config"]
     output = task_path.parent / "artifacts"
     training_records = [r["recording_id"] for r in plan["source_records"] if r["split"] == "train"]
