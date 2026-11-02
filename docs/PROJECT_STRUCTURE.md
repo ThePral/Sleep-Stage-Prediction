@@ -45,9 +45,9 @@ adding folder indexes is sufficient for this organizational pass.
 
 ## New work
 
-Add the BiLSTM implementation under the existing model/training modules and
-give it explicit Sleep-EDF configurations. Do not rename an existing GRU recipe
-to imply that it is BiLSTM. Use fresh study directories and keep older results
+The BiLSTM implementation uses the existing model/training modules with explicit
+`*_bilstm.json` and `experiment_bilstm_*.json` Sleep-EDF configurations. The
+existing GRU recipes are preserved. Use fresh study directories and keep older results
 separate. New figures and tables should be exported to a named run/results
 directory rather than the source tree or raw data folders.
 

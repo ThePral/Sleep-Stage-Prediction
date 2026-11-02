@@ -1,4 +1,4 @@
-> Implementation reference for the earlier LSTM/GRU extension. The current paper direction is described in [RESEARCH_DIRECTION.md](../RESEARCH_DIRECTION.md). BiLSTM integration is still pending.
+> Implementation reference for the earlier LSTM/GRU extension. The current paper direction is described in [RESEARCH_DIRECTION.md](../RESEARCH_DIRECTION.md). The new BiLSTM implementation and recipes are documented in [SLEEPEDF_BILSTM.md](../SLEEPEDF_BILSTM.md).
 
 # Sleep Stage Prediction from EEG Using Spectral Features and LSTM
 [![XERJ Corpus Hub contributor](https://hub.xerj.org/contributors/ThePral/badge.svg)](https://hub.xerj.org/contributors/ThePral)

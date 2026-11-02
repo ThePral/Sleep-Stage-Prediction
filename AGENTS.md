@@ -24,6 +24,12 @@ SSL, cross-attention and a planned BiLSTM head. Cross-dataset work is deferred,
 not deleted. Organization is not authorization to claim BiLSTM implementation
 or start an unvalidated replacement campaign.
 
+The user subsequently requested implementing SSL, cross-attention and BiLSTM.
+New studies may run after the BiLSTM regression/kernel/integration gates pass;
+use the `experiment_bilstm_*.json` recipes and fresh directories. Preserve the
+stopped GRU campaign and never bypass its code/resume seals to reuse partial
+training. Old recipes/bundles default to the explicit `legacy` temporal mode.
+
 Current guides are under `docs/operations/`, environment specifications under
 `environments/`, and source configurations under `configs/sleepedf/`. See
 `docs/PROJECT_STRUCTURE.md` for pinned artifact paths and the migration map.

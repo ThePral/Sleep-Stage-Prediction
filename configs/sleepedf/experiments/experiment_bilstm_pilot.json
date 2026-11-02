@@ -1,0 +1,12 @@
+{
+  "model": {"sequence_length": 10, "samples_per_epoch": 3000, "temporal_head": "bilstm", "temporal_units": 32},
+  "training": {"batch_size": 2, "epochs": 1, "patience": 1},
+  "pretraining": {"batch_size": 32, "epochs": 1, "diagnostic_epochs": 32},
+  "fractions": [0.25, 1.0],
+  "draw_seeds": [42],
+  "training_seeds": [42],
+  "conditions": ["M0", "M1", "M2", "M3", "M4", "M5", "M6"],
+  "train_participants": ["SC400", "SC403"],
+  "validation_participants": ["SC401"],
+  "limits": {"max_train_batches": 2, "max_validation_batches": 2, "max_pretraining_batches": 2}
+}

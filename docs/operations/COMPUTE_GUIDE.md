@@ -1,9 +1,11 @@
 # Source-training compute workflow
 
 The prior CPU matrix is now stopped at the user's request, with three sealed
-SSL epochs preserved. The current direction is Sleep-EDF SSL/cross-attention
-with a planned BiLSTM head; no replacement campaign is running. GPU routes below
-are retained historical recipes. The current runtime route remains native CPU
+SSL epochs preserved. Sleep-EDF SSL/cross-attention/BiLSTM is now implemented
+and a fresh staged CPU workflow runs under `runs/bilstm_2026-11-02` after its
+regression/kernel gates passed. See [the implementation guide](../SLEEPEDF_BILSTM.md)
+for new recipes and inspect live status for actual stage completion. GPU routes
+below are retained historical recipes. The current runtime route remains native CPU
 with project-managed storage on D:. See [research direction](../RESEARCH_DIRECTION.md).
 
 The bounded source-only benchmark completed on CPU before that matrix. Follow

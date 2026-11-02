@@ -1,0 +1,343 @@
+powershell : WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+At line:2 char:1
++ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: All lo...itten to STDERR:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+I0000 00:00:1793641473.798406  129756 port.cc:153] oneDNN custom operations are on. You may see slightly different 
+numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the 
+environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1793641475.501181  129756 port.cc:153] oneDNN custom operations are on. You may see slightly different 
+numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the 
+environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+test_all_views_train_both_directions_and_roundtrip 
+(test_bilstm.BiLSTMArchitectureTests.test_all_views_train_both_directions_and_roundtrip) ... WARNING:tensorflow:From 
+D:\Local Disk\Uni Sources\Term 8\Final 
+Project\Sleep-Stage-Prediction\.venv\Lib\site-packages\keras\src\backend\common\global_state.py:82: The name 
+tf.reset_default_graph is deprecated. Please use tf.compat.v1.reset_default_graph instead.
+
+I0000 00:00:1793641478.361224  129756 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available 
+CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with 
+the appropriate compiler flags.
+WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow >= 2.11. Even if 
+CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
+ok
+test_gated_bilstm_can_overfit_a_tiny_multiclass_batch 
+(test_bilstm.BiLSTMArchitectureTests.test_gated_bilstm_can_overfit_a_tiny_multiclass_batch) ... ok
+test_legacy_configuration_defaults_keep_the_previous_architecture 
+(test_bilstm.BiLSTMArchitectureTests.test_legacy_configuration_defaults_keep_the_previous_architecture) ... ok
+test_linear_probe_ignores_the_unused_temporal_choice 
+(test_bilstm.BiLSTMTransferTests.test_linear_probe_ignores_the_unused_temporal_choice) ... ok
+test_ssl_transfer_finetuning_export_and_declared_head_agree 
+(test_bilstm.BiLSTMTransferTests.test_ssl_transfer_finetuning_export_and_declared_head_agree) ... E0000 
+00:00:1793641492.230447  129756 util.cc:131] oneDNN supports DT_BOOL only on platforms with AVX-512. Falling back to 
+the default Eigen-based implementation if present.
+ok
+test_existing_artifacts_are_not_overwritten 
+(test_compute.SourceCapsuleTests.test_existing_artifacts_are_not_overwritten) ... ok
+test_legacy_root_document_members_remain_readable 
+(test_compute.SourceCapsuleTests.test_legacy_root_document_members_remain_readable) ... ok
+test_modified_extracted_content_is_detected 
+(test_compute.SourceCapsuleTests.test_modified_extracted_content_is_detected) ... ok
+test_path_traversal_links_and_held_out_scope_are_rejected_before_extraction 
+(test_compute.SourceCapsuleTests.test_path_traversal_links_and_held_out_scope_are_rejected_before_extraction) ... ok
+test_roundtrip_preserves_hashes_and_excludes_held_out_data_and_private_files 
+(test_compute.SourceCapsuleTests.test_roundtrip_preserves_hashes_and_excludes_held_out_data_and_private_files) ... ok
+test_wrong_archive_hash_fails_before_creating_destination 
+(test_compute.SourceCapsuleTests.test_wrong_archive_hash_fails_before_creating_destination) ... ok
+test_configuration_rejects_invalid_batches 
+(test_compute.TrainingKernelPreflightTests.test_configuration_rejects_invalid_batches) ... ok
+test_missing_gpu_fails_closed_without_training 
+(test_compute.TrainingKernelPreflightTests.test_missing_gpu_fails_closed_without_training) ... ok
+test_synthetic_supervised_and_contrastive_updates_execute_and_reports_are_immutable (test_compute.TrainingKernelPreflig
+htTests.test_synthetic_supervised_and_contrastive_updates_execute_and_reports_are_immutable) ... W0000 
+00:00:1793641522.612917  129756 loop_optimizer.cc:934] Skipping loop optimization for Merge node with control input: 
+assert_equal_9/Assert/AssertGuard/branch_executed/_9
+ok
+test_augmentations_are_stateless_independent_and_bounded 
+(test_contrastive.ContrastiveMathTests.test_augmentations_are_stateless_independent_and_bounded) ... ok
+test_constant_representation_has_known_loss_and_bad_diagnostics 
+(test_contrastive.ContrastiveMathTests.test_constant_representation_has_known_loss_and_bad_diagnostics) ... ok
+test_invalid_configuration_is_rejected (test_contrastive.ContrastiveMathTests.test_invalid_configuration_is_rejected) 
+... ok
+test_loss_matches_direct_numpy_formula_and_gradients 
+(test_contrastive.ContrastiveMathTests.test_loss_matches_direct_numpy_formula_and_gradients) ... ok
+test_objective_rejects_invalid_negatives_and_temperature 
+(test_contrastive.ContrastiveMathTests.test_objective_rejects_invalid_negatives_and_temperature) ... ok
+test_projection_model_serializes_and_backpropagates_to_encoder 
+(test_contrastive.ContrastiveMathTests.test_projection_model_serializes_and_backpropagates_to_encoder) ... ok
+test_temporal_mask_uses_only_recording_and_epoch_ids 
+(test_contrastive.ContrastiveMathTests.test_temporal_mask_uses_only_recording_and_epoch_ids) ... ok
+test_labels_do_not_change_pool_waveforms_order_or_statistics 
+(test_contrastive.LabelFreeDataTests.test_labels_do_not_change_pool_waveforms_order_or_statistics) ... ok
+test_pool_rejects_held_out_records_and_invalid_indices 
+(test_contrastive.LabelFreeDataTests.test_pool_rejects_held_out_records_and_invalid_indices) ... ok
+test_unlabeled_waveform_scale_and_supervised_spectral_fit_are_explicit 
+(test_contrastive.LabelFreeDataTests.test_unlabeled_waveform_scale_and_supervised_spectral_fit_are_explicit) ... ok
+test_epoch_resume_matches_uninterrupted_updates_then_transfers_and_probes (test_contrastive.PretrainingIntegrationTests
+.test_epoch_resume_matches_uninterrupted_updates_then_transfers_and_probes) ... WARNING:tensorflow:5 out of the last 5 
+calls to <function TensorFlowTrainer._make_function.<locals>.multi_step_on_iterator at 0x000001A58150CC20> triggered 
+tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating 
+@tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of 
+tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True 
+option that can avoid unnecessary retracing. For (3), please refer to 
+https://www.tensorflow.org/guide/function#controlling_retracing and 
+https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+WARNING:tensorflow:5 out of the last 5 calls to <function 
+TensorFlowTrainer._make_function.<locals>.multi_step_on_iterator at 0x000001A58150CC20> triggered tf.function 
+retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function 
+repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For 
+(1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that 
+can avoid unnecessary retracing. For (3), please refer to 
+https://www.tensorflow.org/guide/function#controlling_retracing and 
+https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+ok
+test_linear_probe_rejects_temporal_or_fusion_models 
+(test_contrastive.PretrainingIntegrationTests.test_linear_probe_rejects_temporal_or_fusion_models) ... ok
+test_bipolar_derivation_is_not_subtracted_again 
+(test_data_foundation.AdapterAndCacheTests.test_bipolar_derivation_is_not_subtracted_again) ... ok
+test_conflicting_participant_assignments_rejected 
+(test_data_foundation.AdapterAndCacheTests.test_conflicting_participant_assignments_rejected) ... ok
+test_damaged_first_header_is_recorded_without_skipping_numbered_rows 
+(test_data_foundation.AdapterAndCacheTests.test_damaged_first_header_is_recorded_without_skipping_numbered_rows) ... ok
+test_failed_legacy_processing_preserves_the_previous_combined_dataset 
+(test_data_foundation.AdapterAndCacheTests.test_failed_legacy_processing_preserves_the_previous_combined_dataset) ... 
+ok
+test_legacy_header_only_and_misaligned_caches_rejected 
+(test_data_foundation.AdapterAndCacheTests.test_legacy_header_only_and_misaligned_caches_rejected) ... ok
+test_separate_electrodes_are_subtracted_in_physical_units 
+(test_data_foundation.AdapterAndCacheTests.test_separate_electrodes_are_subtracted_in_physical_units) ... ok
+test_workbook_headers_and_explicit_epoch_numbers 
+(test_data_foundation.AdapterAndCacheTests.test_workbook_headers_and_explicit_epoch_numbers) ... ok
+test_empty_metadata_retains_schema (test_data_foundation.AnnotationTests.test_empty_metadata_retains_schema) ... ok
+test_excluded_middle_epoch_preserves_physical_position 
+(test_data_foundation.AnnotationTests.test_excluded_middle_epoch_preserves_physical_position) ... ok
+test_nonzero_start_and_recording_end (test_data_foundation.AnnotationTests.test_nonzero_start_and_recording_end) ... ok
+test_off_grid_annotation_rejected (test_data_foundation.AnnotationTests.test_off_grid_annotation_rejected) ... ok
+test_overlapping_annotations_rejected (test_data_foundation.AnnotationTests.test_overlapping_annotations_rejected) ... 
+ok
+test_unknowns_can_be_retained_without_inventing_labels 
+(test_data_foundation.AnnotationTests.test_unknowns_can_be_retained_without_inventing_labels) ... ok
+test_empty_extraction_keeps_sample_dimension 
+(test_data_foundation.EpochExtractionTests.test_empty_extraction_keeps_sample_dimension) ... ok
+test_flat_epoch_removed_before_filtering 
+(test_data_foundation.EpochExtractionTests.test_flat_epoch_removed_before_filtering) ... ok
+test_invalid_indices_are_never_coerced_or_wrapped 
+(test_data_foundation.EpochExtractionTests.test_invalid_indices_are_never_coerced_or_wrapped) ... ok
+test_qc_rejects_metadata_signal_misalignment 
+(test_data_foundation.EpochExtractionTests.test_qc_rejects_metadata_signal_misalignment) ... ok
+test_amplitude_scaling_preserves_relative_powers_and_squares_absolute_power 
+(test_data_foundation.ResearchStoreTests.test_amplitude_scaling_preserves_relative_powers_and_squares_absolute_power) 
+... ok
+test_external_cannot_be_marked_train (test_data_foundation.ResearchStoreTests.test_external_cannot_be_marked_train) 
+... ok
+test_gather_rejects_invalid_context_and_skipped_physical_epochs 
+(test_data_foundation.ResearchStoreTests.test_gather_rejects_invalid_context_and_skipped_physical_epochs) ... ok
+test_isruc_resampling_preserves_epoch_boundaries 
+(test_data_foundation.ResearchStoreTests.test_isruc_resampling_preserves_epoch_boundaries) ... ok
+test_misaligned_waveforms_are_rejected_before_publication 
+(test_data_foundation.ResearchStoreTests.test_misaligned_waveforms_are_rejected_before_publication) ... ok
+test_preprocessing_fingerprint_changes_with_parameters 
+(test_data_foundation.ResearchStoreTests.test_preprocessing_fingerprint_changes_with_parameters) ... ok
+test_roundtrip_mmap_and_supervised_vs_ssl_windows 
+(test_data_foundation.ResearchStoreTests.test_roundtrip_mmap_and_supervised_vs_ssl_windows) ... ok
+test_signal_qc_preserves_grid_and_breaks_windows 
+(test_data_foundation.ResearchStoreTests.test_signal_qc_preserves_grid_and_breaks_windows) ... ok
+test_tampering_and_incomplete_stores_rejected 
+(test_data_foundation.ResearchStoreTests.test_tampering_and_incomplete_stores_rejected) ... ok
+test_unscored_epochs_are_available_only_to_label_independent_selection 
+(test_data_foundation.ResearchStoreTests.test_unscored_epochs_are_available_only_to_label_independent_selection) ... ok
+test_arbitrary_and_duplicate_index_labels_do_not_reorder_features 
+(test_data_foundation.SequenceTests.test_arbitrary_and_duplicate_index_labels_do_not_reorder_features) ... ok
+test_datasets_and_splits_are_isolated (test_data_foundation.SequenceTests.test_datasets_and_splits_are_isolated) ... ok
+test_position_and_legacy_feature_apis_agree 
+(test_data_foundation.SequenceTests.test_position_and_legacy_feature_apis_agree) ... ok
+test_sorting_preserves_original_feature_correspondence 
+(test_data_foundation.SequenceTests.test_sorting_preserves_original_feature_correspondence) ... ok
+test_windows_do_not_cross_gaps_or_recordings 
+(test_data_foundation.SequenceTests.test_windows_do_not_cross_gaps_or_recordings) ... ok
+test_calibration_has_known_uniform_and_perfect_probability_values 
+(test_evaluation_protocol.ClusterAnalysisTests.test_calibration_has_known_uniform_and_perfect_probability_values) ... 
+ok
+test_mismatched_targets_duplicate_ids_and_probabilities_are_rejected 
+(test_evaluation_protocol.ClusterAnalysisTests.test_mismatched_targets_duplicate_ids_and_probabilities_are_rejected) 
+... ok
+test_one_participant_produces_no_confidence_interval 
+(test_evaluation_protocol.ClusterAnalysisTests.test_one_participant_produces_no_confidence_interval) ... ok
+test_participants_not_nights_or_epochs_define_primary_endpoint_and_pairing (test_evaluation_protocol.ClusterAnalysisTes
+ts.test_participants_not_nights_or_epochs_define_primary_endpoint_and_pairing) ... ok
+test_trained_seeds_do_not_increase_independent_participant_count 
+(test_evaluation_protocol.ClusterAnalysisTests.test_trained_seeds_do_not_increase_independent_participant_count) ... ok
+test_transition_analysis_preserves_physical_unknown_label_gaps 
+(test_evaluation_protocol.ClusterAnalysisTests.test_transition_analysis_preserves_physical_unknown_label_gaps) ... ok
+WARNING:tensorflow:6 out of the last 6 calls to <function 
+TensorFlowTrainer._make_function.<locals>.multi_step_on_iterator at 0x000001A584192F20> triggered tf.function 
+retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function 
+repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For 
+(1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that 
+can avoid unnecessary retracing. For (3), please refer to 
+https://www.tensorflow.org/guide/function#controlling_retracing and 
+https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+WARNING:tensorflow:6 out of the last 6 calls to <function 
+TensorFlowTrainer._make_function.<locals>.multi_step_on_iterator at 0x000001A584192F20> triggered tf.function 
+retracing. Tracing is expensive and the excessive number of tracings could be due to (1) creating @tf.function 
+repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects instead of tensors. For 
+(1), please define your @tf.function outside of the loop. For (2), @tf.function has reduce_retracing=True option that 
+can avoid unnecessary retracing. For (3), please refer to 
+https://www.tensorflow.org/guide/function#controlling_retracing and 
+https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+test_confirmatory_freeze_rejects_capped_models_before_target_access (test_evaluation_protocol.FrozenEvaluationAndProfil
+eTests.test_confirmatory_freeze_rejects_capped_models_before_target_access) ... ok
+test_development_analysis_checks_actual_validation_role 
+(test_evaluation_protocol.FrozenEvaluationAndProfileTests.test_development_analysis_checks_actual_validation_role) ... 
+ok
+test_enrolled_record_content_changes_are_detected_before_prediction (test_evaluation_protocol.FrozenEvaluationAndProfil
+eTests.test_enrolled_record_content_changes_are_detected_before_prediction) ... ok
+test_freezing_does_not_read_targets_and_snapshots_survive_original_relocation (test_evaluation_protocol.FrozenEvaluatio
+nAndProfileTests.test_freezing_does_not_read_targets_and_snapshots_survive_original_relocation) ... ok
+test_profiles_use_source_data_and_leave_original_artifacts_unchanged (test_evaluation_protocol.FrozenEvaluationAndProfi
+leTests.test_profiles_use_source_data_and_leave_original_artifacts_unchanged) ... ok
+test_protocol_invalid_caps_and_target_roles_are_rejected 
+(test_evaluation_protocol.FrozenEvaluationAndProfileTests.test_protocol_invalid_caps_and_target_roles_are_rejected) 
+... ok
+test_scorer_counts_and_preprocessing_are_checked_before_predictions (test_evaluation_protocol.FrozenEvaluationAndProfil
+eTests.test_scorer_counts_and_preprocessing_are_checked_before_predictions) ... ok
+test_snapshot_tampering_and_runtime_code_changes_are_rejected (test_evaluation_protocol.FrozenEvaluationAndProfileTests
+.test_snapshot_tampering_and_runtime_code_changes_are_rejected) ... ok
+test_synthetic_external_scoring_is_complete_paired_and_does_not_modify_models (test_evaluation_protocol.FrozenEvaluatio
+nAndProfileTests.test_synthetic_external_scoring_is_complete_paired_and_does_not_modify_models) ... ok
+test_target_record_changes_and_incomplete_model_exports_do_not_publish_results (test_evaluation_protocol.FrozenEvaluati
+onAndProfileTests.test_target_record_changes_and_incomplete_model_exports_do_not_publish_results) ... ok
+test_draws_are_nested_whole_participants_and_annotation_costs_include_validation 
+(test_experiments.LabelBudgetTests.test_draws_are_nested_whole_participants_and_annotation_costs_include_validation) 
+... ok
+test_full_unlabeled_pool_transfer_requires_explicit_content_matched_subset 
+(test_experiments.LabelBudgetTests.test_full_unlabeled_pool_transfer_requires_explicit_content_matched_subset) ... ok
+test_invalid_draws_budgets_and_held_out_scopes_are_rejected 
+(test_experiments.LabelBudgetTests.test_invalid_draws_budgets_and_held_out_scopes_are_rejected) ... ok
+test_manifest_tampering_and_source_scope_changes_are_detected 
+(test_experiments.LabelBudgetTests.test_manifest_tampering_and_source_scope_changes_are_detected) ... ok
+test_standalone_budget_training_rejects_recording_overrides_or_missing_fixed_scale 
+(test_experiments.LabelBudgetTests.test_standalone_budget_training_rejects_recording_overrides_or_missing_fixed_scale) 
+... ok
+Running waveform_statistics (attempt_0001)
+Running normalizer_draw42_n1 (attempt_0001)
+Running ssl_seed42 (attempt_0001)
+test_budgeted_spectral_scratch_and_ssl_training_export_matching_inference 
+(test_experiments.StudyRunnerTests.test_budgeted_spectral_scratch_and_ssl_training_export_matching_inference) ... 
+WARNING:tensorflow:5 out of the last 6 calls to <function train_contrastive.<locals>.update at 0x000001A58D7A4CC0> 
+triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) 
+creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects 
+instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has 
+reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to 
+https://www.tensorflow.org/guide/function#controlling_retracing and 
+https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+WARNING:tensorflow:5 out of the last 6 calls to <function train_contrastive.<locals>.update at 0x000001A58D7A4CC0> 
+triggered tf.function retracing. Tracing is expensive and the excessive number of tracings could be due to (1) 
+creating @tf.function repeatedly in a loop, (2) passing tensors with different shapes, (3) passing Python objects 
+instead of tensors. For (1), please define your @tf.function outside of the loop. For (2), @tf.function has 
+reduce_retracing=True option that can avoid unnecessary retracing. For (3), please refer to 
+https://www.tensorflow.org/guide/function#controlling_retracing and 
+https://www.tensorflow.org/api_docs/python/tf/function for  more details.
+SSL epoch 1/1: loss=1.73920, retrieval=0.750, encoder rank=1.66
+Running M0_draw42_n1_seed42 (attempt_0001)
+1/1 - 4s - 4s/step - accuracy: 0.5000 - loss: 1.5900 - val_loss: 1.6034 - val_accuracy: 0.2500 - val_macro_f1: 0.0800 - val_balanced_accuracy: 0.2500 - learning_rate: 0.0010
+Running M1_draw42_n1_seed42 (attempt_0001)
+1/1 - 4s - 4s/step - accuracy: 0.0000e+00 - loss: 1.6394 - val_loss: 1.6265 - val_accuracy: 0.2500 - val_macro_f1: 0.1000 - val_balanced_accuracy: 0.2500 - learning_rate: 0.0010
+Running M4_draw42_n1_seed42 (attempt_0001)
+1/1 - 4s - 4s/step - accuracy: 0.0000e+00 - loss: 1.6414 - val_loss: 1.6275 - val_accuracy: 0.0000e+00 - val_macro_f1: 0.0000e+00 - val_balanced_accuracy: 0.0000e+00 - learning_rate: 0.0010
+ok
+test_configuration_rejects_unpaired_or_unknown_options 
+(test_experiments.StudyRunnerTests.test_configuration_rejects_unpaired_or_unknown_options) ... ok
+test_core_matrix_shares_budget_normalizers_seeds_and_ssl_checkpoints 
+(test_experiments.StudyRunnerTests.test_core_matrix_shares_budget_normalizers_seeds_and_ssl_checkpoints) ... ok
+Running waveform_statistics (attempt_0001)
+Running waveform_statistics (attempt_0002)
+test_interrupted_completion_publication_does_not_leave_a_partial_final_seal 
+(test_experiments.StudyRunnerTests.test_interrupted_completion_publication_does_not_leave_a_partial_final_seal) ... ok
+test_planned_code_change_or_concurrent_runner_prevents_execution 
+(test_experiments.StudyRunnerTests.test_planned_code_change_or_concurrent_runner_prevents_execution) ... ok
+Running waveform_statistics (attempt_0001)
+Running normalizer_draw42_n1 (attempt_0001)
+Running normalizer_draw42_n1 (attempt_0002)
+test_scheduler_skips_complete_jobs_preserves_failed_attempts_and_detects_tampering 
+(test_experiments.StudyRunnerTests.test_scheduler_skips_complete_jobs_preserves_failed_attempts_and_detects_tampering) 
+... ok
+test_canonical_bundle_roundtrip_and_batch_prediction_agree 
+(test_inference_bundle.InferenceBundleTests.test_canonical_bundle_roundtrip_and_batch_prediction_agree) ... E0000 
+00:00:1793641580.591130  129756 node_def_util.cc:682] NodeDef mentions attribute use_unbounded_threadpool which is not 
+in the op definition: Op<name=MapDataset; signature=input_dataset:variant, other_arguments: -> handle:variant; 
+attr=f:func; attr=Targuments:list(type),min=0; attr=output_types:list(type),min=1; 
+attr=output_shapes:list(shape),min=1; attr=use_inter_op_parallelism:bool,default=true; 
+attr=preserve_cardinality:bool,default=false; attr=force_synchronous:bool,default=false; 
+attr=metadata:string,default=""> This may be expected if your graph generating binary is newer  than this binary. 
+Unknown attributes will be ignored. NodeDef: {{node ParallelMapDatasetV2/_14}}
+ok
+test_feature_order_mismatch_is_rejected 
+(test_inference_bundle.InferenceBundleTests.test_feature_order_mismatch_is_rejected) ... ok
+test_historical_model_shape_is_rejected_at_initialization 
+(test_inference_bundle.InferenceBundleTests.test_historical_model_shape_is_rejected_at_initialization) ... ok
+test_output_class_count_mismatch_is_rejected 
+(test_inference_bundle.InferenceBundleTests.test_output_class_count_mismatch_is_rejected) ... ok
+test_attention_diagnostics_can_be_exposed_as_a_functional_model 
+(test_multiview.ArchitectureTests.test_attention_diagnostics_can_be_exposed_as_a_functional_model) ... ok
+test_attention_uses_ten_keys_and_backpropagates_into_both_views 
+(test_multiview.ArchitectureTests.test_attention_uses_ten_keys_and_backpropagates_into_both_views) ... ok
+test_backbone_weights_transfer_between_comparison_models 
+(test_multiview.ArchitectureTests.test_backbone_weights_transfer_between_comparison_models) ... ok
+test_default_variants_have_correct_shapes_and_compact_parameter_counts 
+(test_multiview.ArchitectureTests.test_default_variants_have_correct_shapes_and_compact_parameter_counts) ... ok
+test_each_variant_serializes_without_custom_objects 
+(test_multiview.ArchitectureTests.test_each_variant_serializes_without_custom_objects) ... ok
+test_epoch_encoder_does_not_mix_batch_members 
+(test_multiview.ArchitectureTests.test_epoch_encoder_does_not_mix_batch_members) ... ok
+test_feature_tokens_have_distinct_identities_and_value_sensitivity 
+(test_multiview.ArchitectureTests.test_feature_tokens_have_distinct_identities_and_value_sensitivity) ... ok
+test_invalid_architecture_configuration_is_rejected 
+(test_multiview.ArchitectureTests.test_invalid_architecture_configuration_is_rejected) ... ok
+test_model_can_overfit_a_small_balanced_problem 
+(test_multiview.ArchitectureTests.test_model_can_overfit_a_small_balanced_problem) ... ok
+test_seeded_initialization_is_reproducible 
+(test_multiview.ArchitectureTests.test_seeded_initialization_is_reproducible) ... ok
+test_absent_class_policy_is_explicit (test_multiview.MetricTests.test_absent_class_policy_is_explicit) ... ok
+test_streaming_metrics_agree_with_sklearn (test_multiview.MetricTests.test_streaming_metrics_agree_with_sklearn) ... ok
+test_batch_shapes_alignment_and_deterministic_shuffle 
+(test_multiview.SourceDataAndNormalizationTests.test_batch_shapes_alignment_and_deterministic_shuffle) ... ok
+test_capped_validation_spans_time_without_label_based_selection 
+(test_multiview.SourceDataAndNormalizationTests.test_capped_validation_spans_time_without_label_based_selection) ... ok
+test_explicit_held_out_recording_cannot_enter_training 
+(test_multiview.SourceDataAndNormalizationTests.test_explicit_held_out_recording_cannot_enter_training) ... ok
+test_external_stores_are_not_discovered_as_source_inputs 
+(test_multiview.SourceDataAndNormalizationTests.test_external_stores_are_not_discovered_as_source_inputs) ... ok
+test_missing_duplicate_recordings_and_invalid_batches_rejected 
+(test_multiview.SourceDataAndNormalizationTests.test_missing_duplicate_recordings_and_invalid_batches_rejected) ... ok
+test_normalization_is_fitted_once_per_unique_training_epoch 
+(test_multiview.SourceDataAndNormalizationTests.test_normalization_is_fitted_once_per_unique_training_epoch) ... ok
+test_normalization_rejects_missing_and_invalid_statistics 
+(test_multiview.SourceDataAndNormalizationTests.test_normalization_rejects_missing_and_invalid_statistics) ... ok
+test_training_checkpoint_export_and_raw_input_inference 
+(test_multiview.TrainingIntegrationTests.test_training_checkpoint_export_and_raw_input_inference) ... ok
+{}
+test_cli_forwards_required_gpu_without_executing_a_worker 
+(test_training_handoff.GPUHandoffTests.test_cli_forwards_required_gpu_without_executing_a_worker) ... ok
+{}
+test_cli_keeps_cpu_execution_an_explicitly_available_path 
+(test_training_handoff.GPUHandoffTests.test_cli_keeps_cpu_execution_an_explicitly_available_path) ... ok
+test_device_policy_rejects_nonboolean_values 
+(test_training_handoff.GPUHandoffTests.test_device_policy_rejects_nonboolean_values) ... ok
+test_execution_guard_precedes_study_reads_and_worker_execution 
+(test_training_handoff.GPUHandoffTests.test_execution_guard_precedes_study_reads_and_worker_execution) ... ok
+test_no_gpu_fails_without_building_a_model 
+(test_training_handoff.GPUHandoffTests.test_no_gpu_fails_without_building_a_model) ... ok
+test_visible_devices_are_returned_without_executing_kernels 
+(test_training_handoff.GPUHandoffTests.test_visible_devices_are_returned_without_executing_kernels) ... ok
+test_worker_rechecks_frozen_runtime_before_creating_outputs 
+(test_training_handoff.GPUHandoffTests.test_worker_rechecks_frozen_runtime_before_creating_outputs) ... ok
+
+----------------------------------------------------------------------
+Ran 116 tests in 123.443s
+
+OK

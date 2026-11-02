@@ -38,6 +38,18 @@ class MultiviewPredictor:
             expected["spectral"] = (self.config.sequence_length, len(ALL_FEATURES))
         if actual != expected or self.model.output_shape[-1] != len(CLASS_LABELS):
             raise ValueError("Model/configuration input or output dimensions disagree.")
+        resolved = json.loads((directory / "resolved_config.json").read_text(encoding="utf-8"))
+        if self.config.temporal_head == "bilstm" and resolved.get("training_mode") != "linear_probe":
+            try:
+                head = self.model.get_layer("temporal_bilstm")
+            except ValueError as exc:
+                raise ValueError("Model/configuration BiLSTM head disagrees.") from exc
+            if (not isinstance(head, keras.layers.Bidirectional) or head.merge_mode != "concat"
+                    or not isinstance(head.forward_layer, keras.layers.LSTM)
+                    or not isinstance(head.backward_layer, keras.layers.LSTM)
+                    or head.forward_layer.units != self.config.temporal_units
+                    or head.backward_layer.units != self.config.temporal_units):
+                raise ValueError("Model/configuration BiLSTM head disagrees.")
 
     def predict_batch(self, waveforms=None, spectral_features=None):
         """Predict raw windows in volts, and raw spectral powers in volts squared.

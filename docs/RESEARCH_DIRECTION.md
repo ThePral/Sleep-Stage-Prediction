@@ -4,20 +4,20 @@ The supervisor-recommended paper direction is Sleep-EDF Expanded with
 self-supervised pretraining, waveform/spectral cross-attention and a BiLSTM
 temporal classifier. External-dataset evaluation is deferred for a later phase.
 
-This organizational change does not implement or train the new BiLSTM variant.
-The current `multiview` implementation already has raw/concatenation/gated
-cross-attention variants and source-only contrastive pretraining. Its fusion
-models use a 64-unit GRU; its spectral reference uses two 32-unit LSTMs.
-The legacy exploration notebook also contains earlier BiLSTM experiments;
-those do not constitute the new end-to-end SSL/cross-attention/BiLSTM system.
+The maintained implementation now supports BiLSTM heads for the spectral, raw,
+concatenation and gated cross-attention controls. The initial recipe uses 32
+units per direction. Source-only waveform SSL transfers into the new BiLSTM
+classifiers. Earlier GRU/stacked-LSTM configurations and the legacy notebooks
+remain historical comparisons. See [SLEEPEDF_BILSTM.md](SLEEPEDF_BILSTM.md) for
+the implemented data flow, configuration paths and staged validation policy.
 
 ## Immediate sequence
 
-1. Complete and validate file organization while preserving historical evidence.
-2. Specify a BiLSTM temporal head and matched raw/concatenation/cross-attention controls in the maintained modules.
-3. Keep participant-independent Sleep-EDF splits and source-fitted normalization; define context and evaluation eligibility explicitly.
-4. Verify SSL transfer, checkpoint reload and inference for the BiLSTM variants in small integration runs.
-5. Freeze a fresh source-only study and its label budgets, seeds and selection policy before full training.
+1. Validate BiLSTM gradient flow, serialization, waveform SSL transfer and inference.
+2. Run the full seven-condition integration pilot on source participants only.
+3. Check the full 70/15-participant scope with a bounded M3/M6 source benchmark.
+4. Freeze and execute a fresh uncapped source matrix after checks pass.
+5. Review complete learning curves and source-only comparisons before freezing any additional seeds or scoring held-out data.
 
 The previous CPU GRU matrix was stopped explicitly by the user during
 organization. Three complete SSL epochs are retained with model and optimizer
@@ -39,5 +39,6 @@ the complete external policy, then freeze before scoring. Deferral does not
 invalidate the prepared data or authorize target-based tuning.
 
 This file records scope and sequencing, not positive results, novelty claims
-or a final publication protocol. The first-version architecture and validation
-decisions still need to be made explicitly in the next implementation stage.
+or a final publication protocol. The initial architecture and validation
+configuration are explicit; convergence, repeated-seed evidence and scientific
+conclusions require the subsequent experiment results.

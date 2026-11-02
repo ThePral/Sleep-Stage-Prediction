@@ -6,6 +6,7 @@ they are not rewritten during file organization.
 
 | Evidence | Location |
 |---|---|
+| BiLSTM regression/kernel checks, architecture counts and staged source execution | `bilstm_2026-11-02/` |
 | Workspace organization, path map and explicit training stop | `organization_2026-11-02/` |
 | Stopped CPU campaign, preflight, checkpoint and progress records | `cpu_training_2026-11-02/` |
 | Methods for the earlier GRU source campaign | `source_campaign_2026-11-02/` |
@@ -15,7 +16,7 @@ they are not rewritten during file organization.
 | Supervised integration and canonical data preparation | `supervised_2026-10-27/`, `implementation_2026-10-27/` |
 | Original project audit | `audit_2026-10-26/` |
 
-No new BiLSTM results exist yet. Capped pilots remain integration checks rather
+New BiLSTM execution evidence is separate from earlier GRU artifacts. Capped pilots remain integration checks rather
 than convergence evidence. The stopped SSL checkpoint has three completed
 epochs and is not a completed ten-epoch encoder-transfer bundle. Raw run state
 and checkpoints remain under `runs/`; these reports are selected evidence.

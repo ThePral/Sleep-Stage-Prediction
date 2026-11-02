@@ -2,7 +2,8 @@
 
 | Document | Use |
 |---|---|
-| [RESEARCH_DIRECTION.md](RESEARCH_DIRECTION.md) | Sleep-EDF priority, planned BiLSTM work and deferred ISRUC strategy |
+| [RESEARCH_DIRECTION.md](RESEARCH_DIRECTION.md) | Sleep-EDF/BiLSTM priority and deferred ISRUC strategy |
+| [SLEEPEDF_BILSTM.md](SLEEPEDF_BILSTM.md) | Implemented SSL/cross-attention/BiLSTM data flow, configs and validation |
 | [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) | Where files belong and which paths remain fixed |
 | [IMPLEMENTATION_STATUS.md](IMPLEMENTATION_STATUS.md) | Implementation milestones; read the newest scope update first |
 | [operations/TRAINING_RUNBOOK.md](operations/TRAINING_RUNBOOK.md) | CPU launcher, monitoring and historical recovery commands |

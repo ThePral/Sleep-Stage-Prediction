@@ -1,0 +1,176 @@
+{
+  "date": "2026-11-02",
+  "passed": true,
+  "stage": "real_source_integration_only",
+  "study_fingerprint": "8419bf9ee4691a89c8c3ca3f79ce193caff72fcb0d55052ad86f3567831da75a",
+  "jobs_completed": 18,
+  "classifiers": [
+    {
+      "job_id": "M0_draw42_n1_seed42",
+      "condition": "M0",
+      "budget_id": "draw42_n1",
+      "parameters": 11333,
+      "temporal_head": "bilstm",
+      "waveform_normalization_fit_epochs": 11032,
+      "pretrained_waveform": false,
+      "checkpoint_reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M1_draw42_n1_seed42",
+      "condition": "M1",
+      "budget_id": "draw42_n1",
+      "parameters": 56325,
+      "temporal_head": "bilstm",
+      "waveform_normalization_fit_epochs": 11032,
+      "pretrained_waveform": false,
+      "checkpoint_reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M2_draw42_n1_seed42",
+      "condition": "M2",
+      "budget_id": "draw42_n1",
+      "parameters": 65861,
+      "temporal_head": "bilstm",
+      "waveform_normalization_fit_epochs": 11032,
+      "pretrained_waveform": false,
+      "checkpoint_reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M3_draw42_n1_seed42",
+      "condition": "M3",
+      "budget_id": "draw42_n1",
+      "parameters": 82629,
+      "temporal_head": "bilstm",
+      "waveform_normalization_fit_epochs": 11032,
+      "pretrained_waveform": false,
+      "checkpoint_reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M4_draw42_n1_seed42",
+      "condition": "M4",
+      "budget_id": "draw42_n1",
+      "parameters": 56325,
+      "temporal_head": "bilstm",
+      "waveform_normalization_fit_epochs": 11032,
+      "pretrained_waveform": true,
+      "checkpoint_reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M5_draw42_n1_seed42",
+      "condition": "M5",
+      "budget_id": "draw42_n1",
+      "parameters": 65861,
+      "temporal_head": "bilstm",
+      "waveform_normalization_fit_epochs": 11032,
+      "pretrained_waveform": true,
+      "checkpoint_reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M6_draw42_n1_seed42",
+      "condition": "M6",
+      "budget_id": "draw42_n1",
+      "parameters": 82629,
+      "temporal_head": "bilstm",
+      "waveform_normalization_fit_epochs": 11032,
+      "pretrained_waveform": true,
+      "checkpoint_reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M0_draw42_n2_seed42",
+      "condition": "M0",
+      "budget_id": "draw42_n2",
+      "parameters": 11333,
+      "temporal_head": "bilstm",
+      "waveform_normalization_fit_epochs": 11032,
+      "pretrained_waveform": false,
+      "checkpoint_reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M1_draw42_n2_seed42",
+      "condition": "M1",
+      "budget_id": "draw42_n2",
+      "parameters": 56325,
+      "temporal_head": "bilstm",
+      "waveform_normalization_fit_epochs": 11032,
+      "pretrained_waveform": false,
+      "checkpoint_reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M2_draw42_n2_seed42",
+      "condition": "M2",
+      "budget_id": "draw42_n2",
+      "parameters": 65861,
+      "temporal_head": "bilstm",
+      "waveform_normalization_fit_epochs": 11032,
+      "pretrained_waveform": false,
+      "checkpoint_reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M3_draw42_n2_seed42",
+      "condition": "M3",
+      "budget_id": "draw42_n2",
+      "parameters": 82629,
+      "temporal_head": "bilstm",
+      "waveform_normalization_fit_epochs": 11032,
+      "pretrained_waveform": false,
+      "checkpoint_reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M4_draw42_n2_seed42",
+      "condition": "M4",
+      "budget_id": "draw42_n2",
+      "parameters": 56325,
+      "temporal_head": "bilstm",
+      "waveform_normalization_fit_epochs": 11032,
+      "pretrained_waveform": true,
+      "checkpoint_reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M5_draw42_n2_seed42",
+      "condition": "M5",
+      "budget_id": "draw42_n2",
+      "parameters": 65861,
+      "temporal_head": "bilstm",
+      "waveform_normalization_fit_epochs": 11032,
+      "pretrained_waveform": true,
+      "checkpoint_reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M6_draw42_n2_seed42",
+      "condition": "M6",
+      "budget_id": "draw42_n2",
+      "parameters": 82629,
+      "temporal_head": "bilstm",
+      "waveform_normalization_fit_epochs": 11032,
+      "pretrained_waveform": true,
+      "checkpoint_reload_max_probability_difference": 0.0
+    }
+  ],
+  "training_participants": 2,
+  "validation_participants": 1,
+  "conditions": [
+    "M0",
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "M5",
+    "M6"
+  ],
+  "validation_examples_per_model": 4,
+  "all_models_use_bilstm_32_per_direction": true,
+  "shared_ssl_bundle_sha256": "f5f1c5cab72efdc998d7d9ed56fc588fda835a99c460993d1e8e10dd827bdbf5",
+  "shared_validation_target_sha256": "8e3331118bcfcdd288b647c42078a8a5be43320f35e877cf0c05cf2e6f7ca66b",
+  "all_bundles_reload_within_tolerance": true,
+  "normalizers_match_within_each_budget": true,
+  "waveform_normalization_pool_matches_all_scratch_and_ssl_conditions": true,
+  "source_hashes_match_regression_and_study": true,
+  "preserved_prior_ssl_epochs": 3,
+  "baseline_artifacts_unchanged": true,
+  "broken_documentation_links": [],
+  "real_isruc_or_new_source_test_scoring_opened": false,
+  "limitations": [
+    "Four validation targets and capped updates establish integration only, not convergence or comparative model quality.",
+    "Only one optimization seed and a restricted source participant scope were used."
+  ]
+}

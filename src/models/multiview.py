@@ -23,10 +23,15 @@ class ModelConfig:
     temporal_units: int = 64
     dropout: float = 0.3
     spectral_units: int = 32
+    # Preserve old bundles: legacy uses GRU for waveform models and stacked
+    # LSTMs for the spectral reference. BiLSTM units are per direction.
+    temporal_head: str = "legacy"
 
     def __post_init__(self):
         if self.variant not in {"raw", "concat", "gated", "spectral"}:
             raise ValueError("variant must be raw, concat, gated, or spectral.")
+        if self.temporal_head not in {"legacy", "bilstm"}:
+            raise ValueError("temporal_head must be legacy or bilstm.")
         for name in ["sequence_length", "samples_per_epoch", "token_dim", "attention_heads", "temporal_units", "spectral_units"]:
             value = getattr(self, name)
             if isinstance(value, bool) or not isinstance(value, int) or value < 1:
@@ -205,19 +210,36 @@ def build_multiview_model(config=None):
     config = config or ModelConfig()
     if config.variant == "spectral":
         inputs = {"spectral": keras.Input((config.sequence_length, len(ALL_FEATURES)), name="spectral")}
-        sequence = layers.LSTM(config.spectral_units, return_sequences=True, name="lstm_1")(inputs["spectral"])
-        sequence = layers.LSTM(config.spectral_units, name="lstm_2")(sequence)
+        if config.temporal_head == "bilstm":
+            sequence = build_bilstm_head(inputs["spectral"], config)
+        else:
+            sequence = layers.LSTM(config.spectral_units, return_sequences=True, name="lstm_1")(inputs["spectral"])
+            sequence = layers.LSTM(config.spectral_units, name="lstm_2")(sequence)
         sequence = layers.Dropout(config.dropout, name="temporal_dropout")(sequence)
         output = layers.Dense(len(CLASS_LABELS), activation="softmax", dtype="float32", name="sleep_stage")(sequence)
-        return keras.Model(inputs, output, name="spectral_stacked_lstm_reference")
+        name = "spectral_bilstm_reference" if config.temporal_head == "bilstm" else "spectral_stacked_lstm_reference"
+        return keras.Model(inputs, output, name=name)
     inputs = {"waveform": keras.Input((config.sequence_length, config.samples_per_epoch, 1), name="waveform")}
     if config.variant != "raw":
         inputs["spectral"] = keras.Input((config.sequence_length, len(ALL_FEATURES)), name="spectral")
     sequence = EpochSequenceEncoder(build_epoch_encoder(config), name="epoch_sequence_encoder")(inputs)
-    temporal = layers.GRU(config.temporal_units, name="temporal_gru")(sequence)
+    temporal = (build_bilstm_head(sequence, config) if config.temporal_head == "bilstm"
+                else layers.GRU(config.temporal_units, name="temporal_gru")(sequence))
     temporal = layers.Dropout(config.dropout, name="temporal_dropout")(temporal)
     output = layers.Dense(len(CLASS_LABELS), activation="softmax", dtype="float32", name="sleep_stage")(temporal)
-    return keras.Model(inputs, output, name=f"{config.variant}_sleep_stage_model")
+    name = f"{config.variant}_bilstm_sleep_stage_model" if config.temporal_head == "bilstm" else f"{config.variant}_sleep_stage_model"
+    return keras.Model(inputs, output, name=name)
+
+
+def build_bilstm_head(sequence, config):
+    """Read both directions of the supplied window; no later target epochs.
+
+    The data loader defines window eligibility and the last-epoch target. This
+    head changes neither alignment nor preprocessing's offline assumptions.
+    """
+    return layers.Bidirectional(
+        layers.LSTM(config.temporal_units), merge_mode="concat", name="temporal_bilstm",
+    )(sequence)
 
 
 def get_waveform_encoder(model):

@@ -1,4 +1,39 @@
-# Current scope and organization - 2 November 2026
+# SSL, cross-attention and BiLSTM implementation - 2 November 2026
+
+BiLSTM is implemented as an explicit temporal-head option for raw, concatenation,
+gated-attention and spectral controls. New recipes use 32 units per direction,
+a 64-feature output, and the existing ten-epoch window ending at its target.
+The full gated model has 82,629 parameters. Legacy GRU/stacked-LSTM defaults
+and prior model bundles remain supported. Inference checks declared BiLSTM
+type/units, including serialization and SSL waveform transfer.
+
+All 116 regression tests pass (123.443 seconds), including both-direction
+gradient flow, tiny multiclass overfit, serialization, SSL transfer/fine-tuning,
+source-only selection, legacy compatibility and inference mismatch rejection.
+Native CPU supervised/SSL kernel checks pass. The few-step synthetic check ran
+alongside regressions, so its timings are readiness evidence rather than a
+dedicated throughput comparison.
+
+A fresh staged CPU workflow is under `runs/bilstm_2026-11-02`. The seven-condition
+capped pilot must pass before the full-source M3/M6 benchmark, disposable
+training profile and first uncapped one-seed matrix. Check live status/ledgers
+to determine which stages have completed. Source and packages remain frozen
+while those jobs run; real ISRUC and new source-test scoring remain unopened.
+Evidence is in `reports/bilstm_2026-11-02`; the architecture/configuration guide
+is [SLEEPEDF_BILSTM.md](SLEEPEDF_BILSTM.md).
+
+The 18-job real-source pilot subsequently completed, with all 14 classifier
+bundles verified and identical four-target validation masks across all
+conditions/budgets. Shared SSL initialization and normalization checks pass;
+prior baseline files and the stopped checkpoint remain unchanged. This capped
+two-training/one-validation-participant run validates integration only. The
+staged runner has advanced to the full-source capped benchmark.
+
+The following organization milestone describes the earlier state before this
+implementation. The stopped three-epoch SSL checkpoint remains intact and is
+not reused as a completed encoder bundle.
+
+# Organization milestone - 2 November 2026
 
 The current paper direction is Sleep-EDF Expanded with SSL, cross-attention
 and a planned BiLSTM temporal head. The previous GRU matrix was stopped at the

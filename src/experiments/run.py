@@ -105,7 +105,10 @@ def create_study(root, directory, config, *, split_file=None):
              "limited_run": plan["limited_participant_scope"] or any(v is not None for v in config["limits"].values()),
              "selection_policy": "source_validation_only_no_source_test_or_external_prediction_jobs",
              "comparison_policy": "paired_budget_seed_normalizer_validation_targets_and_ssl_checkpoint",
-             "M0_policy": "fresh_two_layer_32_unit_spectral_LSTM_by_default_not_the_historical_frozen_checkpoint"}
+             "M0_policy": (f"fresh_spectral_BiLSTM_{config['model']['temporal_units']}_units_per_direction"
+                           if config["model"]["temporal_head"] == "bilstm" else
+                           "fresh_two_layer_32_unit_spectral_LSTM_by_default_not_the_historical_frozen_checkpoint"),
+             "temporal_context_policy": "ten_or_configured_contiguous_eligible_epochs_ending_at_target_no_later_target_epochs_offline_preprocessing"}
     study["fingerprint"] = fingerprint(study)
     directory = Path(directory)
     directory.mkdir(parents=True, exist_ok=False)
@@ -167,6 +170,8 @@ def write_tables(directory, study, ledger):
         predictions = pd.read_csv(attempt / "artifacts/validation_predictions.csv", usecols=["epoch_id", "true_stage"])
         budget = summary["label_budget"]
         rows.append({"job_id": job["job_id"], "condition": job["condition"], "budget_id": job["budget_id"],
+                     "temporal_head": study["config"]["model"].get("temporal_head", "legacy"),
+                     "temporal_units": study["config"]["model"]["temporal_units"],
                      "training_seed": job["seed"], "draw_seed": budget["draw_seed"], "fraction": budget["fraction"],
                      "labeled_training_participants": len(budget["participants"]),
                      "training_annotated_hours": budget["annotation_cost"]["annotated_hours"],
@@ -177,7 +182,7 @@ def write_tables(directory, study, ledger):
                      "normalizer_sha256": sha256_file(attempt / "artifacts/normalizer.json"),
                      "validation_targets_sha256": fingerprint(predictions.to_dict("records")),
                      "limited_run": study["limited_run"]})
-    columns = ["job_id", "condition", "budget_id", "training_seed", "draw_seed", "fraction", "labeled_training_participants",
+    columns = ["job_id", "condition", "budget_id", "temporal_head", "temporal_units", "training_seed", "draw_seed", "fraction", "labeled_training_participants",
                "training_annotated_hours", "validation_annotated_hours", "validation_examples", "validation_macro_f1",
                "validation_accuracy", "parameters", "epochs_completed", "best_epoch", "normalizer_sha256", "validation_targets_sha256", "limited_run"]
     frame = pd.DataFrame(rows, columns=columns)

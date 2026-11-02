@@ -3,10 +3,26 @@
 The previous campaign was stopped explicitly by the user on 2 November 2026,
 with three complete SSL epochs preserved and no supervised jobs started.
 See [the stop record](../../reports/organization_2026-11-02/training_stop.json).
-The following recipes reproduce the earlier GRU/LSTM work; the planned BiLSTM
-variant is not implemented or running. Source packaging paths changed during
-organization, so the old frozen matrix must not be restarted under changed code.
-Prepare a fresh study after the new architecture is specified and validated.
+The BiLSTM replacement is now implemented and its full 116-test regression
+suite passes. [SLEEPEDF_BILSTM.md](../SLEEPEDF_BILSTM.md) describes the architecture
+and new configuration names. A fresh CPU staged runner uses
+`runs/bilstm_2026-11-02/status.json`: seven-condition integration pilot, full-source
+capped benchmark, disposable training profile, then the uncapped source matrix.
+Every stage must pass before the next starts. Read that status and job ledgers
+for actual progress; startup is not completion or convergence.
+
+For independent reproduction, use the commands in the BiLSTM guide and fresh
+output directories. To plan the uncapped version after successful checks:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.experiments.run plan --config configs/sleepedf/experiments/experiment_bilstm_matrix.json --study-dir runs/my_bilstm_matrix
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.experiments.run execute --study-dir runs/my_bilstm_matrix
+```
+
+The later sections retain earlier GRU/LSTM recipes for reproducibility. The old
+frozen GRU matrix must not be restarted under changed code. The new campaign
+starts source-only SSL afresh and does not bypass the stopped checkpoint's
+code/resume guards. No real ISRUC or new source-test scoring is scheduled.
 
 ## Current route: native CPU, runtime files on D: (2 November 2026)
 

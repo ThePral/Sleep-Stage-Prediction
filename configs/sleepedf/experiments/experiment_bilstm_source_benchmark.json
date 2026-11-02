@@ -1,0 +1,10 @@
+{
+  "model": {"sequence_length": 10, "samples_per_epoch": 3000, "temporal_head": "bilstm", "temporal_units": 32},
+  "training": {"batch_size": 4, "epochs": 2, "learning_rate": 0.001, "patience": 2},
+  "pretraining": {"batch_size": 32, "epochs": 2, "learning_rate": 0.001, "temperature": 0.2},
+  "fractions": [1.0],
+  "draw_seeds": [42],
+  "training_seeds": [42],
+  "conditions": ["M3", "M6"],
+  "limits": {"max_train_batches": 128, "max_validation_batches": 64, "max_pretraining_batches": 128}
+}

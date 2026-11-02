@@ -1,0 +1,179 @@
+{
+  "date": "2026-11-02",
+  "models": [
+    {
+      "variant": "spectral",
+      "parameters": 11333,
+      "config": {
+        "variant": "spectral",
+        "sequence_length": 10,
+        "samples_per_epoch": 3000,
+        "filters": [
+          16,
+          32,
+          64
+        ],
+        "kernels": [
+          31,
+          15,
+          7
+        ],
+        "strides": [
+          4,
+          5,
+          5
+        ],
+        "token_dim": 64,
+        "attention_heads": 4,
+        "temporal_units": 32,
+        "dropout": 0.3,
+        "spectral_units": 32,
+        "temporal_head": "bilstm"
+      },
+      "forward_units": 32,
+      "backward_units": 32,
+      "temporal_output_features": 64,
+      "inputs": {
+        "spectral": [
+          null,
+          10,
+          10
+        ]
+      }
+    },
+    {
+      "variant": "raw",
+      "parameters": 56325,
+      "config": {
+        "variant": "raw",
+        "sequence_length": 10,
+        "samples_per_epoch": 3000,
+        "filters": [
+          16,
+          32,
+          64
+        ],
+        "kernels": [
+          31,
+          15,
+          7
+        ],
+        "strides": [
+          4,
+          5,
+          5
+        ],
+        "token_dim": 64,
+        "attention_heads": 4,
+        "temporal_units": 32,
+        "dropout": 0.3,
+        "spectral_units": 32,
+        "temporal_head": "bilstm"
+      },
+      "forward_units": 32,
+      "backward_units": 32,
+      "temporal_output_features": 64,
+      "inputs": {
+        "waveform": [
+          null,
+          10,
+          3000,
+          1
+        ]
+      }
+    },
+    {
+      "variant": "concat",
+      "parameters": 65861,
+      "config": {
+        "variant": "concat",
+        "sequence_length": 10,
+        "samples_per_epoch": 3000,
+        "filters": [
+          16,
+          32,
+          64
+        ],
+        "kernels": [
+          31,
+          15,
+          7
+        ],
+        "strides": [
+          4,
+          5,
+          5
+        ],
+        "token_dim": 64,
+        "attention_heads": 4,
+        "temporal_units": 32,
+        "dropout": 0.3,
+        "spectral_units": 32,
+        "temporal_head": "bilstm"
+      },
+      "forward_units": 32,
+      "backward_units": 32,
+      "temporal_output_features": 64,
+      "inputs": {
+        "spectral": [
+          null,
+          10,
+          10
+        ],
+        "waveform": [
+          null,
+          10,
+          3000,
+          1
+        ]
+      }
+    },
+    {
+      "variant": "gated",
+      "parameters": 82629,
+      "config": {
+        "variant": "gated",
+        "sequence_length": 10,
+        "samples_per_epoch": 3000,
+        "filters": [
+          16,
+          32,
+          64
+        ],
+        "kernels": [
+          31,
+          15,
+          7
+        ],
+        "strides": [
+          4,
+          5,
+          5
+        ],
+        "token_dim": 64,
+        "attention_heads": 4,
+        "temporal_units": 32,
+        "dropout": 0.3,
+        "spectral_units": 32,
+        "temporal_head": "bilstm"
+      },
+      "forward_units": 32,
+      "backward_units": 32,
+      "temporal_output_features": 64,
+      "inputs": {
+        "spectral": [
+          null,
+          10,
+          10
+        ],
+        "waveform": [
+          null,
+          10,
+          3000,
+          1
+        ]
+      }
+    }
+  ],
+  "data_access": "model_construction_only_no_recordings_loaded"
+}

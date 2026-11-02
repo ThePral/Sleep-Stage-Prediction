@@ -27,15 +27,19 @@ class PreflightConfig:
     warmup_steps: int = 2
     measured_steps: int = 5
     require_gpu: bool = True
+    temporal_head: str = "legacy"
+    temporal_units: int = 64
 
     def __post_init__(self):
-        for name in ["supervised_batch_size", "contrastive_batch_size", "warmup_steps", "measured_steps"]:
+        for name in ["supervised_batch_size", "contrastive_batch_size", "warmup_steps", "measured_steps", "temporal_units"]:
             value = getattr(self, name)
             minimum = 2 if name == "contrastive_batch_size" else 1
             if isinstance(value, bool) or not isinstance(value, int) or value < minimum:
                 raise ValueError(f"{name} must be an integer >= {minimum}.")
         if not isinstance(self.require_gpu, bool):
             raise ValueError("require_gpu must be boolean.")
+        if self.temporal_head not in {"legacy", "bilstm"}:
+            raise ValueError("temporal_head must be legacy or bilstm.")
 
 
 def hardware_inventory():
@@ -82,7 +86,8 @@ def run_preflight(output_path, config=None):
         tf.config.experimental.enable_op_determinism()
 
         with tf.device(device):
-            architecture = ModelConfig()
+            architecture = ModelConfig(temporal_head=config.temporal_head, temporal_units=config.temporal_units)
+            report["supervised_model_config"] = architecture.to_dict()
             model = compile_multiview_model(build_multiview_model(architecture))
             inputs = {"waveform": tf.random.stateless_normal((config.supervised_batch_size, 10, 3000, 1), [42, 1]),
                       "spectral": tf.random.stateless_normal((config.supervised_batch_size, 10, 10), [42, 2])}
@@ -163,9 +168,12 @@ def main(argv=None):
     parser.add_argument("--contrastive-batch-size", type=int, default=32)
     parser.add_argument("--warmup-steps", type=int, default=2)
     parser.add_argument("--measured-steps", type=int, default=5)
+    parser.add_argument("--temporal-head", choices=["legacy", "bilstm"], default="legacy")
+    parser.add_argument("--temporal-units", type=int, default=64, help="Units per direction for BiLSTM.")
     args = parser.parse_args(argv)
     result = run_preflight(args.report, PreflightConfig(args.supervised_batch_size, args.contrastive_batch_size,
-                                                      args.warmup_steps, args.measured_steps, not args.allow_cpu))
+                                                      args.warmup_steps, args.measured_steps, not args.allow_cpu,
+                                                      args.temporal_head, args.temporal_units))
     print(json.dumps({"passed": result["passed"], "devices": result.get("tensorflow_devices"),
                       "checks": result["checks"], "error": result.get("error")}, indent=2))
     return 0 if result["passed"] else 2

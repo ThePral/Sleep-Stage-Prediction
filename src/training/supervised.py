@@ -243,6 +243,7 @@ def train_supervised(
             history = pd.read_csv(run_directory / "training_history.csv")
             summary = {
                 "variant": model_config.variant, "parameters": model.count_params(),
+                "temporal_head": model_config.temporal_head, "temporal_units": model_config.temporal_units,
                 "training_mode": resolved["training_mode"],
                 "trainable_parameters": int(sum(np.prod(v.shape) for v in model.trainable_weights)),
                 "pretrained_waveform": pretrained is not None,

@@ -1,0 +1,89 @@
+{
+  "date": "2026-11-02",
+  "milestone": "Sleep-EDF waveform SSL plus gated spectral cross-attention plus BiLSTM",
+  "implemented": true,
+  "regression_tests_passed": 116,
+  "regression_seconds": 123.443,
+  "temporal_units_per_direction": 32,
+  "temporal_output_features": 64,
+  "legacy_configuration_and_bundle_compatibility_tested": true,
+  "real_source_pilot_jobs_completed": 18,
+  "real_source_pilot_classifiers_verified": 14,
+  "real_source_pilot_limited_run": true,
+  "kernel_preflight_passed": true,
+  "kernel_preflight_concurrent_with_regression_tests": true,
+  "full_source_benchmark_participants": {
+    "train": 70,
+    "validation": 15
+  },
+  "pipeline_snapshot": {
+    "date": "2026-11-02",
+    "status": "running",
+    "orchestrator_pid": 130624,
+    "model_family": "waveform_SSL_spectral_cross_attention_BiLSTM_32_per_direction",
+    "route": "native_windows_cpu",
+    "source_only": true,
+    "full_matrix_completed": false,
+    "data_policy": "Sleep-EDF training/validation only; no real ISRUC or new source-test predictions",
+    "prior_three_epoch_checkpoint_reused": false,
+    "completed_stages": [
+      "pilot_plan",
+      "pilot_execute",
+      "benchmark_plan"
+    ],
+    "regression_gate_passed": true,
+    "cpu_kernel_gate_passed": true,
+    "stage": "benchmark_execute",
+    "command": [
+      "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\.venv\\Scripts\\python.exe",
+      "-m",
+      "src.experiments.run",
+      "execute",
+      "--study-dir",
+      "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\bilstm_2026-11-02\\source_benchmark"
+    ],
+    "pilot_verified": true,
+    "child_pid": 126148
+  },
+  "benchmark_ledger_snapshot": {
+    "schema_version": 1,
+    "study_fingerprint": "97e6e3449d115fcd0d6207d71ad7792ded67f0def7690caf6f83dc92ebd4b303",
+    "jobs": {
+      "waveform_statistics": {
+        "status": "completed",
+        "attempt": "jobs/waveform_statistics/attempt_0001"
+      },
+      "normalizer_draw42_n70": {
+        "status": "running",
+        "attempt": "jobs/normalizer_draw42_n70/attempt_0001"
+      }
+    }
+  },
+  "full_matrix_completed_at_snapshot": false,
+  "prior_partial_ssl_checkpoint_reused": false,
+  "old_ssl_checkpoint_preserved": true,
+  "old_gru_campaign_restarted": false,
+  "installed_packages_changed": false,
+  "source_hashes_match_tests_and_active_study": true,
+  "runtime_storage": "Project-managed temp/cache/checkpoints/logs on D:; Windows system/pagefile activity not controlled",
+  "free_gib_at_snapshot": {
+    "C:/": 7.41,
+    "D:/": 129.78
+  },
+  "isruc_predictive_scoring_opened": false,
+  "new_source_test_predictive_scoring_opened": false,
+  "limitations": [
+    "Capped pilot/benchmark scores cannot establish convergence or an SSL/attention benefit.",
+    "The uncapped one-seed matrix is gated on benchmark and training-profile completion; consult live status.",
+    "Repeated seeds, final model selection and held-out evaluation remain subsequent research work."
+  ],
+  "files_sha256": {
+    "architectures.json": "73b38eeaecf86458445618e8d389cbd459691f011cc8c21419e1d70ee6a70d08",
+    "cpu_preflight.json": "1710fa1ef002079520f756721032ee36facca646f811ba2deb39a5f9db75a915",
+    "pilot_paired_source_validation.csv": "7c16d78db46aa4d62683df09e2bfba00c89e1a85f711c9e76f7026ff6a1eaa73",
+    "pilot_source_validation_results.csv": "15d633603a739b6cc4cfab030985abca4783fade1d08c6a386c719978bf91174",
+    "pilot_validation.json": "97868fb10ea4bafeade13ec325ae391e37b80a5667b0e72fbdd4374dbe1f7173",
+    "regression_summary.json": "f00ff7242248512e6e00117d70deb8f539d3688426a0112db07bae4578724613",
+    "regression_tests.txt": "81b69ca3cfa75b8fbbeb50cd1ae22b727e5a599815f47aec80117aed6afefe26"
+  }
+}

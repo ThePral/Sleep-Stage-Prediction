@@ -23,6 +23,7 @@ LEGACY_DOCUMENTS = {"IMPLEMENTATION_STATUS.md", "COMPUTE_GUIDE.md", "TRAINING_RU
                     "constraints-cuda125-pascal.txt"}
 DOCUMENTS = LEGACY_DOCUMENTS | {
     "README.md", "AGENTS.md", "docs/README.md", "docs/PROJECT_STRUCTURE.md", "docs/RESEARCH_DIRECTION.md",
+    "docs/SLEEPEDF_BILSTM.md",
     "docs/IMPLEMENTATION_STATUS.md", "docs/operations/COMPUTE_GUIDE.md", "docs/operations/TRAINING_RUNBOOK.md",
     "docs/reference/IMPLEMENTED_PIPELINE.md", "docs/archive/2026-10/PROJECT_AUDIT_2026-10-26.md",
     "docs/archive/2026-10/RESEARCH_ROADMAP_2026-10-26.md", "environments/README.md",

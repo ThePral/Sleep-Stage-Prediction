@@ -3,9 +3,10 @@
 [![XERJ Corpus Hub contributor](https://hub.xerj.org/contributors/ThePral/badge.svg)](https://hub.xerj.org/contributors/ThePral)
 
 The current paper direction is **Sleep-EDF Expanded**, combining self-supervised
-EEG pretraining, raw/spectral cross-attention and a planned BiLSTM temporal head.
-The existing research models use a GRU head, with a stacked-LSTM spectral
-reference; the BiLSTM replacement is the next implementation step.
+EEG pretraining, raw/spectral cross-attention and a BiLSTM temporal head.
+The [BiLSTM implementation guide](docs/SLEEPEDF_BILSTM.md) describes the seven
+matched conditions and staged validation. Earlier GRU and stacked-LSTM recipes
+remain available through the backward-compatible legacy setting.
 
 Cross-dataset work is deferred and preserved for later. Its ISRUC adapter,
 prepared data, evaluation code, audit tools and configuration remain available.
@@ -15,6 +16,7 @@ Real ISRUC predictive scoring remains unopened.
 
 - [Project structure and path rules](docs/PROJECT_STRUCTURE.md)
 - [Current research direction and deferred work](docs/RESEARCH_DIRECTION.md)
+- [SSL, cross-attention and BiLSTM implementation](docs/SLEEPEDF_BILSTM.md)
 - [Documentation index](docs/README.md)
 - [Implementation status](docs/IMPLEMENTATION_STATUS.md)
 - [CPU training and recovery runbook](docs/operations/TRAINING_RUNBOOK.md)
@@ -28,7 +30,7 @@ src/                           Shared data, models, training, inference and eval
 configs/
   sleepedf/models/             Existing supervised and linear-probe configurations
   sleepedf/pretraining/        Source-only SSL configuration
-  sleepedf/experiments/        Existing source experiment matrices and pilots
+  sleepedf/experiments/        BiLSTM and historical source matrices/pilots
   sleepedf/evaluation/         Source-validation integration specification
   compute/gpu/                 Retained GPU benchmark/matrix recipes
   deferred/cross_dataset/      ISRUC evaluation specification for later
@@ -60,7 +62,8 @@ The previous CPU matrix was **stopped at the user's request** before any
 supervised jobs started. Three complete SSL epochs and their checkpoint are
 preserved. The interruption is recorded in
 [training_stop.json](reports/organization_2026-11-02/training_stop.json).
-No BiLSTM campaign is running. Do not automatically restart the older GRU matrix.
+New BiLSTM runs use fresh study directories after passing staged checks.
+Do not automatically restart the older GRU matrix.
 
 The [workspace migration report](reports/organization_2026-11-02/README.md)
 records moved paths and validation. Old reports and study manifests keep their
