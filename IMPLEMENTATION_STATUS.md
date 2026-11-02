@@ -356,3 +356,12 @@ jobs are retained. Track actual progress in its ledger and logs; startup does
 not establish completion, convergence or an SSL benefit. ISRUC and new real
 source-test predictive scoring remain unopened. Evidence for runtime routing,
 CPU optimizer checks and the transition is in `reports/cpu_training_2026-11-02`.
+
+The CPU continuation has three sealed preparation jobs completed and SSL
+pretraining active. `scripts/training_status.py` checks the actual scheduler
+identity, samples its process tree, checks frozen source/package versions and
+optionally verifies completed artifact hashes. It imports no TensorFlow and
+leaves the study unchanged. Reproducible commands are in `TRAINING_RUNBOOK.md`;
+dated progress snapshots and monitor checks are retained with the CPU evidence.
+Initial activity samples precede the first SSL epoch seal, so no epoch timing,
+convergence or comparative performance claim is available yet.

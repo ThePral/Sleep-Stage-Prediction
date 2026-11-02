@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "missing_lock_not_reported_live": true,
+  "unrelated_live_pid_not_reported_as_scheduler": true,
+  "tensorflow_imported": false,
+  "temporary_checks_on_d": true,
+  "real_study_modified": false
+}

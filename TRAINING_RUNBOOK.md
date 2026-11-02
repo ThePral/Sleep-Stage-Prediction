@@ -41,6 +41,30 @@ summary, not by a stale `running` status. Keep source code/packages unchanged
 throughout this campaign. The earlier CPU five-job benchmark was capped and
 does not establish convergence. Real ISRUC/source-test scoring remains unopened.
 
+### Inspect a live CPU study
+
+This read-only command checks the scheduler PID and its command line, samples
+its process tree for five seconds, compares frozen source/package versions,
+and verifies every completed job's artifact hashes. It imports no TensorFlow,
+performs no optimizer updates and does not alter the study:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 scripts/training_status.py --study-dir runs/training_execution_2026-11-02_cpu/source_matrix --sample-seconds 5 --verify-artifacts
+```
+
+Add `--report runs/my_progress_01.json` to preserve a snapshot; use a new filename
+each time, outside the study directory. A verified live scheduler and observed
+CPU activity distinguish the process from a stale `running` record. CPU activity
+alone does not prove optimizer progress. SSL publishes its epoch count and
+checkpoint only after a full epoch, so `published_epochs: 0` can persist while
+the first epoch runs. Supervised history is also written at epoch boundaries.
+No ETA is inferred before real epoch timings are available. Final status
+`completed_in_ledger` is a recorded claim; use `--verify-artifacts` to require
+all completed artifact seals before `completed_artifacts_verified` is reported.
+If the scheduler is missing or its PID identity cannot be checked, inspect the
+logs/processes before any recovery. The monitor never deletes a lock or restarts
+a job automatically. It opens no source-test or ISRUC predictions.
+
 ## Historical WSL/GPU route (stopped; retain for reproduction)
 
 The user subsequently delegated training execution to the assistant on

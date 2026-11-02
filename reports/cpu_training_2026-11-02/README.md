@@ -39,3 +39,22 @@ not establish convergence. This campaign can take days; it is not complete
 merely because its scheduler started. No real ISRUC or new source-test
 predictive scoring is scheduled. See `TRAINING_RUNBOOK.md` for manual commands
 and recovery instructions.
+
+Continuation: `progress_01.json` captures three completed preparation jobs with
+all their artifact seals verified, followed by the running SSL job. Its scheduler
+identity is checked against the process command line. During a five-second
+sample its process tree used 21.34 CPU seconds and about 629 MiB resident memory;
+this is a point-in-time observation, not a peak. Available host memory was about
+3.06 GiB, with 129.8 GiB free on D: and 10.18 GiB on C:. Source hashes and package
+versions still matched the study. No SSL epoch checkpoint had yet been published.
+The new `scripts/training_status.py` reproduces these read-only checks without
+importing TensorFlow or modifying the running campaign. No training result or
+convergence claim follows from this activity sample.
+
+`progress_02.json` additionally records CPU-only worker devices and another
+successful source/package/artifact check. `monitor_validation.json` confirms
+that a missing scheduler lock or an unrelated live PID is not reported as a
+live scheduler. `monitor_cli_validation.json` records rejection of report
+overwrites and reports inside the frozen study, including exit codes. These
+checks perform no optimizer updates. The original regression suite was not
+rerun while the campaign was active; no source modules or packages changed.
