@@ -1,0 +1,251 @@
+{
+  "date": "2026-11-02",
+  "relocations": [
+    {
+      "from": "PROJECT_AUDIT_2026-10-26.md",
+      "to": "docs/archive/2026-10/PROJECT_AUDIT_2026-10-26.md",
+      "sha256_before": "24d5847623364f2cfddf8660fad150a41bd1b868c229a765da1f2c14bb70fb14",
+      "sha256_after": "f0b694cd9aee99db914684791baf26493ebaf5273a7a74ccffb03b423e893835"
+    },
+    {
+      "from": "RESEARCH_ROADMAP_2026-10-26.md",
+      "to": "docs/archive/2026-10/RESEARCH_ROADMAP_2026-10-26.md",
+      "sha256_before": "956fa0d50cee8400d61fe2f2f44756f7afaa7ee4dfcc96757af5343668051fff",
+      "sha256_after": "f9fe98c7af652102475ead312b59bc8edda12e9afe46fae88d57846b77bcb562"
+    },
+    {
+      "from": "audit_sleep_dataset_compatibility.py",
+      "to": "scripts/audits/cross_dataset/audit_sleep_dataset_compatibility.py",
+      "sha256_before": "37d5e8e3209c4a3d0532758f8803783c5a5cd2265ca7c29c53bb30efb9ba3805",
+      "sha256_after": "78d10da17e9acf7b1036649aaa8711d985d3b9f7d3c98c6870dd0e58dff1f084"
+    },
+    {
+      "from": "audit_sleep_dataset_compatibility_v2.py",
+      "to": "scripts/audits/cross_dataset/audit_sleep_dataset_compatibility_v2.py",
+      "sha256_before": "d5c1215a0badd12d0c166f0bffa0e22c580db883983de9d24c85d0c7538ebf10",
+      "sha256_after": "f091a90d398b4fb3c5bf9375ef226757215e9a76ec0632f3d80a496e10fbf31e"
+    },
+    {
+      "from": "audit_sleepedf_isruc_v3.py",
+      "to": "scripts/audits/cross_dataset/audit_sleepedf_isruc_v3.py",
+      "sha256_before": "5874ff5316fc0fda7a85ca354ae593dbfd35f1ae25496084ac459adc82581938",
+      "sha256_after": "87953270e6c79059107b198e34a10713edd054c2f97b742b32c7210196911ff7"
+    },
+    {
+      "from": "configs/evaluation_isruc.json",
+      "to": "configs/deferred/cross_dataset/evaluation_isruc.json",
+      "sha256_before": "3b6be75edf7943f9405125ad0eecdaaab15a64aea60f87e0608c6928f7d1c196",
+      "sha256_after": "3b6be75edf7943f9405125ad0eecdaaab15a64aea60f87e0608c6928f7d1c196"
+    },
+    {
+      "from": "configs/evaluation_source_validation_pilot.json",
+      "to": "configs/sleepedf/evaluation/evaluation_source_validation_pilot.json",
+      "sha256_before": "139b4acba635f06c251dc4a16cabedfe88d770e324da1995d12352c2be4b0a66",
+      "sha256_after": "139b4acba635f06c251dc4a16cabedfe88d770e324da1995d12352c2be4b0a66"
+    },
+    {
+      "from": "configs/experiment_gpu_benchmark.json",
+      "to": "configs/compute/gpu/experiment_gpu_benchmark.json",
+      "sha256_before": "851f8c8a3981c7b479165066df366beaea4a592d2a0d648b426a1887bf417927",
+      "sha256_after": "851f8c8a3981c7b479165066df366beaea4a592d2a0d648b426a1887bf417927"
+    },
+    {
+      "from": "configs/experiment_gpu_matrix.json",
+      "to": "configs/compute/gpu/experiment_gpu_matrix.json",
+      "sha256_before": "c840dc9bfec2c53f1b7fcc8281b44dfba0a1bb0101a2b0ad7b8c7d78a164eee4",
+      "sha256_after": "c840dc9bfec2c53f1b7fcc8281b44dfba0a1bb0101a2b0ad7b8c7d78a164eee4"
+    },
+    {
+      "from": "configs/experiment_matrix.json",
+      "to": "configs/sleepedf/experiments/experiment_matrix.json",
+      "sha256_before": "d77966b9cf0e6f41c06acd31fb7d184977b6340de1bffe590b1ccde5099afb39",
+      "sha256_after": "d77966b9cf0e6f41c06acd31fb7d184977b6340de1bffe590b1ccde5099afb39"
+    },
+    {
+      "from": "configs/experiment_pilot.json",
+      "to": "configs/sleepedf/experiments/experiment_pilot.json",
+      "sha256_before": "5af409dad99ea9449387325635db825feb12206b29f8f5cd1e5801fd4ab107c2",
+      "sha256_after": "5af409dad99ea9449387325635db825feb12206b29f8f5cd1e5801fd4ab107c2"
+    },
+    {
+      "from": "configs/experiment_source_benchmark.json",
+      "to": "configs/sleepedf/experiments/experiment_source_benchmark.json",
+      "sha256_before": "a188f8822829cd3b25323e5b97f3d71cb3346cbcebe9136a8694c275f521472d",
+      "sha256_after": "a188f8822829cd3b25323e5b97f3d71cb3346cbcebe9136a8694c275f521472d"
+    },
+    {
+      "from": "configs/linear_probe.json",
+      "to": "configs/sleepedf/models/linear_probe.json",
+      "sha256_before": "5c0472ea3bf6a0e119ab016e8d8a48b6e75a0a187473b0cb6717941115464f73",
+      "sha256_after": "5c0472ea3bf6a0e119ab016e8d8a48b6e75a0a187473b0cb6717941115464f73"
+    },
+    {
+      "from": "configs/pretrain_raw.json",
+      "to": "configs/sleepedf/pretraining/pretrain_raw.json",
+      "sha256_before": "1f4b03600c0d8c07895b7400e32858417de2c3aa9d78ef27f5e437e25dc8707c",
+      "sha256_after": "1f4b03600c0d8c07895b7400e32858417de2c3aa9d78ef27f5e437e25dc8707c"
+    },
+    {
+      "from": "configs/supervised_concat.json",
+      "to": "configs/sleepedf/models/supervised_concat.json",
+      "sha256_before": "df1f330aacca060b23649fc68cc3ac2c7c344b5ce779febeff2f243d2dbe15ab",
+      "sha256_after": "df1f330aacca060b23649fc68cc3ac2c7c344b5ce779febeff2f243d2dbe15ab"
+    },
+    {
+      "from": "configs/supervised_gated.json",
+      "to": "configs/sleepedf/models/supervised_gated.json",
+      "sha256_before": "1c8242bf7f1b389c730aed05b404ce26f43b5c769ab54039b0ce9ce13e0bbb69",
+      "sha256_after": "1c8242bf7f1b389c730aed05b404ce26f43b5c769ab54039b0ce9ce13e0bbb69"
+    },
+    {
+      "from": "configs/supervised_raw.json",
+      "to": "configs/sleepedf/models/supervised_raw.json",
+      "sha256_before": "4d5997c7a7d9d46e5e102bcf8006c6acc67ab18cb9598b146290d4778ece4c35",
+      "sha256_after": "4d5997c7a7d9d46e5e102bcf8006c6acc67ab18cb9598b146290d4778ece4c35"
+    },
+    {
+      "from": "configs/supervised_spectral.json",
+      "to": "configs/sleepedf/models/supervised_spectral.json",
+      "sha256_before": "637cff77dbeaee6152d948ec782e1b9940d67264d3267ff06dc114d120584fcb",
+      "sha256_after": "637cff77dbeaee6152d948ec782e1b9940d67264d3267ff06dc114d120584fcb"
+    },
+    {
+      "from": "notebooks/01_dataset_exploration.ipynb",
+      "to": "notebooks/legacy/baseline/01_dataset_exploration.ipynb",
+      "sha256_before": "93b3bf1c94d376a8fa833162d46ba6aeee73e83552369548111d7b32df673fcb",
+      "sha256_after": "5c4b7dd7de2705566932a05d7df78a5dc4fce330fbd2df391f0e5f671cb10bf1"
+    },
+    {
+      "from": "notebooks/02_dataset_quality_check.ipynb",
+      "to": "notebooks/legacy/baseline/02_dataset_quality_check.ipynb",
+      "sha256_before": "b5758c201503358ef33153e08c37b605873b1e1256b33fb21d98c7b4d5ce37e2",
+      "sha256_after": "1b8b27d22e24869cb58b9f86ba4adbbc86afc873a029ec257409e29695fd3898"
+    },
+    {
+      "from": "notebooks/03_sequence_analysis.ipynb",
+      "to": "notebooks/legacy/baseline/03_sequence_analysis.ipynb",
+      "sha256_before": "aa755f8da4cc37af2bff9469e15a4f4621e8001702088335f543c7eb0795128e",
+      "sha256_after": "51e30a0f557afaec01e77849d8c0b1e0e1166559e57a3d8f9c20e4c60db4abc3"
+    },
+    {
+      "from": "notebooks/04_final_evaluation.ipynb",
+      "to": "notebooks/legacy/baseline/04_final_evaluation.ipynb",
+      "sha256_before": "efabbad72601bf335f457c83883ec017562a48501d1efe3ccff9cd5fb166168d",
+      "sha256_after": "fd8e221a7d9456212947d00b183dce21c9ec46712abe11cd80908419c5d4075f"
+    },
+    {
+      "from": "notebooks/05_inference_test.ipynb",
+      "to": "notebooks/legacy/baseline/05_inference_test.ipynb",
+      "sha256_before": "a158a08acf496c3437102c976440f7454f2ff5f60bf17461528f0223003e3f3c",
+      "sha256_after": "4e8f49e39b643cbaa3c0931ad61e2a93745e4e7f97d760ee2b77f63427b4f360"
+    },
+    {
+      "from": "notebooks/06_participant_split_model.ipynb",
+      "to": "notebooks/legacy/baseline/06_participant_split_model.ipynb",
+      "sha256_before": "6c102cc9606a0d2592bdcfe080bf42dfafc38832004d9959ed426126a4a76fea",
+      "sha256_after": "9c9c2deae358cf1462db0885c3d9dd60b64b764411093b1c3fffe7acfb225c22"
+    },
+    {
+      "from": "notebooks/sleep_stage_paper_figures_extended.ipynb",
+      "to": "notebooks/legacy/paper/sleep_stage_paper_figures_extended.ipynb",
+      "sha256_before": "e5f34cba3d3006f0ef0608efdacfddcb125b24d2968f6022786294b4e8b2c634",
+      "sha256_after": "bc007156f30069b98744cb5b7b65b478fffab8e2442b24161b6f498203c2678c"
+    },
+    {
+      "from": "notebooks/sleep_stage_paper_plots.ipynb",
+      "to": "notebooks/legacy/paper/sleep_stage_paper_plots.ipynb",
+      "sha256_before": "52d424451631b10e983b7d9dae7307bf66bd785f8b69931b2ed75b05ffce0057",
+      "sha256_after": "2b9c99b8db1c51ab172b89a639891ad4c6990cac844258c0c5a70d3775f59e49"
+    },
+    {
+      "from": "notebooks/sleep_stage_paper_plots_fixed.ipynb",
+      "to": "notebooks/legacy/paper/sleep_stage_paper_plots_fixed.ipynb",
+      "sha256_before": "c17106b0d4c280b2ff363004786092fae2cf89debf58f07964697cc8cb6ea5e2",
+      "sha256_after": "149a36fe695bc91801a05e0595a1b6335d100270eb5f6493118531bf6673a12b"
+    },
+    {
+      "from": "IMPLEMENTATION_STATUS.md",
+      "to": "docs/IMPLEMENTATION_STATUS.md",
+      "sha256_before": "49b0d09f0e242140ee6b654008df877c6ad4c831fe4a2dbaaf5d0bd682edaf96",
+      "sha256_after": "aed11cec3f95d25e2bf9d22a74ed64568d979cfc7a383a50f075d1e85667a02e"
+    },
+    {
+      "from": "COMPUTE_GUIDE.md",
+      "to": "docs/operations/COMPUTE_GUIDE.md",
+      "sha256_before": "3fa9cb9225dd1e6a46ef139bf6ec325247e201c54e2042a93a8d1163e959baa6",
+      "sha256_after": "27a5612564dfb1e226f9f6ff16c9a1a7dab6b4e40aa9c30c2f0cfc6c936cb782"
+    },
+    {
+      "from": "TRAINING_RUNBOOK.md",
+      "to": "docs/operations/TRAINING_RUNBOOK.md",
+      "sha256_before": "22b26c0375a15369e12da42c99c1e9ddc5bf75e966a93ff61e88640db778556a",
+      "sha256_after": "85862137607af881ed4b01b75d7b5be6ca846a8f432739856b2f114242205408"
+    },
+    {
+      "from": "requirements-research-common.txt",
+      "to": "environments/requirements-research-common.txt",
+      "sha256_before": "ecc59fc08abc928263b735803ae9d6e3dd181b9a2f2c365ac207fecc40bf8c13",
+      "sha256_after": "ecc59fc08abc928263b735803ae9d6e3dd181b9a2f2c365ac207fecc40bf8c13"
+    },
+    {
+      "from": "requirements-linux-gpu.txt",
+      "to": "environments/requirements-linux-gpu.txt",
+      "sha256_before": "1f6fa6c70fe86da3bc9d0c968dbf976db33361dc4e51ff289e06018ca1a08559",
+      "sha256_after": "1f6fa6c70fe86da3bc9d0c968dbf976db33361dc4e51ff289e06018ca1a08559"
+    },
+    {
+      "from": "constraints-cuda125-pascal.txt",
+      "to": "environments/constraints-cuda125-pascal.txt",
+      "sha256_before": "678f6758aabc738ad177f945b6e20a62e05a89c43b19062b096a7b6376981057",
+      "sha256_after": "678f6758aabc738ad177f945b6e20a62e05a89c43b19062b096a7b6376981057"
+    },
+    {
+      "from": "requirements-windows-py313.lock.txt",
+      "to": "environments/requirements-windows-py313.lock.txt",
+      "sha256_before": "a7f6ca42f282d8b2851e2911170ade395febab08e163a0b85adec77932f25025",
+      "sha256_after": "a7f6ca42f282d8b2851e2911170ade395febab08e163a0b85adec77932f25025"
+    },
+    {
+      "from": "README.md",
+      "to": "docs/reference/IMPLEMENTED_PIPELINE.md",
+      "sha256_before": "b3364590bb2556e7c713c01264bbcaa5c3e31955875687bc911529426711453d",
+      "sha256_after": "70c0e525fb6ab60cb8b756f6dafc30950f3d0ea993cb4b486371512f547b4cb3"
+    }
+  ],
+  "notebook_output_fingerprints": {
+    "notebooks/legacy/baseline/01_dataset_exploration.ipynb": "cf0f07b389d2322800ff8c52b9c55054c95a51e4be7b1cab7130e54410f4c2ea",
+    "notebooks/legacy/baseline/02_dataset_quality_check.ipynb": "0262712253675506183e67e0c872390c74d7e32b2e86c2a22da483a56d4b9325",
+    "notebooks/legacy/baseline/03_sequence_analysis.ipynb": "ab1e38110138bb63938967cfbe72baa548f55112aab483413381e459dae172f2",
+    "notebooks/legacy/baseline/04_final_evaluation.ipynb": "3c4907f19b4ece6556bde2ab4820a05be360c2b104014debb95beb511218caf6",
+    "notebooks/legacy/baseline/05_inference_test.ipynb": "6710ed7a0b945ecfdc8b147bc334a08495e63c50df338d6cc453cdae3d6a1744",
+    "notebooks/legacy/baseline/06_participant_split_model.ipynb": "f39d5423d708704caa9d2a10798e8a45aaf11ae6046f59152b1be1e6a4420df9",
+    "notebooks/legacy/paper/sleep_stage_paper_figures_extended.ipynb": "785fc78d66ac6d2ec5b00f2f63c35cfe1dbb7bcf79d69839dd143387d2337c14",
+    "notebooks/legacy/paper/sleep_stage_paper_plots.ipynb": "4bdd9bd91e36bf38135769ba41f3ade41e91d893d44b358b17cbe7cc585ebffa",
+    "notebooks/legacy/paper/sleep_stage_paper_plots_fixed.ipynb": "7bf225e65ab3425d744723322803033223549721607113a470f644bb7c9b8a6c"
+  },
+  "notebook_outputs_and_execution_counts_preserved": true,
+  "configuration_contents_preserved": true,
+  "data_checkpoints_reports_runs_and_participant_split_not_relocated": true,
+  "environment_specification_contents_preserved": true,
+  "installed_environments_not_moved_or_modified": true,
+  "directories_relocated": [
+    {
+      "from": "notebooks/paper_figures_extended",
+      "to": "notebooks/legacy/paper/paper_figures_extended",
+      "contained_files": 0
+    }
+  ],
+  "source_code_unchanged_during_initial_moves": true,
+  "source_changes_after_training_stop": [
+    "src/compute/capsule.py"
+  ],
+  "model_training_preprocessing_inference_code_unchanged": true,
+  "original_root_readme_retained_as_reference_and_replaced_with_navigation": true,
+  "documentation_links_repaired": [
+    {
+      "file": "docs/archive/2026-10/RESEARCH_ROADMAP_2026-10-26.md",
+      "from": "../../../IMPLEMENTATION_STATUS.md",
+      "to": "../../IMPLEMENTATION_STATUS.md"
+    }
+  ]
+}

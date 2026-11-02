@@ -1,0 +1,134 @@
+{
+  "date": "2026-11-02",
+  "passed": true,
+  "relocated_files": 35,
+  "markdown_links_checked": 35,
+  "broken_markdown_links": [],
+  "notebooks": [
+    {
+      "file": "notebooks/legacy/baseline/01_dataset_exploration.ipynb",
+      "code_cells_compiled_without_execution": 72,
+      "root_assignments_checked_from_root_and_notebook_directory": 1,
+      "outputs_execution_counts_metadata_preserved": true
+    },
+    {
+      "file": "notebooks/legacy/baseline/02_dataset_quality_check.ipynb",
+      "code_cells_compiled_without_execution": 95,
+      "root_assignments_checked_from_root_and_notebook_directory": 3,
+      "outputs_execution_counts_metadata_preserved": true
+    },
+    {
+      "file": "notebooks/legacy/baseline/03_sequence_analysis.ipynb",
+      "code_cells_compiled_without_execution": 91,
+      "root_assignments_checked_from_root_and_notebook_directory": 2,
+      "outputs_execution_counts_metadata_preserved": true
+    },
+    {
+      "file": "notebooks/legacy/baseline/04_final_evaluation.ipynb",
+      "code_cells_compiled_without_execution": 41,
+      "root_assignments_checked_from_root_and_notebook_directory": 1,
+      "outputs_execution_counts_metadata_preserved": true
+    },
+    {
+      "file": "notebooks/legacy/baseline/05_inference_test.ipynb",
+      "code_cells_compiled_without_execution": 22,
+      "root_assignments_checked_from_root_and_notebook_directory": 1,
+      "outputs_execution_counts_metadata_preserved": true
+    },
+    {
+      "file": "notebooks/legacy/baseline/06_participant_split_model.ipynb",
+      "code_cells_compiled_without_execution": 72,
+      "root_assignments_checked_from_root_and_notebook_directory": 2,
+      "outputs_execution_counts_metadata_preserved": true
+    },
+    {
+      "file": "notebooks/legacy/paper/sleep_stage_paper_figures_extended.ipynb",
+      "code_cells_compiled_without_execution": 32,
+      "root_assignments_checked_from_root_and_notebook_directory": 1,
+      "outputs_execution_counts_metadata_preserved": true
+    },
+    {
+      "file": "notebooks/legacy/paper/sleep_stage_paper_plots.ipynb",
+      "code_cells_compiled_without_execution": 14,
+      "root_assignments_checked_from_root_and_notebook_directory": 1,
+      "outputs_execution_counts_metadata_preserved": true
+    },
+    {
+      "file": "notebooks/legacy/paper/sleep_stage_paper_plots_fixed.ipynb",
+      "code_cells_compiled_without_execution": 14,
+      "root_assignments_checked_from_root_and_notebook_directory": 1,
+      "outputs_execution_counts_metadata_preserved": true
+    }
+  ],
+  "preserved_baseline_artifact_hashes_verified": 10,
+  "preexisting_notebook_syntax_issues": [],
+  "historical_report_files_unchanged_after_git_line_ending_normalization": 67,
+  "source_files_changed": [
+    "src/compute/capsule.py"
+  ],
+  "model_training_preprocessing_inference_modules_unchanged": true,
+  "configuration_and_environment_specs_byte_identical": true,
+  "old_scheduler_stopped_and_lock_released": true,
+  "installed_packages_changed": false,
+  "real_isruc_predictive_scoring_opened": false,
+  "capsule_tests": {
+    "passed": true,
+    "tests": 6,
+    "command": "python -m unittest tests.test_compute.SourceCapsuleTests -v",
+    "includes_legacy_archive_member_roundtrip": true
+  },
+  "notebook_code_cells_compiled": 453,
+  "cli_checks": [
+    {
+      "command": [
+        "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\scripts\\audits\\cross_dataset\\audit_sleep_dataset_compatibility.py",
+        "--help"
+      ],
+      "returncode": 0,
+      "stdout": "usage: audit_sleep_dataset_compatibility.py [-h] [--sleep-edf SLEEP_EDF]\n                                            [--isruc ISRUC]\n                                            [--features FEATURES]\n                                            [--split SPLIT]\n                                            [--max-files MAX_FILES]\n                                            [--report REPORT]\n\nAudit Sleep-EDF and ISRUC-Sleep files before cross-dataset experiments. Run\nfrom the root of the Sleep-Stage-Prediction project: python\nscripts/audits/cross_dataset/audit_sleep_dataset_compatibility.py --sleep-edf\ndata/raw --isruc data/external/isruc --features\ndata/features/sleep_edf_features.csv --split\ndata/features/participant_split.csv The script reads metadata and annotation\nsummaries only; it does not preprocess signals, train models, or modify any\nsource files.\n\noptions:\n  -h, --help            show this help message and exit\n  --sleep-edf SLEEP_EDF\n                        Root containing Sleep-EDF files\n  --isruc ISRUC         Root containing ISRUC files\n  --features FEATURES   Existing feature CSV\n  --split SPLIT         Participant split CSV\n  --max-files MAX_FILES\n                        Number of signal files to inspect for each dataset\n  --report REPORT       JSON report path\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\scripts\\audits\\cross_dataset\\audit_sleep_dataset_compatibility_v2.py",
+        "--help"
+      ],
+      "returncode": 0,
+      "stdout": "usage: audit_sleep_dataset_compatibility_v2.py [-h] [--sleep-edf SLEEP_EDF]\n                                               [--isruc ISRUC]\n                                               [--features FEATURES]\n                                               [--split SPLIT]\n                                               [--max-files MAX_FILES]\n                                               [--report REPORT]\n\nAudit Sleep-EDF and ISRUC-Sleep compatibility before cross-dataset\nexperiments. This is a read-only audit of source data. For ISRUC .rec signal\nfiles, the script creates a temporary hard-link with an .edf suffix in the\nsame folder so MNE can read the EDF-formatted content. The original file is\nnot renamed or modified. Run from the project root, for example: python\nscripts/audits/cross_dataset/audit_sleep_dataset_compatibility_v2.py --sleep-\nedf data/raw --isruc data/external/ISRUC-Sleep-I --features\ndata/features/sleep_edf_features.csv --split\ndata/features/participant_split.csv --max-files 101 --report\nresults/dataset_compatibility_audit_v2.json\n\noptions:\n  -h, --help            show this help message and exit\n  --sleep-edf SLEEP_EDF\n                        Root containing Sleep-EDF PSG and hypnogram files\n  --isruc ISRUC         Root containing ISRUC .rec and annotation files\n  --features FEATURES   Existing Sleep-EDF feature CSV\n  --split SPLIT         Existing participant split CSV\n  --max-files MAX_FILES\n                        Maximum signal files and Excel files to inspect per\n                        source; use 0 to inspect all\n  --report REPORT       Output JSON report path\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\scripts\\audits\\cross_dataset\\audit_sleepedf_isruc_v3.py",
+        "--help"
+      ],
+      "returncode": 0,
+      "stdout": "usage: audit_sleepedf_isruc_v3.py [-h] --sleep-edf SLEEP_EDF --isruc ISRUC\n                                  [--features FEATURES] [--split SPLIT]\n                                  [--report REPORT]\n\nRobust, read-only audit of Sleep-EDF Expanded and ISRUC-Sleep Cohort I. This\nversion fixes the MNE read_annotations API issue, identifies the duplicate\nalternate-named recording in ISRUC subject 65, and parses ISRUC annotation\nfiles without assuming Excel headers are consistent. It does NOT train a model\nor modify source data. Run from the project root: python\nscripts/audits/cross_dataset/audit_sleepedf_isruc_v3.py \\ --sleep-edf data/raw\n\\ --isruc data/external/ISRUC-Sleep-I \\ --features\ndata/features/sleep_edf_features.csv \\ --split\ndata/features/participant_split.csv \\ --report\nresults/dataset_compatibility_audit_v3.json\n\noptions:\n  -h, --help            show this help message and exit\n  --sleep-edf SLEEP_EDF\n  --isruc ISRUC\n  --features FEATURES\n  --split SPLIT\n  --report REPORT\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "-m",
+        "src.compute.capsule",
+        "--help"
+      ],
+      "returncode": 0,
+      "stdout": "usage: capsule.py [-h] {create,unpack,verify} ...\n\nCreate and verify an offline source-training capsule; no upload is performed.\nOnly explicit code/configuration paths, the frozen split, and prepared Sleep-\nEDF train/validation stores enter the archive. Test and external epoch data do\nnot.\n\npositional arguments:\n  {create,unpack,verify}\n\noptions:\n  -h, --help            show this help message and exit\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "-m",
+        "pip",
+        "check"
+      ],
+      "returncode": 0,
+      "stdout": "No broken requirements found.\n",
+      "stderr": ""
+    }
+  ],
+  "frozen_package_versions_unchanged": true,
+  "sealed_ssl_epochs_still_preserved": 3,
+  "latest_checkpoint_files_reverified": 7,
+  "research_training_or_notebooks_executed_for_validation": false
+}

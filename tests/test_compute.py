@@ -27,8 +27,20 @@ class SourceCapsuleTests(unittest.TestCase):
         (self.project / "src/example.py").write_text("VALUE = 42\n")
         (self.project / "scripts").mkdir()
         (self.project / "scripts/research.ps1").write_text("Write-Output 'launcher fixture'\n")
+        (self.project / "scripts/research_cpu.ps1").write_text("# CPU launcher fixture.\n")
+        (self.project / "scripts/training_status.py").write_text("# Read-only monitor fixture.\n")
         (self.project / "scripts/configure_wsl_cuda.py").write_text("# Environment configuration fixture.\n")
-        (self.project / "TRAINING_RUNBOOK.md").write_text("User-run training commands.\n")
+        (self.project / "docs/operations").mkdir(parents=True)
+        (self.project / "docs/operations/TRAINING_RUNBOOK.md").write_text("CPU training commands.\n")
+        (self.project / "environments").mkdir()
+        (self.project / "environments/requirements-research-common.txt").write_text("# Common fixture.\n")
+        (self.project / "environments/constraints-cuda125-pascal.txt").write_text("# Constraint fixture.\n")
+        (self.project / "environments/requirements-linux-gpu.txt").write_text(
+            "-r requirements-research-common.txt\n-c constraints-cuda125-pascal.txt\n")
+        (self.project / "configs/sleepedf/experiments").mkdir(parents=True)
+        (self.project / "configs/sleepedf/experiments/experiment_pilot.json").write_text("{}")
+        (self.project / "configs/deferred/cross_dataset").mkdir(parents=True)
+        (self.project / "configs/deferred/cross_dataset/evaluation_isruc.json").write_text("{}")
         (self.project / "AGENTS.md").write_text("Training belongs to the user.\n")
         (self.project / ".env").write_text("SECRET=do-not-copy")
         (self.project / "src/.private.py").write_text("SECRET=do-not-copy")
@@ -46,9 +58,15 @@ class SourceCapsuleTests(unittest.TestCase):
         with tarfile.open(self.archive, "r:") as tar:
             names = tar.getnames()
         self.assertNotIn(".env", names)
-        for name in ["scripts/research.ps1", "scripts/configure_wsl_cuda.py", "TRAINING_RUNBOOK.md", "AGENTS.md"]:
+        for name in ["scripts/research.ps1", "scripts/research_cpu.ps1", "scripts/training_status.py",
+                     "scripts/configure_wsl_cuda.py", "docs/operations/TRAINING_RUNBOOK.md", "AGENTS.md",
+                     "environments/requirements-linux-gpu.txt", "environments/requirements-research-common.txt",
+                     "environments/constraints-cuda125-pascal.txt",
+                     "configs/sleepedf/experiments/experiment_pilot.json",
+                     "configs/deferred/cross_dataset/evaluation_isruc.json"]:
             self.assertIn(name, names)
-        self.assertFalse(any(".aws" in n or ".private" in n or "isruc" in n or "SC4021" in n for n in names))
+        self.assertNotIn("TRAINING_RUNBOOK.md", names)
+        self.assertFalse(any(".aws" in n or ".private" in n or "/isruc/" in n or "SC4021" in n for n in names))
         self.assertEqual(len(self.result["source_scope"]["training_participants"]), 4)
         destination = self.root / "restored"
         unpack_capsule(self.archive, destination, self.result["archive_sha256"])
@@ -57,6 +75,26 @@ class SourceCapsuleTests(unittest.TestCase):
         self.assertEqual(verified["validation_participants"], 1)
         self.assertEqual(verified["manifest_fingerprint"], self.result["manifest_fingerprint"])
         self.assertEqual((destination / "src/example.py").read_bytes(), (self.project / "src/example.py").read_bytes())
+
+    def test_legacy_root_document_members_remain_readable(self):
+        old_name = "docs/operations/TRAINING_RUNBOOK.md"
+        legacy_name = "TRAINING_RUNBOOK.md"
+        with tarfile.open(self.archive, "r:") as source:
+            contents = [(member.name, source.extractfile(member).read()) for member in source.getmembers()]
+        manifest = json.loads(contents[0][1])
+        manifest["files"][legacy_name] = manifest["files"].pop(old_name)
+        manifest["fingerprint"] = fingerprint({k: v for k, v in manifest.items() if k != "fingerprint"})
+        contents[0] = (contents[0][0], json.dumps(manifest).encode())
+        archive = self.root / "legacy.tar"
+        with tarfile.open(archive, "w") as target:
+            for name, payload in contents:
+                member = tarfile.TarInfo(legacy_name if name == old_name else name)
+                member.size = len(payload)
+                target.addfile(member, io.BytesIO(payload))
+        destination = self.root / "legacy-restored"
+        unpack_capsule(archive, destination, sha256_file(archive))
+        verify_extracted(destination)
+        self.assertEqual((destination / legacy_name).read_bytes(), (self.project / old_name).read_bytes())
 
     def test_wrong_archive_hash_fails_before_creating_destination(self):
         destination = self.root / "wrong"

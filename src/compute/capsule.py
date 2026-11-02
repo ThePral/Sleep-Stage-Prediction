@@ -17,9 +17,20 @@ from src.data.prepare_research_data import ROOT, participant_assignments
 
 
 MANIFEST = "training_capsule.json"
-DOCUMENTS = {"README.md", "IMPLEMENTATION_STATUS.md", "COMPUTE_GUIDE.md", "TRAINING_RUNBOOK.md", "AGENTS.md",
-             "scripts/research.ps1", "scripts/configure_wsl_cuda.py", "requirements-research-common.txt",
-             "requirements-linux-gpu.txt", "constraints-cuda125-pascal.txt"}
+# Legacy names remain valid when verifying archives created before organization.
+LEGACY_DOCUMENTS = {"IMPLEMENTATION_STATUS.md", "COMPUTE_GUIDE.md", "TRAINING_RUNBOOK.md",
+                    "requirements-research-common.txt", "requirements-linux-gpu.txt",
+                    "constraints-cuda125-pascal.txt"}
+DOCUMENTS = LEGACY_DOCUMENTS | {
+    "README.md", "AGENTS.md", "docs/README.md", "docs/PROJECT_STRUCTURE.md", "docs/RESEARCH_DIRECTION.md",
+    "docs/IMPLEMENTATION_STATUS.md", "docs/operations/COMPUTE_GUIDE.md", "docs/operations/TRAINING_RUNBOOK.md",
+    "docs/reference/IMPLEMENTED_PIPELINE.md", "docs/archive/2026-10/PROJECT_AUDIT_2026-10-26.md",
+    "docs/archive/2026-10/RESEARCH_ROADMAP_2026-10-26.md", "environments/README.md",
+    "environments/requirements-research-common.txt", "environments/requirements-linux-gpu.txt",
+    "environments/constraints-cuda125-pascal.txt", "environments/requirements-windows-py313.lock.txt",
+    "configs/README.md", "scripts/README.md", "scripts/research.ps1", "scripts/research_cpu.ps1",
+    "scripts/training_status.py", "scripts/configure_wsl_cuda.py",
+}
 
 
 def safe_member(name):

@@ -1,0 +1,33 @@
+powershell : WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+At line:2 char:1
++ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: All lo...itten to STDERR:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+I0000 00:00:1793640404.821541  120444 port.cc:153] oneDNN custom operations are on. You may see slightly different 
+numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the 
+environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1793640408.069989  120444 port.cc:153] oneDNN custom operations are on. You may see slightly different 
+numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the 
+environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+test_existing_artifacts_are_not_overwritten 
+(tests.test_compute.SourceCapsuleTests.test_existing_artifacts_are_not_overwritten) ... ok
+test_legacy_root_document_members_remain_readable 
+(tests.test_compute.SourceCapsuleTests.test_legacy_root_document_members_remain_readable) ... ok
+test_modified_extracted_content_is_detected 
+(tests.test_compute.SourceCapsuleTests.test_modified_extracted_content_is_detected) ... ok
+test_path_traversal_links_and_held_out_scope_are_rejected_before_extraction 
+(tests.test_compute.SourceCapsuleTests.test_path_traversal_links_and_held_out_scope_are_rejected_before_extraction) 
+... ok
+test_roundtrip_preserves_hashes_and_excludes_held_out_data_and_private_files 
+(tests.test_compute.SourceCapsuleTests.test_roundtrip_preserves_hashes_and_excludes_held_out_data_and_private_files) 
+... ok
+test_wrong_archive_hash_fails_before_creating_destination 
+(tests.test_compute.SourceCapsuleTests.test_wrong_archive_hash_fails_before_creating_destination) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 4.813s
+
+OK

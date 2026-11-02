@@ -2,7 +2,7 @@
 """Audit Sleep-EDF and ISRUC-Sleep files before cross-dataset experiments.
 
 Run from the root of the Sleep-Stage-Prediction project:
-    python audit_sleep_dataset_compatibility.py \
+    python scripts/audits/cross_dataset/audit_sleep_dataset_compatibility.py \
         --sleep-edf data/raw \
         --isruc data/external/isruc \
         --features data/features/sleep_edf_features.csv \

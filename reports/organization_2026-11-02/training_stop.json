@@ -1,0 +1,81 @@
+{
+  "date": "2026-11-02",
+  "reason": "User explicitly requested stopping now and preserving the latest checkpoint before workspace organization and future Sleep-EDF BiLSTM work.",
+  "scheduler_pid": 126668,
+  "worker_pids_stopped": [
+    121912,
+    77112
+  ],
+  "scheduler_exited": true,
+  "runner_lock_released": true,
+  "sealed_ssl_epochs_preserved": 3,
+  "checkpoint_prefix": "checkpoints/epoch_0003/state",
+  "verified_checkpoint_files": {
+    "waveform_normalizer.json": "ba7f25e98d73ad648bf8727dda52ff265327b8f6bc6c15d2a250ab86ee9e927f",
+    "model_config.json": "42474c4a15776e40a61c5c3e6a0a35e25f80f49a73c24988031c041b60fe5264",
+    "data_manifest.json": "7d63573188779a2e5c03a732ff1b58eda511bd958a215d105793e1cd5c05322f",
+    "resolved_config.json": "9a744f83e1fdc622a87c45f73745f1c6a9b159e4f218173c155e656aed7a07df",
+    "checkpoints/epoch_0003/history.json": "88b92c72526d6f93d1127a388fefc27b8a3674c401e1c7318a00a3c1ab6ee04e",
+    "checkpoints/epoch_0003/state.data-00000-of-00001": "43ffc08e887c7b0d02f9f99a63ab4bcbddf8f8ea9c1c8a66ab3871dc492f0659",
+    "checkpoints/epoch_0003/state.index": "a9dae23ce01fa044e539f12c659f7b70b6b4a5de2760bfe7d7985e4d8c90bcbd"
+  },
+  "no_supervised_jobs_started": true,
+  "source_study_fingerprint": "92a0c9a6993467f2ff6fa12a6688b8fac4d2469e83edfd400887de9eb502e4a0",
+  "campaign_state_after_exit": {
+    "date": "2026-11-02",
+    "status": "failed",
+    "orchestrator_pid": 126344,
+    "route": "native_windows_cpu",
+    "study_directory": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\training_execution_2026-11-02_cpu\\source_matrix",
+    "data_policy": "Sleep-EDF train/validation only; real ISRUC and source-test scoring unopened",
+    "full_matrix_completed": false,
+    "storage_policy": "Project-managed temp/cache/checkpoints/logs on D:; Windows system writes not controlled",
+    "cpu_preflight": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\reports\\cpu_training_2026-11-02\\cpu_preflight_b4_ssl32.json",
+    "regression_snapshot_matches": true,
+    "free_gib_before": {
+      "C:/": 10.26,
+      "D:/": 129.8
+    },
+    "stage": "source_execute",
+    "command": [
+      "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\.venv\\Scripts\\python.exe",
+      "-m",
+      "src.experiments.run",
+      "execute",
+      "--study-dir",
+      "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\training_execution_2026-11-02_cpu\\source_matrix"
+    ],
+    "completed_stages": [
+      "source_plan"
+    ],
+    "error": "RuntimeError",
+    "message": "source_execute exited 1; see D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\training_execution_2026-11-02_cpu\\source_execute.log",
+    "traceback": "Traceback (most recent call last):\n  File \"D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\training_execution_2026-11-02_cpu\\execute_cpu.py\", line 64, in <module>\n    run('source_execute', ['-m', 'src.experiments.run', 'execute', '--study-dir', str(study)])\n    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\training_execution_2026-11-02_cpu\\execute_cpu.py\", line 35, in run\n    raise RuntimeError(f'{stage} exited {code}; see {base / (stage + \".log\")}')\nRuntimeError: source_execute exited 1; see D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\training_execution_2026-11-02_cpu\\source_execute.log\n"
+  },
+  "ledger_after_exit": {
+    "schema_version": 1,
+    "study_fingerprint": "92a0c9a6993467f2ff6fa12a6688b8fac4d2469e83edfd400887de9eb502e4a0",
+    "jobs": {
+      "waveform_statistics": {
+        "status": "completed",
+        "attempt": "jobs/waveform_statistics/attempt_0001"
+      },
+      "normalizer_draw42_n18": {
+        "status": "completed",
+        "attempt": "jobs/normalizer_draw42_n18/attempt_0001"
+      },
+      "normalizer_draw42_n70": {
+        "status": "completed",
+        "attempt": "jobs/normalizer_draw42_n70/attempt_0001"
+      },
+      "ssl_seed42": {
+        "status": "failed",
+        "attempt": "jobs/ssl_seed42/attempt_0001",
+        "error": "RuntimeError",
+        "message": "Job ssl_seed42 exited 15; see D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\training_execution_2026-11-02_cpu\\source_matrix\\jobs\\ssl_seed42\\attempt_0001.log"
+      }
+    }
+  },
+  "uncommitted_partial_epoch_may_be_lost": true,
+  "original_data_or_checkpoint_files_modified": false
+}

@@ -1,6 +1,6 @@
 **Recommended direction: a compact, physiology-informed representation study with a strictly frozen external evaluation.**
 
-Implementation started on 27 October 2026. See [implementation status](IMPLEMENTATION_STATUS.md)
+Implementation started on 27 October 2026. See [implementation status](../../IMPLEMENTATION_STATUS.md)
 for delivered code, validation results, and the next milestone; this document
 retains the research design and acceptance criteria.
 

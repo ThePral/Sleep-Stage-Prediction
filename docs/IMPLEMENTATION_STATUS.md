@@ -1,3 +1,20 @@
+# Current scope and organization - 2 November 2026
+
+The current paper direction is Sleep-EDF Expanded with SSL, cross-attention
+and a planned BiLSTM temporal head. The previous GRU matrix was stopped at the
+user's request after three saved SSL epochs, before supervised training.
+Cross-dataset work is deferred and preserved. BiLSTM integration is not yet
+implemented, and no replacement campaign is running.
+
+See [research direction](RESEARCH_DIRECTION.md), [project structure](PROJECT_STRUCTURE.md)
+and [organization evidence](../reports/organization_2026-11-02/README.md).
+The dated milestones below describe the earlier implementation/history.
+Current configuration paths are indexed in [configs/README.md](../configs/README.md).
+Only capsule packaging metadata changed under `src/` during organization;
+new studies must freeze the current code before further research training.
+
+---
+
 **Research implementation — started 27 October 2026.**
 
 The one-month objective is the complete implementation and validation of the

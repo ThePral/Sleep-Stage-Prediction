@@ -7,7 +7,7 @@ without assuming Excel headers are consistent. It does NOT train a model or
 modify source data.
 
 Run from the project root:
-  python audit_sleepedf_isruc_v3.py \\
+  python scripts/audits/cross_dataset/audit_sleepedf_isruc_v3.py \\
     --sleep-edf data/raw \\
     --isruc data/external/ISRUC-Sleep-I \\
     --features data/features/sleep_edf_features.csv \\

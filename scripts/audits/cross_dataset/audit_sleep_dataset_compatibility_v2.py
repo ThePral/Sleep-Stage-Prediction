@@ -6,7 +6,7 @@ creates a temporary hard-link with an .edf suffix in the same folder so MNE can
 read the EDF-formatted content. The original file is not renamed or modified.
 
 Run from the project root, for example:
-  python audit_sleep_dataset_compatibility_v2.py \
+  python scripts/audits/cross_dataset/audit_sleep_dataset_compatibility_v2.py \
     --sleep-edf data/raw \
     --isruc data/external/ISRUC-Sleep-I \
     --features data/features/sleep_edf_features.csv \

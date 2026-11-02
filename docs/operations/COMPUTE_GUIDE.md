@@ -1,8 +1,13 @@
 # Source-training compute workflow
 
-The bounded source-only benchmark has completed on CPU. The next training step
-is GPU verification, then the full experiment matrix after reviewing
-measured speed and memory. Follow [TRAINING_RUNBOOK.md](TRAINING_RUNBOOK.md) for
+The prior CPU matrix is now stopped at the user's request, with three sealed
+SSL epochs preserved. The current direction is Sleep-EDF SSL/cross-attention
+with a planned BiLSTM head; no replacement campaign is running. GPU routes below
+are retained historical recipes. The current runtime route remains native CPU
+with project-managed storage on D:. See [research direction](../RESEARCH_DIRECTION.md).
+
+The bounded source-only benchmark completed on CPU before that matrix. Follow
+[TRAINING_RUNBOOK.md](TRAINING_RUNBOOK.md) for
 the exact PowerShell commands. The benchmark uses
 all 70 training and 15 validation participants, the default architecture, and
 short capped schedules. Its scores cannot establish convergence or support a
@@ -17,7 +22,7 @@ The existing native Windows Python 3.13 environment runs TensorFlow 2.21 on CPU.
 Native Windows GPU support ended at TensorFlow 2.10; WSL2 is the supported path
 for current releases ([TensorFlow installation](https://www.tensorflow.org/install/pip)).
 
-`requirements-linux-gpu.txt` pins the framework and direct research dependencies.
+`environments/requirements-linux-gpu.txt` pins the framework and direct research dependencies.
 Its CUDA constraint file pins CUDA 12.5 libraries and cuDNN 9.3, matching the
 documented TensorFlow 2.21 build combination
 ([tested builds](https://www.tensorflow.org/install/source)). cuDNN 9.3 supports
@@ -33,7 +38,7 @@ For a standard Linux/WSL Python with venv/pip available, run from the checkout:
 
 ```bash
 python3 -m venv .venv-linux
-.venv-linux/bin/python -m pip install -r requirements-linux-gpu.txt
+.venv-linux/bin/python -m pip install -r environments/requirements-linux-gpu.txt
 .venv-linux/bin/python -m pip check
 .venv-linux/bin/python -m pip freeze > requirements-linux-installed.lock.txt
 .venv-linux/bin/python scripts/configure_wsl_cuda.py --report runs/cuda_links.json
@@ -65,7 +70,7 @@ required after configuration; discovery alone does not establish usable kernels.
 This WSL setup also requires process-local CUDA library search paths. The
 PowerShell launcher provides them without changing system paths. Measured
 synthetic GPU checks pass at supervised batch 32 and SSL batch 128 (about 199 MiB
-combined TF allocator peak). GPU recipes live in `configs/experiment_gpu_*.json`;
+combined TF allocator peak). GPU recipes live in `configs/compute/gpu/experiment_gpu_*.json`;
 the original CPU/reference configs remain intact. Follow the runbook's explicit
 data-root selection: WSL cannot enumerate the original traversal-only store
 directories, so the active run reads the verified source-only capsule copy.
@@ -97,7 +102,7 @@ Use the Python executable of the verified environment for every command:
 
 ```bash
 python -u -m src.experiments.run plan \
-  --config configs/experiment_source_benchmark.json \
+  --config configs/sleepedf/experiments/experiment_source_benchmark.json \
   --study-dir runs/source_benchmark
 python -u -m src.experiments.run execute \
   --study-dir runs/source_benchmark --require-gpu
@@ -175,7 +180,7 @@ so runtime paths and packages are recorded there.
 ## Full campaign and external evaluation
 
 After reviewing the benchmark, plan a fresh study with
-`configs/experiment_matrix.json`. Its default one-seed matrix is the first full
+`configs/sleepedf/experiments/experiment_matrix.json`. Its default one-seed matrix is the first full
 source experiment, not a repeated-seed result. Freeze any additional seeds,
 budgets and ablations before confirmatory comparisons. Estimate compute from
 actual loader/training timings and epoch counts; early stopping makes the total
@@ -187,7 +192,7 @@ the user-run preflight first. CPU execution remains available by omitting the fl
 
 ## Native CPU route with runtime storage on D: (2 November 2026)
 
-Use `scripts/research_cpu.ps1`, as documented in `TRAINING_RUNBOOK.md`, instead
+Use `scripts/research_cpu.ps1`, as documented in `docs/operations/TRAINING_RUNBOOK.md`, instead
 of the WSL launcher. It uses the existing `.venv` on D:, disables CUDA, and
 redirects Python temporary files, pip/Keras/Matplotlib caches and worker scratch
 files under `runs/cpu_runtime`. Checkpoints and studies also stay on D:.

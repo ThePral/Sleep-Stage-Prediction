@@ -1,5 +1,13 @@
 # Reproducible training commands
 
+The previous campaign was stopped explicitly by the user on 2 November 2026,
+with three complete SSL epochs preserved and no supervised jobs started.
+See [the stop record](../../reports/organization_2026-11-02/training_stop.json).
+The following recipes reproduce the earlier GRU/LSTM work; the planned BiLSTM
+variant is not implemented or running. Source packaging paths changed during
+organization, so the old frozen matrix must not be restarted under changed code.
+Prepare a fresh study after the new architecture is specified and validated.
+
 ## Current route: native CPU, runtime files on D: (2 November 2026)
 
 The WSL/GPU pipeline is stopped. Use the existing Windows environment without
@@ -19,18 +27,18 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m 
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.compute.preflight --allow-cpu --report runs/my_cpu_preflight.json
 ```
 
-The active CPU campaign uses the original `configs/experiment_matrix.json`:
+The stopped CPU campaign used the configuration now at `configs/sleepedf/experiments/experiment_matrix.json`:
 supervised batch 4 and SSL batch 32, no epoch/batch caps, seven conditions,
 18/70 labeled training participants, 15 validation participants, seed 42.
 Use a fresh directory for independent reproduction:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.experiments.run plan --config configs/experiment_matrix.json --study-dir runs/my_cpu_source_matrix
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.experiments.run plan --config configs/sleepedf/experiments/experiment_matrix.json --study-dir runs/my_cpu_source_matrix
 if ($LASTEXITCODE -ne 0) { throw 'Study planning failed.' }
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.experiments.run execute --study-dir runs/my_cpu_source_matrix
 ```
 
-Do not pass `--require-gpu`. The current run's directory is
+Do not pass `--require-gpu` for CPU reproduction. The stopped run's directory is
 `runs/training_execution_2026-11-02_cpu/source_matrix`; inspect `ledger.json`
 and the active job's `attempt_0001.log`. Its outer process status is
 `runs/training_execution_2026-11-02_cpu/status.json`. To continue after a normal
@@ -84,7 +92,7 @@ matrix on successful checks. Its live status is
 The measured GPU configuration uses supervised batch **32** and SSL batch
 **128**. Both synthetic workloads passed on the GTX 1050; the combined TF
 allocator peak was about 199 MiB, excluding driver reservations. These choices
-use `configs/experiment_gpu_benchmark.json` and `configs/experiment_gpu_matrix.json`.
+use `configs/compute/gpu/experiment_gpu_benchmark.json` and `configs/compute/gpu/experiment_gpu_matrix.json`.
 The original CPU/reference configurations remain unchanged.
 
 The original prepared-store directories have traversal-only permissions in WSL,
@@ -164,7 +172,7 @@ implementation, packages, configuration and participant budget; it performs no
 optimizer updates.
 
 ```powershell
-.\scripts\research.ps1 -m src.experiments.run plan --config configs/experiment_gpu_benchmark.json --study-dir runs/user_gpu_benchmark_2026-11-01 --data-root $sourceData
+.\scripts\research.ps1 -m src.experiments.run plan --config configs/compute/gpu/experiment_gpu_benchmark.json --study-dir runs/user_gpu_benchmark_2026-11-01 --data-root $sourceData
 if ($LASTEXITCODE -ne 0) { throw 'Study planning failed; inspect the error.' }
 
 .\scripts\research.ps1 -m src.experiments.run execute --study-dir runs/user_gpu_benchmark_2026-11-01 --require-gpu
@@ -214,7 +222,7 @@ Once GPU execution and memory fit are established, use the uncapped source
 configuration. This is a substantial training run.
 
 ```powershell
-.\scripts\research.ps1 -m src.experiments.run plan --config configs/experiment_gpu_matrix.json --study-dir runs/user_source_matrix_seed42_2026-11-01 --data-root $sourceData
+.\scripts\research.ps1 -m src.experiments.run plan --config configs/compute/gpu/experiment_gpu_matrix.json --study-dir runs/user_source_matrix_seed42_2026-11-01 --data-root $sourceData
 if ($LASTEXITCODE -ne 0) { throw 'Study planning failed; inspect the error.' }
 
 .\scripts\research.ps1 -m src.experiments.run execute --study-dir runs/user_source_matrix_seed42_2026-11-01 --require-gpu
