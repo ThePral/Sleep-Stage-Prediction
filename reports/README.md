@@ -6,6 +6,7 @@ they are not rewritten during file organization.
 
 | Evidence | Location |
 |---|---|
+| Prepared Sleep-EDF Windows access-rule repair for the normal terminal account | `sleepedf_access_2026-11-06/` |
 | Dataset-scope startup diagnosis and read-only monitor verification | `scope_diagnosis_2026-11-06/` |
 | User-owned terminal handoff, background stop and non-optimizer live-progress checks | `bilstm_terminal_handoff_2026-11-02/` |
 | BiLSTM regression/kernel checks, architecture counts and staged source execution | `bilstm_2026-11-02/` |

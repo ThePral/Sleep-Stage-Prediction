@@ -1,0 +1,11 @@
+﻿{
+    "account":  "POURYA\\ELECOMP",
+    "account_sid":  "S-1-5-21-3240810959-1389575364-2310827818-1001",
+    "store_root":  "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\data\\processed\\research_v1\\sleepedf",
+    "objects_updated":  789,
+    "objects_verified":  789,
+    "owners_preserved":  true,
+    "file_sizes_and_content_write_times_preserved":  true,
+    "permission_scope":  "Explicit read for files; read and traverse for directories; existing access rules retained.",
+    "training_launched":  false
+}

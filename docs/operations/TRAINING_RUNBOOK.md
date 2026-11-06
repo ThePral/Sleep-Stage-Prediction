@@ -52,6 +52,27 @@ did not find the complete frozen training scope. Do not shrink that scope or
 disable the guard to proceed. Check the reported `data_root` and its recording
 folders first. A failure before scheduling leaves no job attempt to retry.
 
+On 6 November, a repeated startup failure was traced to protected Windows
+access rules on prepared recording stores: the sandbox owner could read them,
+but the normal checkout owner (`ELECOMP`) lacked access. Python's glob discovery
+can omit inaccessible directories, producing the generic missing-participant
+error. Passing checks from the assistant's account do not establish readability
+from the user's terminal. Explicit read/traverse access was restored for that
+account, with owners, file sizes/content-write times and existing grants retained.
+The backup and repair evidence are under `reports/sleepedf_access_2026-11-06/`.
+
+If this specific permission problem recurs, inspect the intended account/scope
+with the following command. It performs no permission changes without `-Apply`:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/repair_sleepedf_access.ps1
+```
+
+The repair script targets only `data/processed/research_v1/sleepedf`, backs up
+access rules before applying changes, and grants read access to the checkout
+owner (or an explicitly supplied `-Account`). It does not take ownership,
+grant write access, alter training code or start training.
+
 Ctrl+C stops the worker tree and records an interrupted attempt. To retry in the
 same unchanged study, use the execution command with `--live --retry-failed`.
 Completed jobs are verified and skipped; the failed job starts a new attempt.

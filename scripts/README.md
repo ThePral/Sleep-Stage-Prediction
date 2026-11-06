@@ -6,6 +6,7 @@ Run scripts from the checkout root.
 |---|---|
 | `research_cpu.ps1` | Native Windows CPU Python with project-managed runtime files on D: |
 | `training_status.py` | Read-only frozen-study/process/checkpoint monitor |
+| `repair_sleepedf_access.ps1` | Back up prepared Sleep-EDF access rules and grant the checkout owner read access; inspection only unless `-Apply` is supplied |
 | `research.ps1` | Retained WSL launcher for historical GPU reproduction |
 | `configure_wsl_cuda.py` | Retained virtual-environment CUDA library discovery helper |
 | `cache_training_waveforms.py` | Optional historical Linux shared-memory cache helper; not used for the current CPU route |
