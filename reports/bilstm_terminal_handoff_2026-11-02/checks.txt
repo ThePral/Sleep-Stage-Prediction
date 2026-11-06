@@ -1,0 +1,50 @@
+powershell : WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+At line:2 char:1
++ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (WARNING: All lo...itten to STDERR:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+I0000 00:00:1793642835.782527  126704 port.cc:153] oneDNN custom operations are on. You may see slightly different 
+numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the 
+environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1793642837.712598  126704 port.cc:153] oneDNN custom operations are on. You may see slightly different 
+numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the 
+environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+test_cli_forwards_live_without_scheduling_training 
+(tests.test_terminal_progress.TerminalProgressTests.test_cli_forwards_live_without_scheduling_training) ... ok
+test_disabled_progress_is_silent_and_bad_intervals_fail 
+(tests.test_terminal_progress.TerminalProgressTests.test_disabled_progress_is_silent_and_bad_intervals_fail) ... ok
+test_interrupt_cleans_up_its_worker_tree_and_reraises 
+(tests.test_terminal_progress.TerminalProgressTests.test_interrupt_cleans_up_its_worker_tree_and_reraises) ... ok
+test_live_worker_keeps_stdout_stderr_and_exit_code_in_terminal_and_log (tests.test_terminal_progress.TerminalProgressTe
+sts.test_live_worker_keeps_stdout_stderr_and_exit_code_in_terminal_and_log) ... ok
+test_progress_reports_first_interval_and_last_batches_with_metrics (tests.test_terminal_progress.TerminalProgressTests.
+test_progress_reports_first_interval_and_last_batches_with_metrics) ... ok
+test_supervised_callback_reports_batches_and_validation_handoff 
+(tests.test_terminal_progress.TerminalProgressTests.test_supervised_callback_reports_batches_and_validation_handoff) 
+... ok
+test_workers_enable_periodic_progress_only_for_live_tasks 
+(tests.test_terminal_progress.TerminalProgressTests.test_workers_enable_periodic_progress_only_for_live_tasks) ... ok
+test_cli_forwards_required_gpu_without_executing_a_worker 
+(tests.test_training_handoff.GPUHandoffTests.test_cli_forwards_required_gpu_without_executing_a_worker) ... ok
+{}
+{}
+test_cli_keeps_cpu_execution_an_explicitly_available_path 
+(tests.test_training_handoff.GPUHandoffTests.test_cli_keeps_cpu_execution_an_explicitly_available_path) ... ok
+test_device_policy_rejects_nonboolean_values 
+(tests.test_training_handoff.GPUHandoffTests.test_device_policy_rejects_nonboolean_values) ... ok
+test_execution_guard_precedes_study_reads_and_worker_execution 
+(tests.test_training_handoff.GPUHandoffTests.test_execution_guard_precedes_study_reads_and_worker_execution) ... ok
+test_no_gpu_fails_without_building_a_model 
+(tests.test_training_handoff.GPUHandoffTests.test_no_gpu_fails_without_building_a_model) ... ok
+test_visible_devices_are_returned_without_executing_kernels 
+(tests.test_training_handoff.GPUHandoffTests.test_visible_devices_are_returned_without_executing_kernels) ... ok
+test_worker_rechecks_frozen_runtime_before_creating_outputs 
+(tests.test_training_handoff.GPUHandoffTests.test_worker_rechecks_frozen_runtime_before_creating_outputs) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.244s
+
+OK

@@ -52,6 +52,13 @@ them. The participant split remains
 
 ## Execution and reproducibility
 
+Training is now user-run in the terminal. The background BiLSTM controller has
+been stopped after its benchmark and profile passed. A fresh uncapped study is
+planned at `runs/bilstm_terminal_2026-11-02`; use the `execute --live` command in
+the [current handoff](docs/operations/TRAINING_RUNBOOK.md#current-handoff-user-run-terminal-training).
+It shows batch/epoch progress while retaining worker logs. The assistant does
+not start further training or optimizer checks without a new explicit request.
+
 Run commands from the checkout root. Use the existing native Windows environment
 on D: through `scripts/research_cpu.ps1`; it routes project-managed temporary
 files and caches to D:. Windows system/paging activity can still use C:.

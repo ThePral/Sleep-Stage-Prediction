@@ -1,5 +1,15 @@
 # SSL, cross-attention and BiLSTM implementation - 2 November 2026
 
+Current ownership update: the user now runs training in their own terminal.
+The background controller was stopped after all five full-source benchmark
+jobs and the training profile completed. The full matrix was interrupted in
+initial waveform-statistics preparation, before optimizer training. Live-output
+support adds `execute --live`, periodic batch progress and durable log teeing.
+A fresh frozen study is planned at `runs/bilstm_terminal_2026-11-02`, with no
+jobs executed. Fourteen non-optimizer handoff tests pass. Earlier regression
+and capped-training evidence below remains historical. See the current
+[runbook](operations/TRAINING_RUNBOOK.md#current-handoff-user-run-terminal-training).
+
 BiLSTM is implemented as an explicit temporal-head option for raw, concatenation,
 gated-attention and spectral controls. New recipes use 32 units per direction,
 a 64-feature output, and the existing ten-epoch window ending at its target.

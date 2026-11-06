@@ -4,6 +4,11 @@ The supervisor-recommended paper direction is Sleep-EDF Expanded with
 self-supervised pretraining, waveform/spectral cross-attention and a BiLSTM
 temporal classifier. External-dataset evaluation is deferred for a later phase.
 
+Training ownership now belongs to the user, who launches commands in a visible
+terminal. The assistant provides commands, implementation and read-only review;
+it does not start background training. The ready `execute --live` command and
+fresh planned study are described in [the runbook](operations/TRAINING_RUNBOOK.md).
+
 The maintained implementation now supports BiLSTM heads for the spectral, raw,
 concatenation and gated cross-attention controls. The initial recipe uses 32
 units per direction. Source-only waveform SSL transfers into the new BiLSTM

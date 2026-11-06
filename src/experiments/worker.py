@@ -36,6 +36,7 @@ def run_task(task_path):
     # frozen implementation before each job, not only at scheduler startup.
     verify_runtime(study, plan, root, split)
     config = study["config"]
+    progress_interval = 100 if task.get("live", False) else 0
     output = task_path.parent / "artifacts"
     training_records = [r["recording_id"] for r in plan["source_records"] if r["split"] == "train"]
     if job["kind"] == "waveform_statistics":
@@ -61,14 +62,16 @@ def run_task(task_path):
                           PretrainingConfig(**{**config["pretraining"], "seed": job["seed"]}), AugmentationConfig(**config["augmentation"]),
                           train_recordings=training_records if config["train_participants"] is not None else None, split_file=split,
                           max_batches=config["limits"]["max_pretraining_batches"],
-                          normalizer_path=Path(task["dependencies"]["waveform_statistics"]) / "waveform_normalizer.json")
+                          normalizer_path=Path(task["dependencies"]["waveform_statistics"]) / "waveform_normalizer.json",
+                          progress_interval=progress_interval)
     elif job["kind"] == "supervised":
         pretrained = Path(task["dependencies"][f"ssl_seed{job['seed']}"]) if job["pretrained"] else None
         train_supervised(root, output, ModelConfig(**{**config["model"], "variant": job["variant"]}),
                          TrainingConfig(**{**config["training"], "seed": job["seed"]}), split_file=split,
                          max_train_batches=config["limits"]["max_train_batches"], max_validation_batches=config["limits"]["max_validation_batches"],
                          normalizer_path=Path(task["dependencies"][f"normalizer_{job['budget_id']}"]) / "normalizer.json",
-                         pretrained_path=pretrained, budget_plan_path=study_dir / "label_budgets.json", budget_id=job["budget_id"])
+                         pretrained_path=pretrained, budget_plan_path=study_dir / "label_budgets.json", budget_id=job["budget_id"],
+                         progress_interval=progress_interval)
     else:
         raise ValueError("Unsupported study job kind.")
     # Seal all durable outputs, including predictions/metrics and optimizer state.

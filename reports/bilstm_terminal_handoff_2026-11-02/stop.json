@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-02",
+  "reason": "User now owns training and wants visible terminal commands.",
+  "controller_pid_stopped": 130624,
+  "worker_pids_stopped": [
+    118272,
+    122592
+  ],
+  "scheduler_pids_stopped": [
+    128308
+  ],
+  "previous_controller_state": {
+    "date": "2026-11-02",
+    "status": "running",
+    "orchestrator_pid": 130624,
+    "model_family": "waveform_SSL_spectral_cross_attention_BiLSTM_32_per_direction",
+    "route": "native_windows_cpu",
+    "source_only": true,
+    "full_matrix_completed": false,
+    "data_policy": "Sleep-EDF training/validation only; no real ISRUC or new source-test predictions",
+    "prior_three_epoch_checkpoint_reused": false,
+    "completed_stages": [
+      "pilot_plan",
+      "pilot_execute",
+      "benchmark_plan",
+      "benchmark_execute",
+      "training_profile",
+      "full_matrix_plan"
+    ],
+    "regression_gate_passed": true,
+    "cpu_kernel_gate_passed": true,
+    "stage": "full_matrix_execute",
+    "command": [
+      "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\.venv\\Scripts\\python.exe",
+      "-m",
+      "src.experiments.run",
+      "execute",
+      "--study-dir",
+      "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\bilstm_2026-11-02\\source_matrix"
+    ],
+    "pilot_verified": true,
+    "full_source_benchmark_verified": true,
+    "training_profile_verified": true,
+    "child_pid": 120272
+  },
+  "completed_attempts_and_checkpoints_preserved": true,
+  "source_or_packages_changed_by_stop": false
+}

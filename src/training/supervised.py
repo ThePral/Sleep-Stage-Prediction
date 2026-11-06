@@ -30,6 +30,7 @@ from src.preprocessing.research_normalization import ResearchNormalizer
 from src.preprocessing.sequences import CLASS_LABELS
 from src.preprocessing.waveform_normalization import WaveformNormalizer
 from src.training.artifacts import write_json
+from src.training.progress import BatchProgress
 
 
 @dataclass(frozen=True)
@@ -92,13 +93,27 @@ class SourceValidation(keras.callbacks.Callback):
             logs[f"val_{key}"] = metrics[key]
 
 
+class SourceTrainingProgress(keras.callbacks.Callback):
+    def __init__(self, batches, epochs, interval):
+        super().__init__()
+        self.batches, self.epochs, self.interval = batches, epochs, interval
+
+    def on_epoch_begin(self, epoch, logs=None):
+        self.progress = BatchProgress("Supervised", epoch + 1, self.epochs, self.batches, self.interval)
+
+    def on_train_batch_end(self, batch, logs=None):
+        self.progress.update(batch + 1, logs)
+        if batch + 1 == self.batches:
+            print("Training pass complete; computing source-validation metrics...", flush=True)
+
+
 def train_supervised(
     root, run_directory, model_config=None, training_config=None, *,
     train_recordings=None, validation_recordings=None, split_file=None,
     max_train_batches=None, max_validation_batches=None, normalizer_path=None, verbose=2,
     pretrained_path=None, freeze_backbone=False, linear_probe=False,
     waveform_normalizer_path=None,
-    budget_plan_path=None, budget_id=None,
+    budget_plan_path=None, budget_id=None, progress_interval=0,
 ):
     model_config = model_config or ModelConfig()
     training_config = training_config or TrainingConfig()
@@ -225,6 +240,8 @@ def train_supervised(
                 keras.callbacks.ReduceLROnPlateau(monitor="val_loss", factor=0.5, patience=2, min_lr=1e-6),
                 keras.callbacks.CSVLogger(run_directory / "training_history.csv"),
             ]
+            if progress_interval:
+                callbacks.append(SourceTrainingProgress(len(training_batches), training_config.epochs, progress_interval))
             model.fit(training_batches.as_dataset(), epochs=training_config.epochs, callbacks=callbacks,
                       shuffle=False, verbose=verbose)
             if frozen_weights is not None:

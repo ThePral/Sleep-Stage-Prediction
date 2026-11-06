@@ -15,6 +15,7 @@ import psutil
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from src.experiments.run import code_hashes, load_study, verify_job_result
+from src.data.label_budgets import verify_plan_scope
 
 
 def read_json(path):
@@ -62,7 +63,20 @@ def process_sample(scheduler):
     return result
 
 
-def inspect_study(directory, *, sample_seconds=3., verify_artifacts=False):
+def inspect_data_scope(study, plan):
+    """Check frozen source identities/manifests without loading waveforms or labels."""
+    result = {"data_root": study["data_root"], "split_file": study["split_file"],
+              "verified": False, "error": None}
+    try:
+        verify_plan_scope(plan, Path(study["data_root"]), Path(study["split_file"]))
+    except (ValueError, OSError) as exc:
+        result["error"] = f"{type(exc).__name__}: {exc}"
+    else:
+        result["verified"] = True
+    return result
+
+
+def inspect_study(directory, *, sample_seconds=3., verify_artifacts=False, verify_data_scope=False):
     directory = Path(directory).resolve()
     study, plan = load_study(directory)
     ledger = read_json(directory / "ledger.json")
@@ -121,6 +135,7 @@ def inspect_study(directory, *, sample_seconds=3., verify_artifacts=False):
             "workspace_free_bytes": shutil.disk_usage(ROOT).free,
             "c_drive_free_bytes": shutil.disk_usage("C:/").free if sys.platform == "win32" else None,
             "source_hashes_match": study["code_sha256"] == code_hashes(), "packages_match": packages_match,
+            "data_scope": inspect_data_scope(study, plan) if verify_data_scope else None,
             "training_participants": len(plan["training_participants"]),
             "validation_participants": len(plan["validation_participants"]),
             "completed_artifacts_verified": verified if verify_artifacts else None,
@@ -135,6 +150,8 @@ def main():
     parser.add_argument("--study-dir", type=Path, required=True)
     parser.add_argument("--sample-seconds", type=float, default=3.)
     parser.add_argument("--verify-artifacts", action="store_true")
+    parser.add_argument("--verify-data-scope", action="store_true",
+                        help="Verify frozen source participants, recording manifests and split at the saved data root.")
     parser.add_argument("--report", type=Path)
     args = parser.parse_args()
     if not 0 < args.sample_seconds <= 30:
@@ -143,7 +160,8 @@ def main():
         parser.error("Use a new report path; previous observations are preserved.")
     if args.report is not None and args.report.resolve().is_relative_to(args.study_dir.resolve()):
         parser.error("Save monitoring reports outside the frozen study directory.")
-    result = inspect_study(args.study_dir, sample_seconds=args.sample_seconds, verify_artifacts=args.verify_artifacts)
+    result = inspect_study(args.study_dir, sample_seconds=args.sample_seconds, verify_artifacts=args.verify_artifacts,
+                           verify_data_scope=args.verify_data_scope)
     if args.report is not None:
         args.report.parent.mkdir(parents=True, exist_ok=True)
         with args.report.open("x", encoding="utf-8") as stream:

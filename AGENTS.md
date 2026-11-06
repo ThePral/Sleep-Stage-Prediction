@@ -2,6 +2,25 @@
 
 ## Training ownership
 
+Current ownership (2 November 2026): the user now wants to launch training in
+their own terminal using assistant-provided commands so progress is visible.
+This supersedes all earlier delegation below. Do not start research training,
+pretraining, fine-tuning, optimizer kernel checks, training-mode profiles, or
+optimizer-based regression suites without a new explicit request. Do not launch
+background training or automatically advance staged controllers. The assistant
+may implement/review code, inspect artifacts, plan fresh studies and run checks
+that perform no optimizer updates. Provide `execute --live` commands through
+`scripts/research_cpu.ps1`, retain logs, and keep project-managed files on D:.
+
+The automatic BiLSTM controller has been stopped for terminal handoff after
+its benchmark/profile completed. Preserve its completed pilot and benchmark;
+the full matrix was interrupted during initial waveform-statistics preparation,
+before full-schedule optimizer training. Logging implementation changes require
+a fresh frozen study. See `reports/bilstm_terminal_handoff_2026-11-02/`.
+
+The earlier execution authorizations in this history no longer assign current
+training ownership to the assistant.
+
 On 1 November 2026 the user superseded their earlier request to run training
 personally and explicitly delegated execution to the assistant ("I've changed
 my mind, do it yourself please."). The assistant may run dependency setup, GPU

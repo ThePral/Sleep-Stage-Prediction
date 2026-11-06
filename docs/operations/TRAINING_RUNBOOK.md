@@ -1,5 +1,77 @@
 # Reproducible training commands
 
+## Current handoff: user-run terminal training
+
+On 2 November 2026 the user took back training execution so progress is visible
+in their own terminal. The background BiLSTM controller is stopped. Its capped
+full-source benchmark completed all five jobs, and the disposable training
+profile completed successfully. The old full matrix was interrupted during
+waveform-statistics preparation; no full-schedule optimizer training started.
+All completed artifacts remain intact.
+
+`--live` now streams each worker's output to the terminal and its durable
+attempt log. SSL and supervised phases print the first batch, every 100th
+batch and the final batch, with loss, applicable accuracy, elapsed time and an
+approximate remaining phase time. Source-validation summaries follow each
+supervised epoch. Initial ETA includes compilation and should not be treated
+as a stable throughput estimate. Preparation/integrity checks precede training
+and can take several minutes without batch updates.
+
+A fresh **18-job uncapped study has been planned, not executed**, under
+`runs/bilstm_terminal_2026-11-02`. Fresh planning is required because live-output
+code changed after the earlier study freeze. From a PowerShell terminal opened
+at the checkout root, start it yourself:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.experiments.run execute --study-dir runs/bilstm_terminal_2026-11-02 --live
+```
+
+This runs three preparation jobs, ten-epoch SSL, then 14 supervised classifiers
+across both label budgets. Each classifier allows up to 30 epochs with patience
+five. Checkpoints/logs/caches stay on D: through the CPU launcher. No ISRUC or
+new source-test predictive scoring is scheduled. The assistant will provide
+commands and inspect outputs; it will not start training in the background.
+
+For staged execution, add `--max-jobs 4` on the first call to complete the three
+preparation jobs plus SSL and return before the classifiers. Later run the same
+command without that limit to skip verified completed jobs and continue.
+
+To check dataset availability before launching, run this read-only command:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 scripts/training_status.py --study-dir runs/bilstm_terminal_2026-11-02 --verify-data-scope --verify-artifacts
+```
+
+Require `data_scope.verified: true`, `source_hashes_match: true` and
+`packages_match: true` before execution. Without `--verify-data-scope`, the
+monitor reports `data_scope: null`; code/package agreement alone does not
+establish dataset availability. This check verifies source identities, frozen
+split and manifest hashes; it does not scan waveform payload integrity.
+`Missing source train participants` means discovery at the chosen data root
+did not find the complete frozen training scope. Do not shrink that scope or
+disable the guard to proceed. Check the reported `data_root` and its recording
+folders first. A failure before scheduling leaves no job attempt to retry.
+
+Ctrl+C stops the worker tree and records an interrupted attempt. To retry in the
+same unchanged study, use the execution command with `--live --retry-failed`.
+Completed jobs are verified and skipped; the failed job starts a new attempt.
+This scheduler retry does **not** resume within-job optimizer state. SSL's
+separate checked epoch-resume API is documented in the implementation reference.
+Do not edit source files or update packages once the study is frozen.
+
+An example progress line is:
+
+```text
+SSL epoch 1/10 batch 100/10106 (1.0%) loss=... retrieval_accuracy=... elapsed=... ETA~...
+```
+
+The 116-test regression pass below is historical evidence from before live
+logging changes. The handoff adds 14 passing non-optimizer progress/ownership
+checks; it does not automatically rerun optimizer-based tests under user-owned
+training. Details are in `reports/bilstm_terminal_handoff_2026-11-02/`.
+
+## Earlier automated execution and reproduction history
+
 The previous campaign was stopped explicitly by the user on 2 November 2026,
 with three complete SSL epochs preserved and no supervised jobs started.
 See [the stop record](../../reports/organization_2026-11-02/training_stop.json).

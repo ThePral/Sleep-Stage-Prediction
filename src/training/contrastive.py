@@ -22,6 +22,7 @@ from src.models.contrastive import (AugmentationConfig, augment_waveform, build_
 from src.models.multiview import ModelConfig, get_waveform_encoder
 from src.preprocessing.waveform_normalization import WaveformNormalizer, source_identity
 from src.training.artifacts import write_json
+from src.training.progress import BatchProgress
 
 
 @dataclass(frozen=True)
@@ -100,7 +101,7 @@ class PretrainedEncoder:
 
 def train_contrastive(root, run_directory, model_config=None, pretraining_config=None, augmentation_config=None, *,
                       train_recordings=None, split_file=None, max_batches=None, resume_from=None, verbose=2,
-                      normalizer_path=None):
+                      normalizer_path=None, progress_interval=0):
     config = model_config or ModelConfig(variant="raw")
     training = pretraining_config or PretrainingConfig()
     augmentation = augmentation_config or AugmentationConfig()
@@ -214,11 +215,13 @@ def train_contrastive(root, run_directory, model_config=None, pretraining_config
             base_names = ["waveform_normalizer.json", "model_config.json", "data_manifest.json", "resolved_config.json"]
             for epoch in range(initial_epoch, training.epochs):
                 values = []
+                progress = BatchProgress("SSL", epoch + 1, training.epochs, len(batches), progress_interval)
                 for batch, (raw, allowed, _) in enumerate(batches.iter_batches(epoch)):
                     # fold_in avoids collisions between epoch and batch numbers.
                     seed = tf.random.experimental.stateless_fold_in([training.seed, epoch], batch)
                     result = update(raw, allowed, seed)
                     values.append({key: float(value.numpy()) for key, value in result.items()})
+                    progress.update(batch + 1, values[-1])
                 row = {"epoch": epoch + 1, **{key: float(np.mean([v[key] for v in values])) for key in values[0]}}
                 diagnostics = representation_diagnostics(encoder, diagnostic_raw)
                 row.update({f"encoder_{key}": value for key, value in diagnostics.items()})

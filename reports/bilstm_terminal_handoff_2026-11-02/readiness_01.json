@@ -1,0 +1,34 @@
+{
+  "observed_at_utc": "2026-11-02T18:34:01.169885+00:00",
+  "status": "no_verified_live_scheduler",
+  "study_directory": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\bilstm_terminal_2026-11-02",
+  "study_fingerprint": "5a3e0540508567daa7128aa667762be951e798646c5ca86b0c0b793543cc870c",
+  "limited_run": false,
+  "jobs_planned": 18,
+  "jobs": {
+    "completed": 0,
+    "running": 0,
+    "failed": 0,
+    "pending": 18
+  },
+  "scheduler_identity": "no_scheduler_lock",
+  "processes": [],
+  "sample_seconds": 1.0,
+  "observed_process_tree_cpu_seconds": 0,
+  "sampled_process_tree_rss_bytes": 0,
+  "host_available_memory_bytes": 5661339648,
+  "workspace_free_bytes": 139347099648,
+  "c_drive_free_bytes": 10722652160,
+  "source_hashes_match": true,
+  "packages_match": true,
+  "training_participants": 70,
+  "validation_participants": 15,
+  "completed_artifacts_verified": null,
+  "active_jobs": [],
+  "tensorflow_imported": false,
+  "limitations": [
+    "A process sample is not proof of optimizer progress; epoch seals provide stronger evidence.",
+    "Ledger and process observations can span a job transition; rerun if they disagree.",
+    "Published epoch counts do not establish convergence; no predictive evaluation is performed."
+  ]
+}

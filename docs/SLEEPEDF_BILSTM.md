@@ -83,7 +83,7 @@ Run from the checkout root through the native CPU launcher:
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.compute.preflight --allow-cpu --temporal-head bilstm --temporal-units 32 --report runs/my_bilstm_preflight.json
 
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.experiments.run plan --config configs/sleepedf/experiments/experiment_bilstm_pilot.json --study-dir runs/my_bilstm_pilot
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.experiments.run execute --study-dir runs/my_bilstm_pilot
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.experiments.run execute --study-dir runs/my_bilstm_pilot --live
 ```
 
 The pilot uses the full architecture and all seven conditions, but only two
@@ -103,12 +103,17 @@ For the full-source benchmark and a disposable training profile:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.experiments.run plan --config configs/sleepedf/experiments/experiment_bilstm_source_benchmark.json --study-dir runs/my_bilstm_source_benchmark
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.experiments.run execute --study-dir runs/my_bilstm_source_benchmark
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.experiments.run execute --study-dir runs/my_bilstm_source_benchmark --live
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.evaluation.profile --bundle runs/my_bilstm_source_benchmark/jobs/M3_draw42_n70_seed42/attempt_0001/artifacts --output-dir runs/my_bilstm_training_profile --recordings SC4001 --mode training --batch-size 4 --warmup-steps 5 --measured-steps 50
 ```
 
 Inspect each command's exit code and outputs before continuing. The profiler
 discards its optimizer updates and verifies that saved artifacts are unchanged.
+Training execution now belongs to the user. The prior background controller is
+stopped; the [terminal handoff](operations/TRAINING_RUNBOOK.md#current-handoff-user-run-terminal-training)
+provides the already-planned full-study command. `--live` retains logs while
+showing periodic SSL/supervised batch progress. The assistant does not execute
+these optimizer-based commands under the current ownership preference.
 
 Single-model recipes are `configs/sleepedf/models/supervised_*_bilstm.json`.
 The existing `configs/sleepedf/pretraining/pretrain_raw.json` describes the

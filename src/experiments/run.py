@@ -9,6 +9,8 @@ from pathlib import Path
 import subprocess
 import sys
 
+import psutil
+
 import pandas as pd
 
 from src.data.epoch_store import sha256_file
@@ -201,10 +203,58 @@ def write_tables(directory, study, ledger):
         Path(directory) / "paired_source_validation.csv", index=False)
 
 
+def stop_worker_tree(process):
+    """Terminate only descendants of the worker we started, including venv launchers."""
+    if process.poll() is not None:
+        return
+    try:
+        children = psutil.Process(process.pid).children(recursive=True)
+    except psutil.Error:
+        children = []
+    for child in reversed(children):
+        try:
+            child.terminate()
+        except psutil.NoSuchProcess:
+            pass
+    if process.poll() is None:
+        process.terminate()
+    try:
+        process.wait(timeout=10)
+    except subprocess.TimeoutExpired:
+        process.kill()
+        process.wait()
+    _, alive = psutil.wait_procs(children, timeout=10)
+    for child in alive:
+        try:
+            child.kill()
+        except psutil.NoSuchProcess:
+            pass
+    psutil.wait_procs(alive, timeout=5)
+
+
+def run_worker_live(command, log):
+    """Tee complete UTF-8 worker lines to the terminal and durable attempt log."""
+    process = subprocess.Popen(command, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                               text=True, encoding="utf-8", errors="replace", bufsize=1)
+    try:
+        for line in process.stdout:
+            log.write(line)
+            log.flush()
+            print(line, end="", flush=True)
+        return process.wait()
+    except BaseException:
+        stop_worker_tree(process)
+        raise
+    finally:
+        process.stdout.close()
+
+
 def execute_study(directory, *, root=None, split_file=None, max_jobs=None, retry_failed=False, executor=None,
-                  require_gpu=False):
+                  require_gpu=False, live=False):
     if not isinstance(require_gpu, bool):
         raise ValueError("require_gpu must be boolean.")
+    if not isinstance(live, bool):
+        raise ValueError("live must be boolean.")
     gpu_devices = None
     if require_gpu:
         from src.compute.devices import require_gpu_device
@@ -250,17 +300,21 @@ def execute_study(directory, *, root=None, split_file=None, max_jobs=None, retry
             attempt = job_directory / f"attempt_{attempt_number:04d}"
             attempt.mkdir()
             write_json(attempt / "task.json", {"study_directory": str(directory), "job_id": job_id,
-                                               "data_root": str(root), "split_file": str(split_file), "dependencies": dependencies})
+                                               "data_root": str(root), "split_file": str(split_file), "dependencies": dependencies,
+                                               "live": live})
             ledger["jobs"][job_id] = {"status": "running", "attempt": attempt.relative_to(directory).as_posix()}
             atomic_json(directory / "ledger.json", ledger)
             print(f"Running {job_id} ({attempt.name})", flush=True)
             try:
                 if executor is None:
                     with attempt.with_suffix(".log").open("w", encoding="utf-8") as log:
-                        result = subprocess.run([sys.executable, "-u", "-X", "utf8", "-m", "src.experiments.worker",
-                                                 "--task", str(attempt / "task.json")], cwd=ROOT, stdout=log, stderr=subprocess.STDOUT)
-                    if result.returncode:
-                        raise RuntimeError(f"Job {job_id} exited {result.returncode}; see {attempt.with_suffix('.log')}")
+                        command = [sys.executable, "-u", "-X", "utf8", "-m", "src.experiments.worker", "--task", str(attempt / "task.json")]
+                        if live:
+                            returncode = run_worker_live(command, log)
+                        else:
+                            returncode = subprocess.run(command, cwd=ROOT, stdout=log, stderr=subprocess.STDOUT).returncode
+                    if returncode:
+                        raise RuntimeError(f"Job {job_id} exited {returncode}; see {attempt.with_suffix('.log')}")
                 else:
                     executor(attempt / "task.json")
                 verify_job_result(attempt, study, job_id)
@@ -298,6 +352,7 @@ def main(argv=None):
     run.add_argument("--max-jobs", type=int)
     run.add_argument("--retry-failed", action="store_true")
     run.add_argument("--require-gpu", action="store_true", help="Fail before scheduling jobs if TensorFlow exposes no GPU.")
+    run.add_argument("--live", action="store_true", help="Stream worker output and periodic training-batch progress to this terminal.")
     args = parser.parse_args(argv)
     if args.command == "plan":
         study = create_study(args.data_root, args.study_dir, json.loads(args.config.read_text(encoding="utf-8")), split_file=args.split_file)
@@ -305,7 +360,7 @@ def main(argv=None):
     else:
         print(json.dumps(execute_study(args.study_dir, root=args.data_root, split_file=args.split_file,
                                        max_jobs=args.max_jobs, retry_failed=args.retry_failed,
-                                       require_gpu=args.require_gpu), indent=2))
+                                       require_gpu=args.require_gpu, live=args.live), indent=2))
 
 
 if __name__ == "__main__":

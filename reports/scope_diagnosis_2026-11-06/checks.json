@@ -1,0 +1,17 @@
+{
+  "real_scope": {
+    "data_root": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\data\\processed\\research_v1",
+    "split_file": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\final_model_corrected\\participant_split.csv",
+    "verified": true,
+    "error": null
+  },
+  "missing_root_fault_injection": {
+    "data_root": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\nonexistent_scope_fault_2026-11-06",
+    "split_file": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\final_model_corrected\\participant_split.csv",
+    "verified": false,
+    "error": "ValueError: Missing source train participants; a study scope cannot silently shrink."
+  },
+  "checks_passed": true,
+  "tensorflow_imported": false,
+  "training_launched": false
+}
