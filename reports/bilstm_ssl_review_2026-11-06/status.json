@@ -1,0 +1,45 @@
+{
+  "observed_at_utc": "2026-11-06T08:28:06.336520+00:00",
+  "status": "no_verified_live_scheduler",
+  "study_directory": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\bilstm_terminal_2026-11-02",
+  "study_fingerprint": "5a3e0540508567daa7128aa667762be951e798646c5ca86b0c0b793543cc870c",
+  "limited_run": false,
+  "jobs_planned": 18,
+  "jobs": {
+    "completed": 4,
+    "running": 0,
+    "failed": 0,
+    "pending": 14
+  },
+  "scheduler_identity": "no_scheduler_lock",
+  "processes": [],
+  "sample_seconds": 3.0,
+  "observed_process_tree_cpu_seconds": 0,
+  "sampled_process_tree_rss_bytes": 0,
+  "host_available_memory_bytes": 5625798656,
+  "workspace_free_bytes": 139314094080,
+  "c_drive_free_bytes": 10651840512,
+  "source_hashes_match": true,
+  "packages_match": true,
+  "data_scope": {
+    "data_root": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\data\\processed\\research_v1",
+    "split_file": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\final_model_corrected\\participant_split.csv",
+    "verified": true,
+    "error": null
+  },
+  "training_participants": 70,
+  "validation_participants": 15,
+  "completed_artifacts_verified": [
+    "waveform_statistics",
+    "normalizer_draw42_n18",
+    "normalizer_draw42_n70",
+    "ssl_seed42"
+  ],
+  "active_jobs": [],
+  "tensorflow_imported": false,
+  "limitations": [
+    "A process sample is not proof of optimizer progress; epoch seals provide stronger evidence.",
+    "Ledger and process observations can span a job transition; rerun if they disagree.",
+    "Published epoch counts do not establish convergence; no predictive evaluation is performed."
+  ]
+}

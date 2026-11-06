@@ -1,0 +1,148 @@
+{
+  "passed": true,
+  "study_fingerprint": "5a3e0540508567daa7128aa667762be951e798646c5ca86b0c0b793543cc870c",
+  "completed_jobs_verified": [
+    "waveform_statistics",
+    "normalizer_draw42_n18",
+    "normalizer_draw42_n70",
+    "ssl_seed42"
+  ],
+  "epochs_completed": 10,
+  "optimizer_iterations_recorded": 101060,
+  "all_history_metrics_finite": true,
+  "all_encoder_weights_finite": true,
+  "encoder_weight_tensors": [
+    {
+      "name": "layers/conv1d/vars/0",
+      "shape": [
+        31,
+        1,
+        16
+      ],
+      "elements": 496
+    },
+    {
+      "name": "layers/conv1d/vars/1",
+      "shape": [
+        16
+      ],
+      "elements": 16
+    },
+    {
+      "name": "layers/conv1d_1/vars/0",
+      "shape": [
+        15,
+        16,
+        32
+      ],
+      "elements": 7680
+    },
+    {
+      "name": "layers/conv1d_1/vars/1",
+      "shape": [
+        32
+      ],
+      "elements": 32
+    },
+    {
+      "name": "layers/conv1d_2/vars/0",
+      "shape": [
+        7,
+        32,
+        64
+      ],
+      "elements": 14336
+    },
+    {
+      "name": "layers/conv1d_2/vars/1",
+      "shape": [
+        64
+      ],
+      "elements": 64
+    },
+    {
+      "name": "layers/dense/vars/0",
+      "shape": [
+        64,
+        64
+      ],
+      "elements": 4096
+    },
+    {
+      "name": "layers/dense/vars/1",
+      "shape": [
+        64
+      ],
+      "elements": 64
+    },
+    {
+      "name": "layers/layer_normalization/vars/0",
+      "shape": [
+        16
+      ],
+      "elements": 16
+    },
+    {
+      "name": "layers/layer_normalization/vars/1",
+      "shape": [
+        16
+      ],
+      "elements": 16
+    },
+    {
+      "name": "layers/layer_normalization_1/vars/0",
+      "shape": [
+        32
+      ],
+      "elements": 32
+    },
+    {
+      "name": "layers/layer_normalization_1/vars/1",
+      "shape": [
+        32
+      ],
+      "elements": 32
+    },
+    {
+      "name": "layers/layer_normalization_2/vars/0",
+      "shape": [
+        64
+      ],
+      "elements": 64
+    },
+    {
+      "name": "layers/layer_normalization_2/vars/1",
+      "shape": [
+        64
+      ],
+      "elements": 64
+    }
+  ],
+  "encoder_parameters": 27008,
+  "bundle_and_final_checkpoint_seals_verified": true,
+  "checkpoint_history_matches_csv": true,
+  "first_epoch_loss": 0.5573252686298462,
+  "last_epoch_loss": 0.4595753220745815,
+  "final_contrastive_retrieval_accuracy": 1.0,
+  "final_encoder_effective_rank": 14.92967732657642,
+  "source_only_participants": 70,
+  "source_only_recordings": 138,
+  "quality_epochs": 323423,
+  "normalizer_budget_checks": [
+    {
+      "budget_id": "draw42_n18",
+      "spectral_fit_epochs": 76604,
+      "shared_waveform_fit_epochs": 323423
+    },
+    {
+      "budget_id": "draw42_n70",
+      "spectral_fit_epochs": 321688,
+      "shared_waveform_fit_epochs": 323423
+    }
+  ],
+  "supervised_jobs_pending": 14,
+  "tensorflow_imported": false,
+  "assistant_performed_optimizer_updates": false,
+  "isruc_or_new_source_test_predictive_scoring_performed": false,
+  "interpretation": "Completed fixed-schedule SSL. View retrieval and small-sample rank diagnostics do not establish staging accuracy or transfer gains."
+}
