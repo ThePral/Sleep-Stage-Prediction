@@ -6,6 +6,7 @@ they are not rewritten during file organization.
 
 | Evidence | Location |
 |---|---|
+| Power-loss progress inspection, verified completed models and restart handoff | `power_loss_recovery_2026-11-07/` |
 | Completed ten-epoch user-run SSL, artifact/normalizer checks and supervised handoff | `bilstm_ssl_review_2026-11-06/` |
 | Prepared Sleep-EDF Windows access-rule repair for the normal terminal account | `sleepedf_access_2026-11-06/` |
 | Dataset-scope startup diagnosis and read-only monitor verification | `scope_diagnosis_2026-11-06/` |

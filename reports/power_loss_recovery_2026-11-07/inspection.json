@@ -1,0 +1,111 @@
+{
+  "observed_at_utc": "2026-11-07T08:52:03.150337+00:00",
+  "study_fingerprint": "5a3e0540508567daa7128aa667762be951e798646c5ca86b0c0b793543cc870c",
+  "jobs_planned": 18,
+  "completed_jobs_verified": [
+    {
+      "job_id": "waveform_statistics",
+      "kind": "waveform_statistics",
+      "verified": true
+    },
+    {
+      "job_id": "normalizer_draw42_n18",
+      "kind": "normalizer",
+      "verified": true
+    },
+    {
+      "job_id": "normalizer_draw42_n70",
+      "kind": "normalizer",
+      "verified": true
+    },
+    {
+      "job_id": "ssl_seed42",
+      "kind": "pretrain",
+      "verified": true,
+      "epochs_completed": 10,
+      "limited_data_run": false
+    },
+    {
+      "job_id": "M0_draw42_n18_seed42",
+      "kind": "supervised",
+      "verified": true,
+      "epochs_completed": 7,
+      "best_epoch": 2,
+      "elapsed_seconds": 8336.072882700013,
+      "limited_data_run": false
+    },
+    {
+      "job_id": "M1_draw42_n18_seed42",
+      "kind": "supervised",
+      "verified": true,
+      "epochs_completed": 10,
+      "best_epoch": 5,
+      "elapsed_seconds": 22815.398637499893,
+      "limited_data_run": false
+    },
+    {
+      "job_id": "M2_draw42_n18_seed42",
+      "kind": "supervised",
+      "verified": true,
+      "epochs_completed": 6,
+      "best_epoch": 1,
+      "elapsed_seconds": 15820.74610219989,
+      "limited_data_run": false
+    },
+    {
+      "job_id": "M3_draw42_n18_seed42",
+      "kind": "supervised",
+      "verified": true,
+      "epochs_completed": 8,
+      "best_epoch": 3,
+      "elapsed_seconds": 21904.11484699999,
+      "limited_data_run": false
+    },
+    {
+      "job_id": "M4_draw42_n18_seed42",
+      "kind": "supervised",
+      "verified": true,
+      "epochs_completed": 6,
+      "best_epoch": 1,
+      "elapsed_seconds": 14045.32426220004,
+      "limited_data_run": false
+    }
+  ],
+  "not_started_jobs": [
+    "M6_draw42_n18_seed42",
+    "M0_draw42_n70_seed42",
+    "M1_draw42_n70_seed42",
+    "M2_draw42_n70_seed42",
+    "M3_draw42_n70_seed42",
+    "M4_draw42_n70_seed42",
+    "M5_draw42_n70_seed42",
+    "M6_draw42_n70_seed42"
+  ],
+  "interrupted_job": {
+    "job_id": "M5_draw42_n18_seed42",
+    "attempt": "jobs/M5_draw42_n18_seed42/attempt_0001",
+    "last_logged_epoch": 1,
+    "last_logged_batch": 18922,
+    "training_batches_in_pass": 18922,
+    "completed_validated_epochs": 0,
+    "checkpoint_present": false,
+    "last_log_lines": [
+      "Supervised epoch 1/30 batch 18922/18922 (100.0%) loss=0.27669 accuracy=0.89574 elapsed=00:09:05 ETA~00:00:00",
+      "Training pass complete; computing source-validation metrics..."
+    ],
+    "recovery": "Restart M5 in a fresh attempt from the completed SSL encoder."
+  },
+  "stale_lock": {
+    "pid": 179288,
+    "pid_alive": false,
+    "archived_as": "runs\\bilstm_terminal_2026-11-02\\.runner.lock.power_loss_2026-11-07",
+    "bytes_preserved": true
+  },
+  "ledger_preserved": true,
+  "ledger_sha256": "92872cf9d80035e0928af285c8574960d395f6dadea5f9ca65ae9060bce414cd",
+  "no_live_experiment_workers": true,
+  "source_packages_and_scope_match": true,
+  "tensorflow_imported": false,
+  "training_launched": false,
+  "restart_command": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.experiments.run execute --study-dir runs/bilstm_terminal_2026-11-02 --live --retry-failed"
+}
