@@ -6,6 +6,7 @@ they are not rewritten during file organization.
 
 | Evidence | Location |
 |---|---|
+| Second power-loss inspection: fifteen verified completed jobs and final three-job restart handoff | `power_loss_recovery_2026-11-10/` |
 | Active campaign stop inspection, verified completed experiments and independent partial-model snapshot | `stop_readiness_2026-11-08/` |
 | Power-loss progress inspection, verified completed models and restart handoff | `power_loss_recovery_2026-11-07/` |
 | Completed ten-epoch user-run SSL, artifact/normalizer checks and supervised handoff | `bilstm_ssl_review_2026-11-06/` |
