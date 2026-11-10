@@ -1,0 +1,86 @@
+{
+  "observed_at_utc": "2026-11-08T08:22:08.013696+00:00",
+  "status": "running",
+  "study_directory": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\bilstm_terminal_2026-11-02",
+  "study_fingerprint": "5a3e0540508567daa7128aa667762be951e798646c5ca86b0c0b793543cc870c",
+  "limited_run": false,
+  "jobs_planned": 18,
+  "jobs": {
+    "completed": 12,
+    "running": 1,
+    "failed": 0,
+    "pending": 5
+  },
+  "scheduler_identity": "verified_live_scheduler",
+  "processes": [
+    {
+      "pid": 23864,
+      "created": 1794045683.8267531,
+      "rss_bytes": 33042432,
+      "cpu_seconds": 6.03125
+    },
+    {
+      "pid": 55456,
+      "created": 1794098832.555735,
+      "rss_bytes": 4694016,
+      "cpu_seconds": 0.015625
+    },
+    {
+      "pid": 54728,
+      "created": 1794098832.5734527,
+      "rss_bytes": 278822912,
+      "cpu_seconds": 115566.765625
+    }
+  ],
+  "sample_seconds": 3.0,
+  "observed_process_tree_cpu_seconds": 15.1562,
+  "sampled_process_tree_rss_bytes": 316559360,
+  "host_available_memory_bytes": 4474314752,
+  "workspace_free_bytes": 139161014272,
+  "c_drive_free_bytes": 10164215808,
+  "source_hashes_match": true,
+  "packages_match": true,
+  "data_scope": {
+    "data_root": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\data\\processed\\research_v1",
+    "split_file": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\final_model_corrected\\participant_split.csv",
+    "verified": true,
+    "error": null
+  },
+  "training_participants": 70,
+  "validation_participants": 15,
+  "completed_artifacts_verified": [
+    "waveform_statistics",
+    "normalizer_draw42_n18",
+    "normalizer_draw42_n70",
+    "ssl_seed42",
+    "M0_draw42_n18_seed42",
+    "M1_draw42_n18_seed42",
+    "M2_draw42_n18_seed42",
+    "M3_draw42_n18_seed42",
+    "M4_draw42_n18_seed42",
+    "M5_draw42_n18_seed42",
+    "M6_draw42_n18_seed42",
+    "M0_draw42_n70_seed42"
+  ],
+  "active_jobs": [
+    {
+      "job_id": "M1_draw42_n70_seed42",
+      "kind": "supervised",
+      "log": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\bilstm_terminal_2026-11-02\\jobs\\M1_draw42_n70_seed42\\attempt_0001.log",
+      "recorded_status": {
+        "status": "running"
+      },
+      "devices": [
+        "/physical_device:CPU:0"
+      ],
+      "logged_epochs": 7,
+      "maximum_epochs": 30
+    }
+  ],
+  "tensorflow_imported": false,
+  "limitations": [
+    "A process sample is not proof of optimizer progress; epoch seals provide stronger evidence.",
+    "Ledger and process observations can span a job transition; rerun if they disagree.",
+    "Published epoch counts do not establish convergence; no predictive evaluation is performed."
+  ]
+}
