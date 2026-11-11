@@ -1,5 +1,11 @@
 # Sleep-EDF SSL, cross-attention and BiLSTM
 
+As of 12 November 2026, the first uncapped one-seed matrix is complete and all
+18 jobs verify. The [completion review](../reports/bilstm_completion_2026-11-12/README.md)
+records source-validation scores, paired participant uncertainty and remaining
+research limitations. The architecture below is implemented; its combined SSL
+and attention variant does not show uniform superiority in this first study.
+
 The maintained model supports `temporal_head: "bilstm"`. The initial recipe uses
 32 LSTM units per direction and concatenates the two outputs into 64 features.
 That matches the output width of the earlier 64-unit GRU. This follows Keras'

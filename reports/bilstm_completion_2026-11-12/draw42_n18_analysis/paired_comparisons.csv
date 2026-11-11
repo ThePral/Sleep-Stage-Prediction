@@ -1,0 +1,6 @@
+first,second,participant_mean_macro_f1_difference,confidence_interval
+M4,M1,0.0003869077482065664,"{'lower': -0.02348219815061496, 'upper': 0.024238108573935796, 'status': 'percentile_participant_cluster_bootstrap'}"
+M5,M2,0.026718344537723083,"{'lower': 0.005835027836491865, 'upper': 0.04616336614530854, 'status': 'percentile_participant_cluster_bootstrap'}"
+M6,M3,0.02681772989261904,"{'lower': 0.008330195540740624, 'upper': 0.046000688034521946, 'status': 'percentile_participant_cluster_bootstrap'}"
+M3,M2,-0.005541734295128453,"{'lower': -0.02286672094844508, 'upper': 0.011873052063156487, 'status': 'percentile_participant_cluster_bootstrap'}"
+M6,M5,-0.0054423489402324965,"{'lower': -0.02499253626683215, 'upper': 0.014775177034708242, 'status': 'percentile_participant_cluster_bootstrap'}"

@@ -1,3 +1,23 @@
+# First uncapped BiLSTM study completed - 12 November 2026
+
+The user completed all 18 jobs in `runs/bilstm_terminal_2026-11-02`: preparation,
+ten-epoch source-only SSL and fourteen BiLSTM classifiers across both label
+budgets. All sealed artifacts, prediction identities, normalizer/encoder sharing
+and source/package versions verify. The matrix used one training seed (42),
+one participant draw and no batch caps; it is not repeated-seed confirmation.
+
+Saved source-validation outputs have been analyzed with 2,000 paired
+participant-cluster bootstrap replicates. Results are mixed: SSL improves
+attention over scratch point estimates, while the full-label combined model
+does not outperform the raw/concat scratch controls. Validation intervals are
+exploratory and conditional on the single seed; no new held-out or ISRUC
+scoring occurred. See the [completion review](../reports/bilstm_completion_2026-11-12/README.md)
+for audited metrics, uncertainty, figures and the next protocol decisions.
+
+The dated milestones below preserve earlier states and checks. Source code and
+packages were not changed during training or the completion review. Training
+ownership remains with the user; no new campaign has been started.
+
 # SSL, cross-attention and BiLSTM implementation - 2 November 2026
 
 Current ownership update: the user now runs training in their own terminal.

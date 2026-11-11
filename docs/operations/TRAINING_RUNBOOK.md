@@ -1,5 +1,13 @@
 # Reproducible training commands
 
+Current state (12 November 2026): all 18 jobs in
+`runs/bilstm_terminal_2026-11-02` are complete and verified. No training is running.
+The [completion review](../../reports/bilstm_completion_2026-11-12/README.md)
+contains audited validation results and analysis. The handoff/restart commands
+below remain for reproduction; no more training is needed to complete this
+one-seed matrix. New seeds or changed recipes require a separately frozen study
+and user-launched training. Test and ISRUC scoring were not opened in the review.
+
 ## Current handoff: user-run terminal training
 
 On 2 November 2026 the user took back training execution so progress is visible

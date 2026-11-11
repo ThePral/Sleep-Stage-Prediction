@@ -1,4 +1,4 @@
-# Research direction - 2 November 2026
+# Research direction - 12 November 2026
 
 The supervisor-recommended paper direction is Sleep-EDF Expanded with
 self-supervised pretraining, waveform/spectral cross-attention and a BiLSTM
@@ -6,8 +6,14 @@ temporal classifier. External-dataset evaluation is deferred for a later phase.
 
 Training ownership now belongs to the user, who launches commands in a visible
 terminal. The assistant provides commands, implementation and read-only review;
-it does not start background training. The ready `execute --live` command and
-fresh planned study are described in [the runbook](operations/TRAINING_RUNBOOK.md).
+it does not start background training. The `execute --live` launcher and
+reproduction commands are described in [the runbook](operations/TRAINING_RUNBOOK.md).
+
+The initial uncapped one-seed BiLSTM study is now complete: all 18 jobs and
+fourteen classifiers verify. Its [completion review](../reports/bilstm_completion_2026-11-12/README.md)
+contains the mixed source-validation results and exploratory paired participant
+analysis. The immediate work is review and a frozen replication/evaluation
+policy, not an automatic new training launch or a positive superiority claim.
 
 The maintained implementation now supports BiLSTM heads for the spectral, raw,
 concatenation and gated cross-attention controls. The initial recipe uses 32
@@ -18,11 +24,11 @@ the implemented data flow, configuration paths and staged validation policy.
 
 ## Immediate sequence
 
-1. Validate BiLSTM gradient flow, serialization, waveform SSL transfer and inference.
-2. Run the full seven-condition integration pilot on source participants only.
-3. Check the full 70/15-participant scope with a bounded M3/M6 source benchmark.
-4. Freeze and execute a fresh uncapped source matrix after checks pass.
-5. Review complete learning curves and source-only comparisons before freezing any additional seeds or scoring held-out data.
+1. Completed: BiLSTM gradient flow, serialization, waveform SSL transfer and inference checks.
+2. Completed: the full seven-condition source integration pilot.
+3. Completed: the bounded M3/M6 benchmark over the full 70/15 source scope.
+4. Completed: the first frozen uncapped one-seed source matrix.
+5. Review learning curves, class errors, calibration and paired comparisons; freeze any replication studies and the evaluation policy before additional training or held-out scoring.
 
 The previous CPU GRU matrix was stopped explicitly by the user during
 organization. Three complete SSL epochs are retained with model and optimizer
