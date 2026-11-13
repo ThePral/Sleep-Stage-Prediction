@@ -14,6 +14,8 @@ fourteen classifiers verify. Its [completion review](../reports/bilstm_completio
 contains the mixed source-validation results and exploratory paired participant
 analysis. The immediate work is review and a frozen replication/evaluation
 policy, not an automatic new training launch or a positive superiority claim.
+The [next-step plan](NEXT_STEPS.md) specifies the proposed recovery/performance
+gates and replication/evaluation sequence. It is not a newly frozen protocol.
 
 The maintained implementation now supports BiLSTM heads for the spectral, raw,
 concatenation and gated cross-attention controls. The initial recipe uses 32

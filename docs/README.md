@@ -2,6 +2,7 @@
 
 | Document | Use |
 |---|---|
+| [NEXT_STEPS.md](NEXT_STEPS.md) | Post-study diagnostic findings, recovery/speed gates and proposed replication/evaluation sequence |
 | [RESEARCH_DIRECTION.md](RESEARCH_DIRECTION.md) | Sleep-EDF/BiLSTM priority and deferred ISRUC strategy |
 | [SLEEPEDF_BILSTM.md](SLEEPEDF_BILSTM.md) | Implemented SSL/cross-attention/BiLSTM data flow, configs and validation |
 | [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) | Where files belong and which paths remain fixed |

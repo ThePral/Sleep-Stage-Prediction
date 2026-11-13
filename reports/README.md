@@ -6,6 +6,7 @@ they are not rewritten during file organization.
 
 | Evidence | Location |
 |---|---|
+| Completed-study learning curves, class-error observations and staged next-step plan | `next_steps_2026-11-12/` |
 | Completed uncapped BiLSTM study: all 18 jobs, paired validation analysis, calibration and figures | `bilstm_completion_2026-11-12/` |
 | Second power-loss inspection: fifteen verified completed jobs and final three-job restart handoff | `power_loss_recovery_2026-11-10/` |
 | Active campaign stop inspection, verified completed experiments and independent partial-model snapshot | `stop_readiness_2026-11-08/` |
