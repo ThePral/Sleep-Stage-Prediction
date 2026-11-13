@@ -9,6 +9,7 @@ import csv
 from dataclasses import asdict, dataclass
 import importlib.metadata
 import json
+import os
 from pathlib import Path
 import platform
 import time
@@ -40,6 +41,9 @@ class TrainingConfig:
     learning_rate: float = 0.001
     seed: int = 42
     patience: int = 5
+    validation_batch_size: int | None = None
+    compiled_validation: bool = False
+    recovery: bool = False
 
     def __post_init__(self):
         for name in ["batch_size", "epochs", "patience"]:
@@ -50,12 +54,26 @@ class TrainingConfig:
             raise ValueError("learning_rate must be positive and finite.")
         if isinstance(self.seed, bool) or not isinstance(self.seed, int) or not 0 <= self.seed < 2**32:
             raise ValueError("seed must be an integer in [0, 2**32).")
+        if self.validation_batch_size is not None and (isinstance(self.validation_batch_size, bool)
+                or not isinstance(self.validation_batch_size, int) or self.validation_batch_size < 1):
+            raise ValueError('validation_batch_size must be a positive integer or null.')
+        if not isinstance(self.compiled_validation, bool) or not isinstance(self.recovery, bool):
+            raise ValueError('compiled_validation and recovery must be boolean.')
 
 
-def evaluate_batches(model, batches, prediction_path=None):
+def validation_predictor(model, compiled=False):
+    if not compiled:
+        return lambda inputs: model(inputs, training=False)
+    signature = {name: tf.TensorSpec((None, *tensor.shape[1:]), tf.as_dtype(tensor.dtype))
+                 for name, tensor in model.input.items()}
+    return tf.function(lambda inputs: model(inputs, training=False), input_signature=[signature], autograph=False)
+
+
+def evaluate_batches(model, batches, prediction_path=None, *, compiled=False, predictor=None):
     """Evaluate one deterministic source-validation pass, optionally exporting IDs."""
     if batches.partition.split != "val":
         raise ValueError("Development evaluation only accepts source validation participants.")
+    predictor = predictor or validation_predictor(model, compiled)
     accumulator = ClassificationAccumulator()
     stream = None
     writer = None
@@ -68,7 +86,7 @@ def evaluate_batches(model, batches, prediction_path=None):
         writer.writeheader()
     try:
         for inputs, targets, metadata in batches.iter_batches(epoch=0):
-            probabilities = model(inputs, training=False).numpy()
+            probabilities = predictor(inputs).numpy()
             accumulator.update(targets, probabilities)
             if writer:
                 for item, probability in zip(metadata, probabilities):
@@ -83,12 +101,16 @@ def evaluate_batches(model, batches, prediction_path=None):
 class SourceValidation(keras.callbacks.Callback):
     """Compute val loss/F1 once per epoch before checkpoint/early-stop callbacks."""
 
-    def __init__(self, batches):
+    def __init__(self, batches, compiled=False):
         super().__init__()
         self.batches = batches
+        self.compiled = compiled
+        self.predictor = None
 
     def on_epoch_end(self, epoch, logs=None):
-        metrics = evaluate_batches(self.model, self.batches)
+        if self.predictor is None:
+            self.predictor = validation_predictor(self.model, self.compiled)
+        metrics = evaluate_batches(self.model, self.batches, predictor=self.predictor)
         for key in ["loss", "accuracy", "macro_f1", "balanced_accuracy"]:
             logs[f"val_{key}"] = metrics[key]
 
@@ -113,10 +135,19 @@ def train_supervised(
     max_train_batches=None, max_validation_batches=None, normalizer_path=None, verbose=2,
     pretrained_path=None, freeze_backbone=False, linear_probe=False,
     waveform_normalizer_path=None,
-    budget_plan_path=None, budget_id=None, progress_interval=0,
+    budget_plan_path=None, budget_id=None, progress_interval=0, resume_from=None,
 ):
     model_config = model_config or ModelConfig()
     training_config = training_config or TrainingConfig()
+    if resume_from is not None and not training_config.recovery:
+        raise ValueError('Supervised resume requires training.recovery=true.')
+    if training_config.recovery and (os.environ.get('PYTHONHASHSEED') is None
+            or not os.environ['PYTHONHASHSEED'].isdigit()
+            or not 0 <= int(os.environ['PYTHONHASHSEED']) < 2**32):
+        raise ValueError('Recovery requires a fixed PYTHONHASHSEED before Python starts; use scripts/research_cpu.ps1.')
+    validation_size = training_config.validation_batch_size or training_config.batch_size
+    if max_validation_batches is not None and validation_size != training_config.batch_size:
+        raise ValueError('A changed validation batch size would change the capped validation target mask.')
     if linear_probe and (model_config.variant != "raw" or model_config.sequence_length != 1):
         raise ValueError("Linear probes require raw single-epoch configuration.")
     if pretrained_path is not None and waveform_normalizer_path is not None:
@@ -142,8 +173,12 @@ def train_supervised(
     started = time.perf_counter()
     write_json(run_directory / "status.json", {"status": "running"})
     try:
+        if training_config.recovery:
+            keras.backend.clear_session()
         keras.utils.set_random_seed(training_config.seed)
         tf.config.experimental.enable_op_determinism()
+        if training_config.recovery:
+            tf.random.set_global_generator(tf.random.Generator.from_seed(training_config.seed))
         selection = {
             "train_recordings": train_recordings, "validation_recordings": validation_recordings,
             "max_train_batches": max_train_batches, "max_validation_batches": max_validation_batches,
@@ -212,12 +247,16 @@ def train_supervised(
                                 for p in [Path(__file__), ROOT / "src/models/multiview.py",
                                           ROOT / "src/data/supervised.py", ROOT / "src/preprocessing/research_normalization.py"]},
             }
+            resolved['resume_from'] = str(Path(resume_from).resolve()) if resume_from else None
+            resolved['validation_execution'] = {'batch_size': validation_size, 'compiled': training_config.compiled_validation}
+            resolved['sampler_policy'] = ('explicit_seed_plus_completed_epoch' if training_config.recovery
+                                          else 'legacy_generator_iteration')
             training_batches = WindowBatches(
                 train, normalizer, variant=model_config.variant, batch_size=training_config.batch_size,
                 shuffle=True, seed=training_config.seed, max_batches=max_train_batches,
             )
             validation_batches = WindowBatches(
-                validation, normalizer, variant=model_config.variant, batch_size=training_config.batch_size,
+                validation, normalizer, variant=model_config.variant, batch_size=validation_size,
                 max_batches=max_validation_batches,
             )
             # Seeding occurs before constructing any layers/initializers.
@@ -232,8 +271,10 @@ def train_supervised(
             model = compile_multiview_model(model, training_config.learning_rate)
             write_json(run_directory / "resolved_config.json", resolved)
             checkpoint = run_directory / "model.keras"
+            initial_epoch, recovery = 0, None
+            validation_callback = SourceValidation(validation_batches, training_config.compiled_validation)
             callbacks = [
-                SourceValidation(validation_batches),
+                validation_callback,
                 keras.callbacks.ModelCheckpoint(checkpoint, monitor="val_macro_f1", mode="max", save_best_only=True),
                 keras.callbacks.EarlyStopping(monitor="val_macro_f1", mode="max", patience=training_config.patience,
                                              restore_best_weights=True),
@@ -242,8 +283,34 @@ def train_supervised(
             ]
             if progress_interval:
                 callbacks.append(SourceTrainingProgress(len(training_batches), training_config.epochs, progress_interval))
-            model.fit(training_batches.as_dataset(), epochs=training_config.epochs, callbacks=callbacks,
-                      shuffle=False, verbose=verbose)
+            if training_config.recovery:
+                from src.training.supervised_recovery import fit_recoverable
+                from src.experiments.run import code_hashes
+                # Absolute data provenance, complete source hashes and runtime identity
+                # intentionally forbid silently migrating an exact-resume claim.
+                contract = {'model': model_config.to_dict(), 'training': asdict(training_config),
+                            'data': data_manifest, 'normalizer_sha256': sha256_file(run_directory / 'normalizer.json'),
+                            'selection': selection, 'training_mode': resolved['training_mode'],
+                            'frozen_waveform_encoder': resolved['frozen_waveform_encoder'],
+                            'initialization': resolved.get('pretraining_transfer'),
+                            'code_sha256': code_hashes(), 'python': platform.python_version(),
+                            'platform': platform.platform(), 'processor': platform.processor(),
+                            'execution_environment': {key: os.environ.get(key) for key in
+                                ('TF_ENABLE_ONEDNN_OPTS', 'TF_NUM_INTRAOP_THREADS', 'TF_NUM_INTEROP_THREADS',
+                                 'OMP_NUM_THREADS', 'CUDA_VISIBLE_DEVICES', 'PYTHONHASHSEED')},
+                            'precision_policy': keras.mixed_precision.global_policy().name,
+                            'jit': tf.config.optimizer.get_jit(),
+                            'packages': {distribution.metadata['Name']: distribution.version
+                                         for distribution in importlib.metadata.distributions()},
+                            'devices': [{'name': device.name, 'details': tf.config.experimental.get_device_details(device)}
+                                        for device in tf.config.list_physical_devices()],
+                            'sampler_policy': resolved['sampler_policy']}
+                initial_epoch, recovery = fit_recoverable(model, training_batches, run_directory, training_config,
+                    validation_callback, contract, SourceTrainingProgress(len(training_batches), training_config.epochs, progress_interval)
+                    if progress_interval else None, resume_from=resume_from, verbose=verbose, elapsed_start=started)
+            else:
+                model.fit(training_batches.as_dataset(), epochs=training_config.epochs, callbacks=callbacks,
+                          shuffle=False, verbose=verbose)
             if frozen_weights is not None:
                 for before, after in zip(frozen_weights, get_waveform_encoder(model).get_weights()):
                     if not np.array_equal(before, after):
@@ -254,7 +321,8 @@ def train_supervised(
             reload_difference = float(np.max(np.abs(model(sample, training=False).numpy() - loaded(sample, training=False).numpy())))
             if reload_difference > 1e-6:
                 raise ValueError("Reloaded best checkpoint predictions disagree with restored training weights.")
-            metrics = evaluate_batches(loaded, validation_batches, run_directory / "validation_predictions.csv")
+            metrics = evaluate_batches(loaded, validation_batches, run_directory / "validation_predictions.csv",
+                                       compiled=training_config.compiled_validation)
             write_json(run_directory / "validation_metrics.json", metrics)
             pd.DataFrame(metrics["confusion_matrix"], index=CLASS_LABELS, columns=CLASS_LABELS).to_csv(run_directory / "validation_confusion_matrix.csv")
             history = pd.read_csv(run_directory / "training_history.csv")
@@ -272,8 +340,14 @@ def train_supervised(
                 "train_batches_per_epoch": len(training_batches), "validation_batches": len(validation_batches),
                 "normalization_fit_epochs": normalizer.state["fit_epochs"],
                 "waveform_normalization_fit_epochs": normalizer.state.get("pretraining_waveform", normalizer.state)["fit_epochs"],
-                "limited_data_run": limited, "elapsed_seconds": time.perf_counter() - started,
+                "limited_data_run": limited,
+                "elapsed_seconds": time.perf_counter() - started + (recovery.previous_elapsed if recovery else 0.),
+                'elapsed_seconds_this_call': time.perf_counter() - started,
+                'elapsed_seconds_policy': 'current_call_plus_published_prior_segments_excluding_uncommitted_interruption_time',
                 "checkpoint_reload_max_probability_difference": reload_difference,
+                'resumed_after_epoch': initial_epoch,
+                'recovery_enabled': training_config.recovery,
+                'elapsed_seconds_previous_completed_segments': recovery.previous_elapsed if recovery else 0.,
                 "source_validation": metrics,
             }
             write_json(run_directory / "summary.json", summary)
@@ -301,6 +375,10 @@ def main(argv=None):
     parser.add_argument("--validation-recordings", nargs="+")
     parser.add_argument("--epochs", type=int)
     parser.add_argument("--batch-size", type=int)
+    parser.add_argument('--validation-batch-size', type=int)
+    parser.add_argument('--compiled-validation', action=argparse.BooleanOptionalAction, default=None)
+    parser.add_argument('--recovery', action=argparse.BooleanOptionalAction, default=None)
+    parser.add_argument('--resume-from', type=Path)
     parser.add_argument("--max-train-batches", type=int)
     parser.add_argument("--max-validation-batches", type=int)
     parser.add_argument("--normalizer", type=Path)
@@ -315,7 +393,7 @@ def main(argv=None):
     if set(config) - {"model", "training"}:
         parser.error("Unknown top-level configuration keys.")
     training = dict(config.get("training", {}))
-    for name in ["epochs", "batch_size"]:
+    for name in ["epochs", "batch_size", 'validation_batch_size', 'compiled_validation', 'recovery']:
         if getattr(args, name) is not None:
             training[name] = getattr(args, name)
     summary = train_supervised(
@@ -325,7 +403,7 @@ def main(argv=None):
         max_validation_batches=args.max_validation_batches, normalizer_path=args.normalizer,
         pretrained_path=args.pretrained, freeze_backbone=args.freeze_backbone, linear_probe=args.linear_probe,
         waveform_normalizer_path=args.waveform_normalizer,
-        budget_plan_path=args.budget_plan, budget_id=args.budget_id,
+        budget_plan_path=args.budget_plan, budget_id=args.budget_id, resume_from=args.resume_from,
     )
     print(json.dumps(summary, indent=2))
 

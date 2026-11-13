@@ -1,5 +1,11 @@
 # Next steps after the first completed study — 12 November 2026
 
+13 November update: recovery and validation controls are implemented as opt-in
+paths; non-optimizer checks pass. The next action is the user-run synthetic
+optimizer gate in [the handoff](operations/SUPERVISED_RECOVERY.md), followed by
+full regression and measured parity/performance checks. The criteria below
+remain acceptance requirements, not claims that all gates have passed.
+
 The first uncapped study is complete and preserved. The next task is to make
 replication reliable and affordable, then test the research questions with
 matched controls. This is a staged work plan, not a frozen training protocol or

@@ -16,6 +16,7 @@ $runtimeRoot = Join-Path $projectRoot 'runs/cpu_runtime'
 $settings = [ordered]@{
     CUDA_VISIBLE_DEVICES = '-1'
     PYTHONDONTWRITEBYTECODE = '1'
+    PYTHONHASHSEED = $(if ($env:PYTHONHASHSEED) { $env:PYTHONHASHSEED } else { '42' })
     TEMP = (Join-Path $runtimeRoot 'temp')
     TMP = (Join-Path $runtimeRoot 'temp')
     TMPDIR = (Join-Path $runtimeRoot 'temp')
@@ -37,7 +38,7 @@ Push-Location -LiteralPath $projectRoot
 try {
     foreach ($name in $settings.Keys) {
         $value = $settings[$name]
-        if ($name -notin @('CUDA_VISIBLE_DEVICES', 'PYTHONDONTWRITEBYTECODE')) {
+        if ($name -notin @('CUDA_VISIBLE_DEVICES', 'PYTHONDONTWRITEBYTECODE', 'PYTHONHASHSEED')) {
             [System.IO.Directory]::CreateDirectory($value) | Out-Null
         }
         [Environment]::SetEnvironmentVariable($name, $value, 'Process')

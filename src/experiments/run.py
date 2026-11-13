@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import uuid
 
 import psutil
 
@@ -249,12 +250,65 @@ def run_worker_live(command, log):
         process.stdout.close()
 
 
+def archive_stale_lock(directory):
+    """Explicit recovery only: preserve a dead PID lock, refuse any live worker."""
+    lock = Path(directory) / '.runner.lock'
+    if not lock.exists():
+        return None
+    if lock.is_symlink():
+        raise ValueError('Refusing to recover a linked scheduler lock.')
+    payload = lock.read_bytes()
+    pid = int(payload)
+    if psutil.pid_exists(pid):
+        raise ValueError('Scheduler lock PID is alive; inspect it before any lock recovery.')
+    # Windows venv launchers may remain as a parent with the same arguments.
+    # Exclude only this caller and verified identical-command launcher parents.
+    current = psutil.Process(os.getpid())
+    excluded = {current.pid}
+    command = current.cmdline()[1:]
+    for parent in current.parents():
+        try:
+            if parent.cmdline()[1:] != command:
+                break
+            excluded.add(parent.pid)
+        except psutil.Error:
+            break
+    for process in psutil.process_iter(['cmdline']):
+        if process.pid in excluded:
+            continue
+        args = process.info['cmdline'] or []
+        if '-m' in args and args[args.index('-m') + 1] in ('src.experiments.worker', 'src.experiments.run'):
+            raise ValueError('An experiment process is alive; refuse stale-lock recovery.')
+    if lock.read_bytes() != payload:
+        raise ValueError('Scheduler lock changed during recovery.')
+    destination = lock.with_name('.runner.lock.abandoned.' + uuid.uuid4().hex)
+    lock.rename(destination)
+    return destination
+
+
+def supervised_resume_source(directory, job_id):
+    from src.training.recovery_state import load_recovery
+    candidates = []
+    for attempt in sorted((Path(directory) / 'jobs' / job_id).glob('attempt_*')):
+        source = attempt / 'artifacts'
+        if (source / 'recovery/latest.json').exists():
+            _, state, _ = load_recovery(source)
+            if state['contract']['code_sha256'] != code_hashes():
+                raise ValueError('Recovery implementation changed; refuse supervised resume.')
+            candidates.append((state['completed_epochs'], attempt.name, source))
+    return max(candidates)[2] if candidates else None
+
+
 def execute_study(directory, *, root=None, split_file=None, max_jobs=None, retry_failed=False, executor=None,
-                  require_gpu=False, live=False):
+                  require_gpu=False, live=False, resume_supervised=False, recover_stale_lock=False):
     if not isinstance(require_gpu, bool):
         raise ValueError("require_gpu must be boolean.")
     if not isinstance(live, bool):
         raise ValueError("live must be boolean.")
+    if not isinstance(resume_supervised, bool) or not isinstance(recover_stale_lock, bool):
+        raise ValueError('Resume and lock recovery switches must be boolean.')
+    if (resume_supervised or recover_stale_lock) and not retry_failed:
+        raise ValueError('Explicit resume/lock recovery requires --retry-failed.')
     gpu_devices = None
     if require_gpu:
         from src.compute.devices import require_gpu_device
@@ -266,6 +320,12 @@ def execute_study(directory, *, root=None, split_file=None, max_jobs=None, retry
     if max_jobs is not None and (isinstance(max_jobs, bool) or not isinstance(max_jobs, int) or max_jobs < 1):
         raise ValueError("max_jobs must be a positive integer.")
     verify_runtime(study, plan, root, split_file)
+    if resume_supervised and not study['config']['training'].get('recovery', False):
+        raise ValueError('This study did not enable supervised recovery; it cannot be retrofitted.')
+    if recover_stale_lock:
+        archived = archive_stale_lock(directory)
+        if archived is not None:
+            print(f'Archived abandoned scheduler lock: {archived.name}', flush=True)
     lock = directory / ".runner.lock"
     # Exclusive creation prevents two serial schedulers from sharing a study.
     with lock.open("x", encoding="utf-8") as stream:
@@ -286,6 +346,10 @@ def execute_study(directory, *, root=None, split_file=None, max_jobs=None, retry
             prior = ledger["jobs"].get(job_id, {})
             if prior.get("status") in {"failed", "running"} and not retry_failed:
                 raise ValueError(f"Job {job_id} needs --retry-failed to preserve and replace its interrupted/failed attempt.")
+            resume_source = (supervised_resume_source(directory, job_id)
+                             if resume_supervised and job['kind'] == 'supervised' else None)
+            if resume_supervised and job['kind'] == 'supervised' and prior and resume_source is None:
+                print(f'{job_id}: no published epoch state; restarting declared initialization.', flush=True)
             dependencies = {}
             for dependency in job["dependencies"]:
                 found = completed_attempt(directory, study, dependency)
@@ -301,7 +365,7 @@ def execute_study(directory, *, root=None, split_file=None, max_jobs=None, retry
             attempt.mkdir()
             write_json(attempt / "task.json", {"study_directory": str(directory), "job_id": job_id,
                                                "data_root": str(root), "split_file": str(split_file), "dependencies": dependencies,
-                                               "live": live})
+                                               "live": live, 'resume_from': str(resume_source) if resume_source else None})
             ledger["jobs"][job_id] = {"status": "running", "attempt": attempt.relative_to(directory).as_posix()}
             atomic_json(directory / "ledger.json", ledger)
             print(f"Running {job_id} ({attempt.name})", flush=True)
@@ -351,6 +415,8 @@ def main(argv=None):
     run.add_argument("--split-file", type=Path)
     run.add_argument("--max-jobs", type=int)
     run.add_argument("--retry-failed", action="store_true")
+    run.add_argument('--resume-supervised', action='store_true', help='Restore the latest sealed supervised epoch in this recovery-enabled study.')
+    run.add_argument('--recover-stale-lock', action='store_true', help='Archive a dead scheduler lock only after checking process absence.')
     run.add_argument("--require-gpu", action="store_true", help="Fail before scheduling jobs if TensorFlow exposes no GPU.")
     run.add_argument("--live", action="store_true", help="Stream worker output and periodic training-batch progress to this terminal.")
     args = parser.parse_args(argv)
@@ -360,7 +426,8 @@ def main(argv=None):
     else:
         print(json.dumps(execute_study(args.study_dir, root=args.data_root, split_file=args.split_file,
                                        max_jobs=args.max_jobs, retry_failed=args.retry_failed,
-                                       require_gpu=args.require_gpu, live=args.live), indent=2))
+                                       require_gpu=args.require_gpu, live=args.live,
+                                       resume_supervised=args.resume_supervised, recover_stale_lock=args.recover_stale_lock), indent=2))
 
 
 if __name__ == "__main__":

@@ -2,6 +2,13 @@
 
 ## Training ownership
 
+13 November engineering update: opt-in supervised epoch recovery and compiled
+validation are implemented. Non-optimizer checks passed, but the fresh-process
+optimizer equivalence gate and full regression are user-run and still pending.
+Do not claim exact resume or measured speedup before those gates pass. The
+completed 18-job seed-42 study remains preserved historical evidence; edited
+source requires new study directories. See `docs/operations/SUPERVISED_RECOVERY.md`.
+
 Current ownership (2 November 2026): the user now wants to launch training in
 their own terminal using assistant-provided commands so progress is visible.
 This supersedes all earlier delegation below. Do not start research training,

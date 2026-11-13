@@ -1,5 +1,13 @@
 # Reproducible training commands
 
+13 November engineering update: opt-in supervised recovery and validation
+execution controls are implemented, with non-optimizer tests passed. Start
+with the small user-run optimizer gate in
+[SUPERVISED_RECOVERY.md](SUPERVISED_RECOVERY.md). Full regression, real-data
+parity and runtime benchmarking remain pending; do not start a replication
+matrix yet. Existing completed artifacts remain intact, but source hashes now
+differ from their historical freeze, so new execution requires a fresh study.
+
 Current state (12 November 2026): all 18 jobs in
 `runs/bilstm_terminal_2026-11-02` are complete and verified. No training is running.
 The [completion review](../../reports/bilstm_completion_2026-11-12/README.md)

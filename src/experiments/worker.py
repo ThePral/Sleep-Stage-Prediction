@@ -36,6 +36,13 @@ def run_task(task_path):
     # frozen implementation before each job, not only at scheduler startup.
     verify_runtime(study, plan, root, split)
     config = study["config"]
+    resume_from = task.get('resume_from')
+    if resume_from:
+        source = Path(resume_from).resolve()
+        if (job['kind'] != 'supervised' or source.name != 'artifacts'
+                or source.parent.parent != (study_dir / 'jobs' / job['job_id']).resolve()
+                or source.parent == task_path.parent):
+            raise ValueError('Supervised resume must reference a previous attempt of this study/job.')
     progress_interval = 100 if task.get("live", False) else 0
     output = task_path.parent / "artifacts"
     training_records = [r["recording_id"] for r in plan["source_records"] if r["split"] == "train"]
@@ -71,7 +78,7 @@ def run_task(task_path):
                          max_train_batches=config["limits"]["max_train_batches"], max_validation_batches=config["limits"]["max_validation_batches"],
                          normalizer_path=Path(task["dependencies"][f"normalizer_{job['budget_id']}"]) / "normalizer.json",
                          pretrained_path=pretrained, budget_plan_path=study_dir / "label_budgets.json", budget_id=job["budget_id"],
-                         progress_interval=progress_interval)
+                         progress_interval=progress_interval, resume_from=resume_from)
     else:
         raise ValueError("Unsupported study job kind.")
     # Seal all durable outputs, including predictions/metrics and optimizer state.

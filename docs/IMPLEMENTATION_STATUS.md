@@ -1,3 +1,17 @@
+# Recovery/validation engineering handoff - 13 November 2026
+
+Opt-in epoch-boundary supervised recovery and compiled validation/separate
+inference batch size are implemented. Twenty-six non-optimizer checks pass,
+including state publication/integrity, mocked restoration and inference parity.
+The fresh-process synthetic optimizer gate and full regression are prepared
+for the user to run; training equivalence and real speedup are not yet claimed.
+See the [handoff](operations/SUPERVISED_RECOVERY.md) and
+[evidence](../reports/recovery_implementation_2026-11-13/README.md).
+
+All 18 historical completed job inventories and ten baseline hashes still
+verify. Source changes require new studies; the completed seed-42 run must
+remain historical and cannot be resumed under these edited sources.
+
 # First uncapped BiLSTM study completed - 12 November 2026
 
 The user completed all 18 jobs in `runs/bilstm_terminal_2026-11-02`: preparation,

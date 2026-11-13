@@ -225,7 +225,7 @@ class WindowBatches:
                 inputs["spectral"] = self.normalizer.transform_spectral(spectral)
             yield inputs, targets, metadata
 
-    def as_dataset(self):
+    def as_dataset(self, *, epoch=None):
         import tensorflow as tf
         length = self.partition.sequence_length
         samples = int(round(self.partition.preprocessing.epoch_duration * self.partition.preprocessing.sampling_frequency))
@@ -234,7 +234,7 @@ class WindowBatches:
             signature["spectral"] = tf.TensorSpec((None, length, len(ALL_FEATURES)), tf.float32)
 
         def generate():
-            for inputs, targets, _ in self.iter_batches():
+            for inputs, targets, _ in self.iter_batches(epoch=epoch):
                 yield inputs, targets
 
         dataset = tf.data.Dataset.from_generator(generate, output_signature=(signature, tf.TensorSpec((None,), tf.int64)))

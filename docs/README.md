@@ -2,6 +2,7 @@
 
 | Document | Use |
 |---|---|
+| [operations/SUPERVISED_RECOVERY.md](operations/SUPERVISED_RECOVERY.md) | Opt-in epoch recovery, validation execution and user-run training gates |
 | [NEXT_STEPS.md](NEXT_STEPS.md) | Post-study diagnostic findings, recovery/speed gates and proposed replication/evaluation sequence |
 | [RESEARCH_DIRECTION.md](RESEARCH_DIRECTION.md) | Sleep-EDF/BiLSTM priority and deferred ISRUC strategy |
 | [SLEEPEDF_BILSTM.md](SLEEPEDF_BILSTM.md) | Implemented SSL/cross-attention/BiLSTM data flow, configs and validation |

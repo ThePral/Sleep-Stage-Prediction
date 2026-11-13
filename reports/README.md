@@ -6,6 +6,7 @@ they are not rewritten during file organization.
 
 | Evidence | Location |
 |---|---|
+| Opt-in supervised recovery/validation implementation, read-only checks and pending user optimizer gates | `recovery_implementation_2026-11-13/` |
 | Completed-study learning curves, class-error observations and staged next-step plan | `next_steps_2026-11-12/` |
 | Completed uncapped BiLSTM study: all 18 jobs, paired validation analysis, calibration and figures | `bilstm_completion_2026-11-12/` |
 | Second power-loss inspection: fifteen verified completed jobs and final three-job restart handoff | `power_loss_recovery_2026-11-10/` |
