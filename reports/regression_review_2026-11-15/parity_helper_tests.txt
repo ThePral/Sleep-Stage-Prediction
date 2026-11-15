@@ -1,0 +1,10 @@
+test_equal_probabilities_preserve_every_metric (tests.test_validation_parity.ValidationParityTests.test_equal_probabilities_preserve_every_metric) ... ok
+test_identity_includes_labels_and_order (tests.test_validation_parity.ValidationParityTests.test_identity_includes_labels_and_order) ... ok
+test_invalid_probabilities_and_shapes_are_rejected (tests.test_validation_parity.ValidationParityTests.test_invalid_probabilities_and_shapes_are_rejected) ... ok
+test_samples_span_the_cohort_without_duplicates (tests.test_validation_parity.ValidationParityTests.test_samples_span_the_cohort_without_duplicates) ... ok
+test_small_probability_change_cannot_hide_an_argmax_flip (tests.test_validation_parity.ValidationParityTests.test_small_probability_change_cannot_hide_an_argmax_flip) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.006s
+
+OK

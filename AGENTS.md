@@ -5,8 +5,10 @@
 13 November engineering update: opt-in supervised epoch recovery and compiled
 validation are implemented. Non-optimizer checks passed. The user-run fresh-process
 synthetic optimizer gate also passed: state and predictions match exactly for
-the tested tiny gated-BiLSTM CPU case. Full regression, real-data parity and
-performance measurement are still pending and user-owned. Do not generalize
+the tested tiny gated-BiLSTM CPU case. The user also passed all 136 full-regression
+tests on 15 November (147.021 seconds); the retained log and source/package
+provenance were verified. Real-data parity and performance measurement remain
+pending and user-owned. Do not generalize
 the synthetic recovery result to untested configurations or claim measured speedup. The
 completed 18-job seed-42 study remains preserved historical evidence; edited
 source requires new study directories. See `docs/operations/SUPERVISED_RECOVERY.md`.

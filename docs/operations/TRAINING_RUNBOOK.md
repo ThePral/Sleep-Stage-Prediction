@@ -2,8 +2,9 @@
 
 13 November engineering update: opt-in supervised recovery and validation
 execution controls are implemented, with non-optimizer tests passed. The user-run
-synthetic recovery gate has also passed for the tested CPU case. Continue with
-full regression in [SUPERVISED_RECOVERY.md](SUPERVISED_RECOVERY.md). Real-data
+synthetic recovery gate has also passed for the tested CPU case, and the user
+passed all 136 regression tests on 15 November. Continue with the bounded
+[real-data parity check](../../reports/regression_review_2026-11-15/README.md). Real-data
 parity and runtime benchmarking remain pending; do not start a replication
 matrix yet. Existing completed artifacts remain intact, but source hashes now
 differ from their historical freeze, so new execution requires a fresh study.

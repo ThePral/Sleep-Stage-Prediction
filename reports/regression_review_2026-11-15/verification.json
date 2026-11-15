@@ -1,0 +1,20 @@
+{
+  "full_regression_passed": true,
+  "tests_reported": 136,
+  "elapsed_seconds_reported": 147.021,
+  "full_regression_executed_by": "user",
+  "log": "reports\\recovery_validation_2026-11-13\\full_regression_01.log",
+  "log_sha256": "d70d7b18cb7b655a3b1e1c8efd957215cf2fe808f086036324ad2eff9773d449",
+  "source_matches_prior_gate_and_readonly_audit": true,
+  "packages_match_prior_gate": true,
+  "new_script_helper_tests_passed": 5,
+  "helper_tests_performed_optimizer_updates": false,
+  "new_helper_tests_added_after_user_full_suite": true,
+  "completed_historical_job_inventories_verified": 18,
+  "baseline_hashes_preserved": true,
+  "tensorflow_imported_by_inspection": false,
+  "real_data_parity_executed": false,
+  "performance_measured": false,
+  "research_training_launched": false,
+  "test_or_ISRUC_scoring_performed": false
+}

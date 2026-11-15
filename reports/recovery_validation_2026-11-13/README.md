@@ -1,5 +1,10 @@
 # User-run synthetic recovery gate passed — 13 November 2026
 
+15 November update: the user also passed all 136 full-regression tests in
+147.021 seconds. See the [separate log review](../regression_review_2026-11-15/README.md)
+for verification and the next user-run real-data parity command. The original
+synthetic-gate evidence below remains preserved.
+
 The user ran `tests.test_supervised_recovery_training` and reported one passing
 test in 42.455 seconds. Artifacts are preserved at
 `runs/recovery_gate/3149ea07f23440278975a4e95008ac5a/`. The assistant inspected

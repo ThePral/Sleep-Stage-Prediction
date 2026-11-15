@@ -3,8 +3,9 @@
 This implementation is opt-in. The user-run fresh-process synthetic optimizer
 gate passed on 13 November: saved state and exported predictions matched exactly
 for the tested gated BiLSTM on CPU. The [artifact review](../../reports/recovery_validation_2026-11-13/README.md)
-records the evidence and its limits. Full regression, real-data validation parity
-and an end-to-end speed improvement remain pending. No research training or
+records the evidence and its limits. Full regression subsequently passed on
+15 November: 136 tests in 147.021 seconds, verified against the retained log.
+Real-data validation parity and an end-to-end speed improvement remain pending. No research training or
 optimizer-based gate was launched by the assistant.
 
 ## Passed synthetic training gate (reproduction)
@@ -30,16 +31,18 @@ prediction parity. It also loads the completed inference bundles. Report its
 result before launching a new research campaign. A pass applies to the tested
 environment/architecture, not arbitrary hardware or all possible model changes.
 
-After that gate passes, run the full regression suite yourself:
+The user also passed the full regression command below; it is retained for reproduction:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m unittest discover -s tests -v
 ```
 
-The full suite includes optimizer updates and remains user-owned. No prior
-full-suite result is claimed for the new implementation. The assistant-run
-non-optimizer checks are recorded in
-`reports/recovery_implementation_2026-11-13/`.
+The full suite includes optimizer updates and remains user-owned. The next
+action is the bounded saved-model inference check in
+[the real-data parity handoff](../../reports/regression_review_2026-11-15/README.md).
+This compares both source-validation identity and numerical results without
+new model training. A sampled pass is followed by full-cohort parity and a
+separately measured integration/throughput study.
 
 ## Configuration and state
 

@@ -2,9 +2,10 @@
 
 13 November update: recovery and validation controls are implemented as opt-in
 paths; non-optimizer checks pass. The user-run synthetic optimizer gate passed
-on 13 November. The next action is full regression in
-[the handoff](operations/SUPERVISED_RECOVERY.md), followed by measured
-parity/performance checks. The criteria below
+on 13 November, and all 136 full-regression tests passed on 15 November.
+The next action is the user-run
+[bounded real-data parity check](../reports/regression_review_2026-11-15/README.md),
+then full-cohort parity and measured performance checks. The criteria below
 remain acceptance requirements, not claims that all gates have passed.
 
 The first uncapped study is complete and preserved. The next task is to make

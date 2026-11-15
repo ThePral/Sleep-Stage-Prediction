@@ -6,6 +6,7 @@ they are not rewritten during file organization.
 
 | Evidence | Location |
 |---|---|
+| User-run 136-test regression verified; bounded real-data parity script and handoff | `regression_review_2026-11-15/` |
 | User-run synthetic recovery gate passed; independent state/prediction audit and full regression handoff | `recovery_validation_2026-11-13/` |
 | Opt-in supervised recovery/validation implementation, read-only checks and pending user optimizer gates | `recovery_implementation_2026-11-13/` |
 | Completed-study learning curves, class-error observations and staged next-step plan | `next_steps_2026-11-12/` |

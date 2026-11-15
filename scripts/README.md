@@ -4,6 +4,7 @@ Run scripts from the checkout root.
 
 | Script | Purpose |
 |---|---|
+| `validation_parity.py` | User-run replay of completed classifiers on identical source-validation targets; sampled/full inference checks without optimizer updates |
 | `research_cpu.ps1` | Native Windows CPU Python with project-managed runtime files on D: |
 | `training_status.py` | Read-only frozen-study/process/checkpoint monitor |
 | `repair_sleepedf_access.ps1` | Back up prepared Sleep-EDF access rules and grant the checkout owner read access; inspection only unless `-Apply` is supplied |

@@ -6,7 +6,10 @@ including state publication/integrity, mocked restoration and inference parity.
 The user-run fresh-process synthetic optimizer gate subsequently passed: saved
 state and probabilities match exactly for the tested gated-BiLSTM CPU case.
 See the [gate review](../reports/recovery_validation_2026-11-13/README.md).
-Full regression, real-data parity and measured speedup remain pending.
+Full regression subsequently passed on 15 November: 136 tests in 147.021 seconds.
+See the [verified log review and parity handoff](../reports/regression_review_2026-11-15/README.md).
+Real-data parity and measured speedup remain pending; the new parity helper
+has five separately passing pure tests and has not been executed on real EEG.
 See the [handoff](operations/SUPERVISED_RECOVERY.md) and
 [evidence](../reports/recovery_implementation_2026-11-13/README.md).
 
