@@ -1,13 +1,16 @@
 # Supervised recovery and validation execution — 13 November 2026
 
-This implementation is opt-in and awaits the user-run optimizer equivalence
-gate. Atomic-state/inference tests pass; exact training continuation and an
-end-to-end speed improvement have not yet been demonstrated. No research
-training or optimizer-based gate was launched by the assistant.
+This implementation is opt-in. The user-run fresh-process synthetic optimizer
+gate passed on 13 November: saved state and exported predictions matched exactly
+for the tested gated BiLSTM on CPU. The [artifact review](../../reports/recovery_validation_2026-11-13/README.md)
+records the evidence and its limits. Full regression, real-data validation parity
+and an end-to-end speed improvement remain pending. No research training or
+optimizer-based gate was launched by the assistant.
 
-## Run the small training gate first
+## Passed synthetic training gate (reproduction)
 
-From the project root, run in your terminal:
+The user ran the following command successfully. It is retained for reproduction;
+the next action is full regression below, rather than repeating this gate alone:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m unittest tests.test_supervised_recovery_training -v

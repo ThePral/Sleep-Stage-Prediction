@@ -3,9 +3,11 @@
 ## Training ownership
 
 13 November engineering update: opt-in supervised epoch recovery and compiled
-validation are implemented. Non-optimizer checks passed, but the fresh-process
-optimizer equivalence gate and full regression are user-run and still pending.
-Do not claim exact resume or measured speedup before those gates pass. The
+validation are implemented. Non-optimizer checks passed. The user-run fresh-process
+synthetic optimizer gate also passed: state and predictions match exactly for
+the tested tiny gated-BiLSTM CPU case. Full regression, real-data parity and
+performance measurement are still pending and user-owned. Do not generalize
+the synthetic recovery result to untested configurations or claim measured speedup. The
 completed 18-job seed-42 study remains preserved historical evidence; edited
 source requires new study directories. See `docs/operations/SUPERVISED_RECOVERY.md`.
 

@@ -3,8 +3,10 @@
 Opt-in epoch-boundary supervised recovery and compiled validation/separate
 inference batch size are implemented. Twenty-six non-optimizer checks pass,
 including state publication/integrity, mocked restoration and inference parity.
-The fresh-process synthetic optimizer gate and full regression are prepared
-for the user to run; training equivalence and real speedup are not yet claimed.
+The user-run fresh-process synthetic optimizer gate subsequently passed: saved
+state and probabilities match exactly for the tested gated-BiLSTM CPU case.
+See the [gate review](../reports/recovery_validation_2026-11-13/README.md).
+Full regression, real-data parity and measured speedup remain pending.
 See the [handoff](operations/SUPERVISED_RECOVERY.md) and
 [evidence](../reports/recovery_implementation_2026-11-13/README.md).
 

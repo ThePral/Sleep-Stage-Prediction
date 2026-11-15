@@ -1,5 +1,10 @@
 # Recovery/validation implementation handoff — 13 November 2026
 
+Later update: the user ran and passed the fresh-process synthetic recovery gate.
+See the [separate artifact review](../recovery_validation_2026-11-13/README.md).
+The evidence and statements below record the earlier assistant implementation
+handoff; its non-optimizer evidence JSON is preserved unchanged.
+
 The completed 18-job study was verified idle before source edits. New opt-in
 supervised epoch recovery, compiled validation and a separate validation batch
 size have been implemented. No research training, pretraining, fine-tuning,

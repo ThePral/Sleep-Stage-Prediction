@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "training_executed_by": "user",
+  "gate_directory": "runs\\recovery_gate\\3149ea07f23440278975a4e95008ac5a",
+  "user_reported_test_seconds": 42.455,
+  "interrupted_after_epoch": 3,
+  "baseline_and_resumed_completed_epochs": 4,
+  "best_epoch": 2,
+  "final_optimizer": {
+    "iterations": 12,
+    "learning_rate": 0.0005000000237487257
+  },
+  "arrays_checked": 145,
+  "integer_arrays_equal": 8,
+  "maximum_float_array_difference": 0.0,
+  "maximum_exported_probability_difference": 0.0,
+  "python_numpy_and_callback_state_equal": true,
+  "checkpoint_seals_verified": true,
+  "source_and_packages_match_gate_contract": true,
+  "gate_contract_sha256": "16ada0334fef7e0898dbcddfeae18e4f487e86ec3b37b64fe1fa890d31b69af0",
+  "worker_log_sha256": {
+    "baseline": "e6a6af19badf3f798c898e538f6cec6db2d40fd317f84a4ab69143ecafdd4e91",
+    "interrupted": "ab7cdd95bf29cd98e36339ee861715bc94e2bdae72436431830354dd387646f1",
+    "resumed": "bf38c6aa639d58dd7e4b7bf81bc7b5e0bf28ded50c698ba94038925b005b6de6"
+  },
+  "assistant_optimizer_updates": false,
+  "tensorflow_imported_by_inspection": false,
+  "full_regression_passed": null,
+  "real_data_parity_passed": null,
+  "speedup_measured": false,
+  "scope": "One tiny synthetic gated-BiLSTM, dropout, CPU, fixed runtime. Not historical-implementation equivalence or arbitrary-device recovery."
+}
