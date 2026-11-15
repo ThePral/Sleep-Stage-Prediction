@@ -1,0 +1,60 @@
+{
+  "review_date": "2026-11-15",
+  "input_sha256": {
+    "result.json": "3cf729209c8eb1dcd292dc7584b29312d58a8aea9d5ce3cc0f0273e845d17d04",
+    "policy.json": "6aac5f355a3ce8ba7699d9fe70a57996eaf202839e37b197fa70a124271929af",
+    "selected_targets.csv": "d92d5d0f2357492f2b7403b409fb6dce6a96e2e6b17195fd297ff6db7999a3a1"
+  },
+  "current_source_and_parity_script_match": true,
+  "preserved_m3_job_seal_verified": true,
+  "all_target_ids_labels_and_order_match_saved_export": true,
+  "model_id": "M3_draw42_n70_seed42",
+  "targets": 65133,
+  "execution_mode": "eager",
+  "batch_size": 4,
+  "comparison": {
+    "passed": true,
+    "probabilities_within_tolerance": true,
+    "maximum_probability_difference": 1.1102230246251565e-16,
+    "largest_difference": {
+      "selected_row": 3,
+      "stage": "W",
+      "reference": 0.999936819076538,
+      "candidate": 0.9999368190765381,
+      "epoch_id": "sleepedf:SC4011:000012"
+    },
+    "argmax_mismatches": 0,
+    "metric_differences": {
+      "loss": -1.0547118733938987e-15,
+      "accuracy": 0.0,
+      "macro_f1": 0.0
+    },
+    "confusion_matrices_equal": true
+  },
+  "inference_seconds": 1763.7550435000448,
+  "total_reviewed_execution_seconds": 1774.0975862000487,
+  "full_cohort_eager_passed_models": [
+    "M3_draw42_n70_seed42"
+  ],
+  "remaining_models": [
+    "M0_draw42_n18_seed42",
+    "M1_draw42_n18_seed42",
+    "M2_draw42_n18_seed42",
+    "M3_draw42_n18_seed42",
+    "M4_draw42_n18_seed42",
+    "M5_draw42_n18_seed42",
+    "M6_draw42_n18_seed42",
+    "M0_draw42_n70_seed42",
+    "M1_draw42_n70_seed42",
+    "M2_draw42_n70_seed42",
+    "M4_draw42_n70_seed42",
+    "M5_draw42_n70_seed42",
+    "M6_draw42_n70_seed42"
+  ],
+  "compiled_parity_accepted": false,
+  "full_family_parity_accepted": false,
+  "optimizer_updates_by_reviewer": false,
+  "model_inference_by_reviewer": false,
+  "tensorflow_imported_by_reviewer": false,
+  "training_speedup_established": false
+}

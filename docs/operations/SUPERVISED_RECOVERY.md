@@ -5,7 +5,8 @@ gate passed on 13 November: saved state and exported predictions matched exactly
 for the tested gated BiLSTM on CPU. The [artifact review](../../reports/recovery_validation_2026-11-13/README.md)
 records the evidence and its limits. Full regression subsequently passed on
 15 November: 136 tests in 147.021 seconds, verified against the retained log.
-Real-data validation parity and an end-to-end speed improvement remain pending. No research training or
+M3/n70 subsequently passed full-cohort eager batch-4 parity on all 65,133
+targets. The other 13 models and an end-to-end speed improvement remain pending. No research training or
 optimizer-based gate was launched by the assistant.
 
 ## Passed synthetic training gate (reproduction)
@@ -40,15 +41,17 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m 
 The full suite includes optimizer updates and remains user-owned. The bounded
 saved-model check subsequently passed 13/14 models. M3 at n70 failed the
 probability tolerance at compiled batch 32; eager replay passed and predicted
-classes were unchanged on the 64 targets. The next action is the user-run
-[full-cohort eager check](../../reports/validation_parity_batch_review_2026-11-15/README.md).
+classes were unchanged on the 64 targets. M3/n70 then passed full-cohort eager
+batch-4 parity (maximum probability difference 1.11e-16, zero class changes).
+The next action is the user-run
+[remaining eager checks](../../reports/validation_parity_full_review_2026-11-15/README.md).
 The matched-batch diagnostic failed compiled 4/8/16/32 and eager 16/32; eager
-4/8 passed only on the sample. Keep compiled validation unaccepted and retain
+4/8 passed on the sample. Keep compiled validation unaccepted and retain
 eager batch 4 while full-cohort parity is checked. The existing recovery pilot
 enables compiled validation; do not run it as the conservative fallback.
 Do not relax tolerances based on this observation or interpret a passing
-alternative batch size as a pass of the original declared mode. Full-cohort
-parity and measured integration/throughput checks remain pending.
+alternative batch size as a pass of the original declared mode. Full-family
+eager parity and measured integration/throughput checks remain pending.
 
 ## Configuration and state
 

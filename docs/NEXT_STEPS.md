@@ -6,10 +6,13 @@ on 13 November, and all 136 full-regression tests passed on 15 November.
 The bounded real-data check passed 13/14 models; M3 at n70 failed the probability
 tolerance at compiled batch 32, with unchanged predicted classes on 64 targets.
 Matched-batch diagnostics failed every tested compiled batch and eager 16/32;
-eager 4/8 passed on the sample. The next action is the user-run
-[full-cohort eager check for M3](../reports/validation_parity_batch_review_2026-11-15/README.md),
-keeping batch 4 and the declared tolerance. Compiled validation is unaccepted;
-full-family parity and measured performance remain pending. The criteria below
+eager 4/8 passed on the sample. M3/n70 then passed full-cohort eager batch-4
+parity on 65,133 targets (maximum probability difference 1.11e-16).
+The next action is the user-run
+[remaining 13-model eager check](../reports/validation_parity_full_review_2026-11-15/README.md),
+keeping batch 4 and the declared tolerance without repeating M3. Compiled
+validation is unaccepted; full-family parity and measured performance remain
+pending. The criteria below
 remain acceptance requirements, not claims that all gates have passed.
 
 The first uncapped study is complete and preserved. The next task is to make

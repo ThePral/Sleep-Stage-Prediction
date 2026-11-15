@@ -1,0 +1,13 @@
+M0_draw42_n18_seed42
+M1_draw42_n18_seed42
+M2_draw42_n18_seed42
+M3_draw42_n18_seed42
+M4_draw42_n18_seed42
+M5_draw42_n18_seed42
+M6_draw42_n18_seed42
+M0_draw42_n70_seed42
+M1_draw42_n70_seed42
+M2_draw42_n70_seed42
+M4_draw42_n70_seed42
+M5_draw42_n70_seed42
+M6_draw42_n70_seed42

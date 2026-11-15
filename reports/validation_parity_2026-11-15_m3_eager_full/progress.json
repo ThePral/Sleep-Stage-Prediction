@@ -1,0 +1,28 @@
+[
+  {
+    "job_id": "M3_draw42_n70_seed42",
+    "examples": 65133,
+    "export_sha256": "068252f6018b97a2b1c766950627985620ace8753808b567b29eaba898166d61",
+    "saved_vs_eager": {
+      "passed": true,
+      "probabilities_within_tolerance": true,
+      "maximum_probability_difference": 1.1102230246251565e-16,
+      "largest_difference": {
+        "selected_row": 3,
+        "stage": "W",
+        "reference": 0.999936819076538,
+        "candidate": 0.9999368190765381,
+        "epoch_id": "sleepedf:SC4011:000012"
+      },
+      "argmax_mismatches": 0,
+      "metric_differences": {
+        "loss": -1.0547118733938987e-15,
+        "accuracy": 0.0,
+        "macro_f1": 0.0
+      },
+      "confusion_matrices_equal": true
+    },
+    "eager_seconds": 1763.7550435000448,
+    "passed": true
+  }
+]
