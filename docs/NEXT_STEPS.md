@@ -5,9 +5,11 @@ paths; non-optimizer checks pass. The user-run synthetic optimizer gate passed
 on 13 November, and all 136 full-regression tests passed on 15 November.
 The bounded real-data check passed 13/14 models; M3 at n70 failed the probability
 tolerance at compiled batch 32, with unchanged predicted classes on 64 targets.
-The next action is the user-run
-[targeted batch diagnostic](../reports/validation_parity_diagnosis_2026-11-15/README.md),
-before full-cohort parity and measured performance checks. The criteria below
+Matched-batch diagnostics failed every tested compiled batch and eager 16/32;
+eager 4/8 passed on the sample. The next action is the user-run
+[full-cohort eager check for M3](../reports/validation_parity_batch_review_2026-11-15/README.md),
+keeping batch 4 and the declared tolerance. Compiled validation is unaccepted;
+full-family parity and measured performance remain pending. The criteria below
 remain acceptance requirements, not claims that all gates have passed.
 
 The first uncapped study is complete and preserved. The next task is to make

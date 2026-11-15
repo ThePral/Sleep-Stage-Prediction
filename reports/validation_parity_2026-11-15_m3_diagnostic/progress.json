@@ -1,0 +1,309 @@
+[
+  {
+    "job_id": "M3_draw42_n70_seed42",
+    "examples": 64,
+    "export_sha256": "068252f6018b97a2b1c766950627985620ace8753808b567b29eaba898166d61",
+    "saved_vs_eager": {
+      "passed": true,
+      "probabilities_within_tolerance": true,
+      "maximum_probability_difference": 1.0477378882024768e-09,
+      "largest_difference": {
+        "selected_row": 63,
+        "stage": "N1",
+        "reference": 0.0011126457247883,
+        "candidate": 0.0011126446770504117,
+        "epoch_id": "sleepedf:ST7242:000978"
+      },
+      "argmax_mismatches": 0,
+      "metric_differences": {
+        "loss": -1.1102230246251565e-16,
+        "accuracy": 0.0,
+        "macro_f1": 0.0
+      },
+      "confusion_matrices_equal": true
+    },
+    "eager_seconds": 1.7508839999791235,
+    "saved_vs_compiled": {
+      "passed": false,
+      "probabilities_within_tolerance": false,
+      "maximum_probability_difference": 5.4836273193359375e-06,
+      "largest_difference": {
+        "selected_row": 33,
+        "stage": "N1",
+        "reference": 0.8058162927627563,
+        "candidate": 0.8058217763900757,
+        "epoch_id": "sleepedf:SC4321:001207"
+      },
+      "argmax_mismatches": 0,
+      "metric_differences": {
+        "loss": 5.038225233677807e-07,
+        "accuracy": 0.0,
+        "macro_f1": 0.0
+      },
+      "confusion_matrices_equal": true
+    },
+    "eager_vs_compiled": {
+      "passed": false,
+      "probabilities_within_tolerance": false,
+      "maximum_probability_difference": 5.4836273193359375e-06,
+      "largest_difference": {
+        "selected_row": 33,
+        "stage": "N1",
+        "reference": 0.8058162927627563,
+        "candidate": 0.8058217763900757,
+        "epoch_id": "sleepedf:SC4321:001207"
+      },
+      "argmax_mismatches": 0,
+      "metric_differences": {
+        "loss": 5.03822523478803e-07,
+        "accuracy": 0.0,
+        "macro_f1": 0.0
+      },
+      "confusion_matrices_equal": true
+    },
+    "compiled_seconds": 0.20258340000873432,
+    "passed": false,
+    "batch_diagnostics": [
+      {
+        "batch_size": 4,
+        "saved_vs_eager": {
+          "passed": true,
+          "probabilities_within_tolerance": true,
+          "maximum_probability_difference": 1.0477378882024768e-09,
+          "largest_difference": {
+            "selected_row": 63,
+            "stage": "N1",
+            "reference": 0.0011126457247883,
+            "candidate": 0.0011126446770504117
+          },
+          "argmax_mismatches": 0,
+          "metric_differences": {
+            "loss": -1.1102230246251565e-16,
+            "accuracy": 0.0,
+            "macro_f1": 0.0
+          },
+          "confusion_matrices_equal": true
+        },
+        "saved_vs_compiled": {
+          "passed": false,
+          "probabilities_within_tolerance": false,
+          "maximum_probability_difference": 5.185604095458984e-06,
+          "largest_difference": {
+            "selected_row": 33,
+            "stage": "N1",
+            "reference": 0.8058162927627563,
+            "candidate": 0.8058214783668518
+          },
+          "argmax_mismatches": 0,
+          "metric_differences": {
+            "loss": 4.868708418648282e-07,
+            "accuracy": 0.0,
+            "macro_f1": 0.0
+          },
+          "confusion_matrices_equal": true
+        },
+        "eager_vs_compiled": {
+          "passed": false,
+          "probabilities_within_tolerance": false,
+          "maximum_probability_difference": 5.185604095458984e-06,
+          "largest_difference": {
+            "selected_row": 33,
+            "stage": "N1",
+            "reference": 0.8058162927627563,
+            "candidate": 0.8058214783668518
+          },
+          "argmax_mismatches": 0,
+          "metric_differences": {
+            "loss": 4.868708419758505e-07,
+            "accuracy": 0.0,
+            "macro_f1": 0.0
+          },
+          "confusion_matrices_equal": true
+        },
+        "eager_seconds": 1.7508839999791235,
+        "compiled_seconds": 0.20659810001961887,
+        "compiled_traces": 1
+      },
+      {
+        "batch_size": 8,
+        "saved_vs_eager": {
+          "passed": true,
+          "probabilities_within_tolerance": true,
+          "maximum_probability_difference": 1.0132789611816406e-06,
+          "largest_difference": {
+            "selected_row": 38,
+            "stage": "N2",
+            "reference": 0.6841755509376526,
+            "candidate": 0.6841765642166138
+          },
+          "argmax_mismatches": 0,
+          "metric_differences": {
+            "loss": 5.8420126625158275e-08,
+            "accuracy": 0.0,
+            "macro_f1": 0.0
+          },
+          "confusion_matrices_equal": true
+        },
+        "saved_vs_compiled": {
+          "passed": false,
+          "probabilities_within_tolerance": false,
+          "maximum_probability_difference": 5.185604095458984e-06,
+          "largest_difference": {
+            "selected_row": 33,
+            "stage": "N1",
+            "reference": 0.8058162927627563,
+            "candidate": 0.8058214783668518
+          },
+          "argmax_mismatches": 0,
+          "metric_differences": {
+            "loss": 3.81347961875278e-07,
+            "accuracy": 0.0,
+            "macro_f1": 0.0
+          },
+          "confusion_matrices_equal": true
+        },
+        "eager_vs_compiled": {
+          "passed": false,
+          "probabilities_within_tolerance": false,
+          "maximum_probability_difference": 5.185604095458984e-06,
+          "largest_difference": {
+            "selected_row": 33,
+            "stage": "N1",
+            "reference": 0.8058162927627563,
+            "candidate": 0.8058214783668518
+          },
+          "argmax_mismatches": 0,
+          "metric_differences": {
+            "loss": 3.229278352501197e-07,
+            "accuracy": 0.0,
+            "macro_f1": 0.0
+          },
+          "confusion_matrices_equal": true
+        },
+        "eager_seconds": 1.0364816000219434,
+        "compiled_seconds": 0.2630792999989353,
+        "compiled_traces": 1
+      },
+      {
+        "batch_size": 16,
+        "saved_vs_eager": {
+          "passed": false,
+          "probabilities_within_tolerance": false,
+          "maximum_probability_difference": 2.086162567138672e-06,
+          "largest_difference": {
+            "selected_row": 61,
+            "stage": "REM",
+            "reference": 0.5512498617172241,
+            "candidate": 0.5512519478797913
+          },
+          "argmax_mismatches": 0,
+          "metric_differences": {
+            "loss": -7.080573349860231e-08,
+            "accuracy": 0.0,
+            "macro_f1": 0.0
+          },
+          "confusion_matrices_equal": true
+        },
+        "saved_vs_compiled": {
+          "passed": false,
+          "probabilities_within_tolerance": false,
+          "maximum_probability_difference": 4.76837158203125e-06,
+          "largest_difference": {
+            "selected_row": 33,
+            "stage": "N1",
+            "reference": 0.8058162927627563,
+            "candidate": 0.8058210611343384
+          },
+          "argmax_mismatches": 0,
+          "metric_differences": {
+            "loss": 3.8975799587781523e-07,
+            "accuracy": 0.0,
+            "macro_f1": 0.0
+          },
+          "confusion_matrices_equal": true
+        },
+        "eager_vs_compiled": {
+          "passed": false,
+          "probabilities_within_tolerance": false,
+          "maximum_probability_difference": 4.827976226806641e-06,
+          "largest_difference": {
+            "selected_row": 33,
+            "stage": "N1",
+            "reference": 0.8058162331581116,
+            "candidate": 0.8058210611343384
+          },
+          "argmax_mismatches": 0,
+          "metric_differences": {
+            "loss": 4.6056372937641754e-07,
+            "accuracy": 0.0,
+            "macro_f1": 0.0
+          },
+          "confusion_matrices_equal": true
+        },
+        "eager_seconds": 0.7077584000071511,
+        "compiled_seconds": 0.22811129997717217,
+        "compiled_traces": 1
+      },
+      {
+        "batch_size": 32,
+        "saved_vs_eager": {
+          "passed": false,
+          "probabilities_within_tolerance": false,
+          "maximum_probability_difference": 1.6093254089355469e-06,
+          "largest_difference": {
+            "selected_row": 61,
+            "stage": "REM",
+            "reference": 0.5512498617172241,
+            "candidate": 0.5512514710426331
+          },
+          "argmax_mismatches": 0,
+          "metric_differences": {
+            "loss": -1.0322664389939007e-07,
+            "accuracy": 0.0,
+            "macro_f1": 0.0
+          },
+          "confusion_matrices_equal": true
+        },
+        "saved_vs_compiled": {
+          "passed": false,
+          "probabilities_within_tolerance": false,
+          "maximum_probability_difference": 5.4836273193359375e-06,
+          "largest_difference": {
+            "selected_row": 33,
+            "stage": "N1",
+            "reference": 0.8058162927627563,
+            "candidate": 0.8058217763900757
+          },
+          "argmax_mismatches": 0,
+          "metric_differences": {
+            "loss": 5.038225233677807e-07,
+            "accuracy": 0.0,
+            "macro_f1": 0.0
+          },
+          "confusion_matrices_equal": true
+        },
+        "eager_vs_compiled": {
+          "passed": false,
+          "probabilities_within_tolerance": false,
+          "maximum_probability_difference": 5.662441253662109e-06,
+          "largest_difference": {
+            "selected_row": 33,
+            "stage": "N1",
+            "reference": 0.805816113948822,
+            "candidate": 0.8058217763900757
+          },
+          "argmax_mismatches": 0,
+          "metric_differences": {
+            "loss": 6.070491672671707e-07,
+            "accuracy": 0.0,
+            "macro_f1": 0.0
+          },
+          "confusion_matrices_equal": true
+        },
+        "eager_seconds": 0.4547720000264235,
+        "compiled_seconds": 0.20258340000873432,
+        "compiled_traces": 1
+      }
+    ]
+  }
+]

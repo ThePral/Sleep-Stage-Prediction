@@ -41,7 +41,11 @@ The full suite includes optimizer updates and remains user-owned. The bounded
 saved-model check subsequently passed 13/14 models. M3 at n70 failed the
 probability tolerance at compiled batch 32; eager replay passed and predicted
 classes were unchanged on the 64 targets. The next action is the user-run
-[targeted batch diagnostic](../../reports/validation_parity_diagnosis_2026-11-15/README.md).
+[full-cohort eager check](../../reports/validation_parity_batch_review_2026-11-15/README.md).
+The matched-batch diagnostic failed compiled 4/8/16/32 and eager 16/32; eager
+4/8 passed only on the sample. Keep compiled validation unaccepted and retain
+eager batch 4 while full-cohort parity is checked. The existing recovery pilot
+enables compiled validation; do not run it as the conservative fallback.
 Do not relax tolerances based on this observation or interpret a passing
 alternative batch size as a pass of the original declared mode. Full-cohort
 parity and measured integration/throughput checks remain pending.

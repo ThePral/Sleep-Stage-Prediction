@@ -9,9 +9,11 @@ the tested tiny gated-BiLSTM CPU case. The user also passed all 136 full-regress
 tests on 15 November (147.021 seconds); the retained log and source/package
 provenance were verified. The 15 November real-data smoke check passed 13/14
 models; M3 at n70 failed the probability tolerance at compiled batch 32 despite
-unchanged classes/metrics on 64 targets. Batch diagnostics, full-cohort parity
-and performance measurement remain pending and user-owned. See
-`reports/validation_parity_diagnosis_2026-11-15/`. Do not generalize
+unchanged classes/metrics on 64 targets. Matched-batch diagnostics then failed
+compiled batches 4/8/16/32 and eager batches 16/32; eager 4/8 passed the sample.
+Keep compiled validation unaccepted. Full-cohort eager parity and performance
+measurement remain pending and user-owned. See
+`reports/validation_parity_batch_review_2026-11-15/`. Do not generalize
 the synthetic recovery result to untested configurations or claim measured speedup. The
 completed 18-job seed-42 study remains preserved historical evidence; edited
 source requires new study directories. See `docs/operations/SUPERVISED_RECOVERY.md`.

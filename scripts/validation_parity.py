@@ -1,8 +1,9 @@
 """User-run saved-model validation parity. No training or test/ISRUC inference.
 
 Default: a deterministic 64-window check of every completed classifier. 'all'
-checks the full validation cohort against stored exports, omitting the expensive
-eager replay. Timings describe warmed inference passes, not total epoch speed.
+checks the full validation cohort against stored exports using compiled inference
+unless --eager-only selects the original batch-4 path. Timings describe warmed
+inference passes, not total epoch speed.
 """
 import argparse
 from datetime import datetime, timezone
@@ -106,7 +107,8 @@ def run(args):
     output.mkdir(parents=True, exist_ok=False)
     results = []
     started = time.perf_counter()
-    policy = {'samples': args.samples, 'compiled_batch_size': args.validation_batch_size,
+    policy = {'samples': args.samples, 'compiled_batch_size': None if args.eager_only else args.validation_batch_size,
+              'execution_mode': 'eager' if args.eager_only else ('compiled' if args.samples == 'all' else 'both'),
               'model_ids': [job['job_id'] for job in jobs], 'diagnostic_batch_sizes': args.diagnostic_batch_sizes,
               'eager_batch_size': 4, 'atol': 1e-6, 'rtol': 1e-6,
               'cohort': 'source_validation_only', 'current_source_sha256': code_hashes(),
@@ -134,7 +136,7 @@ def run(args):
                 keras.backend.clear_session()
                 predictor = MultiviewPredictor(artifacts)
                 predictor.normalizer.assert_compatible(partition)
-                compiled = validation_predictor(predictor.model, True)
+                compiled = None if args.eager_only else validation_predictor(predictor.model, True)
                 def inputs_for(indices):
                     raw, spectral, labels, metadata = partition.gather(indices, include_waveform=predictor.config.variant != 'spectral')
                     values = {}
@@ -152,20 +154,24 @@ def run(args):
                         values, identities = inputs_for(chosen[start:start + batch_size])
                         probabilities.append(function(values).numpy())
                         metadata.extend(identities)
+                        completed = min(start + batch_size, len(chosen))
+                        if args.samples == 'all' and (completed % 2048 == 0 or completed == len(chosen)):
+                            print(f"{job['job_id']}: {completed}/{len(chosen)} targets, batch {batch_size}", flush=True)
                     elapsed = time.perf_counter() - tick
                     require_target_identity(expected_targets, pd.DataFrame(metadata))
                     return np.concatenate(probabilities), elapsed
                 item = {'job_id': job['job_id'], 'examples': len(chosen),
                         'export_sha256': sha256_file(artifacts / 'validation_predictions.csv')}
-                if args.samples != 'all':
+                if args.samples != 'all' or args.eager_only:
                     eager, eager_seconds = replay(validation_predictor(predictor.model), 4)
                     item['saved_vs_eager'] = compare_predictions(reference, eager, targets)
                     item['eager_seconds'] = eager_seconds
-                new, seconds = replay(compiled, args.validation_batch_size)
-                item['saved_vs_compiled'] = compare_predictions(reference, new, targets)
-                if args.samples != 'all':
-                    item['eager_vs_compiled'] = compare_predictions(eager, new, targets)
-                item['compiled_seconds'] = seconds
+                if not args.eager_only:
+                    new, seconds = replay(compiled, args.validation_batch_size)
+                    item['saved_vs_compiled'] = compare_predictions(reference, new, targets)
+                    if args.samples != 'all':
+                        item['eager_vs_compiled'] = compare_predictions(eager, new, targets)
+                    item['compiled_seconds'] = seconds
                 item['passed'] = all(value['passed'] for value in item.values() if isinstance(value, dict) and 'passed' in value)
                 if args.diagnostic_batch_sizes:
                     # A failed declared mode remains failed even if a different batch size passes.
@@ -211,8 +217,10 @@ def main():
     parser.add_argument('--study-dir', type=Path, required=True)
     parser.add_argument('--output-dir', type=Path, required=True)
     parser.add_argument('--data-root', type=Path)
-    parser.add_argument('--samples', default='64', help='Positive count or all; all skips eager replay.')
+    parser.add_argument('--samples', default='64', help='Positive count or all; all uses compiled inference unless --eager-only.')
     parser.add_argument('--validation-batch-size', type=int, default=32)
+    parser.add_argument('--eager-only', action='store_true',
+                        help='Check only the original eager batch-4 path, including when samples=all; does not accept compiled parity.')
     parser.add_argument('--model-id', nargs='+', help='Optional exact model job IDs; default checks the whole family.')
     parser.add_argument('--diagnostic-batch-sizes', nargs='+', type=int,
                         help='Bounded eager/compiled comparison at each batch size; never overrides the declared gate result.')
@@ -226,10 +234,15 @@ def main():
             parser.error('--samples must be positive.')
     if args.validation_batch_size < 1:
         parser.error('--validation-batch-size must be positive.')
+    if args.eager_only and args.diagnostic_batch_sizes:
+        parser.error('--eager-only cannot be combined with batch diagnostics.')
+    if args.eager_only and args.validation_batch_size != 32:
+        parser.error('--validation-batch-size controls compiled inference only; omit it with --eager-only.')
     if args.diagnostic_batch_sizes and (args.samples == 'all' or any(size < 1 for size in args.diagnostic_batch_sizes)):
         parser.error('Batch diagnostics require bounded samples and positive sizes.')
     result = run(args)
     print(json.dumps({'passed': result['passed'], 'models_checked': len(result['models']),
+                      'execution_mode': result['policy']['execution_mode'],
                       'full_cohort_checked': result['full_cohort_checked']}, indent=2))
     raise SystemExit(0 if result['passed'] else 1)
 
