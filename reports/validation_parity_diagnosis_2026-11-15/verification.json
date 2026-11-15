@@ -1,0 +1,65 @@
+{
+  "review_date": "2026-11-15",
+  "input_sha256": {
+    "result.json": "6b2269b59018d93a108b41d0c2ea3a270335e865f919e454737ea28e86f965f6",
+    "policy.json": "ad80d0c8cb518d4437c4970b9e7dde2fbc44328fc8b4275364123a77886846d2",
+    "selected_targets.csv": "73b92baeeadca138d6fd012db551baf5ee869e78f2ea54bd4a8d790be07d6b11"
+  },
+  "models_checked": 14,
+  "models_passed": 13,
+  "full_cohort_checked": false,
+  "failed_models": [
+    {
+      "job_id": "M3_draw42_n70_seed42",
+      "examples": 64,
+      "export_sha256": "068252f6018b97a2b1c766950627985620ace8753808b567b29eaba898166d61",
+      "saved_vs_eager": {
+        "passed": true,
+        "probabilities_within_tolerance": true,
+        "maximum_probability_difference": 1.0477378882024768e-09,
+        "argmax_mismatches": 0,
+        "metric_differences": {
+          "loss": -1.1102230246251565e-16,
+          "accuracy": 0.0,
+          "macro_f1": 0.0
+        },
+        "confusion_matrices_equal": true
+      },
+      "eager_seconds": 1.922041599988006,
+      "saved_vs_compiled": {
+        "passed": false,
+        "probabilities_within_tolerance": false,
+        "maximum_probability_difference": 5.4836273193359375e-06,
+        "argmax_mismatches": 0,
+        "metric_differences": {
+          "loss": 5.038225233677807e-07,
+          "accuracy": 0.0,
+          "macro_f1": 0.0
+        },
+        "confusion_matrices_equal": true
+      },
+      "eager_vs_compiled": {
+        "passed": false,
+        "probabilities_within_tolerance": false,
+        "maximum_probability_difference": 5.4836273193359375e-06,
+        "argmax_mismatches": 0,
+        "metric_differences": {
+          "loss": 5.03822523478803e-07,
+          "accuracy": 0.0,
+          "macro_f1": 0.0
+        },
+        "confusion_matrices_equal": true
+      },
+      "compiled_seconds": 0.23295720003079623,
+      "passed": false
+    }
+  ],
+  "source_matches_smoke_policy": true,
+  "diagnostic_executed_by_assistant": false,
+  "optimizer_updates_performed_by_assistant": false,
+  "pure_helper_tests": {
+    "count": 7,
+    "passed": true
+  },
+  "next_action": "User-run matched-batch eager/compiled diagnostic; preserve original tolerances and failed gate."
+}

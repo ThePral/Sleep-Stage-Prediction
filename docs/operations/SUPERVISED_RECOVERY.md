@@ -37,12 +37,14 @@ The user also passed the full regression command below; it is retained for repro
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m unittest discover -s tests -v
 ```
 
-The full suite includes optimizer updates and remains user-owned. The next
-action is the bounded saved-model inference check in
-[the real-data parity handoff](../../reports/regression_review_2026-11-15/README.md).
-This compares both source-validation identity and numerical results without
-new model training. A sampled pass is followed by full-cohort parity and a
-separately measured integration/throughput study.
+The full suite includes optimizer updates and remains user-owned. The bounded
+saved-model check subsequently passed 13/14 models. M3 at n70 failed the
+probability tolerance at compiled batch 32; eager replay passed and predicted
+classes were unchanged on the 64 targets. The next action is the user-run
+[targeted batch diagnostic](../../reports/validation_parity_diagnosis_2026-11-15/README.md).
+Do not relax tolerances based on this observation or interpret a passing
+alternative batch size as a pass of the original declared mode. Full-cohort
+parity and measured integration/throughput checks remain pending.
 
 ## Configuration and state
 

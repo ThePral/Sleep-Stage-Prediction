@@ -45,9 +45,12 @@ def compare_predictions(reference, candidate, targets, atol=1e-6, rtol=1e-6):
     mismatches = int(np.sum(reference.argmax(1) != candidate.argmax(1)))
     differences = {key: float(metrics[1][key] - metrics[0][key]) for key in ('loss', 'accuracy', 'macro_f1')}
     probabilities_match = bool(np.allclose(reference, candidate, atol=atol, rtol=rtol))
+    row, stage = np.unravel_index(np.abs(reference - candidate).argmax(), reference.shape)
     return {'passed': probabilities_match and mismatches == 0 and
             all(abs(value) <= atol for value in differences.values()),
             'probabilities_within_tolerance': probabilities_match, 'maximum_probability_difference': maximum,
+            'largest_difference': {'selected_row': int(row), 'stage': CLASS_LABELS[stage],
+                                   'reference': float(reference[row, stage]), 'candidate': float(candidate[row, stage])},
             'argmax_mismatches': mismatches, 'metric_differences': differences,
             'confusion_matrices_equal': metrics[0]['confusion_matrix'] == metrics[1]['confusion_matrix']}
 
@@ -56,6 +59,17 @@ def require_target_identity(expected, actual):
     columns = ['dataset', 'participant_id', 'recording_id', 'epoch_id', 'epoch_index', 'true_stage']
     if (len(expected) != len(actual) or any(expected[column].tolist() != actual[column].tolist() for column in columns)):
         raise ValueError('Validation targets, labels or ordering changed.')
+
+
+def selected_jobs(jobs, model_ids=None):
+    jobs = [job for job in jobs if job['kind'] == 'supervised']
+    if model_ids is not None:
+        if len(model_ids) != len(set(model_ids)) or set(model_ids) - {job['job_id'] for job in jobs}:
+            raise ValueError('Model IDs must be unique completed-study supervised job IDs.')
+        jobs = [job for job in jobs if job['job_id'] in model_ids]
+    if not jobs:
+        raise ValueError('No supervised model family to check.')
+    return jobs
 
 
 def canonical_targets(partition):
@@ -86,15 +100,14 @@ def run(args):
     split = Path(study['split_file'])
     verify_plan_scope(plan, root, split)
     ledger = json.loads((directory / 'ledger.json').read_text())
-    jobs = [job for job in study['jobs'] if job['kind'] == 'supervised']
-    if not jobs:
-        raise ValueError('No supervised model family to check.')
+    jobs = selected_jobs(study['jobs'], args.model_id)
     if any(ledger['jobs'].get(job['job_id'], {}).get('status') != 'completed' for job in jobs):
         raise ValueError('Parity review requires a completed model family.')
     output.mkdir(parents=True, exist_ok=False)
     results = []
     started = time.perf_counter()
     policy = {'samples': args.samples, 'compiled_batch_size': args.validation_batch_size,
+              'model_ids': [job['job_id'] for job in jobs], 'diagnostic_batch_sizes': args.diagnostic_batch_sizes,
               'eager_batch_size': 4, 'atol': 1e-6, 'rtol': 1e-6,
               'cohort': 'source_validation_only', 'current_source_sha256': code_hashes(),
               'script_sha256': sha256_file(Path(__file__)), 'study_fingerprint': study['fingerprint']}
@@ -154,6 +167,27 @@ def run(args):
                     item['eager_vs_compiled'] = compare_predictions(eager, new, targets)
                 item['compiled_seconds'] = seconds
                 item['passed'] = all(value['passed'] for value in item.values() if isinstance(value, dict) and 'passed' in value)
+                if args.diagnostic_batch_sizes:
+                    # A failed declared mode remains failed even if a different batch size passes.
+                    item['batch_diagnostics'] = []
+                    for size in sorted(set(args.diagnostic_batch_sizes)):
+                        eager_size, eager_time = (eager, item['eager_seconds']) if size == 4 else replay(validation_predictor(predictor.model), size)
+                        compiled_size, compiled_time = (new, seconds) if size == args.validation_batch_size else replay(compiled, size)
+                        diagnostic = {'batch_size': size,
+                                      'saved_vs_eager': compare_predictions(reference, eager_size, targets),
+                                      'saved_vs_compiled': compare_predictions(reference, compiled_size, targets),
+                                      'eager_vs_compiled': compare_predictions(eager_size, compiled_size, targets),
+                                      'eager_seconds': eager_time, 'compiled_seconds': compiled_time,
+                                      'compiled_traces': compiled.experimental_get_tracing_count()}
+                        item['batch_diagnostics'].append(diagnostic)
+                        check = diagnostic['saved_vs_compiled']
+                        print(f"  batch {size}: eager={'PASS' if diagnostic['saved_vs_eager']['passed'] else 'FAIL'}, "
+                              f"compiled={'PASS' if check['passed'] else 'FAIL'}, "
+                              f"max probability delta={check['maximum_probability_difference']:.9g}", flush=True)
+                for name in ('saved_vs_eager', 'saved_vs_compiled', 'eager_vs_compiled'):
+                    if name in item:
+                        position = item[name]['largest_difference']['selected_row']
+                        item[name]['largest_difference']['epoch_id'] = str(expected_targets.epoch_id.iloc[position])
                 results.append(item)
                 (output / 'progress.json').write_text(json.dumps(results, indent=2) + '\n', encoding='utf-8')
                 print(f"{job['job_id']}: {'PASS' if item['passed'] else 'FAIL'}, {len(chosen)} targets", flush=True)
@@ -162,6 +196,7 @@ def run(args):
         result = {'passed': all(item['passed'] for item in results), 'models': results,
                   'observed_at_utc': datetime.now(timezone.utc).isoformat(), 'policy': policy,
                   'full_cohort_checked': args.samples == 'all', 'elapsed_seconds': time.perf_counter() - started,
+                  'diagnostic_only': bool(args.diagnostic_batch_sizes),
                   'timing_limit': 'Warm inference passes include gathering/scaling, exclude initial integrity/model loading/tracing; not total training epoch speedup.',
                   'optimizer_updates_performed': False, 'test_or_ISRUC_scoring': False}
         (output / 'result.json').write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')
@@ -178,6 +213,9 @@ def main():
     parser.add_argument('--data-root', type=Path)
     parser.add_argument('--samples', default='64', help='Positive count or all; all skips eager replay.')
     parser.add_argument('--validation-batch-size', type=int, default=32)
+    parser.add_argument('--model-id', nargs='+', help='Optional exact model job IDs; default checks the whole family.')
+    parser.add_argument('--diagnostic-batch-sizes', nargs='+', type=int,
+                        help='Bounded eager/compiled comparison at each batch size; never overrides the declared gate result.')
     args = parser.parse_args()
     if args.samples != 'all':
         try:
@@ -188,6 +226,8 @@ def main():
             parser.error('--samples must be positive.')
     if args.validation_batch_size < 1:
         parser.error('--validation-batch-size must be positive.')
+    if args.diagnostic_batch_sizes and (args.samples == 'all' or any(size < 1 for size in args.diagnostic_batch_sizes)):
+        parser.error('Batch diagnostics require bounded samples and positive sizes.')
     result = run(args)
     print(json.dumps({'passed': result['passed'], 'models_checked': len(result['models']),
                       'full_cohort_checked': result['full_cohort_checked']}, indent=2))
