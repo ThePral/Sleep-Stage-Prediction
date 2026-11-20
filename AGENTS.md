@@ -20,11 +20,15 @@ the 20 November review verified all 14 model seals, source/script hashes and
 accepted for these saved models. The user then completed all 18 jobs in
 `runs/bilstm_recovery_eager_pilot_2026-11-20`; the review verified all job seals
 and 42 recovery generations (epochs 0/1/2 for each of 14 supervised models).
-This is capped integration evidence, not research performance or proof of
-real-data resume equivalence. A replay of M6 from its sealed epoch-one state
-into `runs/bilstm_real_resume_m6_2026-11-20` is prepared but not executed.
-Its execution and performance measurement remain user-owned. See
-`reports/recovery_pilot_review_2026-11-20/`. Do not generalize
+The user then replayed M6 from epoch one into
+`runs/bilstm_real_resume_m6_2026-11-20`: all 161 state arrays, RNG/callback state,
+history, best-model hash and eight validation predictions match the uninterrupted
+pilot exactly. This passes the tested capped real-data M6 CPU recovery case,
+not full-schedule or cross-hardware recovery. A separate 64-training-batch M6
+runtime benchmark with full validation and best-model export is prepared but
+not executed at `runs/bilstm_recovery_runtime_2026-11-20`; execution and performance
+measurement remain user-owned. See
+`reports/recovery_replay_review_2026-11-20/`. Do not generalize
 the synthetic recovery result to untested configurations or claim measured speedup. The
 completed 18-job seed-42 study remains preserved historical evidence; edited
 source requires new study directories. See `docs/operations/SUPERVISED_RECOVERY.md`.

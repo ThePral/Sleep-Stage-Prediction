@@ -1,0 +1,1642 @@
+{
+  "review_date": "2026-11-20",
+  "real_data_m6_capped_resume_equivalence_passed": true,
+  "baseline": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\bilstm_recovery_eager_pilot_2026-11-20\\jobs\\M6_draw42_n2_seed42\\attempt_0001\\artifacts",
+  "replay": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\bilstm_real_resume_m6_2026-11-20",
+  "completed_epochs": 2,
+  "resumed_after_epoch": 1,
+  "optimizer_steps_at_boundary": 2,
+  "optimizer_steps_at_finish": 4,
+  "optimizer_steps_replayed": 2,
+  "best_epoch": 1,
+  "float_atol": 1e-07,
+  "float_rtol": 1e-07,
+  "integer_comparison": "exact",
+  "compared_state_fields": [
+    "best_score",
+    "best_weights_count",
+    "completed_epochs",
+    "contract",
+    "contract_sha256",
+    "early",
+    "history",
+    "model_layout",
+    "numpy_rng",
+    "optimizer_layout",
+    "python_rng",
+    "reduce",
+    "stop_training",
+    "tf_rng_algorithm"
+  ],
+  "excluded_state_fields": [
+    "elapsed_seconds"
+  ],
+  "state_arrays": [
+    {
+      "name": "model_0",
+      "shape": [
+        31,
+        1,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_1",
+      "shape": [
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_2",
+      "shape": [
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_3",
+      "shape": [
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_4",
+      "shape": [
+        15,
+        16,
+        32
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_5",
+      "shape": [
+        32
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_6",
+      "shape": [
+        32
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_7",
+      "shape": [
+        32
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_8",
+      "shape": [
+        7,
+        32,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_9",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_10",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_11",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_12",
+      "shape": [
+        64,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_13",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_14",
+      "shape": [
+        10,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_15",
+      "shape": [
+        10,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_16",
+      "shape": [
+        64,
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_17",
+      "shape": [
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_18",
+      "shape": [
+        64,
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_19",
+      "shape": [
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_20",
+      "shape": [
+        64,
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_21",
+      "shape": [
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_22",
+      "shape": [
+        2
+      ],
+      "dtype": "int64",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_23",
+      "shape": [
+        4,
+        16,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_24",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_25",
+      "shape": [
+        128,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_26",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_27",
+      "shape": [
+        2
+      ],
+      "dtype": "int64",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_28",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_29",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_30",
+      "shape": [
+        64,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_31",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_32",
+      "shape": [
+        64,
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_33",
+      "shape": [
+        32,
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_34",
+      "shape": [
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_35",
+      "shape": [
+        2
+      ],
+      "dtype": "int64",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_36",
+      "shape": [
+        64,
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_37",
+      "shape": [
+        32,
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_38",
+      "shape": [
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_39",
+      "shape": [
+        2
+      ],
+      "dtype": "int64",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_40",
+      "shape": [
+        2
+      ],
+      "dtype": "int64",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_41",
+      "shape": [
+        64,
+        5
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "model_42",
+      "shape": [
+        5
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_0",
+      "shape": [],
+      "dtype": "int64",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_1",
+      "shape": [],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_2",
+      "shape": [
+        31,
+        1,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_3",
+      "shape": [
+        31,
+        1,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_4",
+      "shape": [
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_5",
+      "shape": [
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_6",
+      "shape": [
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_7",
+      "shape": [
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_8",
+      "shape": [
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_9",
+      "shape": [
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_10",
+      "shape": [
+        15,
+        16,
+        32
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_11",
+      "shape": [
+        15,
+        16,
+        32
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_12",
+      "shape": [
+        32
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_13",
+      "shape": [
+        32
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_14",
+      "shape": [
+        32
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_15",
+      "shape": [
+        32
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_16",
+      "shape": [
+        32
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_17",
+      "shape": [
+        32
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_18",
+      "shape": [
+        7,
+        32,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_19",
+      "shape": [
+        7,
+        32,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_20",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_21",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_22",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_23",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_24",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_25",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_26",
+      "shape": [
+        64,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_27",
+      "shape": [
+        64,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_28",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_29",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_30",
+      "shape": [
+        10,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_31",
+      "shape": [
+        10,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_32",
+      "shape": [
+        10,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_33",
+      "shape": [
+        10,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_34",
+      "shape": [
+        64,
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_35",
+      "shape": [
+        64,
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_36",
+      "shape": [
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_37",
+      "shape": [
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_38",
+      "shape": [
+        64,
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_39",
+      "shape": [
+        64,
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_40",
+      "shape": [
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_41",
+      "shape": [
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_42",
+      "shape": [
+        64,
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_43",
+      "shape": [
+        64,
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_44",
+      "shape": [
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_45",
+      "shape": [
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_46",
+      "shape": [
+        4,
+        16,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_47",
+      "shape": [
+        4,
+        16,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_48",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_49",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_50",
+      "shape": [
+        128,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_51",
+      "shape": [
+        128,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_52",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_53",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_54",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_55",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_56",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_57",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_58",
+      "shape": [
+        64,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_59",
+      "shape": [
+        64,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_60",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_61",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_62",
+      "shape": [
+        64,
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_63",
+      "shape": [
+        64,
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_64",
+      "shape": [
+        32,
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_65",
+      "shape": [
+        32,
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_66",
+      "shape": [
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_67",
+      "shape": [
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_68",
+      "shape": [
+        64,
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_69",
+      "shape": [
+        64,
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_70",
+      "shape": [
+        32,
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_71",
+      "shape": [
+        32,
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_72",
+      "shape": [
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_73",
+      "shape": [
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_74",
+      "shape": [
+        64,
+        5
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_75",
+      "shape": [
+        64,
+        5
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_76",
+      "shape": [
+        5
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "optimizer_77",
+      "shape": [
+        5
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_0",
+      "shape": [
+        31,
+        1,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_1",
+      "shape": [
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_2",
+      "shape": [
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_3",
+      "shape": [
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_4",
+      "shape": [
+        15,
+        16,
+        32
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_5",
+      "shape": [
+        32
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_6",
+      "shape": [
+        32
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_7",
+      "shape": [
+        32
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_8",
+      "shape": [
+        7,
+        32,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_9",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_10",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_11",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_12",
+      "shape": [
+        64,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_13",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_14",
+      "shape": [
+        10,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_15",
+      "shape": [
+        10,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_16",
+      "shape": [
+        64,
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_17",
+      "shape": [
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_18",
+      "shape": [
+        64,
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_19",
+      "shape": [
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_20",
+      "shape": [
+        64,
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_21",
+      "shape": [
+        4,
+        16
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_22",
+      "shape": [
+        4,
+        16,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_23",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_24",
+      "shape": [
+        128,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_25",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_26",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_27",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_28",
+      "shape": [
+        64,
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_29",
+      "shape": [
+        64
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_30",
+      "shape": [
+        64,
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_31",
+      "shape": [
+        32,
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_32",
+      "shape": [
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_33",
+      "shape": [
+        64,
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_34",
+      "shape": [
+        32,
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_35",
+      "shape": [
+        128
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_36",
+      "shape": [
+        64,
+        5
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "best_37",
+      "shape": [
+        5
+      ],
+      "dtype": "float32",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "keras_global_rng",
+      "shape": [
+        2
+      ],
+      "dtype": "int64",
+      "exact": true,
+      "maximum_difference": 0.0
+    },
+    {
+      "name": "tf_global_rng",
+      "shape": [
+        3
+      ],
+      "dtype": "int64",
+      "exact": true,
+      "maximum_difference": 0.0
+    }
+  ],
+  "arrays_compared": 161,
+  "all_arrays_exactly_equal": true,
+  "maximum_state_array_difference": 0.0,
+  "history_exactly_equal": true,
+  "best_model_file_sha256_equal": true,
+  "validation_predictions": {
+    "passed": true,
+    "probabilities_within_tolerance": true,
+    "maximum_probability_difference": 0.0,
+    "largest_difference": {
+      "selected_row": 0,
+      "stage": "W",
+      "reference": 0.3406297564506531,
+      "candidate": 0.3406297564506531
+    },
+    "argmax_mismatches": 0,
+    "metric_differences": {
+      "loss": 0.0,
+      "accuracy": 0.0,
+      "macro_f1": 0.0
+    },
+    "confusion_matrices_equal": true
+  },
+  "validation_targets": 8,
+  "source_packages_data_and_baseline_job_seal_verified": true,
+  "replay_files_sha256": {
+    "bundle.json": "7f82489ff3da0d4beca5f4fb8bb1ef98637b0d9e240e09cd8f723257de5a2def",
+    "data_manifest.json": "0ed43991b3c7508e24ad01370ffd28edc6f0e2ee519cfa33f586b0b14413e1cf",
+    "model.keras": "8ecbf68c8ffea642b04d36bff9d0d916c8411d557241807e953c629bf5d8a0ed",
+    "model_config.json": "2743cc885ee117edd96b7db4937ce64282315398a29d06c45b55925af9840313",
+    "normalizer.json": "2a3a133423a3c558beaeaa7a4f123895953b9167c9136de3f87980344e4c98d4",
+    "recovery\\epoch_0001_0f8024437b33464ab55a7c273324cfb5\\arrays.npz": "f87ebbac441d58d544f5169e1ba7b16d9246cf7b3895561ffdbe9d3190eb5c91",
+    "recovery\\epoch_0001_0f8024437b33464ab55a7c273324cfb5\\best.keras": "8ecbf68c8ffea642b04d36bff9d0d916c8411d557241807e953c629bf5d8a0ed",
+    "recovery\\epoch_0001_0f8024437b33464ab55a7c273324cfb5\\seal.json": "caef43be86c113c55f83ae1522ce42e32d2f80cca1001a5ab3cd6506cfc51fe9",
+    "recovery\\epoch_0001_0f8024437b33464ab55a7c273324cfb5\\state.json": "e6d50b427669ecfb5dcae2cea357dcf5bf14fefba9e98e0624306dc445db697e",
+    "recovery\\epoch_0002_54e85beab30546c98651ceb13976942c\\arrays.npz": "38447c4d57936a59c7aa1844099083ec47cf3411d0e8dc12765790faa663b591",
+    "recovery\\epoch_0002_54e85beab30546c98651ceb13976942c\\best.keras": "8ecbf68c8ffea642b04d36bff9d0d916c8411d557241807e953c629bf5d8a0ed",
+    "recovery\\epoch_0002_54e85beab30546c98651ceb13976942c\\seal.json": "78923d9ff45370baa17f38489236bffc9f4b4fc3161c16b4e4c380b787524c1a",
+    "recovery\\epoch_0002_54e85beab30546c98651ceb13976942c\\state.json": "36e2e8c5fc98283bff1abb6e06387137e8f8d0e707421d15fd86ecac21aa58ec",
+    "recovery\\latest.json": "752bcd747a1af5c818d6722ee301418fd0825d42c612a2456c9cd721f5233287",
+    "resolved_config.json": "bcd8913a8b369a9f48c646091c01d954f4677033af924e04f62b939e18044c30",
+    "status.json": "422dbb632ca214d77851e5e26492171947025f863b084d4390df9fdb08c2f886",
+    "summary.json": "2b2c5174c776a03d5c54a9ba9259e88de88c54000dd7759aa000b5b6f8449bf1",
+    "training_history.csv": "e42e87dfbc0e97f6d1a95d5395597dd107e896a84661fe4d85ebca0d6cfdf074",
+    "validation_confusion_matrix.csv": "f22388d7837992a2dffd010edf5db59cc980cf2d8de2d9be0e3472c776cd5e57",
+    "validation_metrics.json": "c9885f4d26b8f25227e6c2e0dadcc82e37bc1287b52c2fb0cb7f7a133935a3a7",
+    "validation_predictions.csv": "20d10a6d1c6c8430be49943e8c90c915f75adeb15597baae15648e6cfec1d605"
+  },
+  "optimizer_updates_by_reviewer": false,
+  "inference_by_reviewer": false,
+  "tensorflow_imported_by_reviewer": false,
+  "training_speedup_established": false,
+  "scope": "M6 SSL-initialized gated BiLSTM, seed 42, two capped real-data epochs, same native CPU environment; not all configurations or full-schedule recovery."
+}

@@ -12,11 +12,13 @@ The remaining thirteen models also passed on 17 November. The 20 November
 review verified all fourteen on 65,133 targets each at eager batch 4, with
 maximum probability difference 1.11e-16 and zero class changes. The user then
 completed all eighteen capped recovery/eager pilot jobs; all job seals and
-forty-two recovery generations verify. The next action is the user-run
-[M6 epoch-boundary replay](../reports/recovery_pilot_review_2026-11-20/README.md)
-to compare resumed real-data training with the uninterrupted pilot. Compiled
-validation remains unaccepted; real-data resume equivalence and measured
-training performance remain pending. The criteria below
+forty-two recovery generations verify. M6's real-data replay from epoch one
+also passed: all 161 state arrays and exported predictions match exactly.
+This covers the tested capped M6 CPU case. The next action is the user-run
+[runtime benchmark](../reports/recovery_replay_review_2026-11-20/README.md),
+with 64 training batches and full validation/export, before freezing replication.
+Compiled validation remains unaccepted; representative runtime measurement
+remains pending. The criteria below
 remain acceptance requirements, not claims that all gates have passed.
 
 The first uncapped study is complete and preserved. The next task is to make
