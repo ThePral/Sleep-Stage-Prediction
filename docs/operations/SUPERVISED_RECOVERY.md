@@ -6,7 +6,9 @@ for the tested gated BiLSTM on CPU. The [artifact review](../../reports/recovery
 records the evidence and its limits. Full regression subsequently passed on
 15 November: 136 tests in 147.021 seconds, verified against the retained log.
 M3/n70 subsequently passed full-cohort eager batch-4 parity on all 65,133
-targets. The other 13 models and an end-to-end speed improvement remain pending. No research training or
+targets. The remaining thirteen also passed on 17 November; the 20 November
+review verified full-family eager parity. Real-data recovery integration and
+an end-to-end speed improvement remain pending. No research training or
 optimizer-based gate was launched by the assistant.
 
 ## Passed synthetic training gate (reproduction)
@@ -43,15 +45,16 @@ saved-model check subsequently passed 13/14 models. M3 at n70 failed the
 probability tolerance at compiled batch 32; eager replay passed and predicted
 classes were unchanged on the 64 targets. M3/n70 then passed full-cohort eager
 batch-4 parity (maximum probability difference 1.11e-16, zero class changes).
-The next action is the user-run
-[remaining eager checks](../../reports/validation_parity_full_review_2026-11-15/README.md).
+The remaining thirteen also passed full-cohort eager batch-4 parity. The next
+action is the user-run [recovery/eager integration pilot](../../reports/validation_parity_family_review_2026-11-20/README.md).
 The matched-batch diagnostic failed compiled 4/8/16/32 and eager 16/32; eager
 4/8 passed on the sample. Keep compiled validation unaccepted and retain
-eager batch 4 while full-cohort parity is checked. The existing recovery pilot
-enables compiled validation; do not run it as the conservative fallback.
+eager batch 4, which passed for all fourteen saved classifiers. The original
+recovery pilot enables compiled validation; the new eager pilot uses a separate
+recipe and fresh study.
 Do not relax tolerances based on this observation or interpret a passing
-alternative batch size as a pass of the original declared mode. Full-family
-eager parity and measured integration/throughput checks remain pending.
+alternative batch size as a pass of the original declared mode. Real-data
+recovery integration and measured training throughput remain pending.
 
 ## Configuration and state
 
@@ -132,23 +135,26 @@ validation execution mode too.
 
 When validation is capped, changing its batch size would change the selected
 target mask. The trainer therefore rejects that combination. The capped
-`experiment_bilstm_recovery_pilot.json` uses matching batch sizes of two,
-two supervised epochs and two batches per phase; it is an integration recipe,
-not evidence of convergence. Do not execute it before the gates above pass.
+`experiment_bilstm_recovery_pilot.json` uses compiled validation and remains
+unaccepted for the fallback. The separate
+`experiment_bilstm_recovery_eager_pilot.json` uses eager validation, matching
+batch sizes of four, two supervised epochs and two batches per phase. It is an
+integration recipe, not evidence of convergence.
 
-After those gates, plan a fresh pilot and inspect it before execution:
+The eager pilot has been planned and checked with no optimizer execution:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.experiments.run plan --config configs/sleepedf/experiments/experiment_bilstm_recovery_pilot.json --study-dir runs/my_recovery_pilot
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.experiments.run execute --study-dir runs/bilstm_recovery_eager_pilot_2026-11-20 --live
 ```
 
-Subsequent user-run pilot/benchmark commands will be supplied after reviewing
-the gate results. A separate benchmark should measure full epoch time including
+Execution remains user-owned. Inspect its recovery states and exports before
+any longer campaign. A separate benchmark should measure full epoch time including
 data loading, validation and checkpoint saving. Current inference checks cover
 all four representations, tail batches, target identity, predicted classes,
 probabilities, confusion matrices and metrics with `1e-6` tolerance. They do not
-establish real-data full-cohort parity or a measured speedup, and must not be
-used to pool old/new research results without the planned equivalence review.
+establish optimizer/callback equivalence or a measured speedup. The separate
+user-run saved-model check passed real-data full-cohort eager batch-4 parity;
+it does not establish equivalence of old and recovery-enabled training paths.
 
 Primary API references: [TensorFlow checkpoints](https://www.tensorflow.org/api_docs/python/tf/train/Checkpoint)
 and [Keras serialization](https://keras.io/guides/serialization_and_saving/).

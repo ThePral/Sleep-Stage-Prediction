@@ -1,0 +1,340 @@
+[
+  {
+    "job_id": "M0_draw42_n18_seed42",
+    "examples": 65133,
+    "export_sha256": "20b419d82bbce9c6d7da55785456bc50ae7521b3abfc67f2eab2038cb0fdbfa1",
+    "saved_vs_eager": {
+      "passed": true,
+      "probabilities_within_tolerance": true,
+      "maximum_probability_difference": 1.1102230246251565e-16,
+      "largest_difference": {
+        "selected_row": 1,
+        "stage": "W",
+        "reference": 0.99604994058609,
+        "candidate": 0.9960499405860901,
+        "epoch_id": "sleepedf:SC4011:000010"
+      },
+      "argmax_mismatches": 0,
+      "metric_differences": {
+        "loss": -4.440892098500626e-16,
+        "accuracy": 0.0,
+        "macro_f1": 0.0
+      },
+      "confusion_matrices_equal": true
+    },
+    "eager_seconds": 958.3202388999998,
+    "passed": true
+  },
+  {
+    "job_id": "M1_draw42_n18_seed42",
+    "examples": 65133,
+    "export_sha256": "719945f553d55bfe180c49615ddf529c3c9adfed0656ed387ad1ae7bb82bf25c",
+    "saved_vs_eager": {
+      "passed": true,
+      "probabilities_within_tolerance": true,
+      "maximum_probability_difference": 1.1102230246251565e-16,
+      "largest_difference": {
+        "selected_row": 0,
+        "stage": "W",
+        "reference": 0.9999953508377076,
+        "candidate": 0.9999953508377075,
+        "epoch_id": "sleepedf:SC4011:000009"
+      },
+      "argmax_mismatches": 0,
+      "metric_differences": {
+        "loss": -7.216449660063518e-16,
+        "accuracy": 0.0,
+        "macro_f1": 0.0
+      },
+      "confusion_matrices_equal": true
+    },
+    "eager_seconds": 1770.3039927999998,
+    "passed": true
+  },
+  {
+    "job_id": "M2_draw42_n18_seed42",
+    "examples": 65133,
+    "export_sha256": "fbc2f4ffd115a31e17f943d58dfb54c4f1a84f4c7ed1783ebfdb949cc516c12e",
+    "saved_vs_eager": {
+      "passed": true,
+      "probabilities_within_tolerance": true,
+      "maximum_probability_difference": 1.1102230246251565e-16,
+      "largest_difference": {
+        "selected_row": 2,
+        "stage": "W",
+        "reference": 0.999886989593506,
+        "candidate": 0.9998869895935059,
+        "epoch_id": "sleepedf:SC4011:000011"
+      },
+      "argmax_mismatches": 0,
+      "metric_differences": {
+        "loss": -6.106226635438361e-16,
+        "accuracy": 0.0,
+        "macro_f1": 0.0
+      },
+      "confusion_matrices_equal": true
+    },
+    "eager_seconds": 1934.1253724000017,
+    "passed": true
+  },
+  {
+    "job_id": "M3_draw42_n18_seed42",
+    "examples": 65133,
+    "export_sha256": "76750ebc3d11ea46272f1aa16c4c96d967e88d54aa18f56518fcaa605a24a698",
+    "saved_vs_eager": {
+      "passed": true,
+      "probabilities_within_tolerance": true,
+      "maximum_probability_difference": 1.1102230246251565e-16,
+      "largest_difference": {
+        "selected_row": 1,
+        "stage": "W",
+        "reference": 0.9998815059661864,
+        "candidate": 0.9998815059661865,
+        "epoch_id": "sleepedf:SC4011:000010"
+      },
+      "argmax_mismatches": 0,
+      "metric_differences": {
+        "loss": -4.440892098500626e-16,
+        "accuracy": 0.0,
+        "macro_f1": 0.0
+      },
+      "confusion_matrices_equal": true
+    },
+    "eager_seconds": 2137.5796869000005,
+    "passed": true
+  },
+  {
+    "job_id": "M4_draw42_n18_seed42",
+    "examples": 65133,
+    "export_sha256": "29fa961ba9636244d416151ad88b2e15fafb65c702c4e1cd71af006c3ccdab34",
+    "saved_vs_eager": {
+      "passed": true,
+      "probabilities_within_tolerance": true,
+      "maximum_probability_difference": 1.1102230246251565e-16,
+      "largest_difference": {
+        "selected_row": 0,
+        "stage": "W",
+        "reference": 0.9999377727508544,
+        "candidate": 0.9999377727508545,
+        "epoch_id": "sleepedf:SC4011:000009"
+      },
+      "argmax_mismatches": 0,
+      "metric_differences": {
+        "loss": -3.885780586188048e-16,
+        "accuracy": 0.0,
+        "macro_f1": 0.0
+      },
+      "confusion_matrices_equal": true
+    },
+    "eager_seconds": 1814.7248806999996,
+    "passed": true
+  },
+  {
+    "job_id": "M5_draw42_n18_seed42",
+    "examples": 65133,
+    "export_sha256": "56e6306ee1e306b19e4291aa44666b19bd467090881adb002f99ba01ce0dd71c",
+    "saved_vs_eager": {
+      "passed": true,
+      "probabilities_within_tolerance": true,
+      "maximum_probability_difference": 1.1102230246251565e-16,
+      "largest_difference": {
+        "selected_row": 1,
+        "stage": "W",
+        "reference": 0.9998956918716432,
+        "candidate": 0.9998956918716431,
+        "epoch_id": "sleepedf:SC4011:000010"
+      },
+      "argmax_mismatches": 0,
+      "metric_differences": {
+        "loss": -4.440892098500626e-16,
+        "accuracy": 0.0,
+        "macro_f1": 0.0
+      },
+      "confusion_matrices_equal": true
+    },
+    "eager_seconds": 2064.3428559999993,
+    "passed": true
+  },
+  {
+    "job_id": "M6_draw42_n18_seed42",
+    "examples": 65133,
+    "export_sha256": "1df9cb0e9293142db3524fcf7c82f67fba31880c418c151f740e6369de3a75d3",
+    "saved_vs_eager": {
+      "passed": true,
+      "probabilities_within_tolerance": true,
+      "maximum_probability_difference": 1.1102230246251565e-16,
+      "largest_difference": {
+        "selected_row": 0,
+        "stage": "W",
+        "reference": 0.9999948740005492,
+        "candidate": 0.9999948740005493,
+        "epoch_id": "sleepedf:SC4011:000009"
+      },
+      "argmax_mismatches": 0,
+      "metric_differences": {
+        "loss": -6.661338147750939e-16,
+        "accuracy": 0.0,
+        "macro_f1": 0.0
+      },
+      "confusion_matrices_equal": true
+    },
+    "eager_seconds": 2458.6054635,
+    "passed": true
+  },
+  {
+    "job_id": "M0_draw42_n70_seed42",
+    "examples": 65133,
+    "export_sha256": "b7d6990fd343a539ef6c2f997d401121e36cc02978ab02f136e9ec234f09b7c3",
+    "saved_vs_eager": {
+      "passed": true,
+      "probabilities_within_tolerance": true,
+      "maximum_probability_difference": 1.1102230246251565e-16,
+      "largest_difference": {
+        "selected_row": 1,
+        "stage": "W",
+        "reference": 0.9998912811279296,
+        "candidate": 0.9998912811279297,
+        "epoch_id": "sleepedf:SC4011:000010"
+      },
+      "argmax_mismatches": 0,
+      "metric_differences": {
+        "loss": -9.992007221626409e-16,
+        "accuracy": 0.0,
+        "macro_f1": 0.0
+      },
+      "confusion_matrices_equal": true
+    },
+    "eager_seconds": 1131.4872951000034,
+    "passed": true
+  },
+  {
+    "job_id": "M1_draw42_n70_seed42",
+    "examples": 65133,
+    "export_sha256": "957e4889b8725a4b04d8c0e1bc60cb7920fe83eeb549a759aaf6b502f6751e74",
+    "saved_vs_eager": {
+      "passed": true,
+      "probabilities_within_tolerance": true,
+      "maximum_probability_difference": 1.1102230246251565e-16,
+      "largest_difference": {
+        "selected_row": 3,
+        "stage": "W",
+        "reference": 0.9999619722366332,
+        "candidate": 0.9999619722366333,
+        "epoch_id": "sleepedf:SC4011:000012"
+      },
+      "argmax_mismatches": 0,
+      "metric_differences": {
+        "loss": -6.661338147750939e-16,
+        "accuracy": 0.0,
+        "macro_f1": 0.0
+      },
+      "confusion_matrices_equal": true
+    },
+    "eager_seconds": 1487.420768200005,
+    "passed": true
+  },
+  {
+    "job_id": "M2_draw42_n70_seed42",
+    "examples": 65133,
+    "export_sha256": "df27555ab7d10facc5c72ef9b10d7a29a4818bd6e71932f03128ddeef7fc5958",
+    "saved_vs_eager": {
+      "passed": true,
+      "probabilities_within_tolerance": true,
+      "maximum_probability_difference": 1.1102230246251565e-16,
+      "largest_difference": {
+        "selected_row": 8,
+        "stage": "W",
+        "reference": 0.99998676776886,
+        "candidate": 0.9999867677688599,
+        "epoch_id": "sleepedf:SC4011:000017"
+      },
+      "argmax_mismatches": 0,
+      "metric_differences": {
+        "loss": -4.440892098500626e-16,
+        "accuracy": 0.0,
+        "macro_f1": 0.0
+      },
+      "confusion_matrices_equal": true
+    },
+    "eager_seconds": 1505.1173713000026,
+    "passed": true
+  },
+  {
+    "job_id": "M4_draw42_n70_seed42",
+    "examples": 65133,
+    "export_sha256": "63f4a0f52becccf5e84bb67845898aa8f16c753d3abe900483b5ef2ffee31d0a",
+    "saved_vs_eager": {
+      "passed": true,
+      "probabilities_within_tolerance": true,
+      "maximum_probability_difference": 1.1102230246251565e-16,
+      "largest_difference": {
+        "selected_row": 1,
+        "stage": "W",
+        "reference": 0.9999997615814208,
+        "candidate": 0.9999997615814209,
+        "epoch_id": "sleepedf:SC4011:000010"
+      },
+      "argmax_mismatches": 0,
+      "metric_differences": {
+        "loss": -2.7755575615628914e-16,
+        "accuracy": 0.0,
+        "macro_f1": 0.0
+      },
+      "confusion_matrices_equal": true
+    },
+    "eager_seconds": 1427.925965800001,
+    "passed": true
+  },
+  {
+    "job_id": "M5_draw42_n70_seed42",
+    "examples": 65133,
+    "export_sha256": "ff0144678bb92686a97705a9b7e4b64e2f09e35dbf6430d92400d4b287d56c5c",
+    "saved_vs_eager": {
+      "passed": true,
+      "probabilities_within_tolerance": true,
+      "maximum_probability_difference": 1.1102230246251565e-16,
+      "largest_difference": {
+        "selected_row": 2,
+        "stage": "W",
+        "reference": 0.9999935626983644,
+        "candidate": 0.9999935626983643,
+        "epoch_id": "sleepedf:SC4011:000011"
+      },
+      "argmax_mismatches": 0,
+      "metric_differences": {
+        "loss": -3.885780586188048e-16,
+        "accuracy": 0.0,
+        "macro_f1": 0.0
+      },
+      "confusion_matrices_equal": true
+    },
+    "eager_seconds": 1503.5467514999982,
+    "passed": true
+  },
+  {
+    "job_id": "M6_draw42_n70_seed42",
+    "examples": 65133,
+    "export_sha256": "912b5868a2c07ae34b9c542aea161b2798a8dc8a09efaf5cf50796ac61e006c0",
+    "saved_vs_eager": {
+      "passed": true,
+      "probabilities_within_tolerance": true,
+      "maximum_probability_difference": 1.1102230246251565e-16,
+      "largest_difference": {
+        "selected_row": 0,
+        "stage": "W",
+        "reference": 0.9999349117279052,
+        "candidate": 0.9999349117279053,
+        "epoch_id": "sleepedf:SC4011:000009"
+      },
+      "argmax_mismatches": 0,
+      "metric_differences": {
+        "loss": -5.551115123125783e-16,
+        "accuracy": 0.0,
+        "macro_f1": 0.0
+      },
+      "confusion_matrices_equal": true
+    },
+    "eager_seconds": 1715.3656360000023,
+    "passed": true
+  }
+]

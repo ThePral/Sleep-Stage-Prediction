@@ -8,8 +8,13 @@ state and probabilities match exactly for the tested gated-BiLSTM CPU case.
 See the [gate review](../reports/recovery_validation_2026-11-13/README.md).
 Full regression subsequently passed on 15 November: 136 tests in 147.021 seconds.
 See the [verified log review and parity handoff](../reports/regression_review_2026-11-15/README.md).
-Real-data parity and measured speedup remain pending; the new parity helper
-has five separately passing pure tests and has not been executed on real EEG.
+The user subsequently passed full-cohort eager batch-4 parity for all fourteen
+saved classifiers on 65,133 targets each. The 20 November
+[family review](../reports/validation_parity_family_review_2026-11-20/README.md)
+verifies zero class changes and maximum probability difference 1.11e-16.
+Compiled validation remains unaccepted after its sampled numerical failure.
+A fresh capped recovery/eager integration pilot is planned with no jobs started;
+real-data recovery training checks and measured training speedup remain pending.
 See the [handoff](operations/SUPERVISED_RECOVERY.md) and
 [evidence](../reports/recovery_implementation_2026-11-13/README.md).
 

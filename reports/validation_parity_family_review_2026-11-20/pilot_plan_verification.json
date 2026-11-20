@@ -1,0 +1,38 @@
+{
+  "review_date": "2026-11-20",
+  "study_directory": "runs/bilstm_recovery_eager_pilot_2026-11-20",
+  "study_fingerprint": "c6b51f9d64d041488502ae6cfabf0b7a1b6caaf3b1664747c39f8cf0ce85f901",
+  "source_packages_and_data_scope_verified": true,
+  "jobs_planned": 18,
+  "job_kinds": {
+    "waveform_statistics": 1,
+    "normalizer": 2,
+    "pretrain": 1,
+    "supervised": 14
+  },
+  "jobs_started": 0,
+  "recovery": true,
+  "compiled_validation": false,
+  "validation_batch_size": 4,
+  "limited_run": true,
+  "training_owner": "user",
+  "optimizer_updates_by_reviewer": false,
+  "training_config": {
+    "batch_size": 4,
+    "epochs": 2,
+    "learning_rate": 0.001,
+    "patience": 2,
+    "validation_batch_size": 4,
+    "compiled_validation": false,
+    "recovery": true
+  },
+  "limits": {
+    "max_train_batches": 2,
+    "max_validation_batches": 2,
+    "max_pretraining_batches": 2
+  },
+  "study_manifest_sha256": "f3ed22d65610c5b3945f32d06f2b7fdaee97cfe5fab56c324b04274dbfadae6d",
+  "budget_manifest_sha256": "ccc9b56d872e6471a4326f23b18f44a4033a1c035c0307492f879faad6a303d5",
+  "recipe_sha256": "ebd0fca74fdf9c2f0de9a87c7dd8ce9366582c2c7bffa6975fb0261e786ca09e",
+  "tensorflow_imported_by_reviewer": false
+}

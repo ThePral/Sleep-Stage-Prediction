@@ -1,0 +1,383 @@
+{
+  "review_date": "2026-11-20",
+  "study_fingerprint": "5a3e0540508567daa7128aa667762be951e798646c5ca86b0c0b793543cc870c",
+  "inputs": [
+    {
+      "directory": "reports/validation_parity_2026-11-15_m3_eager_full",
+      "observed_at_utc": "2026-11-15T15:58:58.829539+00:00",
+      "elapsed_seconds": 1774.0975862000487,
+      "files_sha256": {
+        "result.json": "3cf729209c8eb1dcd292dc7584b29312d58a8aea9d5ce3cc0f0273e845d17d04",
+        "policy.json": "6aac5f355a3ce8ba7699d9fe70a57996eaf202839e37b197fa70a124271929af",
+        "selected_targets.csv": "d92d5d0f2357492f2b7403b409fb6dce6a96e2e6b17195fd297ff6db7999a3a1"
+      }
+    },
+    {
+      "directory": "reports/validation_parity_2026-11-17_remaining_eager_full",
+      "observed_at_utc": "2026-11-17T22:02:27.604690+00:00",
+      "elapsed_seconds": 21934.809782199998,
+      "files_sha256": {
+        "result.json": "75076ded85ad2b9c75cf5a852a7b09284f626609380b134d932f5165a04af5a2",
+        "policy.json": "23ff39a060f6a51a5857a73baff8549d49b58e433a290d85d8a0224e17b919ed",
+        "selected_targets.csv": "d92d5d0f2357492f2b7403b409fb6dce6a96e2e6b17195fd297ff6db7999a3a1"
+      }
+    }
+  ],
+  "full_family_eager_parity_passed": true,
+  "models_verified": 14,
+  "targets_per_model": 65133,
+  "model_target_evaluations": 911862,
+  "execution_mode": "eager",
+  "batch_size": 4,
+  "atol": 1e-06,
+  "rtol": 1e-06,
+  "maximum_probability_difference": 1.1102230246251565e-16,
+  "maximum_absolute_loss_delta": 1.0547118733938987e-15,
+  "total_argmax_mismatches": 0,
+  "all_target_ids_labels_order_and_artifact_seals_verified": true,
+  "current_source_and_script_match_both_parity_runs": true,
+  "models": [
+    {
+      "job_id": "M3_draw42_n70_seed42",
+      "examples": 65133,
+      "comparison": {
+        "passed": true,
+        "probabilities_within_tolerance": true,
+        "maximum_probability_difference": 1.1102230246251565e-16,
+        "largest_difference": {
+          "selected_row": 3,
+          "stage": "W",
+          "reference": 0.999936819076538,
+          "candidate": 0.9999368190765381,
+          "epoch_id": "sleepedf:SC4011:000012"
+        },
+        "argmax_mismatches": 0,
+        "metric_differences": {
+          "loss": -1.0547118733938987e-15,
+          "accuracy": 0.0,
+          "macro_f1": 0.0
+        },
+        "confusion_matrices_equal": true
+      },
+      "eager_seconds": 1763.7550435000448
+    },
+    {
+      "job_id": "M0_draw42_n18_seed42",
+      "examples": 65133,
+      "comparison": {
+        "passed": true,
+        "probabilities_within_tolerance": true,
+        "maximum_probability_difference": 1.1102230246251565e-16,
+        "largest_difference": {
+          "selected_row": 1,
+          "stage": "W",
+          "reference": 0.99604994058609,
+          "candidate": 0.9960499405860901,
+          "epoch_id": "sleepedf:SC4011:000010"
+        },
+        "argmax_mismatches": 0,
+        "metric_differences": {
+          "loss": -4.440892098500626e-16,
+          "accuracy": 0.0,
+          "macro_f1": 0.0
+        },
+        "confusion_matrices_equal": true
+      },
+      "eager_seconds": 958.3202388999998
+    },
+    {
+      "job_id": "M1_draw42_n18_seed42",
+      "examples": 65133,
+      "comparison": {
+        "passed": true,
+        "probabilities_within_tolerance": true,
+        "maximum_probability_difference": 1.1102230246251565e-16,
+        "largest_difference": {
+          "selected_row": 0,
+          "stage": "W",
+          "reference": 0.9999953508377076,
+          "candidate": 0.9999953508377075,
+          "epoch_id": "sleepedf:SC4011:000009"
+        },
+        "argmax_mismatches": 0,
+        "metric_differences": {
+          "loss": -7.216449660063518e-16,
+          "accuracy": 0.0,
+          "macro_f1": 0.0
+        },
+        "confusion_matrices_equal": true
+      },
+      "eager_seconds": 1770.3039927999998
+    },
+    {
+      "job_id": "M2_draw42_n18_seed42",
+      "examples": 65133,
+      "comparison": {
+        "passed": true,
+        "probabilities_within_tolerance": true,
+        "maximum_probability_difference": 1.1102230246251565e-16,
+        "largest_difference": {
+          "selected_row": 2,
+          "stage": "W",
+          "reference": 0.999886989593506,
+          "candidate": 0.9998869895935059,
+          "epoch_id": "sleepedf:SC4011:000011"
+        },
+        "argmax_mismatches": 0,
+        "metric_differences": {
+          "loss": -6.106226635438361e-16,
+          "accuracy": 0.0,
+          "macro_f1": 0.0
+        },
+        "confusion_matrices_equal": true
+      },
+      "eager_seconds": 1934.1253724000017
+    },
+    {
+      "job_id": "M3_draw42_n18_seed42",
+      "examples": 65133,
+      "comparison": {
+        "passed": true,
+        "probabilities_within_tolerance": true,
+        "maximum_probability_difference": 1.1102230246251565e-16,
+        "largest_difference": {
+          "selected_row": 1,
+          "stage": "W",
+          "reference": 0.9998815059661864,
+          "candidate": 0.9998815059661865,
+          "epoch_id": "sleepedf:SC4011:000010"
+        },
+        "argmax_mismatches": 0,
+        "metric_differences": {
+          "loss": -4.440892098500626e-16,
+          "accuracy": 0.0,
+          "macro_f1": 0.0
+        },
+        "confusion_matrices_equal": true
+      },
+      "eager_seconds": 2137.5796869000005
+    },
+    {
+      "job_id": "M4_draw42_n18_seed42",
+      "examples": 65133,
+      "comparison": {
+        "passed": true,
+        "probabilities_within_tolerance": true,
+        "maximum_probability_difference": 1.1102230246251565e-16,
+        "largest_difference": {
+          "selected_row": 0,
+          "stage": "W",
+          "reference": 0.9999377727508544,
+          "candidate": 0.9999377727508545,
+          "epoch_id": "sleepedf:SC4011:000009"
+        },
+        "argmax_mismatches": 0,
+        "metric_differences": {
+          "loss": -3.885780586188048e-16,
+          "accuracy": 0.0,
+          "macro_f1": 0.0
+        },
+        "confusion_matrices_equal": true
+      },
+      "eager_seconds": 1814.7248806999996
+    },
+    {
+      "job_id": "M5_draw42_n18_seed42",
+      "examples": 65133,
+      "comparison": {
+        "passed": true,
+        "probabilities_within_tolerance": true,
+        "maximum_probability_difference": 1.1102230246251565e-16,
+        "largest_difference": {
+          "selected_row": 1,
+          "stage": "W",
+          "reference": 0.9998956918716432,
+          "candidate": 0.9998956918716431,
+          "epoch_id": "sleepedf:SC4011:000010"
+        },
+        "argmax_mismatches": 0,
+        "metric_differences": {
+          "loss": -4.440892098500626e-16,
+          "accuracy": 0.0,
+          "macro_f1": 0.0
+        },
+        "confusion_matrices_equal": true
+      },
+      "eager_seconds": 2064.3428559999993
+    },
+    {
+      "job_id": "M6_draw42_n18_seed42",
+      "examples": 65133,
+      "comparison": {
+        "passed": true,
+        "probabilities_within_tolerance": true,
+        "maximum_probability_difference": 1.1102230246251565e-16,
+        "largest_difference": {
+          "selected_row": 0,
+          "stage": "W",
+          "reference": 0.9999948740005492,
+          "candidate": 0.9999948740005493,
+          "epoch_id": "sleepedf:SC4011:000009"
+        },
+        "argmax_mismatches": 0,
+        "metric_differences": {
+          "loss": -6.661338147750939e-16,
+          "accuracy": 0.0,
+          "macro_f1": 0.0
+        },
+        "confusion_matrices_equal": true
+      },
+      "eager_seconds": 2458.6054635
+    },
+    {
+      "job_id": "M0_draw42_n70_seed42",
+      "examples": 65133,
+      "comparison": {
+        "passed": true,
+        "probabilities_within_tolerance": true,
+        "maximum_probability_difference": 1.1102230246251565e-16,
+        "largest_difference": {
+          "selected_row": 1,
+          "stage": "W",
+          "reference": 0.9998912811279296,
+          "candidate": 0.9998912811279297,
+          "epoch_id": "sleepedf:SC4011:000010"
+        },
+        "argmax_mismatches": 0,
+        "metric_differences": {
+          "loss": -9.992007221626409e-16,
+          "accuracy": 0.0,
+          "macro_f1": 0.0
+        },
+        "confusion_matrices_equal": true
+      },
+      "eager_seconds": 1131.4872951000034
+    },
+    {
+      "job_id": "M1_draw42_n70_seed42",
+      "examples": 65133,
+      "comparison": {
+        "passed": true,
+        "probabilities_within_tolerance": true,
+        "maximum_probability_difference": 1.1102230246251565e-16,
+        "largest_difference": {
+          "selected_row": 3,
+          "stage": "W",
+          "reference": 0.9999619722366332,
+          "candidate": 0.9999619722366333,
+          "epoch_id": "sleepedf:SC4011:000012"
+        },
+        "argmax_mismatches": 0,
+        "metric_differences": {
+          "loss": -6.661338147750939e-16,
+          "accuracy": 0.0,
+          "macro_f1": 0.0
+        },
+        "confusion_matrices_equal": true
+      },
+      "eager_seconds": 1487.420768200005
+    },
+    {
+      "job_id": "M2_draw42_n70_seed42",
+      "examples": 65133,
+      "comparison": {
+        "passed": true,
+        "probabilities_within_tolerance": true,
+        "maximum_probability_difference": 1.1102230246251565e-16,
+        "largest_difference": {
+          "selected_row": 8,
+          "stage": "W",
+          "reference": 0.99998676776886,
+          "candidate": 0.9999867677688599,
+          "epoch_id": "sleepedf:SC4011:000017"
+        },
+        "argmax_mismatches": 0,
+        "metric_differences": {
+          "loss": -4.440892098500626e-16,
+          "accuracy": 0.0,
+          "macro_f1": 0.0
+        },
+        "confusion_matrices_equal": true
+      },
+      "eager_seconds": 1505.1173713000026
+    },
+    {
+      "job_id": "M4_draw42_n70_seed42",
+      "examples": 65133,
+      "comparison": {
+        "passed": true,
+        "probabilities_within_tolerance": true,
+        "maximum_probability_difference": 1.1102230246251565e-16,
+        "largest_difference": {
+          "selected_row": 1,
+          "stage": "W",
+          "reference": 0.9999997615814208,
+          "candidate": 0.9999997615814209,
+          "epoch_id": "sleepedf:SC4011:000010"
+        },
+        "argmax_mismatches": 0,
+        "metric_differences": {
+          "loss": -2.7755575615628914e-16,
+          "accuracy": 0.0,
+          "macro_f1": 0.0
+        },
+        "confusion_matrices_equal": true
+      },
+      "eager_seconds": 1427.925965800001
+    },
+    {
+      "job_id": "M5_draw42_n70_seed42",
+      "examples": 65133,
+      "comparison": {
+        "passed": true,
+        "probabilities_within_tolerance": true,
+        "maximum_probability_difference": 1.1102230246251565e-16,
+        "largest_difference": {
+          "selected_row": 2,
+          "stage": "W",
+          "reference": 0.9999935626983644,
+          "candidate": 0.9999935626983643,
+          "epoch_id": "sleepedf:SC4011:000011"
+        },
+        "argmax_mismatches": 0,
+        "metric_differences": {
+          "loss": -3.885780586188048e-16,
+          "accuracy": 0.0,
+          "macro_f1": 0.0
+        },
+        "confusion_matrices_equal": true
+      },
+      "eager_seconds": 1503.5467514999982
+    },
+    {
+      "job_id": "M6_draw42_n70_seed42",
+      "examples": 65133,
+      "comparison": {
+        "passed": true,
+        "probabilities_within_tolerance": true,
+        "maximum_probability_difference": 1.1102230246251565e-16,
+        "largest_difference": {
+          "selected_row": 0,
+          "stage": "W",
+          "reference": 0.9999349117279052,
+          "candidate": 0.9999349117279053,
+          "epoch_id": "sleepedf:SC4011:000009"
+        },
+        "argmax_mismatches": 0,
+        "metric_differences": {
+          "loss": -5.551115123125783e-16,
+          "accuracy": 0.0,
+          "macro_f1": 0.0
+        },
+        "confusion_matrices_equal": true
+      },
+      "eager_seconds": 1715.3656360000023
+    }
+  ],
+  "compiled_validation_accepted": false,
+  "training_speedup_established": false,
+  "real_data_recovery_training_verified": false,
+  "optimizer_updates_by_reviewer": false,
+  "inference_by_reviewer": false,
+  "tensorflow_imported_by_reviewer": false
+}

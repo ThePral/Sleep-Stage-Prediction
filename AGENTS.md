@@ -13,9 +13,14 @@ unchanged classes/metrics on 64 targets. Matched-batch diagnostics then failed
 compiled batches 4/8/16/32 and eager batches 16/32; eager 4/8 passed the sample.
 M3/n70 then passed full-cohort eager batch-4 parity on all 65,133 targets
 (maximum probability difference 1.11e-16, zero class changes). Keep compiled
-validation unaccepted. The other 13 models' full-cohort eager parity and
-performance measurement remain pending and user-owned. See
-`reports/validation_parity_full_review_2026-11-15/`. Do not generalize
+validation unaccepted. The remaining thirteen also passed on 17 November;
+the 20 November review verified all 14 model seals, source/script hashes and
+65,133 target identities per model, with maximum probability difference
+1.11e-16 and zero class changes. Full-family eager batch-4 inference parity is
+accepted for these saved models. A capped recovery-enabled eager pilot is
+planned, not executed, at `runs/bilstm_recovery_eager_pilot_2026-11-20`.
+Its execution and performance measurement remain user-owned. See
+`reports/validation_parity_family_review_2026-11-20/`. Do not generalize
 the synthetic recovery result to untested configurations or claim measured speedup. The
 completed 18-job seed-42 study remains preserved historical evidence; edited
 source requires new study directories. See `docs/operations/SUPERVISED_RECOVERY.md`.
