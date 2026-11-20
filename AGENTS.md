@@ -28,11 +28,17 @@ not full-schedule or cross-hardware recovery. The user also completed the
 64-training-batch M6 runtime benchmark: 59.47 minutes for the training call,
 including two full validation passes/export, with 664.42 MiB peak sampled host
 RSS. Its bundle, recovery counters and full target identities verify. It does
-not measure an uncapped epoch, SSL, GPU VRAM or a speedup. A CPU-compatible
-three-seed replication draft (17/42/123, 48 jobs) is prepared but not frozen or
-executed; hardware/resource preference is pending. The historical seed-42 study
-is not pooled as a third new-version seed. See
-`reports/runtime_review_2026-11-20/` and `docs/REPLICATION_PROTOCOL_DRAFT.md`. Do not generalize
+not measure an uncapped epoch, SSL, GPU VRAM or a speedup. The user selected
+the current CPU route. A fresh three-seed replication study (17/42/123, 48 jobs)
+is frozen at `runs/bilstm_replication_cpu_2026-11-20`, with no jobs started.
+Source/packages and original participant budgets match; protocol/recipe hashes
+are archived with the study. The user launches only the first four-job stage
+(three preparation jobs plus full SSL seed 17) via the terminal handoff, then
+reports its summary for inspection before continuing. Do not advance stages
+automatically. SSL scheduler epoch resume is not implemented by the supervised
+resume flag. The historical seed-42 study is not pooled as a new-version seed.
+See `docs/operations/REPLICATION_CPU.md`, `docs/REPLICATION_PROTOCOL_CPU_2026-11-20.md`
+and `reports/replication_cpu_freeze_2026-11-20/`. Do not generalize
 the synthetic recovery result to untested configurations or claim measured speedup. The
 completed 18-job seed-42 study remains preserved historical evidence; edited
 source requires new study directories. See `docs/operations/SUPERVISED_RECOVERY.md`.

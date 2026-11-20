@@ -1,0 +1,36 @@
+{
+  "review_date": "2026-11-20",
+  "frozen_CPU_replication_plan_verified": true,
+  "study_directory": "runs/bilstm_replication_cpu_2026-11-20",
+  "study_fingerprint": "1e994b1116d15494f9137c56f7133bcc1afe807867381e7717e268a169351572",
+  "protocol_freeze_fingerprint": "dd1b01758bbbb8d63738ae9b06f86c3eae23f66ebc3bd8329e935f4dbfcce333",
+  "jobs_planned": 48,
+  "job_kinds": {
+    "waveform_statistics": 1,
+    "normalizer": 2,
+    "pretrain": 3,
+    "supervised": 42
+  },
+  "jobs_started": 0,
+  "limited_run": false,
+  "first_stage_job_ids": [
+    "waveform_statistics",
+    "normalizer_draw42_n18",
+    "normalizer_draw42_n70",
+    "ssl_seed17"
+  ],
+  "first_stage_expected_completed_jobs": 4,
+  "first_stage_is_full_campaign_completion": false,
+  "source_packages_scope_protocol_recipe_and_launcher_verified": true,
+  "label_budget_fingerprint_matches_historical_study": true,
+  "D_free_GiB_at_inspection": 120.38350677490234,
+  "optimizer_updates_performed": false,
+  "inference_performed": false,
+  "tensorflow_imported_by_inspector": false,
+  "files_sha256": {
+    "study.json": "31992a22d66f45b8aaf300e41bfe7318c5e17ee87e9198fb03415cedf68a4da5",
+    "label_budgets.json": "4541ff713120c7a03170c5eb147e1f1b48557eb5d7f0ed19a8c0782fde2492a4",
+    "protocol.md": "377775b14ce93ac95856519f285d035e14e7647afcd3391c8e4f3633838c541d",
+    "protocol_freeze.json": "2ec5853fecac9a2c59c4140ef13bdcd6aaf87441f5fef6421d330a29c002f78a"
+  }
+}

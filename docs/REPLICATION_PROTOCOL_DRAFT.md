@@ -1,5 +1,10 @@
 # Draft Sleep EDF replication protocol
 
+The user selected CPU execution; the successor
+[frozen CPU protocol](REPLICATION_PROTOCOL_CPU_2026-11-20.md) and
+[terminal handoff](operations/REPLICATION_CPU.md) are now current. The draft
+below is retained as the earlier planning version.
+
 This draft specifies a consistent repeated-seed comparison of raw waveform
 learning, waveform/spectral fusion and source-only SSL with a BiLSTM classifier.
 The tested CPU eager path has passed its engineering checks. Resource allocation

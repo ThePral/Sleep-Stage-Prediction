@@ -23,8 +23,11 @@ the [runtime benchmark](../reports/runtime_review_2026-11-20/README.md):
 59.47 minutes for 64 training batches with full validation/export, and 664.42 MiB
 peak sampled host RSS. Bundle/recovery seals and full target identities verify.
 This does not measure an uncapped epoch or establish a speed improvement.
-A consistent three-seed replication recipe is drafted with 48 jobs; no new
-replication study is frozen or running while the compute route is undecided.
+The user selected CPU execution. The
+[48-job CPU replication study](operations/REPLICATION_CPU.md) is frozen with
+seeds 17/42/123 and original participant budgets, recovery enabled and eager
+batch-4 validation. No jobs have started. The user receives a first-stage command
+for three preparation jobs and SSL seed 17 before further manual advancement.
 See the [handoff](operations/SUPERVISED_RECOVERY.md) and
 [evidence](../reports/recovery_implementation_2026-11-13/README.md).
 

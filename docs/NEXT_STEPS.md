@@ -18,16 +18,20 @@ This covers the tested capped M6 CPU case. The user also completed the
 [runtime benchmark](../reports/runtime_review_2026-11-20/README.md): 59.47 minutes
 for capped training plus full validation/export, with 664.42 MiB peak sampled
 host RSS. This is not an uncapped epoch estimate or a speedup. The next action
-is the CPU/GPU resource decision and review of the
-[three-seed replication draft](REPLICATION_PROTOCOL_DRAFT.md), before a fresh
-study freeze. Compiled validation remains unaccepted. The criteria below
+was the compute decision; the user selected the existing CPU route. The
+[CPU replication protocol](REPLICATION_PROTOCOL_CPU_2026-11-20.md) and new 48-job
+study are now frozen with no jobs started. The next action is the user-run
+[first preparation/SSL-17 stage](operations/REPLICATION_CPU.md), limited to four
+new jobs and followed by artifact inspection. Compiled validation remains
+unaccepted. The criteria below
 remain acceptance requirements, not claims that all gates have passed.
 
 The first uncapped study is complete and preserved. The next task is to make
 replication reliable and affordable, then test the research questions with
 matched controls. This is a staged work plan, not a frozen training protocol or
 authorization for the assistant to launch training. Only the explicitly named
-capped integration study has completed; the replication campaign is not frozen.
+capped integration study has completed. The replication campaign is now frozen
+but remains user-owned and unlaunched.
 
 ## 1. Use the completed study to decide what to test
 
@@ -117,13 +121,13 @@ model definitions, labeled and unlabeled participant pools, source split,
 checkpoint/stopping policies, paired contrasts, seeds, endpoints and compute
 limits. Preserve full-label controls even if attention is the intended method.
 
-The current draft uses optimization seeds 17, 42 and 123 under the same new
+The frozen CPU protocol uses optimization seeds 17, 42 and 123 under the same new
 recovery-enabled procedure, with draw seed 42 held fixed. Rerun seed 42 rather
 than pooling the historical implementation as its third seed. This separates
 optimization variation from participant label selection; varying label draws
-is a distinct study. These choices remain a draft pending resource review.
+is a distinct study. The user selected the CPU route for this scope.
 
-The draft retains M0 through M6 at both budgets and all three seeds: 42 supervised
+The protocol retains M0 through M6 at both budgets and all three seeds: 42 supervised
 fits, three SSL fits and three preparation jobs (48 jobs). This describes scope,
 not a runtime or cost commitment. Final scope depends on resources and scientific
 claims, not on which validation result is most flattering.
@@ -157,6 +161,6 @@ The paper's physiological and BiLSTM claims must match the ablations actually
 performed. A clear, reproducible finding about label efficiency can be valuable
 without claiming that every component wins in every setting.
 
-Recovery, accepted eager inference parity and the scoped runtime benchmark are
-complete. The next step is a resource decision and a fresh replication freeze.
+Recovery, accepted eager inference parity, the scoped runtime benchmark and the
+CPU replication freeze are complete. The next step is the user-run first stage.
 The full campaign remains unlaunched.
