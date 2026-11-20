@@ -24,11 +24,15 @@ The user then replayed M6 from epoch one into
 `runs/bilstm_real_resume_m6_2026-11-20`: all 161 state arrays, RNG/callback state,
 history, best-model hash and eight validation predictions match the uninterrupted
 pilot exactly. This passes the tested capped real-data M6 CPU recovery case,
-not full-schedule or cross-hardware recovery. A separate 64-training-batch M6
-runtime benchmark with full validation and best-model export is prepared but
-not executed at `runs/bilstm_recovery_runtime_2026-11-20`; execution and performance
-measurement remain user-owned. See
-`reports/recovery_replay_review_2026-11-20/`. Do not generalize
+not full-schedule or cross-hardware recovery. The user also completed the
+64-training-batch M6 runtime benchmark: 59.47 minutes for the training call,
+including two full validation passes/export, with 664.42 MiB peak sampled host
+RSS. Its bundle, recovery counters and full target identities verify. It does
+not measure an uncapped epoch, SSL, GPU VRAM or a speedup. A CPU-compatible
+three-seed replication draft (17/42/123, 48 jobs) is prepared but not frozen or
+executed; hardware/resource preference is pending. The historical seed-42 study
+is not pooled as a third new-version seed. See
+`reports/runtime_review_2026-11-20/` and `docs/REPLICATION_PROTOCOL_DRAFT.md`. Do not generalize
 the synthetic recovery result to untested configurations or claim measured speedup. The
 completed 18-job seed-42 study remains preserved historical evidence; edited
 source requires new study directories. See `docs/operations/SUPERVISED_RECOVERY.md`.

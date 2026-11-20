@@ -18,9 +18,13 @@ The [pilot review](../reports/recovery_pilot_review_2026-11-20/README.md)
 verified all job seals and forty-two recovery generations. The user then passed
 the [capped real-data M6 replay](../reports/recovery_replay_review_2026-11-20/README.md):
 all 161 state arrays and eight validation predictions match the uninterrupted
-pilot exactly. This applies to the tested configuration. A runtime benchmark
-with capped training and full validation/export is prepared but not executed;
-measured training performance and speed improvement remain pending.
+pilot exactly. This applies to the tested configuration. The user completed
+the [runtime benchmark](../reports/runtime_review_2026-11-20/README.md):
+59.47 minutes for 64 training batches with full validation/export, and 664.42 MiB
+peak sampled host RSS. Bundle/recovery seals and full target identities verify.
+This does not measure an uncapped epoch or establish a speed improvement.
+A consistent three-seed replication recipe is drafted with 48 jobs; no new
+replication study is frozen or running while the compute route is undecided.
 See the [handoff](operations/SUPERVISED_RECOVERY.md) and
 [evidence](../reports/recovery_implementation_2026-11-13/README.md).
 

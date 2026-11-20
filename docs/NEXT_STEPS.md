@@ -14,11 +14,13 @@ maximum probability difference 1.11e-16 and zero class changes. The user then
 completed all eighteen capped recovery/eager pilot jobs; all job seals and
 forty-two recovery generations verify. M6's real-data replay from epoch one
 also passed: all 161 state arrays and exported predictions match exactly.
-This covers the tested capped M6 CPU case. The next action is the user-run
-[runtime benchmark](../reports/recovery_replay_review_2026-11-20/README.md),
-with 64 training batches and full validation/export, before freezing replication.
-Compiled validation remains unaccepted; representative runtime measurement
-remains pending. The criteria below
+This covers the tested capped M6 CPU case. The user also completed the
+[runtime benchmark](../reports/runtime_review_2026-11-20/README.md): 59.47 minutes
+for capped training plus full validation/export, with 664.42 MiB peak sampled
+host RSS. This is not an uncapped epoch estimate or a speedup. The next action
+is the CPU/GPU resource decision and review of the
+[three-seed replication draft](REPLICATION_PROTOCOL_DRAFT.md), before a fresh
+study freeze. Compiled validation remains unaccepted. The criteria below
 remain acceptance requirements, not claims that all gates have passed.
 
 The first uncapped study is complete and preserved. The next task is to make
@@ -115,16 +117,15 @@ model definitions, labeled and unlabeled participant pools, source split,
 checkpoint/stopping policies, paired contrasts, seeds, endpoints and compute
 limits. Preserve full-label controls even if attention is the intended method.
 
-A reasonable starting draft is two additional predeclared optimization seeds,
-such as 17 and 123, with draw seed 42 held fixed. This separates optimization
-variation from a change in participant label selection. Varying label draws is
-a distinct study; do not claim robustness to label selection from one draw.
-The seed choices here are a proposal, not a registered final protocol.
+The current draft uses optimization seeds 17, 42 and 123 under the same new
+recovery-enabled procedure, with draw seed 42 held fixed. Rerun seed 42 rather
+than pooling the historical implementation as its third seed. This separates
+optimization variation from participant label selection; varying label draws
+is a distinct study. These choices remain a draft pending resource review.
 
-For M1–M6 at both budgets and two new seeds, the existing job graph would need
-24 supervised fits, two SSL fits and three preparation jobs (29 jobs). Including
-M0 for both seeds would make 33 jobs. This describes scope, not a runtime or
-cost commitment. Final scope depends on benchmarked resources and the scientific
+The draft retains M0 through M6 at both budgets and all three seeds: 42 supervised
+fits, three SSL fits and three preparation jobs (48 jobs). This describes scope,
+not a runtime or cost commitment. Final scope depends on resources and scientific
 claims, not on which validation result is most flattering.
 
 The existing seed-42 study remains exploratory provenance. Before pooling it
@@ -156,5 +157,6 @@ The paper's physiological and BiLSTM claims must match the ablations actually
 performed. A clear, reproducible finding about label efficiency can be valuable
 without claiming that every component wins in every setting.
 
-The immediate implementation order is **recovery, validation speed, controlled
-benchmark, frozen replication**. No new full training command is needed today.
+Recovery, accepted eager inference parity and the scoped runtime benchmark are
+complete. The next step is a resource decision and a fresh replication freeze.
+The full campaign remains unlaunched.

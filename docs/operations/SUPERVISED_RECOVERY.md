@@ -11,7 +11,9 @@ review verified full-family eager parity. The user also completed all eighteen
 capped recovery/eager pilot jobs; all job seals and forty-two recovery generations
 verify. The user also passed the capped real-data M6 epoch-one replay: all 161
 state arrays, callbacks/RNG, history and validation predictions match exactly.
-A runtime benchmark remains pending; no end-to-end speed improvement is claimed.
+The user completed a runtime benchmark with 64 training batches and two full
+validation passes: 59.47 minutes for the training call and 664.42 MiB peak sampled
+host RSS. Its artifacts verify; no uncapped epoch time or speedup is claimed.
 No research training or
 optimizer-based gate was launched by the assistant.
 
@@ -50,7 +52,9 @@ probability tolerance at compiled batch 32; eager replay passed and predicted
 classes were unchanged on the 64 targets. M3/n70 then passed full-cohort eager
 batch-4 parity (maximum probability difference 1.11e-16, zero class changes).
 The remaining thirteen also passed full-cohort eager batch-4 parity. The next
-action is the user-run [runtime benchmark](../../reports/recovery_replay_review_2026-11-20/README.md).
+action is the [replication resource decision](../../reports/runtime_review_2026-11-20/README.md)
+and protocol review before a fresh study freeze. The scoped runtime benchmark
+has completed and verified.
 The M6 replay has passed for the tested two capped real-data epochs on CPU;
 this does not establish full-schedule or cross-device equivalence.
 The matched-batch diagnostic failed compiled 4/8/16/32 and eager 16/32; eager
@@ -59,8 +63,8 @@ eager batch 4, which passed for all fourteen saved classifiers. The original
 recovery pilot enables compiled validation; the new eager pilot uses a separate
 recipe and fresh study.
 Do not relax tolerances based on this observation or interpret a passing
-alternative batch size as a pass of the original declared mode. Measured
-training throughput remains pending.
+alternative batch size as a pass of the original declared mode. Full uncapped
+training-pass duration and a speed improvement remain unmeasured.
 
 ## Configuration and state
 
@@ -154,10 +158,12 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m 
 ```
 
 All eighteen job seals and forty-two recovery generations have been inspected.
-M6's epoch-one replay also passed. The next user-run command is the runtime
-benchmark in the linked replay review, timing capped training with full
-validation, checkpoint saving and final export. Its cap does not establish a
-full uncapped epoch duration. Current inference checks cover
+M6's epoch-one replay also passed. The runtime benchmark completed in 59.47
+training-call minutes with 664.42 MiB peak sampled host RSS, including capped
+training, full validation, checkpoint saving and final export. Its cap does
+not establish a full uncapped epoch duration. The next step is reviewing the
+three-seed replication draft and choosing compute before freezing a study.
+Current inference checks cover
 all four representations, tail batches, target identity, predicted classes,
 probabilities, confusion matrices and metrics with `1e-6` tolerance. They do not
 establish optimizer/callback equivalence or a measured speedup by themselves. The separate

@@ -1,0 +1,625 @@
+{
+  "prepared_on": "2026-11-20",
+  "status": "draft_not_frozen_or_executed",
+  "recipe": "configs/sleepedf/experiments/experiment_bilstm_replication_draft.json",
+  "recipe_sha256": "81dd6120d58be3eefd8a2b714de4e7b256061770f8a06eb24be87ab780ef979e",
+  "optimization_seeds": [
+    17,
+    42,
+    123
+  ],
+  "label_draw_seed": 42,
+  "labeled_participant_budgets": [
+    18,
+    70
+  ],
+  "source_training_participants": 70,
+  "source_validation_participants": 15,
+  "job_kinds": {
+    "waveform_statistics": 1,
+    "normalizer": 2,
+    "pretrain": 3,
+    "supervised": 42
+  },
+  "jobs_total": 48,
+  "jobs": [
+    {
+      "job_id": "waveform_statistics",
+      "kind": "waveform_statistics",
+      "dependencies": []
+    },
+    {
+      "job_id": "normalizer_draw42_n18",
+      "kind": "normalizer",
+      "budget_id": "draw42_n18",
+      "dependencies": [
+        "waveform_statistics"
+      ]
+    },
+    {
+      "job_id": "normalizer_draw42_n70",
+      "kind": "normalizer",
+      "budget_id": "draw42_n70",
+      "dependencies": [
+        "waveform_statistics"
+      ]
+    },
+    {
+      "job_id": "ssl_seed17",
+      "kind": "pretrain",
+      "seed": 17,
+      "dependencies": [
+        "waveform_statistics"
+      ]
+    },
+    {
+      "job_id": "ssl_seed42",
+      "kind": "pretrain",
+      "seed": 42,
+      "dependencies": [
+        "waveform_statistics"
+      ]
+    },
+    {
+      "job_id": "ssl_seed123",
+      "kind": "pretrain",
+      "seed": 123,
+      "dependencies": [
+        "waveform_statistics"
+      ]
+    },
+    {
+      "job_id": "M0_draw42_n18_seed17",
+      "kind": "supervised",
+      "budget_id": "draw42_n18",
+      "seed": 17,
+      "condition": "M0",
+      "variant": "spectral",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n18"
+      ]
+    },
+    {
+      "job_id": "M1_draw42_n18_seed17",
+      "kind": "supervised",
+      "budget_id": "draw42_n18",
+      "seed": 17,
+      "condition": "M1",
+      "variant": "raw",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n18"
+      ]
+    },
+    {
+      "job_id": "M2_draw42_n18_seed17",
+      "kind": "supervised",
+      "budget_id": "draw42_n18",
+      "seed": 17,
+      "condition": "M2",
+      "variant": "concat",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n18"
+      ]
+    },
+    {
+      "job_id": "M3_draw42_n18_seed17",
+      "kind": "supervised",
+      "budget_id": "draw42_n18",
+      "seed": 17,
+      "condition": "M3",
+      "variant": "gated",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n18"
+      ]
+    },
+    {
+      "job_id": "M4_draw42_n18_seed17",
+      "kind": "supervised",
+      "budget_id": "draw42_n18",
+      "seed": 17,
+      "condition": "M4",
+      "variant": "raw",
+      "pretrained": true,
+      "dependencies": [
+        "normalizer_draw42_n18",
+        "ssl_seed17"
+      ]
+    },
+    {
+      "job_id": "M5_draw42_n18_seed17",
+      "kind": "supervised",
+      "budget_id": "draw42_n18",
+      "seed": 17,
+      "condition": "M5",
+      "variant": "concat",
+      "pretrained": true,
+      "dependencies": [
+        "normalizer_draw42_n18",
+        "ssl_seed17"
+      ]
+    },
+    {
+      "job_id": "M6_draw42_n18_seed17",
+      "kind": "supervised",
+      "budget_id": "draw42_n18",
+      "seed": 17,
+      "condition": "M6",
+      "variant": "gated",
+      "pretrained": true,
+      "dependencies": [
+        "normalizer_draw42_n18",
+        "ssl_seed17"
+      ]
+    },
+    {
+      "job_id": "M0_draw42_n18_seed42",
+      "kind": "supervised",
+      "budget_id": "draw42_n18",
+      "seed": 42,
+      "condition": "M0",
+      "variant": "spectral",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n18"
+      ]
+    },
+    {
+      "job_id": "M1_draw42_n18_seed42",
+      "kind": "supervised",
+      "budget_id": "draw42_n18",
+      "seed": 42,
+      "condition": "M1",
+      "variant": "raw",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n18"
+      ]
+    },
+    {
+      "job_id": "M2_draw42_n18_seed42",
+      "kind": "supervised",
+      "budget_id": "draw42_n18",
+      "seed": 42,
+      "condition": "M2",
+      "variant": "concat",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n18"
+      ]
+    },
+    {
+      "job_id": "M3_draw42_n18_seed42",
+      "kind": "supervised",
+      "budget_id": "draw42_n18",
+      "seed": 42,
+      "condition": "M3",
+      "variant": "gated",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n18"
+      ]
+    },
+    {
+      "job_id": "M4_draw42_n18_seed42",
+      "kind": "supervised",
+      "budget_id": "draw42_n18",
+      "seed": 42,
+      "condition": "M4",
+      "variant": "raw",
+      "pretrained": true,
+      "dependencies": [
+        "normalizer_draw42_n18",
+        "ssl_seed42"
+      ]
+    },
+    {
+      "job_id": "M5_draw42_n18_seed42",
+      "kind": "supervised",
+      "budget_id": "draw42_n18",
+      "seed": 42,
+      "condition": "M5",
+      "variant": "concat",
+      "pretrained": true,
+      "dependencies": [
+        "normalizer_draw42_n18",
+        "ssl_seed42"
+      ]
+    },
+    {
+      "job_id": "M6_draw42_n18_seed42",
+      "kind": "supervised",
+      "budget_id": "draw42_n18",
+      "seed": 42,
+      "condition": "M6",
+      "variant": "gated",
+      "pretrained": true,
+      "dependencies": [
+        "normalizer_draw42_n18",
+        "ssl_seed42"
+      ]
+    },
+    {
+      "job_id": "M0_draw42_n18_seed123",
+      "kind": "supervised",
+      "budget_id": "draw42_n18",
+      "seed": 123,
+      "condition": "M0",
+      "variant": "spectral",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n18"
+      ]
+    },
+    {
+      "job_id": "M1_draw42_n18_seed123",
+      "kind": "supervised",
+      "budget_id": "draw42_n18",
+      "seed": 123,
+      "condition": "M1",
+      "variant": "raw",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n18"
+      ]
+    },
+    {
+      "job_id": "M2_draw42_n18_seed123",
+      "kind": "supervised",
+      "budget_id": "draw42_n18",
+      "seed": 123,
+      "condition": "M2",
+      "variant": "concat",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n18"
+      ]
+    },
+    {
+      "job_id": "M3_draw42_n18_seed123",
+      "kind": "supervised",
+      "budget_id": "draw42_n18",
+      "seed": 123,
+      "condition": "M3",
+      "variant": "gated",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n18"
+      ]
+    },
+    {
+      "job_id": "M4_draw42_n18_seed123",
+      "kind": "supervised",
+      "budget_id": "draw42_n18",
+      "seed": 123,
+      "condition": "M4",
+      "variant": "raw",
+      "pretrained": true,
+      "dependencies": [
+        "normalizer_draw42_n18",
+        "ssl_seed123"
+      ]
+    },
+    {
+      "job_id": "M5_draw42_n18_seed123",
+      "kind": "supervised",
+      "budget_id": "draw42_n18",
+      "seed": 123,
+      "condition": "M5",
+      "variant": "concat",
+      "pretrained": true,
+      "dependencies": [
+        "normalizer_draw42_n18",
+        "ssl_seed123"
+      ]
+    },
+    {
+      "job_id": "M6_draw42_n18_seed123",
+      "kind": "supervised",
+      "budget_id": "draw42_n18",
+      "seed": 123,
+      "condition": "M6",
+      "variant": "gated",
+      "pretrained": true,
+      "dependencies": [
+        "normalizer_draw42_n18",
+        "ssl_seed123"
+      ]
+    },
+    {
+      "job_id": "M0_draw42_n70_seed17",
+      "kind": "supervised",
+      "budget_id": "draw42_n70",
+      "seed": 17,
+      "condition": "M0",
+      "variant": "spectral",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n70"
+      ]
+    },
+    {
+      "job_id": "M1_draw42_n70_seed17",
+      "kind": "supervised",
+      "budget_id": "draw42_n70",
+      "seed": 17,
+      "condition": "M1",
+      "variant": "raw",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n70"
+      ]
+    },
+    {
+      "job_id": "M2_draw42_n70_seed17",
+      "kind": "supervised",
+      "budget_id": "draw42_n70",
+      "seed": 17,
+      "condition": "M2",
+      "variant": "concat",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n70"
+      ]
+    },
+    {
+      "job_id": "M3_draw42_n70_seed17",
+      "kind": "supervised",
+      "budget_id": "draw42_n70",
+      "seed": 17,
+      "condition": "M3",
+      "variant": "gated",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n70"
+      ]
+    },
+    {
+      "job_id": "M4_draw42_n70_seed17",
+      "kind": "supervised",
+      "budget_id": "draw42_n70",
+      "seed": 17,
+      "condition": "M4",
+      "variant": "raw",
+      "pretrained": true,
+      "dependencies": [
+        "normalizer_draw42_n70",
+        "ssl_seed17"
+      ]
+    },
+    {
+      "job_id": "M5_draw42_n70_seed17",
+      "kind": "supervised",
+      "budget_id": "draw42_n70",
+      "seed": 17,
+      "condition": "M5",
+      "variant": "concat",
+      "pretrained": true,
+      "dependencies": [
+        "normalizer_draw42_n70",
+        "ssl_seed17"
+      ]
+    },
+    {
+      "job_id": "M6_draw42_n70_seed17",
+      "kind": "supervised",
+      "budget_id": "draw42_n70",
+      "seed": 17,
+      "condition": "M6",
+      "variant": "gated",
+      "pretrained": true,
+      "dependencies": [
+        "normalizer_draw42_n70",
+        "ssl_seed17"
+      ]
+    },
+    {
+      "job_id": "M0_draw42_n70_seed42",
+      "kind": "supervised",
+      "budget_id": "draw42_n70",
+      "seed": 42,
+      "condition": "M0",
+      "variant": "spectral",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n70"
+      ]
+    },
+    {
+      "job_id": "M1_draw42_n70_seed42",
+      "kind": "supervised",
+      "budget_id": "draw42_n70",
+      "seed": 42,
+      "condition": "M1",
+      "variant": "raw",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n70"
+      ]
+    },
+    {
+      "job_id": "M2_draw42_n70_seed42",
+      "kind": "supervised",
+      "budget_id": "draw42_n70",
+      "seed": 42,
+      "condition": "M2",
+      "variant": "concat",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n70"
+      ]
+    },
+    {
+      "job_id": "M3_draw42_n70_seed42",
+      "kind": "supervised",
+      "budget_id": "draw42_n70",
+      "seed": 42,
+      "condition": "M3",
+      "variant": "gated",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n70"
+      ]
+    },
+    {
+      "job_id": "M4_draw42_n70_seed42",
+      "kind": "supervised",
+      "budget_id": "draw42_n70",
+      "seed": 42,
+      "condition": "M4",
+      "variant": "raw",
+      "pretrained": true,
+      "dependencies": [
+        "normalizer_draw42_n70",
+        "ssl_seed42"
+      ]
+    },
+    {
+      "job_id": "M5_draw42_n70_seed42",
+      "kind": "supervised",
+      "budget_id": "draw42_n70",
+      "seed": 42,
+      "condition": "M5",
+      "variant": "concat",
+      "pretrained": true,
+      "dependencies": [
+        "normalizer_draw42_n70",
+        "ssl_seed42"
+      ]
+    },
+    {
+      "job_id": "M6_draw42_n70_seed42",
+      "kind": "supervised",
+      "budget_id": "draw42_n70",
+      "seed": 42,
+      "condition": "M6",
+      "variant": "gated",
+      "pretrained": true,
+      "dependencies": [
+        "normalizer_draw42_n70",
+        "ssl_seed42"
+      ]
+    },
+    {
+      "job_id": "M0_draw42_n70_seed123",
+      "kind": "supervised",
+      "budget_id": "draw42_n70",
+      "seed": 123,
+      "condition": "M0",
+      "variant": "spectral",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n70"
+      ]
+    },
+    {
+      "job_id": "M1_draw42_n70_seed123",
+      "kind": "supervised",
+      "budget_id": "draw42_n70",
+      "seed": 123,
+      "condition": "M1",
+      "variant": "raw",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n70"
+      ]
+    },
+    {
+      "job_id": "M2_draw42_n70_seed123",
+      "kind": "supervised",
+      "budget_id": "draw42_n70",
+      "seed": 123,
+      "condition": "M2",
+      "variant": "concat",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n70"
+      ]
+    },
+    {
+      "job_id": "M3_draw42_n70_seed123",
+      "kind": "supervised",
+      "budget_id": "draw42_n70",
+      "seed": 123,
+      "condition": "M3",
+      "variant": "gated",
+      "pretrained": false,
+      "dependencies": [
+        "normalizer_draw42_n70"
+      ]
+    },
+    {
+      "job_id": "M4_draw42_n70_seed123",
+      "kind": "supervised",
+      "budget_id": "draw42_n70",
+      "seed": 123,
+      "condition": "M4",
+      "variant": "raw",
+      "pretrained": true,
+      "dependencies": [
+        "normalizer_draw42_n70",
+        "ssl_seed123"
+      ]
+    },
+    {
+      "job_id": "M5_draw42_n70_seed123",
+      "kind": "supervised",
+      "budget_id": "draw42_n70",
+      "seed": 123,
+      "condition": "M5",
+      "variant": "concat",
+      "pretrained": true,
+      "dependencies": [
+        "normalizer_draw42_n70",
+        "ssl_seed123"
+      ]
+    },
+    {
+      "job_id": "M6_draw42_n70_seed123",
+      "kind": "supervised",
+      "budget_id": "draw42_n70",
+      "seed": 123,
+      "condition": "M6",
+      "variant": "gated",
+      "pretrained": true,
+      "dependencies": [
+        "normalizer_draw42_n70",
+        "ssl_seed123"
+      ]
+    }
+  ],
+  "historical_optimization_seed_42_pooled_with_new_version": false,
+  "historical_one_seed_recorded_classifier_plus_SSL_hours": 118.02472617822218,
+  "historical_three_times_hours_arithmetic_only": 354.07417853466654,
+  "illustrative_M3_validation_pass_seconds": 1763.7550435000448,
+  "capacity_scenarios": [
+    {
+      "epochs_per_model": 5,
+      "model_count": 42,
+      "validation_passes_including_export": 252,
+      "illustrative_validation_hours_at_M3_rate": 123.46285304500314
+    },
+    {
+      "epochs_per_model": 10,
+      "model_count": 42,
+      "validation_passes_including_export": 462,
+      "illustrative_validation_hours_at_M3_rate": 226.3485639158391
+    },
+    {
+      "epochs_per_model": 30,
+      "model_count": 42,
+      "validation_passes_including_export": 1302,
+      "illustrative_validation_hours_at_M3_rate": 637.8914073991829
+    }
+  ],
+  "scenario_limit": "Illustrations assume every model has the measured M3 eager validation cost. Architectures differ; excludes training, SSL, preparation, downtime and thermal changes. Not a runtime guarantee or lower bound.",
+  "study_directory_created": false,
+  "optimizer_updates_performed": false,
+  "pending_decisions": [
+    "CPU versus separately validated GPU/cloud execution",
+    "Compute allocation and staging before a fresh study freeze"
+  ]
+}
