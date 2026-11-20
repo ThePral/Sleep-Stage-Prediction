@@ -10,18 +10,20 @@ eager 4/8 passed on the sample. M3/n70 then passed full-cohort eager batch-4
 parity on 65,133 targets (maximum probability difference 1.11e-16).
 The remaining thirteen models also passed on 17 November. The 20 November
 review verified all fourteen on 65,133 targets each at eager batch 4, with
-maximum probability difference 1.11e-16 and zero class changes. The next action
-is the user-run [capped recovery integration pilot](../reports/validation_parity_family_review_2026-11-20/README.md),
-already planned in a fresh study with recovery enabled and compiled validation
-disabled. Compiled validation remains unaccepted; real-data recovery integration
-and measured training performance remain pending. The criteria below
+maximum probability difference 1.11e-16 and zero class changes. The user then
+completed all eighteen capped recovery/eager pilot jobs; all job seals and
+forty-two recovery generations verify. The next action is the user-run
+[M6 epoch-boundary replay](../reports/recovery_pilot_review_2026-11-20/README.md)
+to compare resumed real-data training with the uninterrupted pilot. Compiled
+validation remains unaccepted; real-data resume equivalence and measured
+training performance remain pending. The criteria below
 remain acceptance requirements, not claims that all gates have passed.
 
 The first uncapped study is complete and preserved. The next task is to make
 replication reliable and affordable, then test the research questions with
 matched controls. This is a staged work plan, not a frozen training protocol or
 authorization for the assistant to launch training. Only the explicitly named
-capped integration study has been planned; the replication campaign is not frozen.
+capped integration study has completed; the replication campaign is not frozen.
 
 ## 1. Use the completed study to decide what to test
 

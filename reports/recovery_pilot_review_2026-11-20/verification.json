@@ -1,0 +1,238 @@
+{
+  "review_date": "2026-11-20",
+  "pilot_completed_and_artifacts_verified": true,
+  "study_fingerprint": "c6b51f9d64d041488502ae6cfabf0b7a1b6caaf3b1664747c39f8cf0ce85f901",
+  "execution_summary": {
+    "jobs_planned": 18,
+    "jobs_completed": 18,
+    "jobs_executed_this_call": 18,
+    "limited_run": true
+  },
+  "source_packages_and_data_scope_verified": true,
+  "completed_job_seals_verified": 18,
+  "supervised_models_verified": 14,
+  "recovery_generations_verified": 42,
+  "supervised_optimizer_steps_observed": 56,
+  "ssl_optimizer_steps_observed": 2,
+  "validation_targets_per_model": 8,
+  "models": [
+    {
+      "job_id": "M0_draw42_n1_seed42",
+      "epochs_completed": 2,
+      "recovery_epochs": [
+        0,
+        1,
+        2
+      ],
+      "optimizer_iterations": 4,
+      "best_epoch": 1,
+      "validation_targets": 8,
+      "state_array_count": 39,
+      "elapsed_seconds_this_call": 4.800965700007509,
+      "reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M1_draw42_n1_seed42",
+      "epochs_completed": 2,
+      "recovery_epochs": [
+        0,
+        1,
+        2
+      ],
+      "optimizer_iterations": 4,
+      "best_epoch": 1,
+      "validation_targets": 8,
+      "state_array_count": 103,
+      "elapsed_seconds_this_call": 7.085057299991604,
+      "reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M2_draw42_n1_seed42",
+      "epochs_completed": 2,
+      "recovery_epochs": [
+        0,
+        1,
+        2
+      ],
+      "optimizer_iterations": 4,
+      "best_epoch": 1,
+      "validation_targets": 8,
+      "state_array_count": 119,
+      "elapsed_seconds_this_call": 7.360255899984622,
+      "reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M3_draw42_n1_seed42",
+      "epochs_completed": 2,
+      "recovery_epochs": [
+        0,
+        1,
+        2
+      ],
+      "optimizer_iterations": 4,
+      "best_epoch": 1,
+      "validation_targets": 8,
+      "state_array_count": 161,
+      "elapsed_seconds_this_call": 8.51143030001549,
+      "reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M4_draw42_n1_seed42",
+      "epochs_completed": 2,
+      "recovery_epochs": [
+        0,
+        1,
+        2
+      ],
+      "optimizer_iterations": 4,
+      "best_epoch": 1,
+      "validation_targets": 8,
+      "state_array_count": 103,
+      "elapsed_seconds_this_call": 6.9235934000171255,
+      "reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M5_draw42_n1_seed42",
+      "epochs_completed": 2,
+      "recovery_epochs": [
+        0,
+        1,
+        2
+      ],
+      "optimizer_iterations": 4,
+      "best_epoch": 1,
+      "validation_targets": 8,
+      "state_array_count": 119,
+      "elapsed_seconds_this_call": 7.3788354999851435,
+      "reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M6_draw42_n1_seed42",
+      "epochs_completed": 2,
+      "recovery_epochs": [
+        0,
+        1,
+        2
+      ],
+      "optimizer_iterations": 4,
+      "best_epoch": 1,
+      "validation_targets": 8,
+      "state_array_count": 161,
+      "elapsed_seconds_this_call": 8.452472100005252,
+      "reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M0_draw42_n2_seed42",
+      "epochs_completed": 2,
+      "recovery_epochs": [
+        0,
+        1,
+        2
+      ],
+      "optimizer_iterations": 4,
+      "best_epoch": 1,
+      "validation_targets": 8,
+      "state_array_count": 39,
+      "elapsed_seconds_this_call": 5.380103500006953,
+      "reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M1_draw42_n2_seed42",
+      "epochs_completed": 2,
+      "recovery_epochs": [
+        0,
+        1,
+        2
+      ],
+      "optimizer_iterations": 4,
+      "best_epoch": 1,
+      "validation_targets": 8,
+      "state_array_count": 103,
+      "elapsed_seconds_this_call": 7.370313099992927,
+      "reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M2_draw42_n2_seed42",
+      "epochs_completed": 2,
+      "recovery_epochs": [
+        0,
+        1,
+        2
+      ],
+      "optimizer_iterations": 4,
+      "best_epoch": 1,
+      "validation_targets": 8,
+      "state_array_count": 119,
+      "elapsed_seconds_this_call": 7.573297900002217,
+      "reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M3_draw42_n2_seed42",
+      "epochs_completed": 2,
+      "recovery_epochs": [
+        0,
+        1,
+        2
+      ],
+      "optimizer_iterations": 4,
+      "best_epoch": 2,
+      "validation_targets": 8,
+      "state_array_count": 161,
+      "elapsed_seconds_this_call": 8.92272950001643,
+      "reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M4_draw42_n2_seed42",
+      "epochs_completed": 2,
+      "recovery_epochs": [
+        0,
+        1,
+        2
+      ],
+      "optimizer_iterations": 4,
+      "best_epoch": 1,
+      "validation_targets": 8,
+      "state_array_count": 103,
+      "elapsed_seconds_this_call": 7.408670200005872,
+      "reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M5_draw42_n2_seed42",
+      "epochs_completed": 2,
+      "recovery_epochs": [
+        0,
+        1,
+        2
+      ],
+      "optimizer_iterations": 4,
+      "best_epoch": 1,
+      "validation_targets": 8,
+      "state_array_count": 119,
+      "elapsed_seconds_this_call": 7.957847299985588,
+      "reload_max_probability_difference": 0.0
+    },
+    {
+      "job_id": "M6_draw42_n2_seed42",
+      "epochs_completed": 2,
+      "recovery_epochs": [
+        0,
+        1,
+        2
+      ],
+      "optimizer_iterations": 4,
+      "best_epoch": 1,
+      "validation_targets": 8,
+      "state_array_count": 161,
+      "elapsed_seconds_this_call": 9.125717400020221,
+      "reload_max_probability_difference": 0.0
+    }
+  ],
+  "epoch_resume_equivalence_on_real_data_tested": false,
+  "compiled_validation_accepted": false,
+  "training_speedup_established": false,
+  "optimizer_updates_by_reviewer": false,
+  "model_inference_by_reviewer": false,
+  "tensorflow_imported_by_reviewer": false,
+  "study_manifest_sha256": "f3ed22d65610c5b3945f32d06f2b7fdaee97cfe5fab56c324b04274dbfadae6d",
+  "execution_summary_sha256": "b775ee60a9e28ed83fb51d4b366724d9a789b1f8add41dc9e379fd464e8a9958"
+}

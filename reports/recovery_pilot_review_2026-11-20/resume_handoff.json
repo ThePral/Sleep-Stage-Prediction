@@ -1,0 +1,16 @@
+{
+  "baseline_artifacts": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\bilstm_recovery_eager_pilot_2026-11-20\\jobs\\M6_draw42_n2_seed42\\attempt_0001\\artifacts",
+  "epoch_one_generation": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\bilstm_recovery_eager_pilot_2026-11-20\\jobs\\M6_draw42_n2_seed42\\attempt_0001\\artifacts\\recovery\\epoch_0001_84c952240b914415b8ecc987cfb75d94",
+  "config": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\reports\\recovery_pilot_review_2026-11-20\\resume_m6_config.json",
+  "data_root": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\data\\processed\\research_v1",
+  "split_file": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\final_model_corrected\\participant_split.csv",
+  "normalizer": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\bilstm_recovery_eager_pilot_2026-11-20\\jobs\\normalizer_draw42_n2\\attempt_0001\\artifacts\\normalizer.json",
+  "pretrained": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\bilstm_recovery_eager_pilot_2026-11-20\\jobs\\ssl_seed42\\attempt_0001\\artifacts",
+  "budget_plan": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\bilstm_recovery_eager_pilot_2026-11-20\\label_budgets.json",
+  "budget_id": "draw42_n2",
+  "resume_output": "D:\\Local Disk\\Uni Sources\\Term 8\\Final Project\\Sleep-Stage-Prediction\\runs\\bilstm_real_resume_m6_2026-11-20",
+  "expected_resumed_after_epoch": 1,
+  "expected_completed_epochs": 2,
+  "optimizer_updates_in_replay": 2,
+  "executed": false
+}

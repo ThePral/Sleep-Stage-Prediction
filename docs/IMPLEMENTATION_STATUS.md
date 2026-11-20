@@ -13,8 +13,11 @@ saved classifiers on 65,133 targets each. The 20 November
 [family review](../reports/validation_parity_family_review_2026-11-20/README.md)
 verifies zero class changes and maximum probability difference 1.11e-16.
 Compiled validation remains unaccepted after its sampled numerical failure.
-A fresh capped recovery/eager integration pilot is planned with no jobs started;
-real-data recovery training checks and measured training speedup remain pending.
+The user completed all eighteen capped recovery/eager integration pilot jobs.
+The [pilot review](../reports/recovery_pilot_review_2026-11-20/README.md)
+verified all job seals and forty-two recovery generations. A fresh M6 replay
+from epoch one is prepared for the user; real-data resume equivalence and
+measured training speedup remain pending.
 See the [handoff](operations/SUPERVISED_RECOVERY.md) and
 [evidence](../reports/recovery_implementation_2026-11-13/README.md).
 

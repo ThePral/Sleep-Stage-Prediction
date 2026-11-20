@@ -17,10 +17,14 @@ validation unaccepted. The remaining thirteen also passed on 17 November;
 the 20 November review verified all 14 model seals, source/script hashes and
 65,133 target identities per model, with maximum probability difference
 1.11e-16 and zero class changes. Full-family eager batch-4 inference parity is
-accepted for these saved models. A capped recovery-enabled eager pilot is
-planned, not executed, at `runs/bilstm_recovery_eager_pilot_2026-11-20`.
+accepted for these saved models. The user then completed all 18 jobs in
+`runs/bilstm_recovery_eager_pilot_2026-11-20`; the review verified all job seals
+and 42 recovery generations (epochs 0/1/2 for each of 14 supervised models).
+This is capped integration evidence, not research performance or proof of
+real-data resume equivalence. A replay of M6 from its sealed epoch-one state
+into `runs/bilstm_real_resume_m6_2026-11-20` is prepared but not executed.
 Its execution and performance measurement remain user-owned. See
-`reports/validation_parity_family_review_2026-11-20/`. Do not generalize
+`reports/recovery_pilot_review_2026-11-20/`. Do not generalize
 the synthetic recovery result to untested configurations or claim measured speedup. The
 completed 18-job seed-42 study remains preserved historical evidence; edited
 source requires new study directories. See `docs/operations/SUPERVISED_RECOVERY.md`.
