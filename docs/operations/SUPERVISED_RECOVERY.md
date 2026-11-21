@@ -52,9 +52,10 @@ probability tolerance at compiled batch 32; eager replay passed and predicted
 classes were unchanged on the 64 targets. M3/n70 then passed full-cohort eager
 batch-4 parity (maximum probability difference 1.11e-16, zero class changes).
 The remaining thirteen also passed full-cohort eager batch-4 parity. The next
-action is the user-run [CPU replication first stage](REPLICATION_CPU.md).
+action is the user-run [CPU replication SSL-42/123 stage](REPLICATION_CPU.md).
 The user selected the current CPU route; its fresh 48-job study and source
-protocol are frozen with no jobs started. The scoped runtime benchmark has
+protocol are frozen; the first four preparation/SSL-17 jobs completed and
+verified, with no supervised jobs started. The scoped runtime benchmark has
 completed and verified.
 The M6 replay has passed for the tested two capped real-data epochs on CPU;
 this does not establish full-schedule or cross-device equivalence.
@@ -163,8 +164,9 @@ M6's epoch-one replay also passed. The runtime benchmark completed in 59.47
 training-call minutes with 664.42 MiB peak sampled host RSS, including capped
 training, full validation, checkpoint saving and final export. Its cap does
 not establish a full uncapped epoch duration. The next step is reviewing the
-frozen three-seed CPU replication protocol and launching its first four-job
-stage in the user's terminal, then inspecting before further advancement.
+frozen three-seed CPU replication protocol and launching its two-job SSL-42/123
+stage in the user's terminal, then inspecting at six completed jobs before
+supervised fits.
 Current inference checks cover
 all four representations, tail batches, target identity, predicted classes,
 probabilities, confusion matrices and metrics with `1e-6` tolerance. They do not

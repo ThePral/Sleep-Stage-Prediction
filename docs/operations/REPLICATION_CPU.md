@@ -1,15 +1,31 @@
 # CPU replication terminal handoff
 
 The user selected the current native Windows CPU route on 20 November 2026.
-The new study is frozen at `runs/bilstm_replication_cpu_2026-11-20` with 48 jobs
-and no jobs started. Its [source protocol](../REPLICATION_PROTOCOL_CPU_2026-11-20.md)
+The study is frozen at `runs/bilstm_replication_cpu_2026-11-20` with 48 jobs.
+The first four jobs have completed and verified, including ten SSL epochs for
+seed 17; no supervised jobs have started. Its [source protocol](../REPLICATION_PROTOCOL_CPU_2026-11-20.md)
 fixes all seven models, both budgets and seeds 17, 42 and 123. Source/package,
 participant-budget, protocol and recipe checks passed. Core source and the
 environment remain unchanged from the accepted CPU engineering checks.
 
-## First stage
+## Current second stage
 
-Run this once from the repository root in PowerShell:
+The [first-stage review](../../reports/replication_cpu_stage1_2026-11-20/README.md)
+verifies all four completed jobs, both normalizers and the seed-17 SSL bundle
+and final checkpoint hashes. Run this once from the repository root:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.experiments.run execute --study-dir runs/bilstm_replication_cpu_2026-11-20 --live --max-jobs 2
+```
+
+This verifies/skips the completed jobs, executes fresh ten-epoch SSL fits for
+seeds 42 and 123, then stops before supervised training. Expect forty-eight
+planned, six completed and two executed this call, with `limited_run: false`.
+Send that summary for inspection before repeating or advancing.
+
+## Completed first stage
+
+The user completed this first-stage command; it is retained for provenance:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.experiments.run execute --study-dir runs/bilstm_replication_cpu_2026-11-20 --live --max-jobs 4

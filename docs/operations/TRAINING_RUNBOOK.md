@@ -2,9 +2,10 @@
 
 20 November current handoff: the user selected the existing CPU route after
 full-family eager parity, capped recovery integration/replay and runtime checks.
-The fresh 48-job replication study is frozen with no jobs started. Use
-[REPLICATION_CPU.md](REPLICATION_CPU.md) for its first four-job stage and
-monitoring. Preserve source/packages and wait for inspection between stages.
+The fresh 48-job replication study is frozen; its first four preparation/SSL-17
+jobs completed and verified. Use [REPLICATION_CPU.md](REPLICATION_CPU.md) for the
+current two-job SSL-42/123 stage and monitoring. No supervised jobs have started.
+Preserve source/packages and wait for inspection between stages.
 The dated handoffs below remain historical; the completed seed-42 study must
 not be restarted or pooled as a third seed under the new procedure.
 
