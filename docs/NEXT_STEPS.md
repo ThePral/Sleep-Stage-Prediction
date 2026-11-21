@@ -22,8 +22,11 @@ was the compute decision; the user selected the existing CPU route. The
 [CPU replication protocol](REPLICATION_PROTOCOL_CPU_2026-11-20.md) and new 48-job
 study are frozen. The first four preparation/SSL-17 jobs completed and their
 seals, full ten-epoch SSL checkpoint, source scope and normalization verify.
-The next action is the user-run [two remaining SSL jobs](operations/REPLICATION_CPU.md),
-limited to seeds 42 and 123 and followed by inspection at 6/48 completed.
+The 22 November review also verified the remaining SSL seeds 42 and 123:
+all six preparation/SSL jobs are complete and all three encoders passed artifact
+and source-scope checks. The next action is the user-run
+[first supervised block](operations/REPLICATION_CPU.md), M0–M6 at the
+18-participant budget and seed 17, followed by inspection at 13/48 completed.
 No supervised fits have started. Compiled validation remains
 unaccepted. The criteria below
 remain acceptance requirements, not claims that all gates have passed.
@@ -33,7 +36,7 @@ replication reliable and affordable, then test the research questions with
 matched controls. This is a staged work plan, not a frozen training protocol or
 authorization for the assistant to launch training. Only the explicitly named
 capped integration study has completed. The replication campaign is now frozen
-and has completed its first four user-run jobs; later stages remain user-owned.
+and has completed its first six user-run jobs; supervised stages remain user-owned.
 
 ## 1. Use the completed study to decide what to test
 
@@ -164,5 +167,5 @@ performed. A clear, reproducible finding about label efficiency can be valuable
 without claiming that every component wins in every setting.
 
 Recovery, accepted eager inference parity, the scoped runtime benchmark and the
-CPU replication freeze and first preparation/SSL-17 stage are complete. The next
-step is the user-run two-job SSL-42/123 stage before supervised fits.
+CPU replication freeze and all preparation/SSL stages are complete. The next
+step is the user-run seven-model supervised block at budget 18 and seed 17.

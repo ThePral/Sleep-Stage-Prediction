@@ -26,9 +26,11 @@ This does not measure an uncapped epoch or establish a speed improvement.
 The user selected CPU execution. The
 [48-job CPU replication study](operations/REPLICATION_CPU.md) is frozen with
 seeds 17/42/123 and original participant budgets, recovery enabled and eager
-batch-4 validation. The first four preparation/SSL-17 jobs completed and verified;
-SSL seed 17 finished ten epochs and 101,060 recorded optimizer updates. The next
-user-run stage is fresh SSL seeds 42/123 only, with no supervised fits yet started.
+batch-4 validation. All six preparation/SSL jobs completed and verified;
+each of seeds 17/42/123 finished ten epochs and 101,060 recorded optimizer updates.
+The [22 November review](../reports/replication_cpu_stage2_2026-11-22/README.md)
+confirms unchanged source-only scope and valid encoder/checkpoint hashes. The
+next user-run stage is M0–M6 at budget 18 and seed 17; no supervised fits started.
 See the [handoff](operations/SUPERVISED_RECOVERY.md) and
 [evidence](../reports/recovery_implementation_2026-11-13/README.md).
 
