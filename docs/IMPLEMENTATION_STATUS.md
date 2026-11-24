@@ -30,7 +30,11 @@ batch-4 validation. All six preparation/SSL jobs completed and verified;
 each of seeds 17/42/123 finished ten epochs and 101,060 recorded optimizer updates.
 The [22 November review](../reports/replication_cpu_stage2_2026-11-22/README.md)
 confirms unchanged source-only scope and valid encoder/checkpoint hashes. The
-next user-run stage is M0–M6 at budget 18 and seed 17; no supervised fits started.
+user then completed M0–M6 at budget 18 and seed 17. The
+[24 November review](../reports/replication_cpu_stage3_2026-11-24/README.md)
+verified seven bundles, 69 epochs, 76 recovery generations and shared validation
+targets. Thirteen jobs are complete; the next user-run stage is M0–M6 at budget
+18 and seed 42, stopping for inspection at twenty completed jobs.
 See the [handoff](operations/SUPERVISED_RECOVERY.md) and
 [evidence](../reports/recovery_implementation_2026-11-13/README.md).
 

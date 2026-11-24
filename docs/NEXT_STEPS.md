@@ -24,10 +24,12 @@ study are frozen. The first four preparation/SSL-17 jobs completed and their
 seals, full ten-epoch SSL checkpoint, source scope and normalization verify.
 The 22 November review also verified the remaining SSL seeds 42 and 123:
 all six preparation/SSL jobs are complete and all three encoders passed artifact
-and source-scope checks. The next action is the user-run
-[first supervised block](operations/REPLICATION_CPU.md), M0–M6 at the
-18-participant budget and seed 17, followed by inspection at 13/48 completed.
-No supervised fits have started. Compiled validation remains
+and source-scope checks. The first seven supervised fits at budget 18/seed 17
+also completed: the 24 November review verified 69 epochs, 76 recovery
+generations and shared 65,133-target validation exports, bringing the total
+to 13/48. The next action is the user-run
+[budget-18/seed-42 block](operations/REPLICATION_CPU.md), M0–M6, followed by
+inspection at 20/48 completed. Compiled validation remains
 unaccepted. The criteria below
 remain acceptance requirements, not claims that all gates have passed.
 
@@ -36,7 +38,7 @@ replication reliable and affordable, then test the research questions with
 matched controls. This is a staged work plan, not a frozen training protocol or
 authorization for the assistant to launch training. Only the explicitly named
 capped integration study has completed. The replication campaign is now frozen
-and has completed its first six user-run jobs; supervised stages remain user-owned.
+and has completed its first thirteen user-run jobs; later stages remain user-owned.
 
 ## 1. Use the completed study to decide what to test
 
@@ -167,5 +169,5 @@ performed. A clear, reproducible finding about label efficiency can be valuable
 without claiming that every component wins in every setting.
 
 Recovery, accepted eager inference parity, the scoped runtime benchmark and the
-CPU replication freeze and all preparation/SSL stages are complete. The next
-step is the user-run seven-model supervised block at budget 18 and seed 17.
+CPU replication freeze, all preparation/SSL stages and budget-18/seed-17 fits
+are complete. The next step is the seven-model budget-18/seed-42 block.

@@ -53,10 +53,11 @@ classes were unchanged on the 64 targets. M3/n70 then passed full-cohort eager
 batch-4 parity (maximum probability difference 1.11e-16, zero class changes).
 The remaining thirteen also passed full-cohort eager batch-4 parity. The next
 action is the user-run [CPU replication supervised block](REPLICATION_CPU.md),
-M0–M6 at budget 18 and seed 17.
+M0–M6 at budget 18 and seed 42.
 The user selected the current CPU route; its fresh 48-job study and source
 protocol are frozen; all six preparation/SSL jobs completed and verified,
-with no supervised jobs started. The scoped runtime benchmark has
+and the first seven supervised models at budget 18/seed 17 completed and
+verified (69 epochs, 76 recovery generations). The scoped runtime benchmark has
 completed and verified.
 The M6 replay has passed for the tested two capped real-data epochs on CPU;
 this does not establish full-schedule or cross-device equivalence.
@@ -166,7 +167,7 @@ training-call minutes with 664.42 MiB peak sampled host RSS, including capped
 training, full validation, checkpoint saving and final export. Its cap does
 not establish a full uncapped epoch duration. The next step is reviewing the
 frozen three-seed CPU replication protocol and launching its seven-model
-budget-18/seed-17 block in the user's terminal, then inspecting at thirteen
+budget-18/seed-42 block in the user's terminal, then inspecting at twenty
 completed jobs before further supervised fits.
 Current inference checks cover
 all four representations, tail batches, target identity, predicted classes,

@@ -4,8 +4,8 @@
 full-family eager parity, capped recovery integration/replay and runtime checks.
 The fresh 48-job replication study is frozen; all six preparation/SSL jobs
 completed and verified. Use [REPLICATION_CPU.md](REPLICATION_CPU.md) for the
-current seven-model budget-18/seed-17 supervised block and monitoring. No
-supervised jobs have started.
+current seven-model budget-18/seed-42 supervised block and monitoring. The
+budget-18/seed-17 fits completed and verified, bringing the total to thirteen.
 Preserve source/packages and wait for inspection between stages.
 The dated handoffs below remain historical; the completed seed-42 study must
 not be restarted or pooled as a third seed under the new procedure.
