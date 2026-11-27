@@ -28,8 +28,11 @@ and source-scope checks. The first seven supervised fits at budget 18/seed 17
 also completed: the 24 November review verified 69 epochs, 76 recovery
 generations and shared 65,133-target validation exports, bringing the total
 to 13/48. The next action is the user-run
-[budget-18/seed-42 block](operations/REPLICATION_CPU.md), M0–M6, followed by
-inspection at 20/48 completed. Compiled validation remains
+[budget-18/seed-123 block](operations/REPLICATION_CPU.md), M0–M6 with explicit
+retry/resume, followed by inspection at 27/48 completed. The seed-42 block has
+passed inspection at twenty completed jobs (52 epochs, 59 recovery generations).
+An additional M0/seed-123 attempt was interrupted during its first epoch; only
+epoch-zero state is sealed, so that epoch must be replayed. Compiled validation remains
 unaccepted. The criteria below
 remain acceptance requirements, not claims that all gates have passed.
 
@@ -38,7 +41,8 @@ replication reliable and affordable, then test the research questions with
 matched controls. This is a staged work plan, not a frozen training protocol or
 authorization for the assistant to launch training. Only the explicitly named
 capped integration study has completed. The replication campaign is now frozen
-and has completed its first thirteen user-run jobs; later stages remain user-owned.
+and has twenty completed user-run jobs plus an interrupted next-job attempt;
+later stages remain user-owned.
 
 ## 1. Use the completed study to decide what to test
 
@@ -170,4 +174,5 @@ without claiming that every component wins in every setting.
 
 Recovery, accepted eager inference parity, the scoped runtime benchmark and the
 CPU replication freeze, all preparation/SSL stages and budget-18/seed-17 fits
-are complete. The next step is the seven-model budget-18/seed-42 block.
+and budget-18/seed-42 fits are complete. The next step is the seven-model
+budget-18/seed-123 block, explicitly retrying its interrupted M0 from epoch zero.

@@ -4,17 +4,38 @@ The user selected the current native Windows CPU route on 20 November 2026.
 The study is frozen at `runs/bilstm_replication_cpu_2026-11-20` with 48 jobs.
 All six preparation/SSL jobs have completed and verified, including ten SSL
 epochs for each of seeds 17/42/123. The first seven supervised models at budget
-18/seed 17 also completed and verified: thirteen of forty-eight jobs are done.
+18/seed 17 also completed and verified. The seed-42 block now verifies as well:
+twenty of forty-eight jobs are complete. The next M0/seed-123 attempt was
+interrupted before its first sealed epoch; its valid epoch-zero state is retained.
 Its [source protocol](../REPLICATION_PROTOCOL_CPU_2026-11-20.md)
 fixes all seven models, both budgets and seeds 17, 42 and 123. Source/package,
 participant-budget, protocol and recipe checks passed. Core source and the
 environment remain unchanged from the accepted CPU engineering checks.
 
-## Current second supervised block
+## Current seed 123 block with explicit retry
+
+The [seed-42 completion and interruption review](../../reports/replication_cpu_stage4_2026-11-27/README.md)
+verifies twenty completed jobs, the new block's 52 epochs/59 recovery generations
+and the interrupted M0/seed-123 epoch-zero checkpoint. Run this once:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.experiments.run execute --study-dir runs/bilstm_replication_cpu_2026-11-20 --live --max-jobs 7 --retry-failed --resume-supervised
+```
+
+This preserves completed jobs, retries M0 in a fresh attempt from epoch zero,
+then trains M1–M6 at budget 18/seed 123. It stops before budget-70 fits. Expect
+forty-eight planned, twenty-seven completed, seven executed and `limited_run: false`.
+The first epoch must be replayed because validation/checkpoint publication did
+not finish. The stale `running` artifact status does not override the failed
+ledger entry; preserve it for provenance. There is no scheduler lock to remove.
+Send the summary before repeating or advancing. Keep source/packages unchanged.
+
+## Completed seed 42 block
 
 The [first supervised block review](../../reports/replication_cpu_stage3_2026-11-24/README.md)
 verified seven models, 69 completed epochs, 76 recovery generations and shared
-65,133-target validation exports. Run this once from the repository root:
+65,133-target validation exports. The user completed the following seed-42
+command, retained for provenance:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.experiments.run execute --study-dir runs/bilstm_replication_cpu_2026-11-20 --live --max-jobs 7
@@ -23,8 +44,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m 
 This trains M0 through M6 at label budget 18 and optimization seed 42, then stops
 before seed-123 supervised fits. It uses the current study's seed-42 SSL encoder
 for M4/M5/M6, not historical supervised checkpoints. Expect forty-eight planned,
-twenty completed, seven executed this call and `limited_run: false`. Send the
-summary for inspection before repeating or advancing. The preceding seed-17
+twenty completed, seven executed this call and `limited_run: false`. That
+summary has passed inspection. The preceding seed-17
 block recorded 42.48 hours; the new seed's stopping times may differ.
 
 ## Completed first supervised block

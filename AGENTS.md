@@ -38,14 +38,22 @@ reported encoder reload difference. The user then completed all seven M0–M6
 fits at draw42_n18/seed17. The 24 November review verified 13 completed-job seals,
 seven model bundles whose validation exports share 65,133 target identities, 69 supervised
 epochs and 76 sealed recovery generations (42.48 recorded supervised hours).
+The 27 November review also verified M0–M6 at draw42_n18/seed42: twenty completed
+job seals, 52 additional epochs, 59 recovery generations and matching validation
+target identities (31.62 recorded hours). The ledger additionally records an
+interrupted M0_draw42_n18_seed123 attempt with KeyboardInterrupt; its valid
+epoch-zero checkpoint has zero completed epochs/optimizer steps, so epoch one
+must be replayed. Artifact status still says running but no scheduler lock or
+visible experiment process was found. Preserve that attempt and all completed jobs.
 Source/packages and original participant budgets match; protocol/recipe hashes
 are archived with the study. The next user-run stage is exactly seven supervised
-jobs, M0–M6 at draw42_n18/seed42, stopping before the seed-123 fits and reporting
-the expected 20/48 summary for inspection. Do not advance stages
+jobs, M0–M6 at draw42_n18/seed123, with --retry-failed --resume-supervised to
+recover M0 from epoch zero, stopping before budget 70 and reporting the expected
+27/48 summary for inspection. Do not advance stages
 automatically. SSL scheduler epoch resume is not implemented by the supervised
 resume flag. The historical seed-42 study is not pooled as a new-version seed.
 See `docs/operations/REPLICATION_CPU.md`, `docs/REPLICATION_PROTOCOL_CPU_2026-11-20.md`
-and `reports/replication_cpu_stage3_2026-11-24/`. Do not generalize
+and `reports/replication_cpu_stage4_2026-11-27/`. Do not generalize
 the synthetic recovery result to untested configurations or claim measured speedup. The
 completed 18-job seed-42 study remains preserved historical evidence; edited
 source requires new study directories. See `docs/operations/SUPERVISED_RECOVERY.md`.

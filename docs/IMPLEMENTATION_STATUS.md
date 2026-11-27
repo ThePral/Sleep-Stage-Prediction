@@ -34,7 +34,12 @@ user then completed M0–M6 at budget 18 and seed 17. The
 [24 November review](../reports/replication_cpu_stage3_2026-11-24/README.md)
 verified seven bundles, 69 epochs, 76 recovery generations and shared validation
 targets. Thirteen jobs are complete; the next user-run stage is M0–M6 at budget
-18 and seed 42, stopping for inspection at twenty completed jobs.
+18 and seed 42, stopping for inspection at twenty completed jobs. That block
+has now passed the [27 November review](../reports/replication_cpu_stage4_2026-11-27/README.md):
+52 epochs and 59 additional recovery generations. A subsequent M0/seed-123
+attempt was interrupted before epoch one was sealed. The next user-run block
+retries it from valid epoch-zero state and continues through M6/seed 123,
+stopping at twenty-seven completed jobs.
 See the [handoff](operations/SUPERVISED_RECOVERY.md) and
 [evidence](../reports/recovery_implementation_2026-11-13/README.md).
 

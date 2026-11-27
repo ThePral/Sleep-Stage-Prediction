@@ -53,12 +53,16 @@ classes were unchanged on the 64 targets. M3/n70 then passed full-cohort eager
 batch-4 parity (maximum probability difference 1.11e-16, zero class changes).
 The remaining thirteen also passed full-cohort eager batch-4 parity. The next
 action is the user-run [CPU replication supervised block](REPLICATION_CPU.md),
-M0–M6 at budget 18 and seed 42.
+M0–M6 at budget 18 and seed 123, using explicit retry/resume for the interrupted M0.
 The user selected the current CPU route; its fresh 48-job study and source
 protocol are frozen; all six preparation/SSL jobs completed and verified,
 and the first seven supervised models at budget 18/seed 17 completed and
 verified (69 epochs, 76 recovery generations). The scoped runtime benchmark has
 completed and verified.
+The seed-42 block also passed inspection (52 epochs, 59 recovery generations),
+bringing completed jobs to twenty. The next M0/seed-123 attempt was interrupted
+with only epoch-zero state sealed; replay its first epoch rather than claiming
+that its unfinished training/validation work was saved. See the current handoff.
 The M6 replay has passed for the tested two capped real-data epochs on CPU;
 this does not establish full-schedule or cross-device equivalence.
 The matched-batch diagnostic failed compiled 4/8/16/32 and eager 16/32; eager
@@ -167,7 +171,7 @@ training-call minutes with 664.42 MiB peak sampled host RSS, including capped
 training, full validation, checkpoint saving and final export. Its cap does
 not establish a full uncapped epoch duration. The next step is reviewing the
 frozen three-seed CPU replication protocol and launching its seven-model
-budget-18/seed-42 block in the user's terminal, then inspecting at twenty
+budget-18/seed-123 block with explicit retry/resume in the user's terminal, then inspecting at twenty-seven
 completed jobs before further supervised fits.
 Current inference checks cover
 all four representations, tail batches, target identity, predicted classes,
