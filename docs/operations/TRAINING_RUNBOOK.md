@@ -1,6 +1,10 @@
 # Reproducible training commands
 
 28 November current handoff: twenty-one jobs are complete after M0/seed 123
+finished. The original -File restart hit a guard false positive on its own
+PowerShell parent. Use the verified -Command form in REPLICATION_CPU.md.
+
+28 November outage state: twenty-one jobs are complete after M0/seed 123
 finished. M1 was interrupted with epoch six sealed. Use the current six-job
 restart with explicit stale-lock recovery in [REPLICATION_CPU.md](REPLICATION_CPU.md).
 It stops at 27/48; preserve all attempts, logs and checkpoint files.

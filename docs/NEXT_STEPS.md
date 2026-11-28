@@ -1,6 +1,12 @@
 # Next steps after the first completed study — 12 November 2026
 
 28 November current status: twenty-one jobs have completed and their seals
+verify. The initial restart was blocked by its own PowerShell -File parent;
+use the corrected -Command form in the current terminal handoff. Read-only
+probes confirmed this resolves the false positive with all guard checks intact.
+Twenty-one completed jobs and the sealed epoch-six state remain preserved.
+
+Outage inspection: twenty-one jobs have completed and their seals
 verify. M0/seed 123 finished; the outage interrupted M1/seed 123 with six epochs
 and 113,532 optimizer steps saved. Use the current
 [six-job recovery command](operations/REPLICATION_CPU.md) to replay epoch seven

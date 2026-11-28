@@ -52,6 +52,12 @@ optimizer steps and best epoch six; epoch seven must be replayed. The scheduler
 lock PID 94504 is dead and no visible experiment process was found. All source,
 packages, data and recorded runtime checks match; no lock was changed or training
 launched by the inspector.
+The initial -File restart hit a confirmed guard false positive on its own
+PowerShell parent. Read-only probes reproduced it and verified that invoking
+the same CPU launcher via powershell -Command passes all guard checks. Lock
+rename was mocked/prevented in probes; no training or lock mutation occurred.
+Use the corrected -Command restart in docs/operations/REPLICATION_CPU.md;
+do not edit frozen src or bypass the actual process/lock safety checks.
 Source/packages and original participant budgets match; protocol/recipe hashes
 are archived with the study. The next user-run restart is exactly six supervised
 jobs, M1–M6 at draw42_n18/seed123, with --retry-failed --resume-supervised
@@ -61,7 +67,7 @@ stopping before budget 70 and reporting the expected
 automatically. SSL scheduler epoch resume is not implemented by the supervised
 resume flag. The historical seed-42 study is not pooled as a new-version seed.
 See `docs/operations/REPLICATION_CPU.md`, `docs/REPLICATION_PROTOCOL_CPU_2026-11-20.md`
-and `reports/replication_power_loss_2026-11-28/`. Do not generalize
+and `reports/recovery_guard_2026-11-28/`. Do not generalize
 the synthetic recovery result to untested configurations or claim measured speedup. The
 completed 18-job seed-42 study remains preserved historical evidence; edited
 source requires new study directories. See `docs/operations/SUPERVISED_RECOVERY.md`.

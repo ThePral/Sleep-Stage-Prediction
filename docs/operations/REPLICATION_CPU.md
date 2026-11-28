@@ -14,13 +14,19 @@ environment remain unchanged from the accepted CPU engineering checks.
 
 ## Current outage restart
 
+The original `powershell -File ... -m ...` restart triggered a guard false
+positive on its own PowerShell parent. The
+[read-only launcher diagnosis](../../reports/recovery_guard_2026-11-28/README.md)
+confirmed the cause and tested the corrected `-Command` wrapper without training
+or lock mutation. Frozen source and the CPU launcher remain unchanged.
+
 The [28 November recovery inspection](../../reports/replication_power_loss_2026-11-28/README.md)
 verified twenty-one completed-job seals, M1's six saved epochs and 113,532 saved
 optimizer updates. The dead scheduler lock is preserved for automatic archival.
 Run this once from the repository root:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.experiments.run execute --study-dir runs/bilstm_replication_cpu_2026-11-20 --live --max-jobs 6 --retry-failed --resume-supervised --recover-stale-lock
+powershell -NoProfile -ExecutionPolicy Bypass -Command "& './scripts/research_cpu.ps1' -m src.experiments.run execute --study-dir runs/bilstm_replication_cpu_2026-11-20 --live --max-jobs 6 --retry-failed --resume-supervised --recover-stale-lock"
 ```
 
 This restores M1 after epoch six, replays epoch seven and continues through M6

@@ -1,0 +1,34 @@
+{
+  "outcome": "An experiment process is alive; refuse stale-lock recovery.",
+  "blockers": [
+    {
+      "name": "powershell.exe",
+      "pid": 19888,
+      "cmdline": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/research_cpu.ps1",
+        "reports/recovery_guard_2026-11-28/probe_guard.py",
+        "-m",
+        "src.experiments.run",
+        "execute",
+        "--study-dir",
+        "runs/bilstm_replication_cpu_2026-11-20",
+        "--live",
+        "--max-jobs",
+        "6",
+        "--retry-failed",
+        "--resume-supervised",
+        "--recover-stale-lock"
+      ],
+      "is_ancestor": true
+    }
+  ],
+  "lock_unchanged": true,
+  "lock_sha256": "ecd929e3bf4fb4958137eb5c89c1b2e4acc0d3601cd3088c74ca14eeb4612622",
+  "optimizer_updates_performed": false,
+  "tensorflow_imported": false
+}
