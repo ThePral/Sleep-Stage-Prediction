@@ -1,5 +1,11 @@
 # Supervised recovery and validation execution — 13 November 2026
 
+28 November current replication recovery: M0/seed 123 completed; M1 retains six
+sealed epochs and 113,532 optimizer steps after the outage. The current
+[six-job restart](REPLICATION_CPU.md) archives the dead scheduler lock, restores
+M1 and replays epoch seven before continuing through M6 to 27/48. Earlier
+stage commands below are historical and must not be used for this restart.
+
 This implementation is opt-in. The user-run fresh-process synthetic optimizer
 gate passed on 13 November: saved state and exported predictions matched exactly
 for the tested gated BiLSTM on CPU. The [artifact review](../../reports/recovery_validation_2026-11-13/README.md)

@@ -45,15 +45,23 @@ interrupted M0_draw42_n18_seed123 attempt with KeyboardInterrupt; its valid
 epoch-zero checkpoint has zero completed epochs/optimizer steps, so epoch one
 must be replayed. Artifact status still says running but no scheduler lock or
 visible experiment process was found. Preserve that attempt and all completed jobs.
+The 28 November outage inspection supersedes that restart status: twenty-one
+completed-job seals verify, including M0/seed123 attempt 0003 (eleven epochs,
+best epoch six). M1/seed123 attempt 0001 retains six sealed epochs, 113,532
+optimizer steps and best epoch six; epoch seven must be replayed. The scheduler
+lock PID 94504 is dead and no visible experiment process was found. All source,
+packages, data and recorded runtime checks match; no lock was changed or training
+launched by the inspector.
 Source/packages and original participant budgets match; protocol/recipe hashes
-are archived with the study. The next user-run stage is exactly seven supervised
-jobs, M0–M6 at draw42_n18/seed123, with --retry-failed --resume-supervised to
-recover M0 from epoch zero, stopping before budget 70 and reporting the expected
+are archived with the study. The next user-run restart is exactly six supervised
+jobs, M1–M6 at draw42_n18/seed123, with --retry-failed --resume-supervised
+--recover-stale-lock to archive the dead lock and restore M1 after epoch six,
+stopping before budget 70 and reporting the expected
 27/48 summary for inspection. Do not advance stages
 automatically. SSL scheduler epoch resume is not implemented by the supervised
 resume flag. The historical seed-42 study is not pooled as a new-version seed.
 See `docs/operations/REPLICATION_CPU.md`, `docs/REPLICATION_PROTOCOL_CPU_2026-11-20.md`
-and `reports/replication_cpu_stage4_2026-11-27/`. Do not generalize
+and `reports/replication_power_loss_2026-11-28/`. Do not generalize
 the synthetic recovery result to untested configurations or claim measured speedup. The
 completed 18-job seed-42 study remains preserved historical evidence; edited
 source requires new study directories. See `docs/operations/SUPERVISED_RECOVERY.md`.

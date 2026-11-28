@@ -1,5 +1,10 @@
 # Reproducible training commands
 
+28 November current handoff: twenty-one jobs are complete after M0/seed 123
+finished. M1 was interrupted with epoch six sealed. Use the current six-job
+restart with explicit stale-lock recovery in [REPLICATION_CPU.md](REPLICATION_CPU.md).
+It stops at 27/48; preserve all attempts, logs and checkpoint files.
+
 20 November current handoff: the user selected the existing CPU route after
 full-family eager parity, capped recovery integration/replay and runtime checks.
 The fresh 48-job replication study is frozen; all six preparation/SSL jobs

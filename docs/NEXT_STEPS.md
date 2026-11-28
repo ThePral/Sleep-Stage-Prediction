@@ -1,5 +1,12 @@
 # Next steps after the first completed study — 12 November 2026
 
+28 November current status: twenty-one jobs have completed and their seals
+verify. M0/seed 123 finished; the outage interrupted M1/seed 123 with six epochs
+and 113,532 optimizer steps saved. Use the current
+[six-job recovery command](operations/REPLICATION_CPU.md) to replay epoch seven
+and finish M1–M6 at budget 18/seed 123, stopping at 27/48. The older status
+updates below remain historical; do not use the previous seven-job command.
+
 13 November update: recovery and validation controls are implemented as opt-in
 paths; non-optimizer checks pass. The user-run synthetic optimizer gate passed
 on 13 November, and all 136 full-regression tests passed on 15 November.

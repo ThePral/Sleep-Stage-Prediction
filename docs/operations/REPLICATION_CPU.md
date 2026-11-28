@@ -5,14 +5,32 @@ The study is frozen at `runs/bilstm_replication_cpu_2026-11-20` with 48 jobs.
 All six preparation/SSL jobs have completed and verified, including ten SSL
 epochs for each of seeds 17/42/123. The first seven supervised models at budget
 18/seed 17 also completed and verified. The seed-42 block now verifies as well:
-twenty of forty-eight jobs are complete. The next M0/seed-123 attempt was
-interrupted before its first sealed epoch; its valid epoch-zero state is retained.
+twenty-one of forty-eight jobs are complete after M0/seed 123 finished. The
+28 November outage interrupted M1/seed 123 with epoch six safely sealed.
 Its [source protocol](../REPLICATION_PROTOCOL_CPU_2026-11-20.md)
 fixes all seven models, both budgets and seeds 17, 42 and 123. Source/package,
 participant-budget, protocol and recipe checks passed. Core source and the
 environment remain unchanged from the accepted CPU engineering checks.
 
-## Current seed 123 block with explicit retry
+## Current outage restart
+
+The [28 November recovery inspection](../../reports/replication_power_loss_2026-11-28/README.md)
+verified twenty-one completed-job seals, M1's six saved epochs and 113,532 saved
+optimizer updates. The dead scheduler lock is preserved for automatic archival.
+Run this once from the repository root:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/research_cpu.ps1 -m src.experiments.run execute --study-dir runs/bilstm_replication_cpu_2026-11-20 --live --max-jobs 6 --retry-failed --resume-supervised --recover-stale-lock
+```
+
+This restores M1 after epoch six, replays epoch seven and continues through M6
+at budget 18/seed 123. It stops before budget 70. Expect forty-eight planned,
+twenty-seven completed, six executed and `limited_run: false`. The old summary
+still says twenty because the outage prevented a new invocation summary. Do not
+delete the lock or edit ledger/status files. Send the final summary before
+advancing. Keep source/packages unchanged.
+
+## Earlier seed 123 restart superseded by the outage command
 
 The [seed-42 completion and interruption review](../../reports/replication_cpu_stage4_2026-11-27/README.md)
 verifies twenty completed jobs, the new block's 52 epochs/59 recovery generations

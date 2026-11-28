@@ -1,5 +1,11 @@
 # Recovery/validation engineering handoff - 13 November 2026
 
+28 November outage update: twenty-one replication job seals verify. M0/seed 123
+completed eleven epochs; M1/seed 123 has six sealed epochs and 113,532 saved
+optimizer updates. The [recovery inspection](../reports/replication_power_loss_2026-11-28/README.md)
+supplies the current six-job restart with explicit dead-lock recovery. Source,
+packages and the frozen study are unchanged; no training was launched here.
+
 Opt-in epoch-boundary supervised recovery and compiled validation/separate
 inference batch size are implemented. Twenty-six non-optimizer checks pass,
 including state publication/integrity, mocked restoration and inference parity.
